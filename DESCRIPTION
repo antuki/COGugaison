@@ -2,12 +2,8 @@ Package: COGugaison
 Type: Package
 Title: Gestion des codes officiels géographiques (COG)
 Version: 0.1.0
-Author: antuki
-Maintainer: antuki
-Description: Le package COGugaison permet de gérer dans les codes officiels géographiques dans les tables de données géographiques :    
-- connaître les fusions et défusions de communes qui ont eu lieu entre deux années ;    
-- prise en compte ces changements de géographie entre deux années (pour les variables numériques mais également les typologies) ;    
-- agrégations à des niveaux géographiques supra-communaux ;
+Authors@R: c(person(given="antuki", role = c("cre","aut")))
+Description: Le package COGugaison permet de gérer dans les codes officiels géographiques dans les tables de données géographiques.
 License: not given
 Encoding: UTF-8
 LazyData: true
