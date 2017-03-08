@@ -2,7 +2,7 @@ Package: COGugaison
 Type: Package
 Title: Gestion des codes officiels géographiques (COG)
 Version: 0.1.0
-Authors@R: c(person(given="antuki", role = c("cre","aut")))
+Authors@R: c(person(given="antuki",family="antuki", role = c("cre","aut"),email="kim.antunez@laposte.net"))
 Description: Le package COGugaison permet de gérer dans les codes officiels géographiques dans les tables de données géographiques.
 License: not given
 Encoding: UTF-8
