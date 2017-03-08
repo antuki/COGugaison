@@ -12,7 +12,7 @@
 #' @export
 
 toto <- function(){
-  data(COG)
+  #data(COG)
   head(COG2014)
   }
 
