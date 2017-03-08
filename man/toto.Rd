@@ -7,8 +7,8 @@
 toto()
 }
 \value{
-un chiffre transformé
+un chiffre transforme
 }
 \description{
-décrire
+decrire
 }

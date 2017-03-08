@@ -7,12 +7,12 @@
 
 #' @title Convertir un toto
 #' @name toto
-#' @description décrire
-#' @return un chiffre transformé
+#' @description decrire
+#' @return un chiffre transforme
 #' @export
 
 toto <- function(){
-  load(COG)
+  data(COG)
   head(COG2014)
   }
 
