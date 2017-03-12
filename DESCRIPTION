@@ -1,15 +1,12 @@
 Package: COGugaison
 Type: Package
 Title: Gestion des codes officiels géographiques (COG)
-Version: 0.1.0
-Authors@R: c(person(given="antuki",family="antuki", role = c("cre","aut"),email="kim.antunez@laposte.net"))
-Description: Le package COGugaison permet de gérer dans les codes officiels géographiques dans les tables de données géographiques.
-License: not given
+Version: 1.0.0
+Authors@R: c(person(family="antuki", role = c("cre","aut"),email="kim.antunez@laposte.net"))
+Description: Le package COGugaison permet de gérer les codes officiels géographiques dans les tables de données géographiques.
+License: aucune
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 6.0.1
-Suggests: knitr,
-    rmarkdown
-VignetteBuilder: knitr
 URL: http://github.com/antuki/COGugaison
 BugReports: http://github.com/antuki/COGugaison/issues
+RoxygenNote: 6.0.1

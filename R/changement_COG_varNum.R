@@ -4,10 +4,20 @@
 #' @return Remplir
 #' @export
 
-changement_COG_varNum <- function(table_entree,annees,codgeo_entree=colnames(table_entree)[1],var_num=colnames(table_entree)[-1],clef_commune_unique=T,ajout_libelle_com=F){
+
+
+
+
+
+changement_COG_varNum <- function(table_entree,annees,codgeo_entree=colnames(table_entree)[1],var_num=colnames(table_entree[ ,sapply(table_entree, is.numeric) ]),clef_commune_unique=T,libgeo=NULL,donnees_insee=T){
 
 
   for (i in 1:(length(annees)-1)){
+
+    #tables de passage spéciales Insee
+    if(donnees_insee==T & (annees[i]==2013 | annees[i]==2014)){
+       assign(paste0("PASSAGE_",annees[i],"_",annees[i+1]),get(paste0("PASSAGE_",annees[i],"_",annees[i+1],"_insee")))
+    }
 
      provisoire <- merge(table_entree,get(paste0("PASSAGE_",annees[i],"_",annees[i+1])),by.x=codgeo_entree,by.y=paste0("cod",annees[i]),all.x=T,all.y=F)
 
@@ -25,13 +35,19 @@ changement_COG_varNum <- function(table_entree,annees,codgeo_entree=colnames(tab
   if(clef_commune_unique==T){
     table_finale <- aggregate(table_finale[,c(var_num)],by =list(with(table_finale,get(codgeo_entree))),FUN=sum)
     colnames(table_finale)<- c(codgeo_entree,var_num)
-    if(ajout_libelle_com==T){
-      table_finale <- merge(table_finale,get(paste0("COG",annees[length(annees)]))[,c(1,2)],by.x=codgeo_entree,by.y="CODGEO",all.x=T,all.y=F)
     }
+
+  if(!is.null(libgeo)){
+    if(donnees_insee==T & (annees[length(annees)]==2014)){
+      assign(paste0("COG",annees[length(annees)]),get(paste0("COG",annees[length(annees)],"_insee")))
+    }
+    table_finale <- table_finale[,-which(colnames(table_finale)==libgeo)]
+    table_finale <- merge(table_finale,get(paste0("COG",annees[length(annees)]))[,c(1,2)],by.x=codgeo_entree,by.y="CODGEO",all.x=T,all.y=F)
+    colnames(table_finale)[ncol(table_finale)]<- libgeo
+    table_finale <- table_finale[,c(1,ncol(table_finale),2:(ncol(table_finale)-1))]
   }
 
   return(table_finale)
-
 
 }
 
