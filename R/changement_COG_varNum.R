@@ -15,7 +15,8 @@ changement_COG_varNum <- function(table_entree,annees,codgeo_entree=colnames(tab
   for (i in 1:(length(annees)-1)){
 
     #tables de passage spéciales Insee
-    if(donnees_insee==T & (annees[i]==2013 | annees[i]==2014)){
+    vecteur <- ifelse(annees[i]<annees[i+1],c(1968,1975,1982,1990,1999,2013,2014),c(1975,1982,1990,1999,2008,2014,2015))
+    if(donnees_insee==T & annees[i]%in%vecteur){
        assign(paste0("PASSAGE_",annees[i],"_",annees[i+1]),get(paste0("PASSAGE_",annees[i],"_",annees[i+1],"_insee")))
     }
 
@@ -38,7 +39,7 @@ changement_COG_varNum <- function(table_entree,annees,codgeo_entree=colnames(tab
     }
 
   if(!is.null(libgeo)){
-    if(donnees_insee==T & (annees[length(annees)]==2014)){
+    if(donnees_insee==T & (annees[length(annees)]%in%c(1968,1975,1982,1990,1999,2014))){
       assign(paste0("COG",annees[length(annees)]),get(paste0("COG",annees[length(annees)],"_insee")))
     }
     table_finale <- table_finale[,-which(colnames(table_finale)==libgeo)]

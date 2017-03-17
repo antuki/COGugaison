@@ -6,6 +6,18 @@
 #'
 
 
+#### attention fusion 14624 > 14697 pris en compte entre 1990 et 1999 alors qu'il aurait dû entre 1982 et 1990 (marche si on change le début en : )
+### attention fusion 08221 > 08169 pris en compte entre 1975 et 1982 alors qu'il aurait dû entre 1982 et 1990 (marche si on change le début en : 02-03-1982)
+### attention changement de département de 1972 a été tenue compte par l'Insee dès 1968 pour la Corse
+
+### new : 200 220 défusion
+# 01/03/1968
+# 20/02/1975
+# 04/03/1982
+# 05/03/1990
+# 08/03/1999
+
+
 modifications_communales <- function(date_debut,date_fin){
 
 donnees <- historiq

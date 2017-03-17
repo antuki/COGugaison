@@ -6,13 +6,12 @@
 
 COG_akinator<- function(vecteur_codgeo,donnees_insee=T, liste_complete=T){
 
-
 vecteur_codgeo <- vecteur_codgeo[-which(substr(vecteur_codgeo,1,2)%in%c("97","98","99"))]
 
 if(donnees_insee==T){
-  assign("PASSAGE_2013_2014",get("PASSAGE_2013_2014_insee"))
-  assign("PASSAGE_2014_2015",get("PASSAGE_2014_2015_insee"))
-  assign("COG2014",get("COG2014_insee"))
+  for (a in c(1968,1975,1982,1990,1999,2014)){
+  assign(paste0("COG",a),get(paste0("COG",a,"_insee")))
+  }
 }
 
 COG_possibles_partiel <- NULL

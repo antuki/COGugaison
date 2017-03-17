@@ -13,7 +13,8 @@ changement_COG_typo <- function(table_entree,annees,codgeo_entree=colnames(table
   for (i in 1:(length(annees)-1)){
 
     #tables de passage spéciales Insee
-    if(donnees_insee==T & (annees[i]==2013 | annees[i]==2014)){
+    vecteur <- ifelse(annees[i]<annees[i+1],c(1968,1975,1982,1990,1999,2013,2014),c(1975,1982,1990,1999,2008,2014,2015))
+    if(donnees_insee==T & annees[i]%in%vecteur){
       assign(paste0("PASSAGE_",annees[i],"_",annees[i+1]),get(paste0("PASSAGE_",annees[i],"_",annees[i+1],"_insee")))
     }
 
@@ -47,9 +48,10 @@ changement_COG_typo <- function(table_entree,annees,codgeo_entree=colnames(table
 
         if (methode_fusion=="max_population"){
           #COG spécial Insee
-          if(donnees_insee==T & (annees[i]==2014)){
+          if(donnees_insee==T & (annees[i]%in%c(1968,1975,1982,1990,1999,2014))){
             assign(paste0("COG",annees[i]),get(paste0("COG",annees[i],"_insee")))
           }
+
           table_f_avecpb <- lapply(table_f_avecpb, FUN=function(x){merge(x,get(paste0("COG",annees[i]))[,-2],by.x=paste0("cod",annees[i]),by.y="CODGEO",all.x=T,all.y=F)})
           table_f_avecpb  <- lapply(table_f_avecpb, FUN=function(x){x[which(x[,6]==(aggregate(POP ~ get(colnames(x)[6]),data =x, FUN=sum)[which.max(aggregate(POP ~ get(colnames(x)[6]),data = x, FUN=sum)$POP),1]))[1],-7]})
           table_f_avecpb <- do.call("rbind", table_f_avecpb)
@@ -76,9 +78,10 @@ changement_COG_typo <- function(table_entree,annees,codgeo_entree=colnames(table
   }
 
   if(!is.null(libgeo)){
-    if(donnees_insee==T & (annees[length(annees)]==2014)){
+    if(donnees_insee==T & (annees[length(annees)]%in%c(1968,1975,1982,1990,1999,2014))){
       assign(paste0("COG",annees[length(annees)]),get(paste0("COG",annees[length(annees)],"_insee")))
     }
+
     table_finale <- merge(table_finale,get(paste0("COG",annees[length(annees)]))[,c(1,2)],by.x=codgeo_entree,by.y="CODGEO",all.x=T,all.y=F)
     colnames(table_finale)[ncol(table_finale)]<- libgeo
     table_finale <- table_finale[,c(1,ncol(table_finale),2:(ncol(table_finale)-1))]
