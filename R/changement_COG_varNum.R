@@ -11,11 +11,12 @@
 
 changement_COG_varNum <- function(table_entree,annees,codgeo_entree=colnames(table_entree)[1],var_num=colnames(table_entree[ ,sapply(table_entree, is.numeric) ]),clef_commune_unique=T,libgeo=NULL,donnees_insee=T){
 
+  annees <- intersect(annees, c(1968, 1975, 1982, 1990, 1999, 2008:2016))
 
   for (i in 1:(length(annees)-1)){
 
     #tables de passage spéciales Insee
-    vecteur <- ifelse(annees[i]<annees[i+1],c(1968,1975,1982,1990,1999,2013,2014),c(1975,1982,1990,1999,2008,2014,2015))
+    if(annees[i] < annees[i + 1]){vecteur <- c(1968, 1975, 1982, 1990, 1999, 2013, 2014)} else{vecteur <-c(1975, 1982, 1990, 1999, 2008, 2014, 2015)}
     if(donnees_insee==T & annees[i]%in%vecteur){
        assign(paste0("PASSAGE_",annees[i],"_",annees[i+1]),get(paste0("PASSAGE_",annees[i],"_",annees[i+1],"_insee")))
     }
@@ -42,7 +43,6 @@ changement_COG_varNum <- function(table_entree,annees,codgeo_entree=colnames(tab
     if(donnees_insee==T & (annees[length(annees)]%in%c(1968,1975,1982,1990,1999,2014))){
       assign(paste0("COG",annees[length(annees)]),get(paste0("COG",annees[length(annees)],"_insee")))
     }
-    table_finale <- table_finale[,-which(colnames(table_finale)==libgeo)]
     table_finale <- merge(table_finale,get(paste0("COG",annees[length(annees)]))[,c(1,2)],by.x=codgeo_entree,by.y="CODGEO",all.x=T,all.y=F)
     colnames(table_finale)[ncol(table_finale)]<- libgeo
     table_finale <- table_finale[,c(1,ncol(table_finale),2:(ncol(table_finale)-1))]

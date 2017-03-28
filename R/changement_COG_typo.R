@@ -4,24 +4,26 @@
 #' @return Remplir
 #' @export
 
-changement_COG_typo <- function(table_entree,annees,codgeo_entree=colnames(table_entree)[1],var_car=colnames(table_entree)[-which(colnames(table_entree)==codgeo_entree)], methode_fusion="methode_difference",mot_different="différents",donnees_insee=T,libgeo=NULL){
+changement_COG_typo <- function(table_entree,annees,codgeo_entree=colnames(table_entree)[1],typos=colnames(table_entree)[-which(colnames(table_entree)==codgeo_entree)], methode_fusion="methode_difference",mot_different="différents",donnees_insee=T,libgeo=NULL){
 
-  if(!is.null(libgeo) & libgeo%in%var_car){
-    var_car <- var_car[-which(var_car==libgeo)]
+  annees <- intersect(annees, c(1968, 1975, 1982, 1990, 1999, 2008:2016))
+
+    if(!is.null(libgeo) & libgeo%in%typos){
+    typos <- typos[-which(typos==libgeo)]
   }
 
   for (i in 1:(length(annees)-1)){
 
     #tables de passage spéciales Insee
-    vecteur <- ifelse(annees[i]<annees[i+1],c(1968,1975,1982,1990,1999,2013,2014),c(1975,1982,1990,1999,2008,2014,2015))
+    if(annees[i] < annees[i + 1]){vecteur <- c(1968, 1975, 1982, 1990, 1999, 2013, 2014)} else{vecteur <-c(1975, 1982, 1990, 1999, 2008, 2014, 2015)}
     if(donnees_insee==T & annees[i]%in%vecteur){
       assign(paste0("PASSAGE_",annees[i],"_",annees[i+1]),get(paste0("PASSAGE_",annees[i],"_",annees[i+1],"_insee")))
     }
 
     provisoire <- merge(get(paste0("PASSAGE_",annees[i],"_",annees[i+1])), table_entree, by.x=paste0("cod",annees[i]),by.y=codgeo_entree, all.x=T, all.y=F)
-    #suppr : variables <- colnames(provisoire)[6:length(colnames(provisoire))]
+    provisoire <- provisoire[apply(provisoire[,6:ncol(provisoire)],1,function(x) !all(is.na(x))),]
 
-    for (var in var_car){
+    for (var in typos){
 
       provisoire_court <- provisoire[,c(paste0("cod",annees[i]),paste0("cod",annees[i+1]),"annee","typemodif","ratio",var)]
       table_n_d <- provisoire_court[(provisoire_court$typemodif=="n") | (provisoire_court$typemodif=="d")| (provisoire_court$typemodif=="c"),]
@@ -66,7 +68,7 @@ changement_COG_typo <- function(table_entree,annees,codgeo_entree=colnames(table
         names(table_finale_provisoire)[names(table_finale_provisoire)==paste0("cod",annees[i+1])] <- codgeo_entree
       }
 
-      if(var==variables[1]){
+      if(var==typos[1]){
         table_finale <- table_finale_provisoire
       } else{
         table_finale <- merge(table_finale,table_finale_provisoire,by=codgeo_entree,all.x=T,all.y=F)

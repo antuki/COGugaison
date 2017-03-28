@@ -4,9 +4,14 @@
 #' @return Remplir
 #' @export
 
+
+
+
 COG_akinator<- function(vecteur_codgeo,donnees_insee=T, liste_complete=T){
 
-vecteur_codgeo <- vecteur_codgeo[-which(substr(vecteur_codgeo,1,2)%in%c("97","98","99"))]
+#enleverPLM
+vecteur_codgeo <- COGugaison::enlever_PLM(vecteur_codgeo,vecteur_entree=T)
+vecteur_codgeo <- unique(vecteur_codgeo[which(substr(vecteur_codgeo,1,2)%in%c(paste0("0",1:9),10:96,"2A","2B") & nchar(vecteur_codgeo)==5)])
 
 if(donnees_insee==T){
   for (a in c(1968,1975,1982,1990,1999,2014)){
@@ -17,7 +22,7 @@ if(donnees_insee==T){
 COG_possibles_partiel <- NULL
 COG_possibles_complet <- NULL
 
-for(annee in c(2008:2016)){
+for(annee in c(1968, 1975, 1982, 1990, 1999, 2008:2016)){
   vecteur_codgeo_COG <- get(paste0("COG",annee))[,1]
   vecteur_codgeo_COG <- vecteur_codgeo_COG[-which(substr(vecteur_codgeo_COG,1,2)==97)]
 
@@ -31,7 +36,7 @@ for(annee in c(2008:2016)){
       COG_possibles_complet <- c(COG_possibles_complet,paste0("COG",annee))
     }
   }else{
-      COG_possibles_complet <- c(paste0("COG",2008:2016))
+      COG_possibles_complet <- c(paste0("COG",c(1968, 1975, 1982, 1990, 1999, 2008:2016)))
   }
 
 
