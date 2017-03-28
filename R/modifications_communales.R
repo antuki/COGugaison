@@ -77,7 +77,7 @@ if((as.Date("2014-01-01") >= as.Date(date_debut,"%d-%m-%Y") & as.Date("2014-01-0
   phrase_defusions <- paste0(phrase_defusions,"\n ATTENTION, l'évènement suivant a été pris en compte dans les données de l'Insee seulement au 01/01/2015 : 2014-01-01 : Loisey (55298) s'est séparée en Loisey (55298), Culey (55138) [rétablissement].")
   }
 
-#### partie changements de codes 
+#### partie changements de codes
 donnees_changements_codes <- donnees[which(donnees$MOD%in%c("410","411","130","500")),]
 phrase_changements_codes <- NULL
 for(codgeo in unique(donnees_changements_codes[which(donnees$MOD%in%c("410","411")),c("DEPCOM")])){
@@ -98,14 +98,14 @@ for(codgeo in unique(donnees_changements_codes[which(donnees$MOD%in%c("410","411
 
 for(codgeo in unique(donnees_changements_codes[which(donnees_changements_codes$MOD%in%c("500")),c("C_LOFF")])){
   for(date in   unique(as.character(donnees_changements_codes[which(donnees_changements_codes$C_LOFF==codgeo & donnees_changements_codes$MOD%in%c("500")),c("EFF")]))){
-    
+
     phrase_changements_codes <- paste0(phrase_changements_codes,
-                                       
+
                                        date," : ",
                                        "Le code commune de ",unique(donnees_changements_codes[which(donnees_changements_codes$DEPCOM==codgeo & donnees_changements_codes$EFF==date & donnees_changements_codes$MOD%in%c("130")),"NCCOFF"]), " passe de ", unique(donnees_changements_codes[which(donnees_changements_codes$C_LOFF==codgeo & donnees_changements_codes$EFF==date & donnees_changements_codes$MOD%in%c("500")),"C_LANC"]), " à ",codgeo,
                                        sapply(as.character(unique(donnees_changements_codes[which(donnees_changements_codes$C_LOFF==codgeo & donnees_changements_codes$EFF==date & donnees_changements_codes$MOD%in%c("500")),"MOD"])),FUN=function(x){switch(x,
                                                                                                                                                                                                                                                               "500"={" [changement de code dû à un changement de chef-lieu]"})}),
-                                       
+
                                        ".\n"
     )
   }
@@ -139,7 +139,7 @@ for(codgeo in unique(donnees_changements_noms[,c("DEPCOM")])){
   }
 }
 
-liste <- list(fusions=phrase_fusions, defusions=phrase_defusions, changements_codes=phrase_changements_codes, changements_noms=donnees_changements_noms)
+liste <- list(fusions=phrase_fusions, defusions=phrase_defusions, changements_codes=phrase_changements_codes, changements_noms=phrase_changements_noms)
 
 return(liste)
 
