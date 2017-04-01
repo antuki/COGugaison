@@ -6,7 +6,7 @@
 \usage{
 changement_COG_typo(table_entree, annees,
   codgeo_entree = colnames(table_entree)[1],
-  var_car = colnames(table_entree)[-which(colnames(table_entree) ==
+  typos = colnames(table_entree)[-which(colnames(table_entree) ==
   codgeo_entree)], methode_fusion = "methode_difference",
   mot_different = "différents", donnees_insee = T, libgeo = NULL)
 }
