@@ -8,20 +8,41 @@ changement_COG_typo <- function(table_entree,annees,codgeo_entree=colnames(table
 
   annees <- intersect(annees, c(1968, 1975, 1982, 1990, 1999, 2008:2016))
 
-    if(!is.null(libgeo) & libgeo%in%typos){
+    if(!is.null(libgeo) && libgeo%in%typos){
     typos <- typos[-which(typos==libgeo)]
   }
 
   for (i in 1:(length(annees)-1)){
 
-    #tables de passage spéciales Insee
+    #tables de passage spéciales Insee v0104
     if(annees[i] < annees[i + 1]){vecteur <- c(1968, 1975, 1982, 1990, 1999, 2013, 2014)} else{vecteur <-c(1975, 1982, 1990, 1999, 2008, 2014, 2015)}
     if(donnees_insee==T & annees[i]%in%vecteur){
       assign(paste0("PASSAGE_",annees[i],"_",annees[i+1]),get(paste0("PASSAGE_",annees[i],"_",annees[i+1],"_insee")))
     }
 
     provisoire <- merge(get(paste0("PASSAGE_",annees[i],"_",annees[i+1])), table_entree, by.x=paste0("cod",annees[i]),by.y=codgeo_entree, all.x=T, all.y=F)
-    provisoire <- provisoire[apply(provisoire[,6:ncol(provisoire)],1,function(x) !all(is.na(x))),]
+
+    #pour les lignes qui n'entrent pas dans la table de passage
+    if(i==1){
+      table_hors_passage <- merge(table_entree,get(paste0("PASSAGE_", annees[i], "_", annees[i + 1])), by.x = codgeo_entree, by.y = paste0("cod",annees[i]), all.x = T, all.y = T)
+      if(!is.null(libgeo) & libgeo%in%colnames(table_entree)){
+        table_hors_passage <- table_hors_passage[which(is.na(table_hors_passage$typemodif)),c(codgeo_entree, libgeo,typos)]
+      }
+      if(!is.null(libgeo) & !libgeo%in%colnames(table_entree)){
+        table_hors_passage <- table_hors_passage[which(is.na(table_hors_passage$typemodif)),c(codgeo_entree,typos)]
+        table_hors_passage[,libgeo]<- NA
+      }
+      if(is.null(libgeo)){
+        table_hors_passage <- table_hors_passage[which(is.na(table_hors_passage$typemodif)),c(codgeo_entree,typos)]
+      }
+    }
+
+    if(length(typos)>1){ #new avec le else aussi
+      provisoire <- provisoire[apply(provisoire[, typos], 1, function(x) !all(is.na(x))), ]
+    } else{
+      provisoire <- provisoire[!is.na(provisoire[,typos]), ]
+    }
+
 
     for (var in typos){
 
@@ -88,6 +109,9 @@ changement_COG_typo <- function(table_entree,annees,codgeo_entree=colnames(table
     colnames(table_finale)[ncol(table_finale)]<- libgeo
     table_finale <- table_finale[,c(1,ncol(table_finale),2:(ncol(table_finale)-1))]
   }
+
+  #on ajoute les lignes hors table de passage (Saint Martin...)
+  table_finale <- rbind(table_finale,table_hors_passage)
 
   return(table_finale)
 

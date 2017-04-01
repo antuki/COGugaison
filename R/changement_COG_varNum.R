@@ -15,13 +15,29 @@ changement_COG_varNum <- function(table_entree,annees,codgeo_entree=colnames(tab
 
   for (i in 1:(length(annees)-1)){
 
-    #tables de passage spéciales Insee
+    #tables de passage spéciales Insee v0104
     if(annees[i] < annees[i + 1]){vecteur <- c(1968, 1975, 1982, 1990, 1999, 2013, 2014)} else{vecteur <-c(1975, 1982, 1990, 1999, 2008, 2014, 2015)}
     if(donnees_insee==T & annees[i]%in%vecteur){
        assign(paste0("PASSAGE_",annees[i],"_",annees[i+1]),get(paste0("PASSAGE_",annees[i],"_",annees[i+1],"_insee")))
     }
 
      provisoire <- merge(table_entree,get(paste0("PASSAGE_",annees[i],"_",annees[i+1])),by.x=codgeo_entree,by.y=paste0("cod",annees[i]),all.x=T,all.y=F)
+
+     #pour les lignes qui n'entrent pas dans la table de passage
+     if(i==1){
+       if(!is.null(libgeo) & libgeo%in%colnames(table_entree)){
+         table_hors_passage <- provisoire[which(is.na(with(provisoire, get(paste0("cod", annees[i + 1]))))),c(codgeo_entree,libgeo,var_num)]
+       }
+       if(!is.null(libgeo) & !libgeo%in%colnames(table_entree)){
+         table_hors_passage <- provisoire[which(is.na(with(provisoire, get(paste0("cod", annees[i + 1]))))),c(codgeo_entree,var_num)]
+         table_hors_passage[,libgeo]<- NA
+       }
+       if(is.null(libgeo)){
+         table_hors_passage <- provisoire[which(is.na(with(provisoire, get(paste0("cod", annees[i + 1]))))),c(codgeo_entree,var_num)]
+       }
+     }
+
+     provisoire <- provisoire[which(!is.na(with(provisoire, get(paste0("cod", annees[i + 1]))))),]
 
     #On laisse telles quelles les lignes non connues de notre table de passage (97 hors DOM, pays étrangers...)
     provisoire[which(is.na(with(provisoire,get(paste0("cod",annees[i+1]))))),"ratio"] <- 1
@@ -47,6 +63,8 @@ changement_COG_varNum <- function(table_entree,annees,codgeo_entree=colnames(tab
     colnames(table_finale)[ncol(table_finale)]<- libgeo
     table_finale <- table_finale[,c(1,ncol(table_finale),2:(ncol(table_finale)-1))]
   }
+
+  table_finale <- rbind(table_finale,table_hors_passage)
 
   return(table_finale)
 
