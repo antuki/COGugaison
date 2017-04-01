@@ -25,10 +25,10 @@ changement_COG_varNum <- function(table_entree,annees,codgeo_entree=colnames(tab
 
      #pour les lignes qui n'entrent pas dans la table de passage
      if(i==1){
-       if(!is.null(libgeo) & libgeo%in%colnames(table_entree)){
+       if(!is.null(libgeo) && libgeo%in%colnames(table_entree)){
          table_hors_passage <- provisoire[which(is.na(with(provisoire, get(paste0("cod", annees[i + 1]))))),c(codgeo_entree,libgeo,var_num)]
        }
-       if(!is.null(libgeo) & !libgeo%in%colnames(table_entree)){
+       if(!is.null(libgeo) && !libgeo%in%colnames(table_entree)){
          table_hors_passage <- provisoire[which(is.na(with(provisoire, get(paste0("cod", annees[i + 1]))))),c(codgeo_entree,var_num)]
          table_hors_passage[,libgeo]<- NA
        }

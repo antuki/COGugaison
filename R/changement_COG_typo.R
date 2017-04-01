@@ -25,10 +25,10 @@ changement_COG_typo <- function(table_entree,annees,codgeo_entree=colnames(table
     #pour les lignes qui n'entrent pas dans la table de passage
     if(i==1){
       table_hors_passage <- merge(table_entree,get(paste0("PASSAGE_", annees[i], "_", annees[i + 1])), by.x = codgeo_entree, by.y = paste0("cod",annees[i]), all.x = T, all.y = T)
-      if(!is.null(libgeo) & libgeo%in%colnames(table_entree)){
+      if(!is.null(libgeo) && libgeo%in%colnames(table_entree)){
         table_hors_passage <- table_hors_passage[which(is.na(table_hors_passage$typemodif)),c(codgeo_entree, libgeo,typos)]
       }
-      if(!is.null(libgeo) & !libgeo%in%colnames(table_entree)){
+      if(!is.null(libgeo) && !libgeo%in%colnames(table_entree)){
         table_hors_passage <- table_hors_passage[which(is.na(table_hors_passage$typemodif)),c(codgeo_entree,typos)]
         table_hors_passage[,libgeo]<- NA
       }
