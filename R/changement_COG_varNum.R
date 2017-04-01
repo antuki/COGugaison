@@ -9,7 +9,7 @@
 
 
 
-changement_COG_varNum <- function(table_entree,annees,codgeo_entree=colnames(table_entree)[1],var_num=colnames(table_entree)[sapply(table_entree, is.numeric)],clef_commune_unique=T,libgeo=NULL,donnees_insee=T){
+changement_COG_varNum <- function(table_entree,annees,codgeo_entree=colnames(table_entree)[1],var_num=colnames(table_entree)[sapply(table_entree, is.numeric)],agregation=T,libgeo=NULL,donnees_insee=T){
 
   annees <- intersect(annees, c(1968, 1975, 1982, 1990, 1999, 2008:2016))
 
@@ -44,7 +44,7 @@ changement_COG_varNum <- function(table_entree,annees,codgeo_entree=colnames(tab
     table_entree <- table_finale
   }
 
-  if(clef_commune_unique==T){
+  if(agregation==T){
     table_finale <- aggregate(table_finale[,c(var_num)],by =list(with(table_finale,get(codgeo_entree))),FUN=sum)
     colnames(table_finale)<- c(codgeo_entree,var_num)
     }

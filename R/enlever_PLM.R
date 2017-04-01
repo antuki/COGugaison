@@ -5,7 +5,6 @@
 #' @export
 
 
-enlever_PLM <- function (table_entree, codgeo_entree = colnames(table_entree)[1],libgeo=NULL,clef_commune_unique=T,vecteur_entree=F) {
 
   if(vecteur_entree==T){
     table_entree[substr(table_entree,1,2)=="75"] <- "75056"
@@ -18,7 +17,7 @@ enlever_PLM <- function (table_entree, codgeo_entree = colnames(table_entree)[1]
   table_entree[substr(with(table_entree,get(codgeo_entree)),1,3)=="132", codgeo_entree] <- "13055"
   table_entree[substr(with(table_entree,get(codgeo_entree)),1,4)=="6938", codgeo_entree] <- "69123"
 
-if(clef_commune_unique==T){
+if(agregation==F){
   table_sortie <- table_entree
 } else{
 
