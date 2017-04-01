@@ -6,8 +6,8 @@
 \usage{
 changement_COG_varNum(table_entree, annees,
   codgeo_entree = colnames(table_entree)[1],
-  var_num = colnames(table_entree[, sapply(table_entree, is.numeric)]),
-  clef_commune_unique = T, libgeo = NULL, donnees_insee = T)
+  var_num = colnames(table_entree)[sapply(table_entree, is.numeric)],
+  agregation = T, libgeo = NULL, donnees_insee = T)
 }
 \value{
 Remplir

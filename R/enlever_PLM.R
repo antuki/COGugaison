@@ -5,6 +5,8 @@
 #' @export
 
 
+enlever_PLM <- function(table_entree,codgeo_entree = colnames(table_entree)[1],libgeo=NULL,agregation = T,vecteur_entree=F){
+
 
   if(vecteur_entree==T){
     table_entree[substr(table_entree,1,2)=="75"] <- "75056"
