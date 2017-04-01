@@ -9,13 +9,12 @@
 
 
 
-changement_COG_varNum <- function(table_entree,annees,codgeo_entree=colnames(table_entree)[1],var_num=colnames(table_entree[ ,sapply(table_entree, is.numeric) ]),clef_commune_unique=T,libgeo=NULL,donnees_insee=T){
+changement_COG_varNum <- function(table_entree,annees,codgeo_entree=colnames(table_entree)[1],var_num=colnames(table_entree)[sapply(table_entree, is.numeric)],clef_commune_unique=T,libgeo=NULL,donnees_insee=T){
 
   annees <- intersect(annees, c(1968, 1975, 1982, 1990, 1999, 2008:2016))
 
   for (i in 1:(length(annees)-1)){
 
-    #tables de passage spéciales Insee v0104
     if(annees[i] < annees[i + 1]){vecteur <- c(1968, 1975, 1982, 1990, 1999, 2013, 2014)} else{vecteur <-c(1975, 1982, 1990, 1999, 2008, 2014, 2015)}
     if(donnees_insee==T & annees[i]%in%vecteur){
        assign(paste0("PASSAGE_",annees[i],"_",annees[i+1]),get(paste0("PASSAGE_",annees[i],"_",annees[i+1],"_insee")))
@@ -24,18 +23,13 @@ changement_COG_varNum <- function(table_entree,annees,codgeo_entree=colnames(tab
      provisoire <- merge(table_entree,get(paste0("PASSAGE_",annees[i],"_",annees[i+1])),by.x=codgeo_entree,by.y=paste0("cod",annees[i]),all.x=T,all.y=F)
 
      #pour les lignes qui n'entrent pas dans la table de passage
-     if(i==1){
-       if(!is.null(libgeo) && libgeo%in%colnames(table_entree)){
-         table_hors_passage <- provisoire[which(is.na(with(provisoire, get(paste0("cod", annees[i + 1]))))),c(codgeo_entree,libgeo,var_num)]
-       }
-       if(!is.null(libgeo) && !libgeo%in%colnames(table_entree)){
-         table_hors_passage <- provisoire[which(is.na(with(provisoire, get(paste0("cod", annees[i + 1]))))),c(codgeo_entree,var_num)]
+     if (i == 1) {
+       table_hors_passage <- provisoire[which(is.na(with(provisoire, get(paste0("cod", annees[i + 1]))))), ]
+       if(nrow(table_hors_passage)!=0 && !is.null(libgeo) && !libgeo%in%colnames(table_hors_passage)){
          table_hors_passage[,libgeo]<- NA
        }
-       if(is.null(libgeo)){
-         table_hors_passage <- provisoire[which(is.na(with(provisoire, get(paste0("cod", annees[i + 1]))))),c(codgeo_entree,var_num)]
-       }
      }
+
 
      provisoire <- provisoire[which(!is.na(with(provisoire, get(paste0("cod", annees[i + 1]))))),]
 
@@ -64,7 +58,10 @@ changement_COG_varNum <- function(table_entree,annees,codgeo_entree=colnames(tab
     table_finale <- table_finale[,c(1,ncol(table_finale),2:(ncol(table_finale)-1))]
   }
 
-  table_finale <- rbind(table_finale,table_hors_passage)
+  #on ajoute les lignes hors table de passage (Saint Martin...)
+  if(nrow(table_hors_passage)!=0){
+    table_finale <- rbind(table_finale, table_hors_passage[,colnames(table_finale)])
+  }
 
   return(table_finale)
 
