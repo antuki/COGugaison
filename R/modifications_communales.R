@@ -51,7 +51,7 @@ for(codgeo in unique(donnees_fusions[which(donnees_fusions$MOD%in%c("320","321",
 
 
 if((as.Date("1982-03-03") >= as.Date(date_debut,"%d-%m-%Y") & as.Date("1982-03-03") <= as.Date(date_fin,"%d-%m-%Y"))  | (as.Date("1982-04-03")  <= as.Date(date_fin,"%d-%m-%Y") & as.Date("1982-04-03")  >= as.Date(date_debut,"%d-%m-%Y")) ){
-  phrase_fusions <- paste0(phrase_fusions,"\n ATTENTION, l'évènement suivant a été pris en compte dans les données de l'Insee seulement au 04/03/1982 : 1982-03-03 : Flaignes-Havys (08169) est un rassemblement de Flaignes-Havys (08169), Havys (08221) [fusion simple].")
+  phrase_fusions <- paste0(phrase_fusions,"ATTENTION, l'évènement suivant a été pris en compte dans les données de l'Insee seulement au 04/03/1982 : 1982-03-03 : Flaignes-Havys (08169) est un rassemblement de Flaignes-Havys (08169), Havys (08221) [fusion simple].\n")
   }
 
 ##### partie défusions
@@ -74,7 +74,7 @@ for(codgeo in unique(donnees_defusions[which(donnees_defusions$MOD%in%c("220","2
 
 #rajouter les exceptions Insee...
 if((as.Date("2014-01-01") >= as.Date(date_debut,"%d-%m-%Y") & as.Date("2014-01-01") <= as.Date(date_fin,"%d-%m-%Y"))  | (as.Date("2015-01-01")  <= as.Date(date_fin,"%d-%m-%Y") & as.Date("2015-01-01")  >= as.Date(date_debut,"%d-%m-%Y")) ){
-  phrase_defusions <- paste0(phrase_defusions,"\n ATTENTION, l'évènement suivant a été pris en compte dans les données de l'Insee seulement au 01/01/2015 : 2014-01-01 : Loisey (55298) s'est séparée en Loisey (55298), Culey (55138) [rétablissement].")
+  phrase_defusions <- paste0(phrase_defusions,"ATTENTION, l'évènement suivant a été pris en compte dans les données de l'Insee seulement au 01/01/2015 : 2014-01-01 : Loisey (55298) s'est séparée en Loisey (55298), Culey (55138) [rétablissement].\n")
   }
 
 #### partie changements de codes
@@ -112,11 +112,11 @@ for(codgeo in unique(donnees_changements_codes[which(donnees_changements_codes$M
 }
 
 if((as.Date("1990-02-01") >= as.Date(date_debut,"%d-%m-%Y") & as.Date("1990-02-01") <= as.Date(date_fin,"%d-%m-%Y"))  | (as.Date("1990-03-05")  <= as.Date(date_fin,"%d-%m-%Y") & as.Date("1990-03-05")  >= as.Date(date_debut,"%d-%m-%Y")) ){
-  phrase_changements_codes <- paste0(phrase_changements_codes,"\n ATTENTION, l'évènement suivant a été pris en compte dans les données de l'Insee seulement au 05/03/1990 : 1990-02-01 : Le code commune de Oudon passe de 14624 à 14697 [changement de code dû à un changement de chef-lieu].")
+  phrase_changements_codes <- paste0(phrase_changements_codes,"ATTENTION, l'évènement suivant a été pris en compte dans les données de l'Insee seulement au 05/03/1990 : 1990-02-01 : Le code commune de Oudon passe de 14624 à 14697 [changement de code dû à un changement de chef-lieu].\n")
 }
 
 if((as.Date("1976-01-01") >= as.Date(date_debut,"%d-%m-%Y") & as.Date("1976-01-01") <= as.Date(date_fin,"%d-%m-%Y")) | (substr(date_debut,7,10)=="1968") ){
-  phrase_changements_codes <- paste0(phrase_changements_codes,"\n ATTENTION, les changements de codes des communes de Corse ont eu lieu pour les données Insee dès le recensement de 1968.")
+  phrase_changements_codes <- paste0(phrase_changements_codes,"ATTENTION, les changements de codes des communes de Corse ont eu lieu pour les données Insee dès le recensement de 1968.\n")
 }
 
 #### partie changement de noms
