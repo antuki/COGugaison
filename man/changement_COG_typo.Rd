@@ -8,7 +8,8 @@ changement_COG_typo(table_entree, annees,
   codgeo_entree = colnames(table_entree)[1],
   typos = colnames(table_entree)[-which(colnames(table_entree) ==
   codgeo_entree)], methode_fusion = "methode_difference",
-  mot_different = "différents", donnees_insee = T, libgeo = NULL)
+  mot_difference = NULL, classe_absorbante = NULL, donnees_insee = T,
+  libgeo = NULL)
 }
 \value{
 Remplir

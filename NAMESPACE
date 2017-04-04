@@ -2,9 +2,8 @@
 
 export(COG_akinator)
 export(changement_COG_typo)
+export(changement_COG_typo_details)
 export(changement_COG_varNum)
-export(creer_table_passage)
-export(creer_table_passage_inverse)
 export(enlever_PLM)
 export(modifications_communales)
 export(nivsupra)
