@@ -4,7 +4,8 @@
 #' @return Remplir
 #' @export
 
-changement_COG_typo <- function(table_entree,annees,codgeo_entree=colnames(table_entree)[1],typos=colnames(table_entree)[-which(colnames(table_entree)==codgeo_entree)], methode_fusion="methode_difference",mot_different="différents",donnees_insee=T,libgeo=NULL){
+
+changement_COG_typo <- function(table_entree,annees,codgeo_entree=colnames(table_entree)[1],typos=colnames(table_entree)[-which(colnames(table_entree)==codgeo_entree)], methode_fusion="methode_difference",mot_difference=NULL,classe_absorbante=NULL,donnees_insee=T,libgeo=NULL){
 
   annees <- intersect(annees, c(1968, 1975, 1982, 1990, 1999, 2008:2016))
 
@@ -51,18 +52,17 @@ changement_COG_typo <- function(table_entree,annees,codgeo_entree=colnames(table
         table_f_sanspb  <- do.call("rbind", table_f_sanspb)
         table_f_avecpb <-table_f_liste[which(lapply(table_f_liste, FUN=function(x){ifelse(length(unique(x[,6]))==1,T,F)})==F)]
 
-
         if (methode_fusion=="methode_difference"){
-          table_f_avecpb <- lapply(table_f_avecpb, FUN=function(x){x[1,]})
+          table_f_avecpb <- lapply(table_f_avecpb, FUN=function(x){
+            categories <- unique(x[,var])[order(unique(x[,var]))]
+            mot_diff <- ifelse(is.null(mot_difference),F,T)
+            x[1,var]<- ifelse(mot_diff==T,mot_difference,paste(categories,collapse = " et "))
+            return(x[1,])
+          })
           table_f_avecpb <- do.call("rbind", table_f_avecpb)
-
-          if(!is.null(table_f_avecpb)){
-            table_f_avecpb[,6] <- mot_different
-          }
-
         }
 
-        if (methode_fusion=="max_population"){
+        if (methode_fusion=="methode_max_pop"){
           #COG spécial Insee
           if(donnees_insee==T & (annees[i]%in%c(1968,1975,1982,1990,1999,2014))){
             assign(paste0("COG",annees[i]),get(paste0("COG",annees[i],"_insee")))
@@ -73,9 +73,22 @@ changement_COG_typo <- function(table_entree,annees,codgeo_entree=colnames(table
           table_f_avecpb <- do.call("rbind", table_f_avecpb)
         }
 
+
+        if (methode_fusion=="methode_classe_absorbante"){
+
+          table_f_avecpb <- lapply(table_f_avecpb, FUN=function(x){
+            categories <- unique(x[,var])[order(unique(x[,var]))]
+            absorb <- ifelse(classe_absorbante%in%categories,T,F)
+            x[1,var]<- ifelse(absorb==T,classe_absorbante,paste(categories,collapse = " et "))
+            return(x[1,])
+            })
+          table_f_avecpb <- do.call("rbind", table_f_avecpb)
+
+
+        }
+
         table_finale_provisoire <- rbind(table_n_d,table_f_sanspb,table_f_avecpb)[,c(2,6)]
         names(table_finale_provisoire)[names(table_finale_provisoire)==paste0("cod",annees[i+1])] <- codgeo_entree
-
 
       } else{
         table_finale_provisoire <- table_n_d[,c(2,6)]
