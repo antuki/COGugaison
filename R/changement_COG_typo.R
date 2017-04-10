@@ -7,7 +7,7 @@
 
 changement_COG_typo <- function(table_entree,annees,codgeo_entree=colnames(table_entree)[1],typos=colnames(table_entree)[-which(colnames(table_entree)==codgeo_entree)], methode_fusion="methode_difference",mot_difference=NULL,classe_absorbante=NULL,donnees_insee=T,libgeo=NULL){
 
-  annees <- intersect(annees, c(1968, 1975, 1982, 1990, 1999, 2008:2016))
+  annees <- intersect(annees, c(1968, 1975, 1982, 1990, 1999, 2008:2017))
 
     if(!is.null(libgeo) && libgeo%in%typos){
     typos <- typos[-which(typos==libgeo)]

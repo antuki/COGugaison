@@ -6,7 +6,7 @@
 
 changement_COG_typo_details <- function(table_entree,annees,codgeo_entree=colnames(table_entree)[1],typo,methode_fusion="methode_difference",mot_difference=NULL,classe_absorbante=NULL, donnees_insee=T){
 
-  annees <- intersect(annees, c(1968, 1975, 1982, 1990, 1999, 2008:2016))
+  annees <- intersect(annees, c(1968, 1975, 1982, 1990, 1999, 2008:2017))
 
   for (i in 1:(length(annees)-1)){
 

@@ -22,7 +22,7 @@ if(donnees_insee==T){
 COG_possibles_partiel <- NULL
 COG_possibles_complet <- NULL
 
-for(annee in c(1968, 1975, 1982, 1990, 1999, 2008:2016)){
+for(annee in c(1968, 1975, 1982, 1990, 1999, 2008:2017)){
   vecteur_codgeo_COG <- get(paste0("COG",annee))[,1]
   vecteur_codgeo_COG <- vecteur_codgeo_COG[-which(substr(vecteur_codgeo_COG,1,2)==97)]
 
@@ -36,7 +36,7 @@ for(annee in c(1968, 1975, 1982, 1990, 1999, 2008:2016)){
       COG_possibles_complet <- c(COG_possibles_complet,paste0("COG",annee))
     }
   }else{
-      COG_possibles_complet <- c(paste0("COG",c(1968, 1975, 1982, 1990, 1999, 2008:2016)))
+      COG_possibles_complet <- c(paste0("COG",c(1968, 1975, 1982, 1990, 1999, 2008:2017)))
   }
 
 
