@@ -4,6 +4,11 @@
 #' @return Remplir
 #' @export
 
+# date_debut="01-01-2016"
+# date_fin="01-01-2017"
+#
+# library(COGugaison)
+
 modifications_communales <- function(date_debut,date_fin){
 
 donnees <- historiq
@@ -11,7 +16,7 @@ donnees <- donnees[which(donnees$EFF > as.Date(date_debut,"%d-%m-%Y") & donnees$
 donnees <- donnees[order(donnees$EFF),]
 
 #### partie fusions
-donnees_fusions <- donnees[which(donnees$MOD%in%c("310","320","311","321","330","340","331","341","333","332","110","111","120","130","140","150")),]
+donnees_fusions <- donnees[which(donnees$MOD%in%c("310","320","311","321","330","340","331","341","333","332","110","111","120","130","140","150","312")),]
 phrase_fusions <- NULL
 for(codgeo in unique(donnees_fusions[which(donnees_fusions$MOD%in%c("320","321","340","341")),c("DEPCOM")])){
   for(date in   unique(as.character(donnees_fusions[which(donnees_fusions$MOD%in%c("320","321","340","341") & donnees_fusions$DEPCOM==codgeo),c("EFF")])))    {
@@ -34,7 +39,7 @@ for(codgeo in unique(donnees_fusions[which(donnees_fusions$MOD%in%c("320","321",
                           paste0(unique(donnees_fusions[which(donnees_fusions$MOD%in%c("320","321","340","341") & donnees_fusions$DEPCOM==codgeo & donnees_fusions$EFF==date),"NCCOFF"])," (",codgeo, ") est un rassemblement de "),
                           paste(c(
                             if(length(donnees_fusions[which(donnees_fusions$MOD%in%c("340","320") & donnees_fusions$DEPCOM==codgeo & donnees_fusions$EFF==date) ,"NCCOFF"])!=0){paste0(unique(donnees_fusions[which(donnees_fusions$MOD%in%c("320","340") & donnees_fusions$DEPCOM==codgeo & donnees_fusions$EFF==date) ,"NCCOFF"])," (",unique(donnees_fusions[which(donnees_fusions$MOD%in%c("320","340") & donnees_fusions$DEPCOM==codgeo & donnees_fusions$EFF==date) ,"DEPCOM"]),")",collapse=", ")},
-                            paste0(donnees_fusions[which(donnees_fusions$MOD%in%c("310","311","330","331","332","333") & donnees_fusions$COMECH==codgeo & donnees_fusions$EFF==date) ,"NCCOFF"]," (",donnees_fusions[which(donnees_fusions$MOD%in%c("310","311","330","331","332","333") & donnees_fusions$COMECH==codgeo & donnees_fusions$EFF==date),"DEPCOM"],")")
+                            paste0(donnees_fusions[which(donnees_fusions$MOD%in%c("310","311","312","330","331","332","333") & donnees_fusions$COMECH==codgeo & donnees_fusions$EFF==date) ,"NCCOFF"]," (",donnees_fusions[which(donnees_fusions$MOD%in%c("310","311","312","330","331","332","333") & donnees_fusions$COMECH==codgeo & donnees_fusions$EFF==date),"DEPCOM"],")")
                             #,if(length(donnees_fusions[which(donnees_fusions$MOD%in%c("110") & donnees_fusions$DEPCOM==codgeo & donnees_fusions$EFF==date) ,"NCCANC"])!=0){paste0(unique(donnees_fusions[which(donnees_fusions$MOD%in%c("110") & donnees_fusions$DEPCOM==codgeo & donnees_fusions$EFF==date) ,"NCCANC"])," (",unique(donnees_fusions[which(donnees_fusions$MOD%in%c("110") & donnees_fusions$DEPCOM==codgeo & donnees_fusions$EFF==date) ,"DEPCOM"]),")")}
                           )
                           ,collapse=", "),
@@ -43,12 +48,14 @@ for(codgeo in unique(donnees_fusions[which(donnees_fusions$MOD%in%c("320","321",
                                                                                                                                                                                                                               "320"={" [fusion simple]"},
                                                                                                                                                                                                                               "321"={" [commune nouvelle sans commune(s) déléguée(s)]"},
                                                                                                                                                                                                                               "340"={" [fusion-association]"},
-                                                                                                                                                                                                                              "341"={" [commune nouvelle avec commune(s) déléguée(s)]"})}),
+                                                                                                                                                                                                                              "341"={" [commune nouvelle avec commune(s) déléguée(s)]"},
+                                                                                                                                                                                                                              )}),
                           ".\n"
   )
   }
 }
 
+cat(phrase_fusions)
 
 if((as.Date("1982-03-03") >= as.Date(date_debut,"%d-%m-%Y") & as.Date("1982-03-03") <= as.Date(date_fin,"%d-%m-%Y"))  | (as.Date("1982-04-03")  <= as.Date(date_fin,"%d-%m-%Y") & as.Date("1982-04-03")  >= as.Date(date_debut,"%d-%m-%Y")) ){
   phrase_fusions <- paste0(phrase_fusions,"ATTENTION, l'évènement suivant a été pris en compte dans les données de l'Insee seulement au 04/03/1982 : 1982-03-03 : Flaignes-Havys (08169) est un rassemblement de Flaignes-Havys (08169), Havys (08221) [fusion simple].\n")
@@ -115,9 +122,9 @@ if((as.Date("1990-02-01") >= as.Date(date_debut,"%d-%m-%Y") & as.Date("1990-02-0
   phrase_changements_codes <- paste0(phrase_changements_codes,"ATTENTION, l'évènement suivant a été pris en compte dans les données de l'Insee seulement au 05/03/1990 : 1990-02-01 : Le code commune de Oudon passe de 14624 à 14697 [changement de code dû à un changement de chef-lieu].\n")
 }
 
-if((as.Date("1976-01-01") >= as.Date(date_debut,"%d-%m-%Y") & as.Date("1976-01-01") <= as.Date(date_fin,"%d-%m-%Y")) | (substr(date_debut,7,10)=="1968") ){
-  phrase_changements_codes <- paste0(phrase_changements_codes,"ATTENTION, les changements de codes des communes de Corse ont eu lieu pour les données Insee dès le recensement de 1968.\n")
-}
+# if((as.Date("1976-01-01") >= as.Date(date_debut,"%d-%m-%Y") & as.Date("1976-01-01") <= as.Date(date_fin,"%d-%m-%Y")) | (substr(date_debut,7,10)=="1968") ){
+#   phrase_changements_codes <- paste0(phrase_changements_codes,"ATTENTION, les changements de codes des communes de Corse ont eu lieu pour les données Insee dès le recensement de 1968.\n")
+# }
 
 #### partie changement de noms
 donnees_changements_noms <- donnees[which(donnees$MOD%in%c("100","140","150")),]

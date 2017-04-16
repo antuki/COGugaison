@@ -4,7 +4,7 @@
 #' @return Remplir
 #' @export
 
-changement_COG_typo_details <- function(table_entree,annees,codgeo_entree=colnames(table_entree)[1],typo,methode_fusion="methode_difference",mot_difference=NULL,classe_absorbante=NULL, donnees_insee=T){
+changement_COG_typo_details <- function(table_entree,annees,codgeo_entree=colnames(table_entree)[1],typo, donnees_insee=T){
 
   annees <- intersect(annees, c(1968, 1975, 1982, 1990, 1999, 2008:2017))
 
@@ -43,8 +43,7 @@ changement_COG_typo_details <- function(table_entree,annees,codgeo_entree=colnam
       }
 
       assign(paste0("resultats_",annees[i],"_",annees[i+1]),table_f_avecpb)
-      table_entree <- changement_COG_typo(table_entree=table_entree,annees=c(annees[i]:annees[i+1]),codgeo_entree=codgeo_entree,typos=typo, methode_fusion=methode_fusion,mot_difference=mot_difference,classe_absorbante=classe_absorbante,donnees_insee=donnees_insee,libgeo=NULL)
-
+      table_entree <- changement_COG_typo(table_entree=table_entree,annees=c(annees[i]:annees[i+1]),codgeo_entree=codgeo_entree,typos=typo, methode_fusion="methode_difference",donnees_insee=donnees_insee,libgeo=NULL)
   }
 
   liste <- mget(ls(pattern = "^resultats_",envir=))

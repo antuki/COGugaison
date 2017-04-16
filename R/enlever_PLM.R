@@ -5,7 +5,7 @@
 #' @export
 
 
-enlever_PLM <- function(table_entree,codgeo_entree = colnames(table_entree)[1],libgeo=NULL,agregation = T,vecteur_entree=F){
+enlever_PLM <- function(table_entree,codgeo_entree = colnames(table_entree)[1],libgeo=NULL,agregation = T,vecteur_entree=is.vector(table_entree)){
 
 
   if(vecteur_entree==T){
