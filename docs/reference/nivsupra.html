@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Titre — modifications_communales â€¢ COGugaison</title>
+<title>Titre — nivsupra â€¢ COGugaison</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -79,18 +79,15 @@
 
     
     <p>Remplir</p>
-
-    <p>Remplir</p>
     
 
-    <pre><span class='fu'>modification_Corse</span>(<span class='no'>table_entree</span>, <span class='kw'>codgeo_entree</span> <span class='kw'>=</span> <span class='fu'>colnames</span>(<span class='no'>table_entree</span>)[<span class='fl'>1</span>],
-  <span class='kw'>vecteur_entree</span> <span class='kw'>=</span> <span class='fu'>is.vector</span>(<span class='no'>table_entree</span>), <span class='kw'>sens</span> <span class='kw'>=</span> <span class='st'>"20vers2A2B"</span>)
-
-<span class='fu'>modifications_communales</span>(<span class='no'>date_debut</span>, <span class='no'>date_fin</span>)</pre>
+    <pre><span class='fu'>nivsupra</span>(<span class='no'>table_entree</span>, <span class='kw'>code_com</span> <span class='kw'>=</span> <span class='fu'>colnames</span>(<span class='no'>table_entree</span>)[<span class='fl'>1</span>],
+  <span class='kw'>var_num</span> <span class='kw'>=</span> <span class='fu'>colnames</span>(<span class='no'>table_entree</span>)[<span class='fu'>sapply</span>(<span class='no'>table_entree</span>, <span class='no'>is.numeric</span>)],
+  <span class='no'>nivsupra</span>, <span class='kw'>nivsupra_nom</span> <span class='kw'>=</span> <span class='fu'>ifelse</span>(<span class='no'>agregation</span> <span class='kw'>==</span> <span class='no'>T</span>, <span class='no'>nivsupra</span>, <span class='fu'>paste0</span>(<span class='no'>nivsupra</span>,
+  <span class='st'>"_"</span>, <span class='no'>code_com</span>)), <span class='kw'>na.nivgeo.rm</span> <span class='kw'>=</span> <span class='no'>F</span>, <span class='kw'>agregation</span> <span class='kw'>=</span> <span class='no'>T</span>)</pre>
         
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Remplir</p>
     <p>Remplir</p>
     
 

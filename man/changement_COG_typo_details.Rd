@@ -5,9 +5,7 @@
 \title{Titre}
 \usage{
 changement_COG_typo_details(table_entree, annees,
-  codgeo_entree = colnames(table_entree)[1], typo,
-  methode_fusion = "methode_difference", mot_difference = NULL,
-  classe_absorbante = NULL, donnees_insee = T)
+  codgeo_entree = colnames(table_entree)[1], typo, donnees_insee = T)
 }
 \value{
 Remplir

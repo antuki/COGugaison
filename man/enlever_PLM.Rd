@@ -5,7 +5,7 @@
 \title{Titre}
 \usage{
 enlever_PLM(table_entree, codgeo_entree = colnames(table_entree)[1],
-  libgeo = NULL, agregation = T, vecteur_entree = F)
+  libgeo = NULL, agregation = T, vecteur_entree = is.vector(table_entree))
 }
 \value{
 Remplir

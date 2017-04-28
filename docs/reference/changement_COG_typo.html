@@ -83,9 +83,10 @@
 
     <pre><span class='fu'>changement_COG_typo</span>(<span class='no'>table_entree</span>, <span class='no'>annees</span>,
   <span class='kw'>codgeo_entree</span> <span class='kw'>=</span> <span class='fu'>colnames</span>(<span class='no'>table_entree</span>)[<span class='fl'>1</span>],
-  <span class='kw'>var_car</span> <span class='kw'>=</span> <span class='fu'>colnames</span>(<span class='no'>table_entree</span>)[-<span class='fu'>which</span>(<span class='fu'>colnames</span>(<span class='no'>table_entree</span>) <span class='kw'>==</span>
+  <span class='kw'>typos</span> <span class='kw'>=</span> <span class='fu'>colnames</span>(<span class='no'>table_entree</span>)[-<span class='fu'>which</span>(<span class='fu'>colnames</span>(<span class='no'>table_entree</span>) <span class='kw'>==</span>
   <span class='no'>codgeo_entree</span>)], <span class='kw'>methode_fusion</span> <span class='kw'>=</span> <span class='st'>"methode_difference"</span>,
-  <span class='kw'>mot_different</span> <span class='kw'>=</span> <span class='st'>"différents"</span>, <span class='kw'>donnees_insee</span> <span class='kw'>=</span> <span class='no'>T</span>, <span class='kw'>libgeo</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+  <span class='kw'>mot_difference</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>classe_absorbante</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>donnees_insee</span> <span class='kw'>=</span> <span class='no'>T</span>,
+  <span class='kw'>libgeo</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
         
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
