@@ -25,8 +25,8 @@ if(agregation==F){
 
   table_sortie <- aggregate(table_entree[,sapply(table_entree, function(x){is.numeric(x) | is.integer(x)})],by =list(with(table_entree,get(codgeo_entree))),FUN=sum)
   colnames(table_sortie)<- colnames(table_entree[,c(codgeo_entree,names(sapply(table_entree, function(x){is.numeric(x) | is.integer(x)})[sapply(table_entree, function(x){is.numeric(x) | is.integer(x)})==T]))])
-  table_sortie <- merge(table_sortie,table_entree[!duplicated(with(table_entree,get(codgeo_entree))),names(sapply(table_entree, function(x){is.numeric(x) | is.integer(x)})[sapply(table_entree, function(x){is.numeric(x) | is.integer(x)})==F])], by=codgeo_entree,all.x=T,all.y=F)
-}
+  #table_sortie <- merge(table_sortie,table_entree[!duplicated(with(table_entree,get(codgeo_entree))),names(sapply(table_entree, function(x){is.numeric(x) | is.integer(x)})[sapply(table_entree, function(x){is.numeric(x) | is.integer(x)})==F])], by=codgeo_entree,all.x=T,all.y=F)
+   }
 
 if(!is.null(libgeo)){
   table_sortie[with(table_sortie,get(codgeo_entree))=="75056", libgeo] <- "Paris"
@@ -34,7 +34,8 @@ if(!is.null(libgeo)){
   table_sortie[with(table_sortie,get(codgeo_entree))=="69123", libgeo] <- "Marseille"
 }
 
-}
+  }
+
 
 return(table_sortie)
 }

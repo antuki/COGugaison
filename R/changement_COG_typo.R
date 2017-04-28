@@ -15,7 +15,6 @@ changement_COG_typo <- function(table_entree,annees,codgeo_entree=colnames(table
 
   for (i in 1:(length(annees)-1)){
 
-    #tables de passage spéciales Insee v0104
     if(annees[i] < annees[i + 1]){vecteur <- c(1968, 1975, 1982, 1990, 1999, 2013, 2014)} else{vecteur <-c(1975, 1982, 1990, 1999, 2008, 2014, 2015)}
     if(donnees_insee==T & annees[i]%in%vecteur){
       assign(paste0("PASSAGE_",annees[i],"_",annees[i+1]),get(paste0("PASSAGE_",annees[i],"_",annees[i+1],"_insee")))
@@ -36,7 +35,6 @@ changement_COG_typo <- function(table_entree,annees,codgeo_entree=colnames(table
     } else{
       provisoire <- provisoire[!is.na(provisoire[,typos]), ]
     }
-
 
     for (var in typos){
 
@@ -120,6 +118,8 @@ changement_COG_typo <- function(table_entree,annees,codgeo_entree=colnames(table
   if(nrow(table_hors_passage)!=0){
     table_finale <- rbind(table_finale, table_hors_passage[,colnames(table_finale)])
   }
+
+  table_finale <- table_finale[order(table_finale[,codgeo_entree]),]#nouveau
 
   return(table_finale)
 

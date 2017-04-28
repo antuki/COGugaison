@@ -58,6 +58,8 @@ changement_COG_varNum <- function(table_entree,annees,codgeo_entree=colnames(tab
     table_finale <- rbind(table_finale, table_hors_passage[,colnames(table_finale)])
   }
 
+  table_finale <- table_finale[order(table_finale[,codgeo_entree]),]#nouveau
+
   return(table_finale)
 
 }
