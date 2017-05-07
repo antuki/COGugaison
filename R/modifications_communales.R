@@ -4,10 +4,10 @@
 #' @return Remplir
 #' @export
 
-# date_debut="01-01-2016"
-# date_fin="01-01-2017"
-#
-# library(COGugaison)
+ date_debut="01-01-2015"
+ date_fin="01-01-2016"
+
+ library(COGugaison)
 
 modifications_communales <- function(date_debut,date_fin){
 
@@ -54,8 +54,6 @@ for(codgeo in unique(donnees_fusions[which(donnees_fusions$MOD%in%c("320","321",
   )
   }
 }
-
-cat(phrase_fusions)
 
 if((as.Date("1982-03-03") >= as.Date(date_debut,"%d-%m-%Y") & as.Date("1982-03-03") <= as.Date(date_fin,"%d-%m-%Y"))  | (as.Date("1982-04-03")  <= as.Date(date_fin,"%d-%m-%Y") & as.Date("1982-04-03")  >= as.Date(date_debut,"%d-%m-%Y")) ){
   phrase_fusions <- paste0(phrase_fusions,"ATTENTION, l'évènement suivant a été pris en compte dans les données de l'Insee seulement au 04/03/1982 : 1982-03-03 : Flaignes-Havys (08169) est un rassemblement de Flaignes-Havys (08169), Havys (08221) [fusion simple].\n")

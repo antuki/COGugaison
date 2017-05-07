@@ -5,10 +5,10 @@
 #' @export
 
 
-nivsupra <- function(table_entree,code_com=colnames(table_entree)[1],var_num=colnames(table_entree)[sapply(table_entree, is.numeric)]
-                      ,nivsupra, nivsupra_nom=ifelse(agregation==T,nivsupra,paste0(nivsupra,"_",code_com)),na.nivgeo.rm=F,agregation=T){
+nivsupra <- function(table_entree,codgeo_entree=colnames(table_entree)[1],var_num=colnames(table_entree)[sapply(table_entree, is.numeric)]
+                     ,nivsupra, nivsupra_nom=ifelse(agregation==T,nivsupra,paste0(nivsupra,"_",codgeo_entree)),na.nivgeo.rm=F,agregation=T){
 
-  table_entree <- merge(table_entree,table_supracom[,c("CODGEO",nivsupra)],by.x=code_com,by.y="CODGEO",all.x=T,all.y=F)
+  table_entree <- merge(table_entree,table_supracom[,c("CODGEO",nivsupra)],by.x=codgeo_entree,by.y="CODGEO",all.x=T,all.y=F)
   colnames(table_entree)[which(colnames(table_entree)==nivsupra)]<- nivsupra_nom
 
   if(agregation==F){
@@ -38,4 +38,7 @@ nivsupra <- function(table_entree,code_com=colnames(table_entree)[1],var_num=col
 
   return(table_sortie)
 }
+
+
+
 

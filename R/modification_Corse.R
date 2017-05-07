@@ -1,5 +1,5 @@
 #' @title Titre
-#' @name modifications_communales
+#' @name modification_Corse
 #' @description Remplir
 #' @return Remplir
 #' @export
