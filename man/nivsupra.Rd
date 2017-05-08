@@ -4,10 +4,10 @@
 \alias{nivsupra}
 \title{Titre}
 \usage{
-nivsupra(table_entree, code_com = colnames(table_entree)[1],
+nivsupra(table_entree, codgeo_entree = colnames(table_entree)[1],
   var_num = colnames(table_entree)[sapply(table_entree, is.numeric)],
   nivsupra, nivsupra_nom = ifelse(agregation == T, nivsupra, paste0(nivsupra,
-  "_", code_com)), na.nivgeo.rm = F, agregation = T)
+  "_", codgeo_entree)), na.nivgeo.rm = F, agregation = T)
 }
 \value{
 Remplir
