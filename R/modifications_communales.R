@@ -1,13 +1,8 @@
-#' @title Titre
+﻿#' @title Titre
 #' @name modifications_communales
 #' @description Remplir
 #' @return Remplir
 #' @export
-
- date_debut="01-01-2015"
- date_fin="01-01-2016"
-
- library(COGugaison)
 
 modifications_communales <- function(date_debut,date_fin){
 
