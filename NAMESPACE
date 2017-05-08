@@ -3,6 +3,7 @@
 export(COG_akinator)
 export(changement_COG_typo)
 export(changement_COG_typo_details)
+export(changement_COG_varNum)
 export(enlever_PLM)
 export(modification_Corse)
 export(modifications_communales)
