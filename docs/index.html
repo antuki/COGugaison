@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gestion des codes officiels g�ographiques (COG) â¢ COGugaison</title>
+<title>Gestion des codes officiels géographiques (COG) • COGugaison</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
@@ -55,28 +55,28 @@
 <a href="#cogugaison" class="anchor"> </a>COGugaison</h1></div>
 <div id="introduction-a-cogugaison" class="section level2">
 <h2 class="hasAnchor">
-<a href="#introduction-a-cogugaison" class="anchor"> </a>Introduction Ã  COGugaison</h2>
-<p>Nous allons balayer dans cette vignette les principales fonctionnalitÃ©s du package <code>COGugaison</code>.</p>
-<p>Ce package a pour objectif global de manipuler des donnÃ©es communales produites Ã  diffÃ©rents millÃ©simes. Il permet actuellement de :</p>
+<a href="#introduction-a-cogugaison" class="anchor"> </a>Introduction à COGugaison</h2>
+<p>Nous allons balayer dans cette vignette les principales fonctionnalités du package <code>COGugaison</code>.</p>
+<p>Ce package a pour objectif global de manipuler des données communales produites à différents millésimes. Il permet actuellement de :</p>
 <ul>
-<li>dÃ©tecter le millÃ©sime du code officiel gÃ©ographique dâune table de donnÃ©es communales : fonction <code>COG_akinator</code>
+<li>détecter le millésime du code officiel géographique d’une table de données communales : fonction <code>COG_akinator</code>
 </li>
-<li>visualiser les modifications communales (fusions, dÃ©fusions, changements de codes ou de noms) qui ont eu lieu entre deux dates : <code>modifications_communales</code>
+<li>visualiser les modifications communales (fusions, défusions, changements de codes ou de noms) qui ont eu lieu entre deux dates : <code>modifications_communales</code>
 </li>
-<li>transformer des tables de donnÃ©es numÃ©riques en gÃ©ographie au premier janvier dâune annÃ©e souhaitÃ©e : <code>changement_COG_varNum</code>
+<li>transformer des tables de données numériques en géographie au premier janvier d’une année souhaitée : <code>changement_COG_varNum</code>
 </li>
-<li>transformer des typologies de communes en gÃ©ographie au premier janvier dâune annÃ©e souhaitÃ©e en ayant le choix entre plusieurs hypothÃ¨ses de classement en cas de fusion de communes de classes diffÃ©rentes (attribuer la classe qui contient le plus de population, dÃ©finir une classe absorbante ou une classe spÃ©cifique aux regroupements de plusieurs communes de classes diffÃ©rentes) : <code>changement_COG_typo</code>.Il est Ã©galement possible dâisoler dans une table les communes fusionnÃ©es appartenant Ã  des classes diffÃ©rentes : <code>changement_COG_typo_details</code>.</li>
-<li>permettre dâagrÃ©ger les tables de donnÃ©es communales Ã  de nombreux Ã©chelons supra-communaux administratifs (EPCI, arrondissements, cantons-villes, dÃ©partements, rÃ©gions) ou dâÃ©tude (bassins de vie, zones dâemploi, unitÃ©s urbaines, aires urbaines) : <code>nivsupra</code>.</li>
-<li>gÃ©rer des cas particuliers comme les codes Insee des communes corses (<code>modification_Corse</code>) ou des arrondissements municipaux de Paris, Lyon, et Marseille (<code>enlever_PLM</code>)</li>
+<li>transformer des typologies de communes en géographie au premier janvier d’une année souhaitée en ayant le choix entre plusieurs hypothèses de classement en cas de fusion de communes de classes différentes (attribuer la classe qui contient le plus de population, définir une classe absorbante ou une classe spécifique aux regroupements de plusieurs communes de classes différentes) : <code>changement_COG_typo</code>.Il est également possible d’isoler dans une table les communes fusionnées appartenant à des classes différentes : <code>changement_COG_typo_details</code>.</li>
+<li>permettre d’agréger les tables de données communales à de nombreux échelons supra-communaux administratifs (EPCI, arrondissements, cantons-villes, départements, régions) ou d’étude (bassins de vie, zones d’emploi, unités urbaines, aires urbaines) : <code>nivsupra</code>.</li>
+<li>gérer des cas particuliers comme les codes Insee des communes corses (<code>modification_Corse</code>) ou des arrondissements municipaux de Paris, Lyon, et Marseille (<code>enlever_PLM</code>)</li>
 </ul>
-<p>Il est Ã  noter que la version actuellement en ligne du package correspond Ã  un premier dÃ©veloppement qui comporte des imperfections. LâidÃ©e est donc Ã  ce stade que les personnes qui utilisent rÃ©guliÃ¨rement des bases de donnÃ©es communales produites Ã  diffÃ©rents millÃ©simes testent ses fonctionnalitÃ©s, dÃ©tectent ses bugs et ses manques pour lâamÃ©liorer.</p>
-<p>Il est Ã©galement important de souligner que les donnÃ©es utilisÃ©es ici sâappuient sur des tables publiÃ©es par lâInsee :</p>
+<p>Il est à noter que la version actuellement en ligne du package correspond à un premier développement qui comporte des imperfections. L’idée est donc à ce stade que les personnes qui utilisent régulièrement des bases de données communales produites à différents millésimes testent ses fonctionnalités, détectent ses bugs et ses manques pour l’améliorer.</p>
+<p>Il est également important de souligner que les données utilisées ici s’appuient sur des tables publiées par l’Insee :</p>
 <ul>
-<li><a href="https://www.insee.fr/fr/information/2666684#titre-bloc-11">lâhistorique des gÃ©ographies communales</a></li>
-<li><a href="https://www.insee.fr/fr/information/2028028">les tables dâappartenance des communes aux diffÃ©rents niveaux gÃ©ographiques</a></li>
+<li><a href="https://www.insee.fr/fr/information/2666684#titre-bloc-11">l’historique des géographies communales</a></li>
+<li><a href="https://www.insee.fr/fr/information/2028028">les tables d’appartenance des communes aux différents niveaux géographiques</a></li>
 </ul>
-<p>Tant que le package nâest pas stabilisÃ©, il est Ã©videmment conseillÃ© de se rÃ©fÃ©rer aux donnÃ©es officielles de lâInsee en cas de doute sur un rÃ©sultat.</p>
-<p>Pour installer le package <code>COGugaison</code> et Ã  le charger dans R :</p>
+<p>Tant que le package n’est pas stabilisé, il est évidemment conseillé de se référer aux données officielles de l’Insee en cas de doute sur un résultat.</p>
+<p>Pour installer le package <code>COGugaison</code> et à le charger dans R :</p>
 <p><code>{r, fig.show='hold'} devtools::install_github("antuki/COGugaison") library(COGugaison)</code></p>
 </div>
 </div>

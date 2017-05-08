@@ -4,7 +4,7 @@
 \alias{modifications_communales}
 \title{Titre}
 \usage{
-modifications_communales()
+modifications_communales(date_debut, date_fin)
 }
 \value{
 Remplir

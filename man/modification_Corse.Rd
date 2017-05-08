@@ -4,7 +4,8 @@
 \alias{modification_Corse}
 \title{Titre}
 \usage{
-modification_Corse()
+modification_Corse(table_entree, codgeo_entree = colnames(table_entree)[1],
+  vecteur_entree = is.vector(table_entree), sens = "20vers2A2B")
 }
 \value{
 Remplir
