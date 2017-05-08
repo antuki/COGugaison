@@ -1,4 +1,4 @@
-﻿#' @title Titre
+#' @title Titre
 #' @name modifications_communales
 #' @description Remplir
 #' @return Remplir
@@ -144,4 +144,5 @@ liste <- list(fusions=phrase_fusions, defusions=phrase_defusions, changements_co
 return(liste)
 
 }
+
 
