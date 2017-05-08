@@ -1,13 +1,11 @@
 ---
 title: "Apprendre les principales fonctionnalités de COGugaison"
 author: "antuki"
-date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 fig_caption: yes
 vignette: >
   %\VignetteIndexEntry{Vignette Title}
   %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
 ---
 
 ## Introduction à COGugaison

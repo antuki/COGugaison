@@ -1,10 +1,6 @@
 # COGugaison
 
-## Introduction à COGugaison
-
-Nous allons balayer dans cette vignette les principales fonctionnalités du package `COGugaison`. 
-
-Ce package a pour objectif global de manipuler des données communales produites à différents millésimes. Il permet actuellement de : 
+Le package `COGugaison` a pour objectif global de manipuler des données communales produites à différents millésimes. Il permet actuellement de : 
 - détecter le millésime du code officiel géographique d'une table de données communales : fonction `COG_akinator`
 - visualiser les modifications communales (fusions, défusions, changements de codes ou de noms) qui ont eu lieu entre deux dates : `modifications_communales`
 - transformer des tables de données numériques en géographie au premier janvier d'une année souhaitée : `changement_COG_varNum`
@@ -20,9 +16,7 @@ Il est également important de souligner que les données utilisées ici s'appui
 
 Tant que le package n'est pas stabilisé, il est évidemment conseillé de se référer aux données officielles de l'Insee en cas de doute sur un résultat.  
 
-Pour installer le package `COGugaison` et à le charger dans R :
+Pour installer le package `COGugaison` et le charger dans R :
  
-```{r, fig.show='hold'}
-devtools::install_github("antuki/COGugaison")
-library(COGugaison)
-```
+    devtools::install_github("antuki/COGugaison")
+    library(COGugaison)
