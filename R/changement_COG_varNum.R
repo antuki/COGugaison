@@ -9,24 +9,24 @@
 #' @param libgeo doit être conservé à NULL si la table souhaitée ne contient pas de libellés de communes, sinon il doit indiquer le nom de la variable renseignant sur le libellé de la commune (celui présent dans la table si il existe déjà ou tout autre nom s'il doit être ajouté).
 #' @param donnees_insee vaut TRUE si les données manipulées sont produites par l'Insee. En effet, quelques rares modifications communales (la défusion des communes Loisey et Culey au 1er janvier 2014 par exemple) ont été prises en compte dans les bases de données communales de l'Insee plus tard que la date officielle. Pour tous les COG officiels datant d'avant 2008, seules les tables de passage Insee sont disponibles dans ce package.
 #' @details
-#' Le code officiel géographique de référence du package est actuellement celui au 01/01/2017. Les données communales devront être dans ce COG pour être agrégées en niveaux supracommunaux (fonction nivsupra). \cr
+#' Le code officiel géographique de référence du package est actuellement celui au 01/01/2017. Les données communales devront être dans ce COG pour être agrégées en niveaux supra-communaux (fonction nivsupra). \cr
 #'
 #' Les autres codes officiels géographiques utilisés dans COGugaison sont les suivants : \cr
 #'  - COG 1968 : à partir du 01/03/1968 (donnees_insee=T obligatoirement)\cr
 #'  - COG 1975 : à partir du 20/02/1975 (donnees_insee=T obligatoirement)\cr
-#'  - COG 1982 : à partir du 04/03/1982 (donnees_insee=T obligatoirement) \cr
+#'  - COG 1982 : à partir du 04/03/1982 (donnees_insee=T obligatoirement)\cr
 #'  - COG 1990 : à partir du 05/03/1990 (donnees_insee=T obligatoirement)\cr
 #'  - COG 1999 : à partir du 08/03/1999 (donnees_insee=T obligatoirement)\cr
-#'  - COG 2008 à 2017 : à partir du 01/01 de chaque année. (donnees_insee=T ou F) \cr
+#'  - COG 2008 à 2017 : à partir du 01/01 de chaque année (donnees_insee=T ou F)\cr
 #'
-#' Les différences entre les tables de passage Insee et non Insee sont les suivantes :
-#' - 1982-03-03 (pris en compte par l'Insee seulement après le 04/03/1982): Flaignes-Havys (08169) est un rassemblement de Flaignes-Havys (08169), Havys (08221) [fusion simple].
-#' - 2014-01-01 (pris en compte par l'Insee seulement au 01/01/2015) : Loisey (55298) s'est séparée en Loisey (55298), Culey (55138) [rétablissement].
+#' Les différences entre les tables de passage Insee et non Insee sont les suivantes :\cr
+#' - 1982-03-03 (pris en compte par l'Insee seulement après le 04/03/1982): Flaignes-Havys (08169) est un rassemblement de Flaignes-Havys (08169), Havys (08221) [fusion simple]. \cr
+#' - 2014-01-01 (pris en compte par l'Insee seulement au 01/01/2015) : Loisey (55298) s'est séparée en Loisey (55298), Culey (55138) [rétablissement]. \cr
 #' - 1990-02-01 (pris en compte par l'Insee seulement après le 05/03/1990) : Le code commune de Oudon passe de 14624 à 14697 [changement de code dû à un changement de chef-lieu]. \cr
 #' @references
 #' \itemize{
-#' \item{l'historique des géographies communales : \href{https://www.insee.fr/fr/information/2666684#titre-bloc-11}{test}}
-#' \item{les tables d'appartenance des communes aux différents niveaux géographiques : \href{https://www.insee.fr/fr/information/2028028}{test}}}
+#' \item{\href{https://www.insee.fr/fr/information/2666684#titre-bloc-11}{historique des géographies communales (Insee)}}
+#' \item{\href{https://www.insee.fr/fr/information/2028028}{tables d'appartenance des communes aux différents niveaux géographiques (Insee)}}}
 #' @seealso \link{changemnt_COG_typo}, \link{changement_COG_typo_details},  \link{COG_akinator}, \link{enlever_PLM}, \link{modification_Corse}, \link{modifications_communales},\link{nivsupra}
 #' @export
 #' @examples
