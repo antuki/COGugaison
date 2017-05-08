@@ -43,7 +43,7 @@ for(codgeo in unique(donnees_fusions[which(donnees_fusions$MOD%in%c("320","321",
                                                                                                                                                                                                                               "320"={" [fusion simple]"},
                                                                                                                                                                                                                               "321"={" [commune nouvelle sans commune(s) déléguée(s)]"},
                                                                                                                                                                                                                               "340"={" [fusion-association]"},
-                                                                                                                                                                                                                              "341"={" [commune nouvelle avec commune(s) déléguée(s)]"},
+                                                                                                                                                                                                                              "341"={" [commune nouvelle avec commune(s) déléguée(s)]"}
                                                                                                                                                                                                                               )}),
                           ".\n"
   )
