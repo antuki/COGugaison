@@ -27,20 +27,21 @@ Il est à noter que la version actuellement en ligne du package correspond à un
 Il est également important de souligner que les données utilisées ici s'appuient sur des tables publiées par l'Insee :
 - [l'historique des géographies communales](https://www.insee.fr/fr/information/2666684#titre-bloc-11)
 - [les tables d'appartenance des communes aux différents niveaux géographiques](https://www.insee.fr/fr/information/2028028)
+
 Tant que le package n'est pas stabilisé, il est évidemment conseillé de se référer aux données officielles de l'Insee en cas de doute sur un résultat.  
 
 
 Commençons par installer le package `COGugaison` et à le charger dans R. 
  
 ```{r, fig.show='hold'}
-#devtools::install_github("antuki/COGugaison")
+devtools::install_github("antuki/COGugaison")
 library(COGugaison)
 ```
 
 
 ## Quel code officiel géographique est utilisé ? 
 
-Nous allons maintenant manipuler une table exemple incluse dans le package, la table `exemple_popcom` qui contient comme variables le code géographique de la commune (CODGEO), son nom (LIBGEO), sa population en 2012 (P12_POP), sa superficie (SUPERF) ainsi que deux typologies de territoires générées aléatoirement (typoA et typoB). Il faut veiller à ce que les variables numériques soient au bon format dans R et que les typologies et identifiants soient au format caractère (si ce n'est pas le cas, il faudra les transformer avec les fonctions as.numeric et as.character).
+Nous allons maintenant manipuler une table exemple incluse dans le package, la table `exemple_popcom` qui contient comme variables le code géographique de la commune (CODGEO), son nom (LIBGEO), sa population en 2012 (P12_POP), sa superficie (SUPERF) ainsi que deux typologies de territoires générées aléatoirement (typoA et typoB). Il faut veiller à ce que les variables numériques soient au bon format dans R et que les typologies et identifiants soient au format caractère (si ce n'est pas le cas, il faudra les transformer avec les fonctions *as.numeric* et *as.character*).
 
 ```{r, fig.show='hold'}
 head(exemple_popcom)
@@ -73,32 +74,33 @@ cat(modifs$changements_noms)
 
 La fonction `changement_COG_varNum` permet de transformer des tables de données numériques communales en géographie au premier janvier d'une année souhaitée.
 
-Ici, nous allons transformer les variables numériques de la table *exemple_pop* afin de récupérer les données de population et de superficie des communes au 1er janvier 2016 (au lieu de 2014).
+Ici, nous allons transformer les variables numériques de la table *exemple_pop* afin de récupérer les données de population et de superficie des communes au 1er janvier 2017 (au lieu de 2014).
 
 ```{r, fig.show='hold'}
-exemple_popcom_COG2016_num <- changement_COG_varNum(table_entree=exemple_popcom,annees=c(2014:2016),agregation=T,libgeo="LIBGEO",donnees_insee=T)
-head(exemple_popcom_COG2016_num)
+exemple_popcom_COG2017_num <- changement_COG_varNum(table_entree=exemple_popcom,annees=c(2014:2017),agregation=T,libgeo="LIBGEO",donnees_insee=T)
+head(exemple_popcom_COG2017_num)
 ```
 
 Le paramètre *agregation* vaut TRUE si la table souhaitée doit sommer toutes les lignes qui concernent une même commune et FALSE si l'on souhaite volontairement conserver les doublons dans les codes commune (dans les tables de flux par exemple, cf. plus bas). Le paramètre *libgeo* doit être conservé à NULL si la table souhaitée ne contient pas de libellés de communes, sinon il doit indiquer le nom de la variable renseignant sur le libellé de la commune (celui présent dans la table si il existe déjà ou tout autre nom s'il doit être ajouté).
 
 ## Transformer des typologies en autre géographie
 
-La fonction `changement_COG_typo` permet de transformer des typologies de communes en géographie au premier janvier d'une année souhaitée. Ici nous allons transformer les deux typologies (typoA et typoB) de la table *exemple_pop* en géographie communale au 1er janvier 2016 (au lieu de 2014).
+La fonction `changement_COG_typo` permet de transformer des typologies de communes en géographie au premier janvier d'une année souhaitée. Ici nous allons transformer les deux typologies (typoA et typoB) de la table *exemple_pop* en géographie communale au 1er janvier 2017 (au lieu de 2014).
 
 Ici, l'hypothèse de classement en cas de fusion de communes (*methode_fusion*) choisie est celle d'une classe spécifique (*methode_difference*, classe appelée *mot_difference*="differents") aux regroupements de plusieurs communes de classes différentes. Les autres hypothèses possibles auraient pu être l'hypothèse du maximum de population *methode_max_pop* ou de classe absorbante *methode_classe_absorbante*. 
 
 
 ```{r, fig.show='hold'}
-exemple_popcom_COG2016_typo <- changement_COG_typo(table_entree=exemple_popcom[,-2],annees=c(2014:2016),methode_fusion="methode_difference",typos=c("typoA","typoB"),mot_difference = "differents",libgeo="LIB",donnees_insee=T)
-head(exemple_popcom_COG2016_typo)
+exemple_popcom_COG2017_typo <- changement_COG_typo(table_entree=exemple_popcom[,-2],annees=c(2014:2017),methode_fusion="methode_difference",typos=c("typoA","typoB"),mot_difference = "differents",libgeo="LIB",donnees_insee=T)
+head(exemple_popcom_COG2017_typo)
 ```
-La fonction `changement_COG_typo_details` permet quant à elle d'isoler dans une table les communes fusionnées appartenant à des classes différentes, ici selon la typologie "typoA" entre 2014 et 2015 puis 2015 et 2016. 
+La fonction `changement_COG_typo_details` permet quant à elle d'isoler dans une table les communes fusionnées appartenant à des classes différentes, ici selon la typologie "typoA" entre 2014 et 2015 puis 2015 et 2016 et 2016 et 2017. 
 
 ```{r, fig.show='hold'}
-details_exemple_popcom_COG2016_typo <- changement_COG_typo_details(table_entree=exemple_popcom[,-2],annees=c(2014:2016),typo="typoA", donnees_insee=T)
-head(details_exemple_popcom_COG2016_typo[["2014_2015"]])
-head(details_exemple_popcom_COG2016_typo[["2015_2016"]])
+details_exemple_popcom_COG2017_typo <- changement_COG_typo_details(table_entree=exemple_popcom[,-2],annees=c(2014:2017),typo="typoA", donnees_insee=T)
+head(details_exemple_popcom_COG2017_typo[["2014_2015"]])
+head(details_exemple_popcom_COG2017_typo[["2015_2016"]])
+head(details_exemple_popcom_COG2017_typo[["2016_2017"]])
 ```
 
 ## Agréger des tables de données communales à des échelons supra-communaux
@@ -110,8 +112,8 @@ Ici nous agrégeons la population et la superficie des communes à l'échelon g�
 Le paramètre *na.nivgeo.rm* vaut FALSE si la table souhaitée doit contenir une ligne identifiée par un code géographique valant NA qui somme les valeurs de toutes les communes qui n'appartiennent à aucun regroupement supracommunal et vaut TRUE si cette ligne doit être supprimée.  
 
 ```{r, fig.show='hold'}
-exemple_popcom_COG2016 <- merge(exemple_popcom_COG2016_num,exemple_popcom_COG2016_typo[,-2],by="CODGEO",all=T)
-exemple_popcom_ZE2010 <- nivsupra(table_entree=exemple_popcom_COG2016,nivsupra="ZE2010",na.nivgeo.rm=F,agregation=T)
+exemple_popcom_COG2017 <- merge(exemple_popcom_COG2017_num,exemple_popcom_COG2017_typo[,-2],by="CODGEO",all=T)
+exemple_popcom_ZE2010 <- nivsupra(table_entree=exemple_popcom_COG2017,nivsupra="ZE2010",na.nivgeo.rm=F,agregation=T)
 exemple_popcom_ZE2010$densite <- exemple_popcom_ZE2010$P12_POP / exemple_popcom_ZE2010$SUPERF
 head(exemple_popcom_ZE2010)
 ```
@@ -146,14 +148,14 @@ exemple_flux_sansPLMsansCorse <- modification_Corse(table_entree=exemple_flux_sa
 ```
 
 
-## ## Transformer des variables numériques en autre géographie dans des données de flux
+## Transformer des variables numériques en autre géographie dans des données de flux
 
 
 La fonction `changement_COG_varNum` peut également s'appliquer à des tables de flux (codes communes pouvant comporter des doublons) grâce à l'option agregation = FALSE. Les variables de type caractère sont alors conservées comme telles ou dupliquées en cas de défusion et les variables numériques (ici IPONDI) sommées en cas de fusion ou réparties proportionnellement à la population de chaque commune en cas de défusion. 
 
 ```{r, fig.show='hold'}
-exemple_flux_COG2016 <- changement_COG_varNum(table_entree=exemple_flux_sansPLMsansCorse,annees=c(2014:2016),codgeo_entree="COMMUNE",agregation=F,libgeo=NULL,donnees_insee=T)
-exemple_flux_COG2016 <- changement_COG_varNum(table_entree=exemple_flux_COG2016,annees=c(2014:2016),codgeo_entree="DCLT",agregation=F,libgeo=NULL,donnees_insee=T)
+exemple_flux_COG2017 <- changement_COG_varNum(table_entree=exemple_flux_sansPLMsansCorse,annees=c(2014:2017),codgeo_entree="COMMUNE",agregation=F,libgeo=NULL,donnees_insee=T)
+exemple_flux_COG2017 <- changement_COG_varNum(table_entree=exemple_flux_COG2017,annees=c(2014:2017),codgeo_entree="DCLT",agregation=F,libgeo=NULL,donnees_insee=T)
 ```
 
 
@@ -164,9 +166,45 @@ La fonction `nivsupra` peut également s'appliquer à des tables de flux (non ag
 Ici, on ajoute les colonnes ZE2010_COMMUNE et ZE2010_DCLT à la table de flux domicile-travail utilisée précédemment.
 
 ```{r, fig.show='hold'}
-exemple_flux_COG2016_etZE <- nivsupra(table_entree=exemple_flux_COG2016,code_com="COMMUNE",nivsupra="ZE2010",na.nivgeo.rm=F,agregation=F)
-exemple_flux_COG2016_etZE <- nivsupra(table_entree=exemple_flux_COG2016_etZE,code_com="DCLT",nivsupra="ZE2010",na.nivgeo.rm=F,agregation=F)
-head(exemple_flux_COG2016_etZE)
+exemple_flux_COG2017_etZE <- nivsupra(table_entree=exemple_flux_COG2017,codgeo_entree="COMMUNE",nivsupra="ZE2010",na.nivgeo.rm=F,agregation=F)
+exemple_flux_COG2017_etZE <- nivsupra(table_entree=exemple_flux_COG2017_etZE,codgeo_entree="DCLT",nivsupra="ZE2010",na.nivgeo.rm=F,agregation=F)
+head(exemple_flux_COG2017_etZE)
 ```
 
 Bonne découverte...!
+
+# Ensemble du code
+
+```{r, fig.show='hold'}
+head(exemple_popcom)
+str(exemple_popcom)
+COG_akinator(vecteur_codgeo=exemple_popcom[,1],donnees_insee=T, liste_complete=T)
+modifs <- modifications_communales(date_debut="01-01-2014",date_fin="01-01-2015")
+cat(modifs$fusions)
+cat(modifs$defusions)
+cat(modifs$changements_codes)
+cat(modifs$changements_noms)
+exemple_popcom_COG2017_num <- changement_COG_varNum(table_entree=exemple_popcom,annees=c(2014:2017),agregation=T,libgeo="LIBGEO",donnees_insee=T)
+head(exemple_popcom_COG2017_num)
+exemple_popcom_COG2017_typo <- changement_COG_typo(table_entree=exemple_popcom[,-2],annees=c(2014:2017),methode_fusion="methode_difference",typos=c("typoA","typoB"),mot_difference = "differents",libgeo="LIB",donnees_insee=T)
+head(exemple_popcom_COG2017_typo)
+details_exemple_popcom_COG2017_typo <- changement_COG_typo_details(table_entree=exemple_popcom[,-2],annees=c(2014:2017),typo="typoA", donnees_insee=T)
+head(details_exemple_popcom_COG2017_typo[["2014_2015"]])
+head(details_exemple_popcom_COG2017_typo[["2015_2016"]])
+head(details_exemple_popcom_COG2017_typo[["2016_2017"]])
+exemple_popcom_COG2017 <- merge(exemple_popcom_COG2017_num,exemple_popcom_COG2017_typo[,-2],by="CODGEO",all=T)
+exemple_popcom_ZE2010 <- nivsupra(table_entree=exemple_popcom_COG2017,nivsupra="ZE2010",na.nivgeo.rm=F,agregation=T)
+exemple_popcom_ZE2010$densite <- exemple_popcom_ZE2010$P12_POP / exemple_popcom_ZE2010$SUPERF
+head(exemple_popcom_ZE2010)
+
+
+head(exemple_flux)
+exemple_flux_sansPLM <-enlever_PLM(table_entree=exemple_flux,codgeo_entree = "COMMUNE",libgeo=NULL,agregation = F,vecteur_entree=F)
+exemple_flux_sansPLM <-enlever_PLM(table_entree=exemple_flux_sansPLM,codgeo_entree = "DCLT",libgeo=NULL,agregation = F,vecteur_entree=F)
+exemple_flux_sansPLMsansCorse <- modification_Corse(table_entree=exemple_flux_sansPLM,sens="2A2Bvers20")
+exemple_flux_COG2017 <- changement_COG_varNum(table_entree=exemple_flux_sansPLMsansCorse,annees=c(2014:2017),codgeo_entree="COMMUNE",agregation=F,libgeo=NULL,donnees_insee=T)
+exemple_flux_COG2017 <- changement_COG_varNum(table_entree=exemple_flux_COG2017,annees=c(2014:2017),codgeo_entree="DCLT",agregation=F,libgeo=NULL,donnees_insee=T)
+exemple_flux_COG2017_etZE <- nivsupra(table_entree=exemple_flux_COG2017,codgeo_entree="COMMUNE",nivsupra="ZE2010",na.nivgeo.rm=F,agregation=F)
+exemple_flux_COG2017_etZE <- nivsupra(table_entree=exemple_flux_COG2017_etZE,codgeo_entree="DCLT",nivsupra="ZE2010",na.nivgeo.rm=F,agregation=F)
+head(exemple_flux_COG2017_etZE)
+```
