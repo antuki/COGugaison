@@ -1,6 +1,6 @@
-#' @title Changer les variables numériques de géographie communale
+#' @title Changer les variables num
 #' @name changement_COG_varNum
-#' @description Transformer des tables de données numériques en géographie au premier janvier d'une année souhaitée.
+#' @description blabla
 
 changement_COG_varNum <- function(table_entree,annees,codgeo_entree=colnames(table_entree)[1],var_num=colnames(table_entree)[sapply(table_entree, is.numeric)],agregation=T,libgeo=NULL,donnees_insee=T){
 

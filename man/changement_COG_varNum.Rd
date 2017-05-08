@@ -2,7 +2,7 @@
 % Please edit documentation in R/changement_COG_varNum.R
 \name{changement_COG_varNum}
 \alias{changement_COG_varNum}
-\title{Changer les variables numériques de géographie communale}
+\title{Changer les variables num}
 \usage{
 changement_COG_varNum(table_entree, annees,
   codgeo_entree = colnames(table_entree)[1],
@@ -10,5 +10,5 @@ changement_COG_varNum(table_entree, annees,
   agregation = T, libgeo = NULL, donnees_insee = T)
 }
 \description{
-Transformer des tables de données numériques en géographie au premier janvier d'une année souhaitée.
+blabla
 }
