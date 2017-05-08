@@ -51,9 +51,6 @@
         <li>
   <a href="../reference/index.html">Reference</a>
 </li>
-<li>
-  <a href="../articles/index.html">Articles</a>
-</li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
@@ -81,10 +78,10 @@
     <p>Remplir</p>
     
 
-    <pre><span class='fu'>nivsupra</span>(<span class='no'>table_entree</span>, <span class='kw'>code_com</span> <span class='kw'>=</span> <span class='fu'>colnames</span>(<span class='no'>table_entree</span>)[<span class='fl'>1</span>],
+    <pre><span class='fu'>nivsupra</span>(<span class='no'>table_entree</span>, <span class='kw'>codgeo_entree</span> <span class='kw'>=</span> <span class='fu'>colnames</span>(<span class='no'>table_entree</span>)[<span class='fl'>1</span>],
   <span class='kw'>var_num</span> <span class='kw'>=</span> <span class='fu'>colnames</span>(<span class='no'>table_entree</span>)[<span class='fu'>sapply</span>(<span class='no'>table_entree</span>, <span class='no'>is.numeric</span>)],
   <span class='no'>nivsupra</span>, <span class='kw'>nivsupra_nom</span> <span class='kw'>=</span> <span class='fu'>ifelse</span>(<span class='no'>agregation</span> <span class='kw'>==</span> <span class='no'>T</span>, <span class='no'>nivsupra</span>, <span class='fu'>paste0</span>(<span class='no'>nivsupra</span>,
-  <span class='st'>"_"</span>, <span class='no'>code_com</span>)), <span class='kw'>na.nivgeo.rm</span> <span class='kw'>=</span> <span class='no'>F</span>, <span class='kw'>agregation</span> <span class='kw'>=</span> <span class='no'>T</span>)</pre>
+  <span class='st'>"_"</span>, <span class='no'>codgeo_entree</span>)), <span class='kw'>na.nivgeo.rm</span> <span class='kw'>=</span> <span class='no'>F</span>, <span class='kw'>agregation</span> <span class='kw'>=</span> <span class='no'>T</span>)</pre>
         
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
