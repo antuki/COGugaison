@@ -4,7 +4,8 @@
 #' @return Remplir
 #' @export
 
- modification_Corse <- function(table_entree,codgeo_entree = colnames(table_entree)[1],vecteur_entree=is.vector(table_entree),sens="20vers2A2B"){
+ modification_Corse <- function() {
+
  }
 
 # modification_Corse <- function(table_entree,codgeo_entree = colnames(table_entree)[1],vecteur_entree=is.vector(table_entree),sens="20vers2A2B"){
