@@ -66,21 +66,29 @@
 <h2 class="hasAnchor">
 <a href="#introduction-a-cogugaison" class="anchor"></a>Introduction à COGugaison</h2>
 <p>Nous allons balayer dans cette vignette les principales fonctionnalités du package <code>COGugaison</code>.</p>
-<p>Ce package a pour objectif global de manipuler des données communales produites à différents millésimes. Il permet actuellement de : * détecter le millésime du code officiel géographique d’une table de données communales : fonction <code>COG_akinator</code> * visualiser les modifications communales (fusions, défusions, changements de codes ou de noms) qui ont eu lieu entre deux dates : <code>modifications_communales</code> * transformer des tables de données numériques en géographie au premier janvier d’une année souhaitée : <code>changement_COG_varNum</code> * transformer des typologies de communes en géographie au premier janvier d’une année souhaitée en ayant le choix entre plusieurs hypothèses de classement en cas de fusion de communes de classes différentes (attribuer la classe qui contient le plus de population, définir une classe absorbante ou une classe spécifique aux regroupements de plusieurs communes de classes différentes) : <code>changement_COG_typo</code>.Il est également possible d’isoler dans une table les communes fusionnées appartenant à des classes différentes : <code>changement_COG_typo_details</code>. * permettre d’agréger les tables de données communales à de nombreux échelons supra-communaux administratifs (EPCI, arrondissements, cantons-villes, départements, régions) ou d’étude (bassins de vie, zones d’emploi, unités urbaines, aires urbaines) : <code>nivsupra</code>. * gérer des cas particuliers comme les codes Insee des communes corses (<code>modification_Corse</code>) ou des arrondissements municipaux de Paris, Lyon, et Marseille (<code>enlever_PLM</code>)</p>
+<p>Ce package a pour objectif global de manipuler des données communales produites à différents millésimes. Il permet actuellement de :</p>
+<ul>
+<li>détecter le millésime du code officiel géographique d’une table de données communales : fonction <code>COG_akinator</code>
+</li>
+<li>visualiser les modifications communales (fusions, défusions, changements de codes ou de noms) qui ont eu lieu entre deux dates : <code>modifications_communales</code>
+</li>
+<li>transformer des tables de données numériques en géographie au premier janvier d’une année souhaitée : <code>changement_COG_varNum</code>
+</li>
+<li>transformer des typologies de communes en géographie au premier janvier d’une année souhaitée en ayant le choix entre plusieurs hypothèses de classement en cas de fusion de communes de classes différentes (attribuer la classe qui contient le plus de population, définir une classe absorbante ou une classe spécifique aux regroupements de plusieurs communes de classes différentes) : <code>changement_COG_typo</code>.Il est également possible d’isoler dans une table les communes fusionnées appartenant à des classes différentes : <code>changement_COG_typo_details</code>.</li>
+<li>permettre d’agréger les tables de données communales à de nombreux échelons supra-communaux administratifs (EPCI, arrondissements, cantons-villes, départements, régions) ou d’étude (bassins de vie, zones d’emploi, unités urbaines, aires urbaines) : <code>nivsupra</code>.</li>
+<li>gérer des cas particuliers comme les codes Insee des communes corses (<code>modification_Corse</code>) ou des arrondissements municipaux de Paris, Lyon, et Marseille (<code>enlever_PLM</code>)</li>
+</ul>
 <p>Il est à noter que la version actuellement en ligne du package correspond à un premier développement qui comporte des imperfections. L’idée est donc à ce stade que les personnes qui utilisent régulièrement des bases de données communales produites à différents millésimes testent ses fonctionnalités, détectent ses bugs et ses manques pour l’améliorer.</p>
-<p>Il est également important de souligner que les données utilisées ici s’appuient sur des tables publiées par l’Insee : - <a href="https://www.insee.fr/fr/information/2666684#titre-bloc-11">l’historique des géographies communales</a> - <a href="https://www.insee.fr/fr/information/2028028">les tables d’appartenance des communes aux différents niveaux géographiques</a></p>
+<p>Il est également important de souligner que les données utilisées ici s’appuient sur des tables publiées par l’Insee :</p>
+<ul>
+<li><p><a href="https://www.insee.fr/fr/information/2666684#titre-bloc-11">l’historique des géographies communales</a></p></li>
+<li><p><a href="https://www.insee.fr/fr/information/2028028">les tables d’appartenance des communes aux différents niveaux géographiques</a></p></li>
+</ul>
 <p>Tant que le package n’est pas stabilisé, il est évidemment conseillé de se référer aux données officielles de l’Insee en cas de doute sur un résultat.</p>
 <p>Commençons par installer le package <code>COGugaison</code> et à le charger dans R.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools::<span class="kw">install_github</span>(<span class="st">"antuki/COGugaison"</span>)</code></pre></div>
-<pre><code>## Downloading GitHub repo antuki/COGugaison@master
-## from URL https://api.github.com/repos/antuki/COGugaison/zipball/master</code></pre>
-<pre><code>## Installing COGugaison</code></pre>
-<pre><code>## "C:/PROGRA~1/R/R-33~1.2/bin/x64/R" --no-site-file --no-environ --no-save  \
-##   --no-restore --quiet CMD INSTALL "C:/Users/Kim  \
-##   Antunez/AppData/Local/Temp/RtmpSgxSJl/devtools336cb3317e0/antuki-COGugaison-aaacb70"  \
-##   --library="C:/Users/Kim Antunez/Documents/R/win-library/3.3"  \
-##   --install-tests</code></pre>
-<pre><code>## </code></pre>
+<pre><code>## Skipping install of 'COGugaison' from a github remote, the SHA1 (2ed2901f) has not changed since last install.
+##   Use `force = TRUE` to force installation</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(COGugaison)</code></pre></div>
 </div>
 <div id="quel-code-officiel-geographique-est-utilise" class="section level2">
