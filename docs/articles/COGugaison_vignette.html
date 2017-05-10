@@ -72,7 +72,7 @@
 <p>Tant que le package n’est pas stabilisÃ©, il est Ã©videmment conseillÃ© de se rÃ©fÃ©rer aux donnÃ©es officielles de l’Insee en cas de doute sur un rÃ©sultat.</p>
 <p>CommenÃ§ons par installer le package <code>COGugaison</code> et Ã  le charger dans R.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools::<span class="kw">install_github</span>(<span class="st">"antuki/COGugaison"</span>)</code></pre></div>
-<pre><code>## Skipping install of 'COGugaison' from a github remote, the SHA1 (49ef0a1d) has not changed since last install.
+<pre><code>## Skipping install of 'COGugaison' from a github remote, the SHA1 (03f2f6c5) has not changed since last install.
 ##   Use `force = TRUE` to force installation</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(COGugaison)</code></pre></div>
 </div>
@@ -108,23 +108,23 @@
 <p>La fonction <code>modifications_communales</code> permet, comme son nom l’indique, de visualiser les modifications communales (fusions, dÃ©fusions, changements de codes ou de noms) qui ont eu lieu entre deux dates. Ici entre le 01/01/2014 et le 01/01/2015. Cette fonction est encore en cours de dÃ©veloppement il est donc possible que certains Ã©vÃ¨nements ne soient pas encore pris en compte. Il ne faut pas hÃ©siter Ã  le signaler.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">modifs &lt;-<span class="st"> </span><span class="kw"><a href="../reference/modifications_communales.html">modifications_communales</a></span>(<span class="dt">date_debut=</span><span class="st">"01-01-2014"</span>,<span class="dt">date_fin=</span><span class="st">"01-01-2015"</span>)
 <span class="kw">cat</span>(modifs$fusions)</code></pre></div>
-<pre><code>## 2015-01-01 : Notre-Dame-d'Estrées-Corbon (14474) est un rassemblement de Corbon (14178), Notre-Dame-d'Estrées (14474) [commune nouvelle avec commune(s) déléguée(s)].
-## 2015-01-01 : Auxons (25035) est un rassemblement de Auxon-Dessous (25034), Auxon-Dessus (25035) [commune nouvelle avec commune(s) déléguée(s)].
-## 2015-01-01 : Goussainville (28185) est un rassemblement de Champagne (28069), Goussainville (28185) [commune nouvelle avec commune(s) déléguée(s)].
-## 2015-01-01 : Eclose-Badinières (38152) est un rassemblement de Badinières (38024), Eclose (38152) [commune nouvelle avec commune(s) déléguée(s)].
-## 2015-01-01 : Saint-Crépin-Ibouvillers (60570) est un rassemblement de Montherlant (60417), Saint-Crépin-Ibouvillers (60570) [commune nouvelle avec commune(s) déléguée(s)].
-## 2015-01-01 : Montsecret-Clairefougère (61292) est un rassemblement de Clairefougère (61109), Montsecret (61292) [commune nouvelle avec commune(s) déléguée(s)].
-## 2015-01-01 : Boischampré (61375) est un rassemblement de Marcei (61249), Saint-Christophe-le-Jajolet (61375), Saint-Loyer-des-Champs (61417), Vrigny (61511) [commune nouvelle avec commune(s) déléguée(s)].
-## 2015-01-01 : Tinchebray-Bocage (61486) est un rassemblement de Beauchêne (61031), Frênes (61177), Larchamp (61223), Saint-Cornier-des-Landes (61377), Saint-Jean-des-Bois (61410), Tinchebray (61486), Yvrandes (61513) [commune nouvelle avec commune(s) déléguée(s)].
-## 2015-01-01 : Vaugneray (69255) est un rassemblement de Saint-Laurent-de-Vaux (69221), Vaugneray (69255) [commune nouvelle avec commune(s) déléguée(s)].
-## 2015-01-01 : Clux-Villeneuve (71578) est un rassemblement de Clux (71138), Villeneuve (71578) [commune nouvelle avec commune(s) déléguée(s)].
-## 2015-01-01 : Villeneuve-en-Perseigne (72137) est un rassemblement de Chassé (72069), Fresnaye-sur-Chédouet (72137), Lignières-la-Carelle (72162), Montigny (72207), Roullée (72258), Saint-Rigomer-des-Bois (72318) [commune nouvelle avec commune(s) déléguée(s)].
-## 2015-01-01 : Saint-Offenge (73263) est un rassemblement de Saint-Offenge-Dessous (73263), Saint-Offenge-Dessus (73264) [commune nouvelle avec commune(s) déléguée(s)].
-## 2015-01-01 : Orvanne (77316) est un rassemblement de Écuelles (77166), Moret-sur-Loing (77316) [commune nouvelle avec commune(s) déléguée(s)].</code></pre>
+<pre><code>## 2015-01-01 : Notre-Dame-d'Estrées-Corbon (14474) est un rassemblement de Corbon (14178), Notre-Dame-d'Estrées (14474) [commune nouvelle avec commune(s) dÃ©lÃ©guÃ©e(s)].
+## 2015-01-01 : Auxons (25035) est un rassemblement de Auxon-Dessous (25034), Auxon-Dessus (25035) [commune nouvelle avec commune(s) dÃ©lÃ©guÃ©e(s)].
+## 2015-01-01 : Goussainville (28185) est un rassemblement de Champagne (28069), Goussainville (28185) [commune nouvelle avec commune(s) dÃ©lÃ©guÃ©e(s)].
+## 2015-01-01 : Eclose-Badinières (38152) est un rassemblement de Badinières (38024), Eclose (38152) [commune nouvelle avec commune(s) dÃ©lÃ©guÃ©e(s)].
+## 2015-01-01 : Saint-Crépin-Ibouvillers (60570) est un rassemblement de Montherlant (60417), Saint-Crépin-Ibouvillers (60570) [commune nouvelle avec commune(s) dÃ©lÃ©guÃ©e(s)].
+## 2015-01-01 : Montsecret-Clairefougère (61292) est un rassemblement de Clairefougère (61109), Montsecret (61292) [commune nouvelle avec commune(s) dÃ©lÃ©guÃ©e(s)].
+## 2015-01-01 : Boischampré (61375) est un rassemblement de Marcei (61249), Saint-Christophe-le-Jajolet (61375), Saint-Loyer-des-Champs (61417), Vrigny (61511) [commune nouvelle avec commune(s) dÃ©lÃ©guÃ©e(s)].
+## 2015-01-01 : Tinchebray-Bocage (61486) est un rassemblement de Beauchêne (61031), Frênes (61177), Larchamp (61223), Saint-Cornier-des-Landes (61377), Saint-Jean-des-Bois (61410), Tinchebray (61486), Yvrandes (61513) [commune nouvelle avec commune(s) dÃ©lÃ©guÃ©e(s)].
+## 2015-01-01 : Vaugneray (69255) est un rassemblement de Saint-Laurent-de-Vaux (69221), Vaugneray (69255) [commune nouvelle avec commune(s) dÃ©lÃ©guÃ©e(s)].
+## 2015-01-01 : Clux-Villeneuve (71578) est un rassemblement de Clux (71138), Villeneuve (71578) [commune nouvelle avec commune(s) dÃ©lÃ©guÃ©e(s)].
+## 2015-01-01 : Villeneuve-en-Perseigne (72137) est un rassemblement de Chassé (72069), Fresnaye-sur-Chédouet (72137), Lignières-la-Carelle (72162), Montigny (72207), Roullée (72258), Saint-Rigomer-des-Bois (72318) [commune nouvelle avec commune(s) dÃ©lÃ©guÃ©e(s)].
+## 2015-01-01 : Saint-Offenge (73263) est un rassemblement de Saint-Offenge-Dessous (73263), Saint-Offenge-Dessus (73264) [commune nouvelle avec commune(s) dÃ©lÃ©guÃ©e(s)].
+## 2015-01-01 : Orvanne (77316) est un rassemblement de Écuelles (77166), Moret-sur-Loing (77316) [commune nouvelle avec commune(s) dÃ©lÃ©guÃ©e(s)].</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cat</span>(modifs$defusions)</code></pre></div>
-<pre><code>## ATTENTION, l'évènement suivant a été pris en compte dans les données de l'Insee seulement au 01/01/2015 : 2014-01-01 : Loisey (55298) s'est séparée en Loisey (55298), Culey (55138) [rétablissement].</code></pre>
+<pre><code>## ATTENTION, l'Ã©vÃ¨nement suivant a Ã©tÃ© pris en compte dans les donnÃ©es de l'Insee seulement au 01/01/2015 : 2014-01-01 : Loisey (55298) s'est sÃ©parÃ©e en Loisey (55298), Culey (55138) [rÃ©tablissement].</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cat</span>(modifs$changements_codes)</code></pre></div>
-<pre><code>## 2014-01-07 : Le code commune de Oudon passe de 14697 à 14472 [changement de code dû à un changement de chef-lieu].</code></pre>
+<pre><code>## 2014-01-07 : Le code commune de Oudon passe de 14697 Ã  14472 [changement de code dÃ» Ã  un changement de chef-lieu].</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cat</span>(modifs$changements_noms)</code></pre></div>
 <pre><code>## 2014-12-06 : La commune de Barisis (02049) change de nom en Barisis-aux-Bois [changement de nom].
 ## 2014-12-06 : La commune de Sainte-Colombe (21544) change de nom en Sainte-Colombe-en-Auxois [changement de nom].
@@ -289,23 +289,23 @@ exemple_flux_COG2017_etZE &lt;-<span class="st"> </span><span class="kw"><a href
 <pre><code>## [1] "COG2014"</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">modifs &lt;-<span class="st"> </span><span class="kw"><a href="../reference/modifications_communales.html">modifications_communales</a></span>(<span class="dt">date_debut=</span><span class="st">"01-01-2014"</span>,<span class="dt">date_fin=</span><span class="st">"01-01-2015"</span>)
 <span class="kw">cat</span>(modifs$fusions)</code></pre></div>
-<pre><code>## 2015-01-01 : Notre-Dame-d'Estrées-Corbon (14474) est un rassemblement de Corbon (14178), Notre-Dame-d'Estrées (14474) [commune nouvelle avec commune(s) déléguée(s)].
-## 2015-01-01 : Auxons (25035) est un rassemblement de Auxon-Dessous (25034), Auxon-Dessus (25035) [commune nouvelle avec commune(s) déléguée(s)].
-## 2015-01-01 : Goussainville (28185) est un rassemblement de Champagne (28069), Goussainville (28185) [commune nouvelle avec commune(s) déléguée(s)].
-## 2015-01-01 : Eclose-Badinières (38152) est un rassemblement de Badinières (38024), Eclose (38152) [commune nouvelle avec commune(s) déléguée(s)].
-## 2015-01-01 : Saint-Crépin-Ibouvillers (60570) est un rassemblement de Montherlant (60417), Saint-Crépin-Ibouvillers (60570) [commune nouvelle avec commune(s) déléguée(s)].
-## 2015-01-01 : Montsecret-Clairefougère (61292) est un rassemblement de Clairefougère (61109), Montsecret (61292) [commune nouvelle avec commune(s) déléguée(s)].
-## 2015-01-01 : Boischampré (61375) est un rassemblement de Marcei (61249), Saint-Christophe-le-Jajolet (61375), Saint-Loyer-des-Champs (61417), Vrigny (61511) [commune nouvelle avec commune(s) déléguée(s)].
-## 2015-01-01 : Tinchebray-Bocage (61486) est un rassemblement de Beauchêne (61031), Frênes (61177), Larchamp (61223), Saint-Cornier-des-Landes (61377), Saint-Jean-des-Bois (61410), Tinchebray (61486), Yvrandes (61513) [commune nouvelle avec commune(s) déléguée(s)].
-## 2015-01-01 : Vaugneray (69255) est un rassemblement de Saint-Laurent-de-Vaux (69221), Vaugneray (69255) [commune nouvelle avec commune(s) déléguée(s)].
-## 2015-01-01 : Clux-Villeneuve (71578) est un rassemblement de Clux (71138), Villeneuve (71578) [commune nouvelle avec commune(s) déléguée(s)].
-## 2015-01-01 : Villeneuve-en-Perseigne (72137) est un rassemblement de Chassé (72069), Fresnaye-sur-Chédouet (72137), Lignières-la-Carelle (72162), Montigny (72207), Roullée (72258), Saint-Rigomer-des-Bois (72318) [commune nouvelle avec commune(s) déléguée(s)].
-## 2015-01-01 : Saint-Offenge (73263) est un rassemblement de Saint-Offenge-Dessous (73263), Saint-Offenge-Dessus (73264) [commune nouvelle avec commune(s) déléguée(s)].
-## 2015-01-01 : Orvanne (77316) est un rassemblement de Écuelles (77166), Moret-sur-Loing (77316) [commune nouvelle avec commune(s) déléguée(s)].</code></pre>
+<pre><code>## 2015-01-01 : Notre-Dame-d'Estrées-Corbon (14474) est un rassemblement de Corbon (14178), Notre-Dame-d'Estrées (14474) [commune nouvelle avec commune(s) dÃ©lÃ©guÃ©e(s)].
+## 2015-01-01 : Auxons (25035) est un rassemblement de Auxon-Dessous (25034), Auxon-Dessus (25035) [commune nouvelle avec commune(s) dÃ©lÃ©guÃ©e(s)].
+## 2015-01-01 : Goussainville (28185) est un rassemblement de Champagne (28069), Goussainville (28185) [commune nouvelle avec commune(s) dÃ©lÃ©guÃ©e(s)].
+## 2015-01-01 : Eclose-Badinières (38152) est un rassemblement de Badinières (38024), Eclose (38152) [commune nouvelle avec commune(s) dÃ©lÃ©guÃ©e(s)].
+## 2015-01-01 : Saint-Crépin-Ibouvillers (60570) est un rassemblement de Montherlant (60417), Saint-Crépin-Ibouvillers (60570) [commune nouvelle avec commune(s) dÃ©lÃ©guÃ©e(s)].
+## 2015-01-01 : Montsecret-Clairefougère (61292) est un rassemblement de Clairefougère (61109), Montsecret (61292) [commune nouvelle avec commune(s) dÃ©lÃ©guÃ©e(s)].
+## 2015-01-01 : Boischampré (61375) est un rassemblement de Marcei (61249), Saint-Christophe-le-Jajolet (61375), Saint-Loyer-des-Champs (61417), Vrigny (61511) [commune nouvelle avec commune(s) dÃ©lÃ©guÃ©e(s)].
+## 2015-01-01 : Tinchebray-Bocage (61486) est un rassemblement de Beauchêne (61031), Frênes (61177), Larchamp (61223), Saint-Cornier-des-Landes (61377), Saint-Jean-des-Bois (61410), Tinchebray (61486), Yvrandes (61513) [commune nouvelle avec commune(s) dÃ©lÃ©guÃ©e(s)].
+## 2015-01-01 : Vaugneray (69255) est un rassemblement de Saint-Laurent-de-Vaux (69221), Vaugneray (69255) [commune nouvelle avec commune(s) dÃ©lÃ©guÃ©e(s)].
+## 2015-01-01 : Clux-Villeneuve (71578) est un rassemblement de Clux (71138), Villeneuve (71578) [commune nouvelle avec commune(s) dÃ©lÃ©guÃ©e(s)].
+## 2015-01-01 : Villeneuve-en-Perseigne (72137) est un rassemblement de Chassé (72069), Fresnaye-sur-Chédouet (72137), Lignières-la-Carelle (72162), Montigny (72207), Roullée (72258), Saint-Rigomer-des-Bois (72318) [commune nouvelle avec commune(s) dÃ©lÃ©guÃ©e(s)].
+## 2015-01-01 : Saint-Offenge (73263) est un rassemblement de Saint-Offenge-Dessous (73263), Saint-Offenge-Dessus (73264) [commune nouvelle avec commune(s) dÃ©lÃ©guÃ©e(s)].
+## 2015-01-01 : Orvanne (77316) est un rassemblement de Écuelles (77166), Moret-sur-Loing (77316) [commune nouvelle avec commune(s) dÃ©lÃ©guÃ©e(s)].</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cat</span>(modifs$defusions)</code></pre></div>
-<pre><code>## ATTENTION, l'évènement suivant a été pris en compte dans les données de l'Insee seulement au 01/01/2015 : 2014-01-01 : Loisey (55298) s'est séparée en Loisey (55298), Culey (55138) [rétablissement].</code></pre>
+<pre><code>## ATTENTION, l'Ã©vÃ¨nement suivant a Ã©tÃ© pris en compte dans les donnÃ©es de l'Insee seulement au 01/01/2015 : 2014-01-01 : Loisey (55298) s'est sÃ©parÃ©e en Loisey (55298), Culey (55138) [rÃ©tablissement].</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cat</span>(modifs$changements_codes)</code></pre></div>
-<pre><code>## 2014-01-07 : Le code commune de Oudon passe de 14697 à 14472 [changement de code dû à un changement de chef-lieu].</code></pre>
+<pre><code>## 2014-01-07 : Le code commune de Oudon passe de 14697 Ã  14472 [changement de code dÃ» Ã  un changement de chef-lieu].</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cat</span>(modifs$changements_noms)</code></pre></div>
 <pre><code>## 2014-12-06 : La commune de Barisis (02049) change de nom en Barisis-aux-Bois [changement de nom].
 ## 2014-12-06 : La commune de Sainte-Colombe (21544) change de nom en Sainte-Colombe-en-Auxois [changement de nom].
