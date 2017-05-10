@@ -1,8 +1,41 @@
-#' @title Titre
+#' @title Visualiser les modifications communales entre deux dates
 #' @name modifications_communales
-#' @description Remplir
-#' @return Remplir
+#' @description Visualiser les modifications communales (fusions, défusions, changements de codes ou de noms) qui ont eu lieu entre deux dates.
+#' Attention, cette fonction est encore en cours de développement il est donc possible que certains évènements ne soient pas encore pris en compte.
+#' @param date_debut date de début de la liste de modifications communales souhaitée
+#' @param date_fin date de fin de la liste de modifications communales souhaitée
+#' @details
+#' Le code officiel géographique de référence du package est actuellement celui au 01/01/2017. Les données communales devront être dans ce COG pour être agrégées en niveaux supra-communaux (fonction nivsupra). \cr
+#'
+#' Les autres codes officiels géographiques utilisés dans COGugaison sont les suivants :
+#' \itemize{
+#' \item{COG 1968 : à partir du 01/03/1968 (donnees_insee=T obligatoirement)}
+#' \item{COG 1975 : à partir du 20/02/1975 (donnees_insee=T obligatoirement)}
+#' \item{COG 1982 : à partir du 04/03/1982 (donnees_insee=T obligatoirement)}
+#' \item{COG 1990 : à partir du 05/03/1990 (donnees_insee=T obligatoirement)}
+#' \item{COG 1999 : à partir du 08/03/1999 (donnees_insee=T obligatoirement)}
+#' \item{COG 2008 à 2017 : à partir du 01/01 de chaque année (donnees_insee=T ou F)}} \cr
+#'
+#' Les différences entre les tables de passage Insee et non Insee sont les suivantes :\cr
+#' \itemize{
+#' \item{1982-03-03 (pris en compte par l'Insee seulement après le 04/03/1982): Flaignes-Havys (08169) est un rassemblement de Flaignes-Havys (08169), Havys (08221) [fusion simple].}
+#' \item{2014-01-01 (pris en compte par l'Insee seulement au 01/01/2015) : Loisey (55298) s'est séparée en Loisey (55298), Culey (55138) [rétablissement].}
+#' \item{1990-02-01 (pris en compte par l'Insee seulement après le 05/03/1990) : Le code commune de Oudon passe de 14624 à 14697 [changement de code dû à un changement de chef-lieu].}}
+#' @references
+#' \itemize{
+#' \item{\href{https://www.insee.fr/fr/information/2666684#titre-bloc-11}{historique des géographies communales (Insee)}}
+#' \item{\href{https://www.insee.fr/fr/information/2028028}{tables d'appartenance des communes aux différents niveaux géographiques (Insee)}}}
+#' @seealso \link{changement_COG_varNum}, \link{changement_COG_typo},\link{changement_COG_typo_details}, \link{COG_akinator}, \link{enlever_PLM}, \link{modification_Corse},\link{nivsupra}
 #' @export
+#' @examples
+#' ## Exemple 1
+#' # modifications communales ayant eu lieu entre 2014 et 2015
+#' modifs <- modifications_communales(date_debut="01-01-2014",date_fin="01-01-2015")
+#' cat(modifs$fusions)
+#' cat(modifs$defusions)
+#' cat(modifs$changements_codes)
+#' cat(modifs$changements_noms)
+
 
 modifications_communales <- function(date_debut,date_fin){
 

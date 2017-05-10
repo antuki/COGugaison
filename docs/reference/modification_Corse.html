@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Titre — modification_Corse â€¢ COGugaison</title>
+<title>Modifier les codes Insee des communes corses — modification_Corse â€¢ COGugaison</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -76,28 +76,84 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Titre</h1>
+    <h1>Modifier les codes Insee des communes corses</h1>
     </div>
 
     
-    <p>Remplir</p>
+    <p>Modifier les codes Insee des communes corses. En effet, en 1976, les codes de toutes les communes corses sont modifiés : alors qu'ils commençaient tous par "20", leurs deux premiers caractères sont remplacés par "2A" (Corse du Sud) ou "2B" (Corse du Nord). Les codes postaux conservent d'ailleurs aujourd'hui le préfixe historique "20". Cette fonction est notamment utile pour la raison suivante :  dans certaines tables issues des recensements Insee de 1968 ou 1975, les communes sont déjà codées avec les préfixes 2A et 2B.</p>
     
 
     <pre class="usage"><span class='fu'>modification_Corse</span>(<span class='no'>table_entree</span>, <span class='kw'>codgeo_entree</span> <span class='kw'>=</span> <span class='fu'>colnames</span>(<span class='no'>table_entree</span>)[<span class='fl'>1</span>],
   <span class='kw'>vecteur_entree</span> <span class='kw'>=</span> <span class='fu'>is.vector</span>(<span class='no'>table_entree</span>), <span class='kw'>sens</span> <span class='kw'>=</span> <span class='st'>"20vers2A2B"</span>)</pre>
-        
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>table_entree</th>
+      <td><p>correspond à la table (ou le vecteur, cf. paramètre vecteur_entree) à transformer de manière à modifier les codes des communes corses.</p></td>
+    </tr>
+    <tr>
+      <th>codgeo_entree</th>
+      <td><p>est une chaîne de caractères qui indique le nom de la variable contenant les codes communes Insee. Par défaut, il s'agit du nom de la première colonne de table_entree.</p></td>
+    </tr>
+    <tr>
+      <th>vecteur_entree</th>
+      <td><p>vaut TRUE si table_entree est un simple vecteur.</p></td>
+    </tr>
+    <tr>
+      <th>sens</th>
+      <td><p>vaut "20vers2A2B" pour changer tous les codes communes corses commençant par 20 par 2A ou 2B et vaut "2A2Bvers20" quand l'effet inverse est recherché.</p></td>
+    </tr>
+    </table>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Remplir</p>
+    <p>Le code officiel géographique de référence du package est actuellement celui au 01/01/2017. Les données communales devront être dans ce COG pour être agrégées en niveaux supra-communaux (fonction nivsupra).</p>
+<p>Les autres codes officiels géographiques utilisés dans COGugaison sont les suivants :</p><ul>
+<li><p>COG 1968 : à partir du 01/03/1968 (donnees_insee=T obligatoirement)</p></li>
+<li><p>COG 1975 : à partir du 20/02/1975 (donnees_insee=T obligatoirement)</p></li>
+<li><p>COG 1982 : à partir du 04/03/1982 (donnees_insee=T obligatoirement)</p></li>
+<li><p>COG 1990 : à partir du 05/03/1990 (donnees_insee=T obligatoirement)</p></li>
+<li><p>COG 1999 : à partir du 08/03/1999 (donnees_insee=T obligatoirement)</p></li>
+<li><p>COG 2008 à 2017 : à partir du 01/01 de chaque année (donnees_insee=T ou F)</p></li>
+</ul><p></p>
+<p>Les différences entre les tables de passage Insee et non Insee sont les suivantes :</p><ul>
+<li><p>1982-03-03 (pris en compte par l'Insee seulement après le 04/03/1982): Flaignes-Havys (08169) est un rassemblement de Flaignes-Havys (08169), Havys (08221) [fusion simple].</p></li>
+<li><p>2014-01-01 (pris en compte par l'Insee seulement au 01/01/2015) : Loisey (55298) s'est séparée en Loisey (55298), Culey (55138) [rétablissement].</p></li>
+<li><p>1990-02-01 (pris en compte par l'Insee seulement après le 05/03/1990) : Le code commune de Oudon passe de 14624 à 14697 [changement de code dû à un changement de chef-lieu].</p></li>
+</ul>
+    
+    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
+
+    <ul>
+<li><p><a href = 'https://www.insee.fr/fr/information/2666684#titre-bloc-11'>historique des géographies communales (Insee)</a></p></li>
+<li><p><a href = 'https://www.insee.fr/fr/information/2028028'>tables d'appartenance des communes aux différents niveaux géographiques (Insee)</a></p></li>
+</ul>
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <p><a href='changement_COG_varNum.html'>changement_COG_varNum</a>, <a href='changement_COG_typo.html'>changement_COG_typo</a>,<a href='changement_COG_typo_details.html'>changement_COG_typo_details</a>, <a href='COG_akinator.html'>COG_akinator</a>, <a href='enlever_PLM.html'>enlever_PLM</a>, <a href='modifications_communales.html'>modifications_communales</a>,<a href='nivsupra.html'>nivsupra</a></p>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='co'>## Exemple 1</span>
+<span class='co'># Ici, nous allons remplacer les codes communes corses commençant par 2A ou 2B par 20 (l'exemple actuel ne contient pas de commune Corse donc le code n'a pas d'impact).</span>
+<span class='no'>exemple_flux_sansCorse</span> <span class='kw'>&lt;-</span> <span class='fu'>modification_Corse</span>(<span class='kw'>table_entree</span><span class='kw'>=</span><span class='no'>exemple_flux</span>,<span class='kw'>sens</span><span class='kw'>=</span><span class='st'>"2A2Bvers20"</span>)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#value">Value</a></li>
-          </ul>
+      <li><a href="#details">Details</a></li>
+
+      <li><a href="#references">References</a></li>
+
+      <li><a href="#see-also">See also</a></li>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>

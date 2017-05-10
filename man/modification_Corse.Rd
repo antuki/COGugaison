@@ -2,14 +2,51 @@
 % Please edit documentation in R/modification_Corse.R
 \name{modification_Corse}
 \alias{modification_Corse}
-\title{Titre}
+\title{Modifier les codes Insee des communes corses}
 \usage{
 modification_Corse(table_entree, codgeo_entree = colnames(table_entree)[1],
   vecteur_entree = is.vector(table_entree), sens = "20vers2A2B")
 }
-\value{
-Remplir
+\arguments{
+\item{table_entree}{correspond à la table (ou le vecteur, cf. paramètre vecteur_entree) à transformer de manière à modifier les codes des communes corses.}
+
+\item{codgeo_entree}{est une chaîne de caractères qui indique le nom de la variable contenant les codes communes Insee. Par défaut, il s'agit du nom de la première colonne de table_entree.}
+
+\item{vecteur_entree}{vaut TRUE si table_entree est un simple vecteur.}
+
+\item{sens}{vaut "20vers2A2B" pour changer tous les codes communes corses commençant par 20 par 2A ou 2B et vaut "2A2Bvers20" quand l'effet inverse est recherché.}
 }
 \description{
-Remplir
+Modifier les codes Insee des communes corses. En effet, en 1976, les codes de toutes les communes corses sont modifiés : alors qu'ils commençaient tous par "20", leurs deux premiers caractères sont remplacés par "2A" (Corse du Sud) ou "2B" (Corse du Nord). Les codes postaux conservent d'ailleurs aujourd'hui le préfixe historique "20". Cette fonction est notamment utile pour la raison suivante :  dans certaines tables issues des recensements Insee de 1968 ou 1975, les communes sont déjà codées avec les préfixes 2A et 2B.
+}
+\details{
+Le code officiel géographique de référence du package est actuellement celui au 01/01/2017. Les données communales devront être dans ce COG pour être agrégées en niveaux supra-communaux (fonction nivsupra). \cr
+
+Les autres codes officiels géographiques utilisés dans COGugaison sont les suivants :
+\itemize{
+\item{COG 1968 : à partir du 01/03/1968 (donnees_insee=T obligatoirement)}
+\item{COG 1975 : à partir du 20/02/1975 (donnees_insee=T obligatoirement)}
+\item{COG 1982 : à partir du 04/03/1982 (donnees_insee=T obligatoirement)}
+\item{COG 1990 : à partir du 05/03/1990 (donnees_insee=T obligatoirement)}
+\item{COG 1999 : à partir du 08/03/1999 (donnees_insee=T obligatoirement)}
+\item{COG 2008 à 2017 : à partir du 01/01 de chaque année (donnees_insee=T ou F)}} \cr
+
+Les différences entre les tables de passage Insee et non Insee sont les suivantes :\cr
+\itemize{
+\item{1982-03-03 (pris en compte par l'Insee seulement après le 04/03/1982): Flaignes-Havys (08169) est un rassemblement de Flaignes-Havys (08169), Havys (08221) [fusion simple].}
+\item{2014-01-01 (pris en compte par l'Insee seulement au 01/01/2015) : Loisey (55298) s'est séparée en Loisey (55298), Culey (55138) [rétablissement].}
+\item{1990-02-01 (pris en compte par l'Insee seulement après le 05/03/1990) : Le code commune de Oudon passe de 14624 à 14697 [changement de code dû à un changement de chef-lieu].}}
+}
+\examples{
+## Exemple 1
+# Ici, nous allons remplacer les codes communes corses commençant par 2A ou 2B par 20 (l'exemple actuel ne contient pas de commune Corse donc le code n'a pas d'impact).
+exemple_flux_sansCorse <- modification_Corse(table_entree=exemple_flux,sens="2A2Bvers20")
+}
+\references{
+\itemize{
+\item{\href{https://www.insee.fr/fr/information/2666684#titre-bloc-11}{historique des géographies communales (Insee)}}
+\item{\href{https://www.insee.fr/fr/information/2028028}{tables d'appartenance des communes aux différents niveaux géographiques (Insee)}}}
+}
+\seealso{
+\link{changement_COG_varNum}, \link{changement_COG_typo},\link{changement_COG_typo_details}, \link{COG_akinator}, \link{enlever_PLM}, \link{modifications_communales},\link{nivsupra}
 }

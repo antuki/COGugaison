@@ -2,14 +2,54 @@
 % Please edit documentation in R/enlever_PLM.R
 \name{enlever_PLM}
 \alias{enlever_PLM}
-\title{Titre}
+\title{Remplacer les arrondissements municipaux par les codes communes}
 \usage{
 enlever_PLM(table_entree, codgeo_entree = colnames(table_entree)[1],
   libgeo = NULL, agregation = T, vecteur_entree = is.vector(table_entree))
 }
-\value{
-Remplir
+\arguments{
+\item{table_entree}{correspond à la table (ou le vecteur, cf. paramètre vecteur_entree) à transformer de manière à remplacer les codes des arrondissements municipaux de Paris, Lyon et Marseille par leurs codes Insee communaux.}
+
+\item{codgeo_entree}{est une chaîne de caractères qui indique le nom de la variable contenant les codes communes Insee et les arrondissements municipaux de Paris, Lyon et Marseille. Par défaut, il s'agit du nom de la première colonne de table_entree.}
+
+\item{libgeo}{doit être conservé à NULL si la table souhaitée ne contient pas de libellés de communes, sinon il doit indiquer le nom de la variable renseignant sur le libellé de la commune (celui présent dans la table si il existe déjà ou tout autre nom s'il doit être ajouté).}
+
+\item{agregation}{vaut TRUE si la table souhaitée doit sommer toutes les lignes qui concernent une même commune et FALSE si l'on souhaite volontairement conserver les doublons dans les codes commune (dans les tables de flux par exemple). Si agregation = F, les variables de type caractère sont alors conservées comme telles ou dupliquées en cas de défusion et les variables numériques sommées en cas de fusion ou réparties proportionnellement à la population de chaque commune en cas de défusion.}
+
+\item{vecteur_entree}{vaut TRUE si table_entree est un simple vecteur.}
 }
 \description{
-Remplir
+Remplacer les codes Insee des arrondissements municipaux de Paris, Lyon et Marseille par leurs codes communes respectifs.
+}
+\details{
+Le code officiel géographique de référence du package est actuellement celui au 01/01/2017. Les données communales devront être dans ce COG pour être agrégées en niveaux supra-communaux (fonction nivsupra). \cr
+
+Les autres codes officiels géographiques utilisés dans COGugaison sont les suivants :
+\itemize{
+\item{COG 1968 : à partir du 01/03/1968 (donnees_insee=T obligatoirement)}
+\item{COG 1975 : à partir du 20/02/1975 (donnees_insee=T obligatoirement)}
+\item{COG 1982 : à partir du 04/03/1982 (donnees_insee=T obligatoirement)}
+\item{COG 1990 : à partir du 05/03/1990 (donnees_insee=T obligatoirement)}
+\item{COG 1999 : à partir du 08/03/1999 (donnees_insee=T obligatoirement)}
+\item{COG 2008 à 2017 : à partir du 01/01 de chaque année (donnees_insee=T ou F)}} \cr
+
+Les différences entre les tables de passage Insee et non Insee sont les suivantes :\cr
+\itemize{
+\item{1982-03-03 (pris en compte par l'Insee seulement après le 04/03/1982): Flaignes-Havys (08169) est un rassemblement de Flaignes-Havys (08169), Havys (08221) [fusion simple].}
+\item{2014-01-01 (pris en compte par l'Insee seulement au 01/01/2015) : Loisey (55298) s'est séparée en Loisey (55298), Culey (55138) [rétablissement].}
+\item{1990-02-01 (pris en compte par l'Insee seulement après le 05/03/1990) : Le code commune de Oudon passe de 14624 à 14697 [changement de code dû à un changement de chef-lieu].}}
+}
+\examples{
+## Exemple 1
+# Ici, nous allons remplacer les arrondissement municipaux par les codes communaux dans la table exemple_flux pour les variables COMMUNE puis DCLT.
+exemple_flux_sansPLM <-enlever_PLM(table_entree=exemple_flux,codgeo_entree = "COMMUNE",libgeo=NULL,agregation = F,vecteur_entree=F)
+exemple_flux_sansPLM <-enlever_PLM(table_entree=exemple_flux_sansPLM,codgeo_entree = "DCLT",libgeo=NULL,agregation = F,vecteur_entree=F)
+}
+\references{
+\itemize{
+\item{\href{https://www.insee.fr/fr/information/2666684#titre-bloc-11}{historique des géographies communales (Insee)}}
+\item{\href{https://www.insee.fr/fr/information/2028028}{tables d'appartenance des communes aux différents niveaux géographiques (Insee)}}}
+}
+\seealso{
+\link{changement_COG_varNum}, \link{changement_COG_typo},\link{changement_COG_typo_details}, \link{COG_akinator}, \link{modification_Corse}, \link{modifications_communales},\link{nivsupra}
 }

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Titre — nivsupra â€¢ COGugaison</title>
+<title>Agréger des données à des échelons supra-communaux — nivsupra â€¢ COGugaison</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -76,30 +76,124 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Titre</h1>
+    <h1>Agréger des données à des échelons supra-communaux</h1>
     </div>
 
     
-    <p>Remplir</p>
+    <p>Permettre d'agréger les tables de données communales à de nombreux échelons supra-communaux administratifs (EPCI, arrondissements, cantons-villes, départements, régions) ou d'étude (bassins de vie, zones d'emploi, unités urbaines, aires urbaines). La fonction `nivsupra` peut également s'appliquer à des tables de flux (non agrégées par codes communes) grâce à l'option agregation = FALSE. La table en entrée est alors conservée comme telle avec une nouvelle colonne qui correspond au niveau supracommunal du code commune considéré.</p>
     
 
     <pre class="usage"><span class='fu'>nivsupra</span>(<span class='no'>table_entree</span>, <span class='kw'>codgeo_entree</span> <span class='kw'>=</span> <span class='fu'>colnames</span>(<span class='no'>table_entree</span>)[<span class='fl'>1</span>],
   <span class='kw'>var_num</span> <span class='kw'>=</span> <span class='fu'>colnames</span>(<span class='no'>table_entree</span>)[<span class='fu'>sapply</span>(<span class='no'>table_entree</span>, <span class='no'>is.numeric</span>)],
   <span class='no'>nivsupra</span>, <span class='kw'>nivsupra_nom</span> <span class='kw'>=</span> <span class='fu'>ifelse</span>(<span class='no'>agregation</span> <span class='kw'>==</span> <span class='no'>T</span>, <span class='no'>nivsupra</span>, <span class='fu'>paste0</span>(<span class='no'>nivsupra</span>,
   <span class='st'>"_"</span>, <span class='no'>codgeo_entree</span>)), <span class='kw'>na.nivgeo.rm</span> <span class='kw'>=</span> <span class='no'>F</span>, <span class='kw'>agregation</span> <span class='kw'>=</span> <span class='no'>T</span>)</pre>
-        
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>table_entree</th>
+      <td><p>correspond à la table (ou le vecteur, cf. paramètre vecteur_entree) à transformer de manière à modifier les codes des communes corses.</p></td>
+    </tr>
+    <tr>
+      <th>codgeo_entree</th>
+      <td><p>est une chaîne de caractères qui indique le nom de la variable contenant les codes communes Insee. Par défaut, il s'agit du nom de la première colonne de table_entree.</p></td>
+    </tr>
+    <tr>
+      <th>var_num</th>
+      <td><p>est un vecteur de chaînes de caractères qui indique les noms des variables numériques à convertir. Par défaut, il s'agit de l'ensemble des variables de types numériques dans table_entree.</p></td>
+    </tr>
+    <tr>
+      <th>nivsupra</th>
+      <td><p>est une chaîne de caractères qui indique le nom du niveau supra-communale souhaité :
+- "DEP" : départements
+- "REG" : régions
+- "EPCI" : EPCI au 01/01/2017
+- "ARR" : arrondissements au 01/01/2017
+- "CV" : cantons-villes au 01/01/2017
+- "ZE2010" : zones d'emploi 2010
+- "UU2010" : unités urbaines 2010
+- "AU2010" : aires urbaines 2010
+- "BV2012" : bassins de vie 2012</p></td>
+    </tr>
+    <tr>
+      <th>nivsupra_nom</th>
+      <td><p>indique le nom à donner au niveau supra-communal dans la table de sortie. Il faut par défaut la chaîne de caractère contenue dans nivsupra si agregation = T et la concaténation de nivsupra et codgeo_entree séparée d'un "_" si agregation = F.</p></td>
+    </tr>
+    <tr>
+      <th>agregation</th>
+      <td><p>vaut TRUE si la table souhaitée doit sommer toutes les lignes qui concernent une même commune et FALSE si l'on souhaite volontairement conserver les doublons dans les codes commune (dans les tables de flux par exemple). Si agregation = F, les variables de type caractère sont alors conservées comme telles ou dupliquées en cas de défusion et les variables numériques sommées en cas de fusion ou réparties proportionnellement à la population de chaque commune en cas de défusion.</p></td>
+    </tr>
+    </table>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Remplir</p>
+    <p>Le code officiel géographique de référence du package est actuellement celui au 01/01/2017. Les données communales devront être dans ce COG pour être agrégées en niveaux supra-communaux (fonction nivsupra).</p>
+<p>Les autres codes officiels géographiques utilisés dans COGugaison sont les suivants :</p><ul>
+<li><p>COG 1968 : à partir du 01/03/1968 (donnees_insee=T obligatoirement)</p></li>
+<li><p>COG 1975 : à partir du 20/02/1975 (donnees_insee=T obligatoirement)</p></li>
+<li><p>COG 1982 : à partir du 04/03/1982 (donnees_insee=T obligatoirement)</p></li>
+<li><p>COG 1990 : à partir du 05/03/1990 (donnees_insee=T obligatoirement)</p></li>
+<li><p>COG 1999 : à partir du 08/03/1999 (donnees_insee=T obligatoirement)</p></li>
+<li><p>COG 2008 à 2017 : à partir du 01/01 de chaque année (donnees_insee=T ou F)</p></li>
+</ul><p></p>
+<p>Les différences entre les tables de passage Insee et non Insee sont les suivantes :</p><ul>
+<li><p>1982-03-03 (pris en compte par l'Insee seulement après le 04/03/1982): Flaignes-Havys (08169) est un rassemblement de Flaignes-Havys (08169), Havys (08221) [fusion simple].</p></li>
+<li><p>2014-01-01 (pris en compte par l'Insee seulement au 01/01/2015) : Loisey (55298) s'est séparée en Loisey (55298), Culey (55138) [rétablissement].</p></li>
+<li><p>1990-02-01 (pris en compte par l'Insee seulement après le 05/03/1990) : Le code commune de Oudon passe de 14624 à 14697 [changement de code dû à un changement de chef-lieu].</p></li>
+</ul>
+    
+    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
+
+    <ul>
+<li><p><a href = 'https://www.insee.fr/fr/information/2666684#titre-bloc-11'>historique des géographies communales (Insee)</a></p></li>
+<li><p><a href = 'https://www.insee.fr/fr/information/2028028'>tables d'appartenance des communes aux différents niveaux géographiques (Insee)</a></p></li>
+</ul>
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <p><a href='changement_COG_varNum.html'>changement_COG_varNum</a>, <a href='changement_COG_typo.html'>changement_COG_typo</a>,<a href='changement_COG_typo_details.html'>changement_COG_typo_details</a>, <a href='COG_akinator.html'>COG_akinator</a>, <a href='enlever_PLM.html'>enlever_PLM</a>, <a href='modification_Corse.html'>modification_Corse</a>,<a href='modifications_communales.html'>modifications_communales</a></p>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='co'>## Exemple 1</span>
+<span class='co'># Ici, après avoir transformé les données en géographie communale au 01/01/2017, nous agrégeons la population et la superficie des communes à l'échelon géographique des zones d'emploi afin d'obtenir une table des densités de population par zone d'emploi.</span>
+<span class='no'>exemple_popcom_COG2017_num</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='changement_COG_varNum.html'>changement_COG_varNum</a></span>(<span class='kw'>table_entree</span><span class='kw'>=</span><span class='no'>exemple_popcom</span>,<span class='kw'>annees</span><span class='kw'>=</span><span class='fu'>c</span>(<span class='fl'>2014</span>:<span class='fl'>2017</span>),<span class='kw'>agregation</span><span class='kw'>=</span><span class='no'>T</span>,<span class='kw'>libgeo</span><span class='kw'>=</span><span class='st'>"LIBGEO"</span>,<span class='kw'>donnees_insee</span><span class='kw'>=</span><span class='no'>T</span>)
+<span class='no'>exemple_popcom_ZE2010</span> <span class='kw'>&lt;-</span> <span class='fu'>nivsupra</span>(<span class='kw'>table_entree</span><span class='kw'>=</span><span class='no'>exemple_popcom_COG2017_num</span>,<span class='kw'>nivsupra</span><span class='kw'>=</span><span class='st'>"ZE2010"</span>,<span class='kw'>na.nivgeo.rm</span><span class='kw'>=</span><span class='no'>F</span>,<span class='kw'>agregation</span><span class='kw'>=</span><span class='no'>T</span>)
+<span class='no'>exemple_popcom_ZE2010</span>$<span class='no'>densite</span> <span class='kw'>&lt;-</span> <span class='no'>exemple_popcom_ZE2010</span>$<span class='no'>P12_POP</span> / <span class='no'>exemple_popcom_ZE2010</span>$<span class='no'>SUPERF</span>
+<span class='fu'>head</span>(<span class='no'>exemple_popcom_ZE2010</span>)</div><div class='output co'>#&gt;   ZE2010                         LIBGEO P12_POP SUPERF  densite
+#&gt; 1   0050                 Mont-de-Marsan  160717   4956 32.42877
+#&gt; 2   0051                        Alençon  122263   2405 50.83701
+#&gt; 3   0052                Cosne - Clamecy   75052   2553 29.39757
+#&gt; 4   0053                          Mâcon  143358   1543 92.90862
+#&gt; 5   0054               Nogent-le-Rotrou   48665   1227 39.66178
+#&gt; 6   0055 La Vallée de la Bresle - Vimeu   99095   1134 87.38536</div><div class='input'><span class='co'>## Exemple 2</span>
+<span class='co'># Ici, on ajoute les colonnes ZE2010_COMMUNE et ZE2010_DCLT à la table exemple de flux domicile-travail.</span>
+<span class='no'>exemple_flux_COG2017</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='changement_COG_varNum.html'>changement_COG_varNum</a></span>(<span class='kw'>table_entree</span><span class='kw'>=</span><span class='no'>exemple_flux</span>,<span class='kw'>annees</span><span class='kw'>=</span><span class='fu'>c</span>(<span class='fl'>2014</span>:<span class='fl'>2017</span>),<span class='kw'>codgeo_entree</span><span class='kw'>=</span><span class='st'>"COMMUNE"</span>,<span class='kw'>agregation</span><span class='kw'>=</span><span class='no'>F</span>,<span class='kw'>libgeo</span><span class='kw'>=</span><span class='kw'>NULL</span>,<span class='kw'>donnees_insee</span><span class='kw'>=</span><span class='no'>T</span>)
+<span class='no'>exemple_flux_COG2017</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='changement_COG_varNum.html'>changement_COG_varNum</a></span>(<span class='kw'>table_entree</span><span class='kw'>=</span><span class='no'>exemple_flux_COG2017</span>,<span class='kw'>annees</span><span class='kw'>=</span><span class='fu'>c</span>(<span class='fl'>2014</span>:<span class='fl'>2017</span>),<span class='kw'>codgeo_entree</span><span class='kw'>=</span><span class='st'>"DCLT"</span>,<span class='kw'>agregation</span><span class='kw'>=</span><span class='no'>F</span>,<span class='kw'>libgeo</span><span class='kw'>=</span><span class='kw'>NULL</span>,<span class='kw'>donnees_insee</span><span class='kw'>=</span><span class='no'>T</span>)
+<span class='no'>exemple_flux_COG2017_etZE</span> <span class='kw'>&lt;-</span> <span class='fu'>nivsupra</span>(<span class='kw'>table_entree</span><span class='kw'>=</span><span class='no'>exemple_flux_COG2017</span>,<span class='kw'>codgeo_entree</span><span class='kw'>=</span><span class='st'>"COMMUNE"</span>,<span class='kw'>nivsupra</span><span class='kw'>=</span><span class='st'>"ZE2010"</span>,<span class='kw'>na.nivgeo.rm</span><span class='kw'>=</span><span class='no'>F</span>,<span class='kw'>agregation</span><span class='kw'>=</span><span class='no'>F</span>)
+<span class='no'>exemple_flux_COG2017_etZE</span> <span class='kw'>&lt;-</span> <span class='fu'>nivsupra</span>(<span class='kw'>table_entree</span><span class='kw'>=</span><span class='no'>exemple_flux_COG2017_etZE</span>,<span class='kw'>codgeo_entree</span><span class='kw'>=</span><span class='st'>"DCLT"</span>,<span class='kw'>nivsupra</span><span class='kw'>=</span><span class='st'>"ZE2010"</span>,<span class='kw'>na.nivgeo.rm</span><span class='kw'>=</span><span class='no'>F</span>,<span class='kw'>agregation</span><span class='kw'>=</span><span class='no'>F</span>)
+<span class='fu'>head</span>(<span class='no'>exemple_flux_COG2017_etZE</span>)</div><div class='output co'>#&gt;    DCLT COMMUNE CS1 AGEREVQ   IPONDI ZE2010_COMMUNE ZE2010_DCLT
+#&gt; 1 02528   61099   4      35 4.177122           0054        2206
+#&gt; 2 03085   61006   2      45 2.700910           2511        8302
+#&gt; 3 03085   61006   5      25 2.867086           2511        8302
+#&gt; 4 03085   61006   6      20 2.700910           2511        8302
+#&gt; 5 03085   61006   6      40 2.773158           2511        8302
+#&gt; 6 03085   61474   5      45 4.000000           2511        8302</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#value">Value</a></li>
-          </ul>
+      <li><a href="#details">Details</a></li>
+
+      <li><a href="#references">References</a></li>
+
+      <li><a href="#see-also">See also</a></li>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>
