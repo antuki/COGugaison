@@ -31,18 +31,20 @@ Transformer des tables de données numériques en géographie au premier janvier
 \details{
 Le code officiel géographique de référence du package est actuellement celui au 01/01/2017. Les données communales devront être dans ce COG pour être agrégées en niveaux supra-communaux (fonction nivsupra). \cr
 
-Les autres codes officiels géographiques utilisés dans COGugaison sont les suivants : \cr
- - COG 1968 : à partir du 01/03/1968 (donnees_insee=T obligatoirement)\cr
- - COG 1975 : à partir du 20/02/1975 (donnees_insee=T obligatoirement)\cr
- - COG 1982 : à partir du 04/03/1982 (donnees_insee=T obligatoirement)\cr
- - COG 1990 : à partir du 05/03/1990 (donnees_insee=T obligatoirement)\cr
- - COG 1999 : à partir du 08/03/1999 (donnees_insee=T obligatoirement)\cr
- - COG 2008 à 2017 : à partir du 01/01 de chaque année (donnees_insee=T ou F)\cr
+Les autres codes officiels géographiques utilisés dans COGugaison sont les suivants :
+\itemize{
+\item{COG 1968 : à partir du 01/03/1968 (donnees_insee=T obligatoirement)}
+\item{COG 1975 : à partir du 20/02/1975 (donnees_insee=T obligatoirement)}
+\item{COG 1982 : à partir du 04/03/1982 (donnees_insee=T obligatoirement)}
+\item{COG 1990 : à partir du 05/03/1990 (donnees_insee=T obligatoirement)}
+\item{COG 1999 : à partir du 08/03/1999 (donnees_insee=T obligatoirement)}
+\item{COG 2008 à 2017 : à partir du 01/01 de chaque année (donnees_insee=T ou F)}} \cr
 
 Les différences entre les tables de passage Insee et non Insee sont les suivantes :\cr
-- 1982-03-03 (pris en compte par l'Insee seulement après le 04/03/1982): Flaignes-Havys (08169) est un rassemblement de Flaignes-Havys (08169), Havys (08221) [fusion simple]. \cr
-- 2014-01-01 (pris en compte par l'Insee seulement au 01/01/2015) : Loisey (55298) s'est séparée en Loisey (55298), Culey (55138) [rétablissement]. \cr
-- 1990-02-01 (pris en compte par l'Insee seulement après le 05/03/1990) : Le code commune de Oudon passe de 14624 à 14697 [changement de code dû à un changement de chef-lieu]. \cr
+\itemize{
+\item{1982-03-03 (pris en compte par l'Insee seulement après le 04/03/1982): Flaignes-Havys (08169) est un rassemblement de Flaignes-Havys (08169), Havys (08221) [fusion simple].}
+\item{2014-01-01 (pris en compte par l'Insee seulement au 01/01/2015) : Loisey (55298) s'est séparée en Loisey (55298), Culey (55138) [rétablissement].}
+\item{1990-02-01 (pris en compte par l'Insee seulement après le 05/03/1990) : Le code commune de Oudon passe de 14624 à 14697 [changement de code dû à un changement de chef-lieu].}}
 }
 \examples{
 ## Exemple 1
