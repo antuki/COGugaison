@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Titre — changement_COG_typo â€¢ COGugaison</title>
+<title>Changer les typologies de géographie communale — changement_COG_typo â€¢ COGugaison</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -76,11 +76,11 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Titre</h1>
+    <h1>Changer les typologies de géographie communale</h1>
     </div>
 
     
-    <p>Remplir</p>
+    <p>Transformer des typologies en géographie au premier janvier d'une année souhaitée en ayant le choix entre plusieurs hypothèses de classement en cas de fusion de communes de classes différentes (attribuer la classe qui contient le plus de population, définir une classe absorbante ou une classe spécifique aux regroupements de plusieurs communes de classes différentes).</p>
     
 
     <pre class="usage"><span class='fu'>changement_COG_typo</span>(<span class='no'>table_entree</span>, <span class='no'>annees</span>,
@@ -89,19 +89,126 @@
   <span class='no'>codgeo_entree</span>)], <span class='kw'>methode_fusion</span> <span class='kw'>=</span> <span class='st'>"methode_difference"</span>,
   <span class='kw'>mot_difference</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>classe_absorbante</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>donnees_insee</span> <span class='kw'>=</span> <span class='no'>T</span>,
   <span class='kw'>libgeo</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
-        
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>table_entree</th>
+      <td><p>correspond à la table à transformer en une autre géographie</p></td>
+    </tr>
+    <tr>
+      <th>annees</th>
+      <td><p>est un vecteur qui liste l'ensemble des années qui séparent le code officiel géographique de départ et d'arrivée. Par exemple c(1968:1985). Le package rend possible l'utilisation de tables de passages d'une année de COG vers une année antiérieure (par exemple c(2016:2014)).</p></td>
+    </tr>
+    <tr>
+      <th>codgeo_entree</th>
+      <td><p>est une chaîne de caractères qui indique le nom de la variable contenant les codes Insee communaux. Par défaut, il s'agit du nom de la première colonne de table_entree.</p></td>
+    </tr>
+    <tr>
+      <th>typos</th>
+      <td><p>est un vecteur de chaînes de caractères qui indique les noms des typologies à convertir. Par défaut, il s'agit de l'ensemble des variables de table_entree sauf codgeo_entree.</p></td>
+    </tr>
+    <tr>
+      <th>methode_fusion</th>
+      <td><p>méthode choisie en cas de fusion de communes de classes différentes :
+- "methode_difference" : créer une classe spécifique dont le nom est contenu dans mot_difference
+- "methode_max_pop" : attribuer la classe contenant le maximum de population des communes fusionnées
+- "methode_classe_absorbante" : attribuer la classe dite absorbante à toute commune fusionnée contenant au moins une ancienne commune appartenant à cette classe absorbante</p></td>
+    </tr>
+    <tr>
+      <th>mot_difference</th>
+      <td><p>n'est à définir que si methode_fusion = "methode_difference". Si ce paramètre est laissé à NULL alors la commune fusionnée possède comme libellé de classe l'ensemble des libellés présents dans ses communes fusionnées séparés d'un "et". Sinon, il indique un nom de classe à attribuer aux communes fusionnées de classes différentes.</p></td>
+    </tr>
+    <tr>
+      <th>classe_absorbante</th>
+      <td><p>n'est à définir que si methode_fusion = "methode_classe_absorbante". Si ce paramètre est laissé à NULL alors la commune fusionnée possède comme libellé de classe l'ensemble des libellés présents dans ses communes fusionnées séparés d'un "et". Sinon, il indique le nom de la classe dite absorbante à attribuer à toute commune fusionnée contenant au moins une ancienne commune appartenant à cette classe absorbante.</p></td>
+    </tr>
+    <tr>
+      <th>donnees_insee</th>
+      <td><p>vaut TRUE si les données manipulées sont produites par l'Insee. En effet, quelques rares modifications communales (la défusion des communes Loisey et Culey au 1er janvier 2014 par exemple) ont été prises en compte dans les bases de données communales de l'Insee plus tard que la date officielle. Pour tous les COG officiels datant d'avant 2008, seules les tables de passage Insee sont disponibles dans ce package.</p></td>
+    </tr>
+    <tr>
+      <th>libgeo</th>
+      <td><p>doit être conservé à NULL si la table souhaitée ne contient pas de libellés de communes, sinon il doit indiquer le nom de la variable renseignant sur le libellé de la commune (celui présent dans la table si il existe déjà ou tout autre nom s'il doit être ajouté).</p></td>
+    </tr>
+    </table>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Remplir</p>
+    <p>Le code officiel géographique de référence du package est actuellement celui au 01/01/2017. Les données communales devront être dans ce COG pour être agrégées en niveaux supra-communaux (fonction nivsupra).</p>
+<p>Les autres codes officiels géographiques utilisés dans COGugaison sont les suivants :</p><ul>
+<li><p>COG 1968 : à partir du 01/03/1968 (donnees_insee=T obligatoirement)</p></li>
+<li><p>COG 1975 : à partir du 20/02/1975 (donnees_insee=T obligatoirement)</p></li>
+<li><p>COG 1982 : à partir du 04/03/1982 (donnees_insee=T obligatoirement)</p></li>
+<li><p>COG 1990 : à partir du 05/03/1990 (donnees_insee=T obligatoirement)</p></li>
+<li><p>COG 1999 : à partir du 08/03/1999 (donnees_insee=T obligatoirement)</p></li>
+<li><p>COG 2008 à 2017 : à partir du 01/01 de chaque année (donnees_insee=T ou F)</p></li>
+</ul><p></p>
+<p>Les différences entre les tables de passage Insee et non Insee sont les suivantes :</p><ul>
+<li><p>1982-03-03 (pris en compte par l'Insee seulement après le 04/03/1982): Flaignes-Havys (08169) est un rassemblement de Flaignes-Havys (08169), Havys (08221) [fusion simple].</p></li>
+<li><p>2014-01-01 (pris en compte par l'Insee seulement au 01/01/2015) : Loisey (55298) s'est séparée en Loisey (55298), Culey (55138) [rétablissement].</p></li>
+<li><p>1990-02-01 (pris en compte par l'Insee seulement après le 05/03/1990) : Le code commune de Oudon passe de 14624 à 14697 [changement de code dû à un changement de chef-lieu].</p></li>
+</ul>
+    
+    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
+
+    <ul>
+<li><p><a href = 'https://www.insee.fr/fr/information/2666684#titre-bloc-11'>historique des géographies communales (Insee)</a></p></li>
+<li><p><a href = 'https://www.insee.fr/fr/information/2028028'>tables d'appartenance des communes aux différents niveaux géographiques (Insee)</a></p></li>
+</ul>
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <p><a href='changement_COG_varNum.html'>changement_COG_varNum</a>, <a href='changement_COG_typo_details.html'>changement_COG_typo_details</a>,  <a href='COG_akinator.html'>COG_akinator</a>, <a href='enlever_PLM.html'>enlever_PLM</a>, <a href='modification_Corse.html'>modification_Corse</a>, <a href='modifications_communales.html'>modifications_communales</a>,<a href='nivsupra.html'>nivsupra</a></p>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='co'>## Exemple 1</span>
+<span class='co'># Ici nous allons transformer les deux typologies (typoA et typoB) de la table exemple_pop en géographie communale au 1er janvier 2017 (au lieu de 2014).</span>
+<span class='co'># L'hypothèse de classement en cas de fusion de communes (*methode_fusion*) choisie est celle d'une classe spécifique (*methode_difference*, classe appelée *mot_difference*="differents") aux regroupements de plusieurs communes de classes différentes. Les autres hypothèses possibles auraient pu être l'hypothèse du maximum de population *methode_max_pop* ou de classe absorbante *methode_classe_absorbante*.</span>
+<span class='no'>exemple_popcom_COG2017_typo</span> <span class='kw'>&lt;-</span> <span class='fu'>changement_COG_typo</span>(<span class='kw'>table_entree</span><span class='kw'>=</span><span class='no'>exemple_popcom</span>[,-<span class='fl'>2</span>],<span class='kw'>annees</span><span class='kw'>=</span><span class='fu'>c</span>(<span class='fl'>2014</span>:<span class='fl'>2017</span>),<span class='kw'>methode_fusion</span><span class='kw'>=</span><span class='st'>"methode_difference"</span>,<span class='kw'>typos</span><span class='kw'>=</span><span class='fu'>c</span>(<span class='st'>"typoA"</span>,<span class='st'>"typoB"</span>),<span class='kw'>mot_difference</span> <span class='kw'>=</span> <span class='st'>"differents"</span>,<span class='kw'>libgeo</span><span class='kw'>=</span><span class='st'>"LIB"</span>,<span class='kw'>donnees_insee</span><span class='kw'>=</span><span class='no'>T</span>)
+<span class='fu'>head</span>(<span class='no'>exemple_popcom_COG2017_typo</span>)</div><div class='output co'>#&gt;   CODGEO                     LIB    typoA typoB
+#&gt; 1  01001 L'Abergement-Clémenciat CLASSE 2     F
+#&gt; 2  01002   L'Abergement-de-Varey CLASSE 3     D
+#&gt; 3  01004       Ambérieu-en-Bugey CLASSE 1     B
+#&gt; 4  01005     Ambérieux-en-Dombes CLASSE 3     F
+#&gt; 5  01006                 Ambléon CLASSE 4     E
+#&gt; 6  01007                Ambronay CLASSE 5     A</div><div class='input'><span class='co'># Nous allons maintenant isoler dans une table les communes fusionnées appartenant à des classes différentes, ici selon la typologie "typoA" entre 2014 et 2015, 2015 et 2016 et 2016 et 2017.</span>
+<span class='no'>details_exemple_popcom_COG2017_typo</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='changement_COG_typo_details.html'>changement_COG_typo_details</a></span>(<span class='kw'>table_entree</span><span class='kw'>=</span><span class='no'>exemple_popcom</span>[,-<span class='fl'>2</span>],<span class='kw'>annees</span><span class='kw'>=</span><span class='fu'>c</span>(<span class='fl'>2014</span>:<span class='fl'>2017</span>),<span class='kw'>typo</span><span class='kw'>=</span><span class='st'>"typoA"</span>, <span class='kw'>donnees_insee</span><span class='kw'>=</span><span class='no'>T</span>)
+<span class='fu'>head</span>(<span class='no'>details_exemple_popcom_COG2017_typo</span><span class='kw'>[[</span><span class='st'>"2014_2015"</span>]])</div><div class='output co'>#&gt;   cod2014              lib2014 cod2015                     lib2015    typoA
+#&gt; 1   14178               Corbon   14474 Notre-Dame-d'Estrées-Corbon CLASSE 2
+#&gt; 2   14474 Notre-Dame-d'Estrées   14474 Notre-Dame-d'Estrées-Corbon CLASSE 4
+#&gt; 3   25034        Auxon-Dessous   25035                  Les Auxons CLASSE 1
+#&gt; 4   25035         Auxon-Dessus   25035                  Les Auxons CLASSE 3
+#&gt; 5   38024           Badinières   38152           Eclose-Badinières CLASSE 4
+#&gt; 6   38152               Eclose   38152           Eclose-Badinières CLASSE 3</div><div class='input'><span class='fu'>head</span>(<span class='no'>details_exemple_popcom_COG2017_typo</span><span class='kw'>[[</span><span class='st'>"2015_2016"</span>]])</div><div class='output co'>#&gt;   cod2015             lib2015 cod2016            lib2016    typoA
+#&gt; 1   01015           Arbignieu   01015    Arboys en Bugey CLASSE 3
+#&gt; 2   01340          Saint-Bois   01015    Arboys en Bugey CLASSE 2
+#&gt; 3   01119           Corcelles   01080 Champdor-Corcelles CLASSE 1
+#&gt; 4   01080            Champdor   01080 Champdor-Corcelles CLASSE 2
+#&gt; 5   01176 Le Grand-Abergement   01187      Haut Valromey CLASSE 2
+#&gt; 6   01409             Songieu   01187      Haut Valromey CLASSE 5</div><div class='input'><span class='fu'>head</span>(<span class='no'>details_exemple_popcom_COG2017_typo</span><span class='kw'>[[</span><span class='st'>"2016_2017"</span>]])</div><div class='output co'>#&gt;   cod2016             lib2016 cod2017          lib2017    typoA
+#&gt; 1   01095 Chavannes-sur-Suran   01095 Nivigne et Suran CLASSE 5
+#&gt; 2   01172           Germagnat   01095 Nivigne et Suran CLASSE 1
+#&gt; 3   01098         Chazey-Bons   01098      Chazey-Bons CLASSE 3
+#&gt; 4   01316              Pugieu   01098      Chazey-Bons CLASSE 4
+#&gt; 5   03168             Meaulne   03168   Meaulne-Vitray CLASSE 2
+#&gt; 6   03318              Vitray   03168   Meaulne-Vitray CLASSE 5</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#value">Value</a></li>
-          </ul>
+      <li><a href="#details">Details</a></li>
+
+      <li><a href="#references">References</a></li>
+
+      <li><a href="#see-also">See also</a></li>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>
