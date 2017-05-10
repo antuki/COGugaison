@@ -38,6 +38,7 @@
 #' # La fonction peut également s'appliquer à des tables de flux (codes communes pouvant comporter des doublons) grâce à l'option agregation = FALSE.
 #' exemple_flux_COG2017 <- changement_COG_varNum(table_entree=exemple_flux,annees=c(2014:2017),codgeo_entree="COMMUNE",agregation=F,libgeo=NULL,donnees_insee=T)
 #' exemple_flux_COG2017 <- changement_COG_varNum(table_entree=exemple_flux_COG2017,annees=c(2014:2017),codgeo_entree="DCLT",agregation=F,libgeo=NULL,donnees_insee=T)
+#' @encoding UTF-8
 
 
 changement_COG_varNum <- function(table_entree,annees,codgeo_entree=colnames(table_entree)[1],var_num=colnames(table_entree)[sapply(table_entree, is.numeric)],agregation=T,libgeo=NULL,donnees_insee=T){
