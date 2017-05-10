@@ -9,7 +9,7 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-## Introduction à COGugaison
+## Introduction à COGugaison v2
 
 Nous allons balayer dans cette vignette les principales fonctionnalités du package `COGugaison`. 
 
