@@ -14,12 +14,14 @@ vignette: >
 Nous allons balayer dans cette vignette les principales fonctionnalités du package `COGugaison`. 
 
 Ce package a pour objectif global de manipuler des données communales produites à différents millésimes. Il permet actuellement de : 
-- détecter le millésime du code officiel géographique d'une table de données communales : fonction `COG_akinator`
+
+- détecter le millésime du code officiel géographique d'une table de données communales : fonction `COG_akinator` 
+
 - visualiser les modifications communales (fusions, défusions, changements de codes ou de noms) qui ont eu lieu entre deux dates : `modifications_communales`
 - transformer des tables de données numériques en géographie au premier janvier d'une année souhaitée : `changement_COG_varNum`
-- transformer des typologies de communes en géographie au premier janvier d'une année souhaitée en ayant le choix entre plusieurs hypothèses de classement en cas de fusion de communes de classes différentes (attribuer la classe qui contient le plus de population, définir une classe absorbante ou une classe spécifique aux regroupements de plusieurs communes de classes différentes) : `changement_COG_typo`.Il est également possible d'isoler dans une table les communes fusionnées appartenant à des classes différentes : `changement_COG_typo_details`.
-- permettre d'agréger les tables de données communales à de nombreux échelons supra-communaux administratifs (EPCI, arrondissements, cantons-villes, départements, régions) ou d'étude (bassins de vie, zones d'emploi, unités urbaines, aires urbaines) : `nivsupra`.
-- gérer des cas particuliers comme les codes Insee des communes corses (`modification_Corse`) ou des arrondissements municipaux de Paris, Lyon, et Marseille (`enlever_PLM`)
+* transformer des typologies de communes en géographie au premier janvier d'une année souhaitée en ayant le choix entre plusieurs hypothèses de classement en cas de fusion de communes de classes différentes (attribuer la classe qui contient le plus de population, définir une classe absorbante ou une classe spécifique aux regroupements de plusieurs communes de classes différentes) : `changement_COG_typo`.Il est également possible d'isoler dans une table les communes fusionnées appartenant à des classes différentes : `changement_COG_typo_details`.
+* permettre d'agréger les tables de données communales à de nombreux échelons supra-communaux administratifs (EPCI, arrondissements, cantons-villes, départements, régions) ou d'étude (bassins de vie, zones d'emploi, unités urbaines, aires urbaines) : `nivsupra`.
+* gérer des cas particuliers comme les codes Insee des communes corses (`modification_Corse`) ou des arrondissements municipaux de Paris, Lyon, et Marseille (`enlever_PLM`)
 
 Il est à noter que la version actuellement en ligne du package correspond à un premier développement qui comporte  des imperfections. L'idée est donc à ce stade que les personnes qui utilisent régulièrement des bases de données communales produites à différents millésimes testent ses fonctionnalités, détectent ses bugs et ses manques pour l'améliorer.  
 
@@ -172,38 +174,3 @@ head(exemple_flux_COG2017_etZE)
 
 Bonne découverte...!
 
-# Ensemble du code
-
-```{r, fig.show='hold'}
-head(exemple_popcom)
-str(exemple_popcom)
-COG_akinator(vecteur_codgeo=exemple_popcom[,1],donnees_insee=T, liste_complete=T)
-modifs <- modifications_communales(date_debut="01-01-2014",date_fin="01-01-2015")
-cat(modifs$fusions)
-cat(modifs$defusions)
-cat(modifs$changements_codes)
-cat(modifs$changements_noms)
-exemple_popcom_COG2017_num <- changement_COG_varNum(table_entree=exemple_popcom,annees=c(2014:2017),agregation=T,libgeo="LIBGEO",donnees_insee=T)
-head(exemple_popcom_COG2017_num)
-exemple_popcom_COG2017_typo <- changement_COG_typo(table_entree=exemple_popcom[,-2],annees=c(2014:2017),methode_fusion="methode_difference",typos=c("typoA","typoB"),mot_difference = "differents",libgeo="LIB",donnees_insee=T)
-head(exemple_popcom_COG2017_typo)
-details_exemple_popcom_COG2017_typo <- changement_COG_typo_details(table_entree=exemple_popcom[,-2],annees=c(2014:2017),typo="typoA", donnees_insee=T)
-head(details_exemple_popcom_COG2017_typo[["2014_2015"]])
-head(details_exemple_popcom_COG2017_typo[["2015_2016"]])
-head(details_exemple_popcom_COG2017_typo[["2016_2017"]])
-exemple_popcom_COG2017 <- merge(exemple_popcom_COG2017_num,exemple_popcom_COG2017_typo[,-2],by="CODGEO",all=T)
-exemple_popcom_ZE2010 <- nivsupra(table_entree=exemple_popcom_COG2017,nivsupra="ZE2010",na.nivgeo.rm=F,agregation=T)
-exemple_popcom_ZE2010$densite <- exemple_popcom_ZE2010$P12_POP / exemple_popcom_ZE2010$SUPERF
-head(exemple_popcom_ZE2010)
-
-
-head(exemple_flux)
-exemple_flux_sansPLM <-enlever_PLM(table_entree=exemple_flux,codgeo_entree = "COMMUNE",libgeo=NULL,agregation = F,vecteur_entree=F)
-exemple_flux_sansPLM <-enlever_PLM(table_entree=exemple_flux_sansPLM,codgeo_entree = "DCLT",libgeo=NULL,agregation = F,vecteur_entree=F)
-exemple_flux_sansPLMsansCorse <- modification_Corse(table_entree=exemple_flux_sansPLM,sens="2A2Bvers20")
-exemple_flux_COG2017 <- changement_COG_varNum(table_entree=exemple_flux_sansPLMsansCorse,annees=c(2014:2017),codgeo_entree="COMMUNE",agregation=F,libgeo=NULL,donnees_insee=T)
-exemple_flux_COG2017 <- changement_COG_varNum(table_entree=exemple_flux_COG2017,annees=c(2014:2017),codgeo_entree="DCLT",agregation=F,libgeo=NULL,donnees_insee=T)
-exemple_flux_COG2017_etZE <- nivsupra(table_entree=exemple_flux_COG2017,codgeo_entree="COMMUNE",nivsupra="ZE2010",na.nivgeo.rm=F,agregation=F)
-exemple_flux_COG2017_etZE <- nivsupra(table_entree=exemple_flux_COG2017_etZE,codgeo_entree="DCLT",nivsupra="ZE2010",na.nivgeo.rm=F,agregation=F)
-head(exemple_flux_COG2017_etZE)
-```

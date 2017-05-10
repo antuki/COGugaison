@@ -66,14 +66,21 @@
 <h2 class="hasAnchor">
 <a href="#introduction-a-cogugaison" class="anchor"></a>Introduction à COGugaison</h2>
 <p>Nous allons balayer dans cette vignette les principales fonctionnalités du package <code>COGugaison</code>.</p>
-<p>Ce package a pour objectif global de manipuler des données communales produites à différents millésimes. Il permet actuellement de : - détecter le millésime du code officiel géographique d’une table de données communales : fonction <code>COG_akinator</code> - visualiser les modifications communales (fusions, défusions, changements de codes ou de noms) qui ont eu lieu entre deux dates : <code>modifications_communales</code> - transformer des tables de données numériques en géographie au premier janvier d’une année souhaitée : <code>changement_COG_varNum</code> - transformer des typologies de communes en géographie au premier janvier d’une année souhaitée en ayant le choix entre plusieurs hypothèses de classement en cas de fusion de communes de classes différentes (attribuer la classe qui contient le plus de population, définir une classe absorbante ou une classe spécifique aux regroupements de plusieurs communes de classes différentes) : <code>changement_COG_typo</code>.Il est également possible d’isoler dans une table les communes fusionnées appartenant à des classes différentes : <code>changement_COG_typo_details</code>. - permettre d’agréger les tables de données communales à de nombreux échelons supra-communaux administratifs (EPCI, arrondissements, cantons-villes, départements, régions) ou d’étude (bassins de vie, zones d’emploi, unités urbaines, aires urbaines) : <code>nivsupra</code>. - gérer des cas particuliers comme les codes Insee des communes corses (<code>modification_Corse</code>) ou des arrondissements municipaux de Paris, Lyon, et Marseille (<code>enlever_PLM</code>)</p>
+<p>Ce package a pour objectif global de manipuler des données communales produites à différents millésimes. Il permet actuellement de : * détecter le millésime du code officiel géographique d’une table de données communales : fonction <code>COG_akinator</code> * visualiser les modifications communales (fusions, défusions, changements de codes ou de noms) qui ont eu lieu entre deux dates : <code>modifications_communales</code> * transformer des tables de données numériques en géographie au premier janvier d’une année souhaitée : <code>changement_COG_varNum</code> * transformer des typologies de communes en géographie au premier janvier d’une année souhaitée en ayant le choix entre plusieurs hypothèses de classement en cas de fusion de communes de classes différentes (attribuer la classe qui contient le plus de population, définir une classe absorbante ou une classe spécifique aux regroupements de plusieurs communes de classes différentes) : <code>changement_COG_typo</code>.Il est également possible d’isoler dans une table les communes fusionnées appartenant à des classes différentes : <code>changement_COG_typo_details</code>. * permettre d’agréger les tables de données communales à de nombreux échelons supra-communaux administratifs (EPCI, arrondissements, cantons-villes, départements, régions) ou d’étude (bassins de vie, zones d’emploi, unités urbaines, aires urbaines) : <code>nivsupra</code>. * gérer des cas particuliers comme les codes Insee des communes corses (<code>modification_Corse</code>) ou des arrondissements municipaux de Paris, Lyon, et Marseille (<code>enlever_PLM</code>)</p>
 <p>Il est à noter que la version actuellement en ligne du package correspond à un premier développement qui comporte des imperfections. L’idée est donc à ce stade que les personnes qui utilisent régulièrement des bases de données communales produites à différents millésimes testent ses fonctionnalités, détectent ses bugs et ses manques pour l’améliorer.</p>
 <p>Il est également important de souligner que les données utilisées ici s’appuient sur des tables publiées par l’Insee : - <a href="https://www.insee.fr/fr/information/2666684#titre-bloc-11">l’historique des géographies communales</a> - <a href="https://www.insee.fr/fr/information/2028028">les tables d’appartenance des communes aux différents niveaux géographiques</a></p>
 <p>Tant que le package n’est pas stabilisé, il est évidemment conseillé de se référer aux données officielles de l’Insee en cas de doute sur un résultat.</p>
 <p>Commençons par installer le package <code>COGugaison</code> et à le charger dans R.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools::<span class="kw">install_github</span>(<span class="st">"antuki/COGugaison"</span>)</code></pre></div>
-<pre><code>## Skipping install of 'COGugaison' from a github remote, the SHA1 (055845a5) has not changed since last install.
-##   Use `force = TRUE` to force installation</code></pre>
+<pre><code>## Downloading GitHub repo antuki/COGugaison@master
+## from URL https://api.github.com/repos/antuki/COGugaison/zipball/master</code></pre>
+<pre><code>## Installing COGugaison</code></pre>
+<pre><code>## "C:/PROGRA~1/R/R-33~1.2/bin/x64/R" --no-site-file --no-environ --no-save  \
+##   --no-restore --quiet CMD INSTALL "C:/Users/Kim  \
+##   Antunez/AppData/Local/Temp/RtmpSgxSJl/devtools336cb3317e0/antuki-COGugaison-aaacb70"  \
+##   --library="C:/Users/Kim Antunez/Documents/R/win-library/3.3"  \
+##   --install-tests</code></pre>
+<pre><code>## </code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(COGugaison)</code></pre></div>
 </div>
 <div id="quel-code-officiel-geographique-est-utilise" class="section level2">
@@ -266,140 +273,6 @@ exemple_flux_COG2017_etZE &lt;-<span class="st"> </span><span class="kw"><a href
 ## 6 03085   61006   4      55 2.716909           2511        8302</code></pre>
 <p>Bonne découverte…!</p>
 </div>
-<div id="ensemble-du-code" class="section level1">
-<h1 class="hasAnchor">
-<a href="#ensemble-du-code" class="anchor"></a>Ensemble du code</h1>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(exemple_popcom)</code></pre></div>
-<pre><code>##   CODGEO                  LIBGEO P12_POP SUPERF    typoA typoB
-## 1  01001 L'Abergement-Clémenciat     777     16 CLASSE 2     F
-## 2  01002   L'Abergement-de-Varey     235      9 CLASSE 3     D
-## 3  01004       Ambérieu-en-Bugey   14233     25 CLASSE 1     B
-## 4  01005     Ambérieux-en-Dombes    1642     16 CLASSE 3     F
-## 5  01006                 Ambléon     110      6 CLASSE 4     E
-## 6  01007                Ambronay    2437     34 CLASSE 5     A</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(exemple_popcom)</code></pre></div>
-<pre><code>## 'data.frame':    36664 obs. of  6 variables:
-##  $ CODGEO : chr  "01001" "01002" "01004" "01005" ...
-##  $ LIBGEO : chr  "L'Abergement-Clémenciat" "L'Abergement-de-Varey" "Ambérieu-en-Bugey" "Ambérieux-en-Dombes" ...
-##  $ P12_POP: int  777 235 14233 1642 110 2437 739 338 1069 385 ...
-##  $ SUPERF : int  16 9 25 16 6 34 5 7 29 15 ...
-##  $ typoA  : chr  "CLASSE 2" "CLASSE 3" "CLASSE 1" "CLASSE 3" ...
-##  $ typoB  : chr  "F" "D" "B" "F" ...</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/COG_akinator.html">COG_akinator</a></span>(<span class="dt">vecteur_codgeo=</span>exemple_popcom[,<span class="dv">1</span>],<span class="dt">donnees_insee=</span>T, <span class="dt">liste_complete=</span>T)</code></pre></div>
-<pre><code>## [1] "COG2014"</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">modifs &lt;-<span class="st"> </span><span class="kw"><a href="../reference/modifications_communales.html">modifications_communales</a></span>(<span class="dt">date_debut=</span><span class="st">"01-01-2014"</span>,<span class="dt">date_fin=</span><span class="st">"01-01-2015"</span>)
-<span class="kw">cat</span>(modifs$fusions)</code></pre></div>
-<pre><code>## 2015-01-01 : Notre-Dame-d'Estrées-Corbon (14474) est un rassemblement de Corbon (14178), Notre-Dame-d'Estrées (14474) [commune nouvelle avec commune(s) déléguée(s)].
-## 2015-01-01 : Auxons (25035) est un rassemblement de Auxon-Dessous (25034), Auxon-Dessus (25035) [commune nouvelle avec commune(s) déléguée(s)].
-## 2015-01-01 : Goussainville (28185) est un rassemblement de Champagne (28069), Goussainville (28185) [commune nouvelle avec commune(s) déléguée(s)].
-## 2015-01-01 : Eclose-Badinières (38152) est un rassemblement de Badinières (38024), Eclose (38152) [commune nouvelle avec commune(s) déléguée(s)].
-## 2015-01-01 : Saint-Crépin-Ibouvillers (60570) est un rassemblement de Montherlant (60417), Saint-Crépin-Ibouvillers (60570) [commune nouvelle avec commune(s) déléguée(s)].
-## 2015-01-01 : Montsecret-Clairefougère (61292) est un rassemblement de Clairefougère (61109), Montsecret (61292) [commune nouvelle avec commune(s) déléguée(s)].
-## 2015-01-01 : Boischampré (61375) est un rassemblement de Marcei (61249), Saint-Christophe-le-Jajolet (61375), Saint-Loyer-des-Champs (61417), Vrigny (61511) [commune nouvelle avec commune(s) déléguée(s)].
-## 2015-01-01 : Tinchebray-Bocage (61486) est un rassemblement de Beauchêne (61031), Frênes (61177), Larchamp (61223), Saint-Cornier-des-Landes (61377), Saint-Jean-des-Bois (61410), Tinchebray (61486), Yvrandes (61513) [commune nouvelle avec commune(s) déléguée(s)].
-## 2015-01-01 : Vaugneray (69255) est un rassemblement de Saint-Laurent-de-Vaux (69221), Vaugneray (69255) [commune nouvelle avec commune(s) déléguée(s)].
-## 2015-01-01 : Clux-Villeneuve (71578) est un rassemblement de Clux (71138), Villeneuve (71578) [commune nouvelle avec commune(s) déléguée(s)].
-## 2015-01-01 : Villeneuve-en-Perseigne (72137) est un rassemblement de Chassé (72069), Fresnaye-sur-Chédouet (72137), Lignières-la-Carelle (72162), Montigny (72207), Roullée (72258), Saint-Rigomer-des-Bois (72318) [commune nouvelle avec commune(s) déléguée(s)].
-## 2015-01-01 : Saint-Offenge (73263) est un rassemblement de Saint-Offenge-Dessous (73263), Saint-Offenge-Dessus (73264) [commune nouvelle avec commune(s) déléguée(s)].
-## 2015-01-01 : Orvanne (77316) est un rassemblement de Écuelles (77166), Moret-sur-Loing (77316) [commune nouvelle avec commune(s) déléguée(s)].</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cat</span>(modifs$defusions)</code></pre></div>
-<pre><code>## ATTENTION, l'évènement suivant a été pris en compte dans les données de l'Insee seulement au 01/01/2015 : 2014-01-01 : Loisey (55298) s'est séparée en Loisey (55298), Culey (55138) [rétablissement].</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cat</span>(modifs$changements_codes)</code></pre></div>
-<pre><code>## 2014-01-07 : Le code commune de Oudon passe de 14697 à 14472 [changement de code dû à un changement de chef-lieu].</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cat</span>(modifs$changements_noms)</code></pre></div>
-<pre><code>## 2014-12-06 : La commune de Barisis (02049) change de nom en Barisis-aux-Bois [changement de nom].
-## 2014-12-06 : La commune de Sainte-Colombe (21544) change de nom en Sainte-Colombe-en-Auxois [changement de nom].
-## 2014-12-06 : La commune de Pont-de-Roide (25463) change de nom en Pont-de-Roide-Vermondans [changement de nom].
-## 2014-12-06 : La commune de Cazaril-Laspènes (31129) change de nom en Cazarilh-Laspènes [changement de nom].
-## 2014-12-06 : La commune de Saint-Martin (66184) change de nom en Saint-Martin-de-Fenouillet [changement de nom].
-## 2014-12-06 : La commune de Cré (72108) change de nom en Cré-sur-Loir [changement de nom].
-## 2014-12-06 : La commune de Belbèse (82015) change de nom en Belbèze-en-Lomagne [changement de nom].
-## 2014-12-06 : La commune de Saint-Vincent (82174) change de nom en Saint-Vincent-d'Autéjac [changement de nom].</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">exemple_popcom_COG2017_num &lt;-<span class="st"> </span><span class="kw"><a href="../reference/changement_COG_varNum.html">changement_COG_varNum</a></span>(<span class="dt">table_entree=</span>exemple_popcom,<span class="dt">annees=</span><span class="kw">c</span>(<span class="dv">2014</span>:<span class="dv">2017</span>),<span class="dt">agregation=</span>T,<span class="dt">libgeo=</span><span class="st">"LIBGEO"</span>,<span class="dt">donnees_insee=</span>T)
-<span class="kw">head</span>(exemple_popcom_COG2017_num)</code></pre></div>
-<pre><code>##   CODGEO                  LIBGEO P12_POP SUPERF
-## 1  01001 L'Abergement-Clémenciat     777     16
-## 2  01002   L'Abergement-de-Varey     235      9
-## 3  01004       Ambérieu-en-Bugey   14233     25
-## 4  01005     Ambérieux-en-Dombes    1642     16
-## 5  01006                 Ambléon     110      6
-## 6  01007                Ambronay    2437     34</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">exemple_popcom_COG2017_typo &lt;-<span class="st"> </span><span class="kw"><a href="../reference/changement_COG_typo.html">changement_COG_typo</a></span>(<span class="dt">table_entree=</span>exemple_popcom[,-<span class="dv">2</span>],<span class="dt">annees=</span><span class="kw">c</span>(<span class="dv">2014</span>:<span class="dv">2017</span>),<span class="dt">methode_fusion=</span><span class="st">"methode_difference"</span>,<span class="dt">typos=</span><span class="kw">c</span>(<span class="st">"typoA"</span>,<span class="st">"typoB"</span>),<span class="dt">mot_difference =</span> <span class="st">"differents"</span>,<span class="dt">libgeo=</span><span class="st">"LIB"</span>,<span class="dt">donnees_insee=</span>T)
-<span class="kw">head</span>(exemple_popcom_COG2017_typo)</code></pre></div>
-<pre><code>##   CODGEO                     LIB    typoA typoB
-## 1  01001 L'Abergement-Clémenciat CLASSE 2     F
-## 2  01002   L'Abergement-de-Varey CLASSE 3     D
-## 3  01004       Ambérieu-en-Bugey CLASSE 1     B
-## 4  01005     Ambérieux-en-Dombes CLASSE 3     F
-## 5  01006                 Ambléon CLASSE 4     E
-## 6  01007                Ambronay CLASSE 5     A</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">details_exemple_popcom_COG2017_typo &lt;-<span class="st"> </span><span class="kw"><a href="../reference/changement_COG_typo_details.html">changement_COG_typo_details</a></span>(<span class="dt">table_entree=</span>exemple_popcom[,-<span class="dv">2</span>],<span class="dt">annees=</span><span class="kw">c</span>(<span class="dv">2014</span>:<span class="dv">2017</span>),<span class="dt">typo=</span><span class="st">"typoA"</span>, <span class="dt">donnees_insee=</span>T)
-<span class="kw">head</span>(details_exemple_popcom_COG2017_typo[[<span class="st">"2014_2015"</span>]])</code></pre></div>
-<pre><code>##   cod2014              lib2014 cod2015                     lib2015
-## 1   14178               Corbon   14474 Notre-Dame-d'Estrées-Corbon
-## 2   14474 Notre-Dame-d'Estrées   14474 Notre-Dame-d'Estrées-Corbon
-## 3   25034        Auxon-Dessous   25035                  Les Auxons
-## 4   25035         Auxon-Dessus   25035                  Les Auxons
-## 5   38024           Badinières   38152           Eclose-Badinières
-## 6   38152               Eclose   38152           Eclose-Badinières
-##      typoA
-## 1 CLASSE 2
-## 2 CLASSE 4
-## 3 CLASSE 1
-## 4 CLASSE 3
-## 5 CLASSE 4
-## 6 CLASSE 3</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(details_exemple_popcom_COG2017_typo[[<span class="st">"2015_2016"</span>]])</code></pre></div>
-<pre><code>##   cod2015             lib2015 cod2016            lib2016    typoA
-## 1   01015           Arbignieu   01015    Arboys en Bugey CLASSE 3
-## 2   01340          Saint-Bois   01015    Arboys en Bugey CLASSE 2
-## 3   01119           Corcelles   01080 Champdor-Corcelles CLASSE 1
-## 4   01080            Champdor   01080 Champdor-Corcelles CLASSE 2
-## 5   01176 Le Grand-Abergement   01187      Haut Valromey CLASSE 2
-## 6   01409             Songieu   01187      Haut Valromey CLASSE 5</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(details_exemple_popcom_COG2017_typo[[<span class="st">"2016_2017"</span>]])</code></pre></div>
-<pre><code>##   cod2016             lib2016 cod2017          lib2017    typoA
-## 1   01095 Chavannes-sur-Suran   01095 Nivigne et Suran CLASSE 5
-## 2   01172           Germagnat   01095 Nivigne et Suran CLASSE 1
-## 3   01098         Chazey-Bons   01098      Chazey-Bons CLASSE 3
-## 4   01316              Pugieu   01098      Chazey-Bons CLASSE 4
-## 5   03168             Meaulne   03168   Meaulne-Vitray CLASSE 2
-## 6   03318              Vitray   03168   Meaulne-Vitray CLASSE 5</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">exemple_popcom_COG2017 &lt;-<span class="st"> </span><span class="kw">merge</span>(exemple_popcom_COG2017_num,exemple_popcom_COG2017_typo[,-<span class="dv">2</span>],<span class="dt">by=</span><span class="st">"CODGEO"</span>,<span class="dt">all=</span>T)
-exemple_popcom_ZE2010 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/nivsupra.html">nivsupra</a></span>(<span class="dt">table_entree=</span>exemple_popcom_COG2017,<span class="dt">nivsupra=</span><span class="st">"ZE2010"</span>,<span class="dt">na.nivgeo.rm=</span>F,<span class="dt">agregation=</span>T)
-exemple_popcom_ZE2010$densite &lt;-<span class="st"> </span>exemple_popcom_ZE2010$P12_POP /<span class="st"> </span>exemple_popcom_ZE2010$SUPERF
-<span class="kw">head</span>(exemple_popcom_ZE2010)</code></pre></div>
-<pre><code>##   ZE2010                         LIBGEO P12_POP SUPERF  densite
-## 1   0050                 Mont-de-Marsan  160717   4956 32.42877
-## 2   0051                        Alençon  122263   2405 50.83701
-## 3   0052                Cosne - Clamecy   75052   2553 29.39757
-## 4   0053                          Mâcon  143358   1543 92.90862
-## 5   0054               Nogent-le-Rotrou   48665   1227 39.66178
-## 6   0055 La Vallée de la Bresle - Vimeu   99095   1134 87.38536</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(exemple_flux)</code></pre></div>
-<pre><code>##   COMMUNE  DCLT CS1 AGEREVQ IPONDI
-## 1   55298 45055   5      25      4
-## 2   55298 52448   3      50      4
-## 3   55298 54323   5      55      4
-## 4   55298 55010   6      35      4
-## 5   55298 55029   6      20      4
-## 6   55298 55029   6      40      4</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">exemple_flux_sansPLM &lt;-<span class="kw"><a href="../reference/enlever_PLM.html">enlever_PLM</a></span>(<span class="dt">table_entree=</span>exemple_flux,<span class="dt">codgeo_entree =</span> <span class="st">"COMMUNE"</span>,<span class="dt">libgeo=</span><span class="ot">NULL</span>,<span class="dt">agregation =</span> F,<span class="dt">vecteur_entree=</span>F)
-exemple_flux_sansPLM &lt;-<span class="kw"><a href="../reference/enlever_PLM.html">enlever_PLM</a></span>(<span class="dt">table_entree=</span>exemple_flux_sansPLM,<span class="dt">codgeo_entree =</span> <span class="st">"DCLT"</span>,<span class="dt">libgeo=</span><span class="ot">NULL</span>,<span class="dt">agregation =</span> F,<span class="dt">vecteur_entree=</span>F)
-exemple_flux_sansPLMsansCorse &lt;-<span class="st"> </span><span class="kw"><a href="../reference/modification_Corse.html">modification_Corse</a></span>(<span class="dt">table_entree=</span>exemple_flux_sansPLM,<span class="dt">sens=</span><span class="st">"2A2Bvers20"</span>)
-exemple_flux_COG2017 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/changement_COG_varNum.html">changement_COG_varNum</a></span>(<span class="dt">table_entree=</span>exemple_flux_sansPLMsansCorse,<span class="dt">annees=</span><span class="kw">c</span>(<span class="dv">2014</span>:<span class="dv">2017</span>),<span class="dt">codgeo_entree=</span><span class="st">"COMMUNE"</span>,<span class="dt">agregation=</span>F,<span class="dt">libgeo=</span><span class="ot">NULL</span>,<span class="dt">donnees_insee=</span>T)
-exemple_flux_COG2017 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/changement_COG_varNum.html">changement_COG_varNum</a></span>(<span class="dt">table_entree=</span>exemple_flux_COG2017,<span class="dt">annees=</span><span class="kw">c</span>(<span class="dv">2014</span>:<span class="dv">2017</span>),<span class="dt">codgeo_entree=</span><span class="st">"DCLT"</span>,<span class="dt">agregation=</span>F,<span class="dt">libgeo=</span><span class="ot">NULL</span>,<span class="dt">donnees_insee=</span>T)
-exemple_flux_COG2017_etZE &lt;-<span class="st"> </span><span class="kw"><a href="../reference/nivsupra.html">nivsupra</a></span>(<span class="dt">table_entree=</span>exemple_flux_COG2017,<span class="dt">codgeo_entree=</span><span class="st">"COMMUNE"</span>,<span class="dt">nivsupra=</span><span class="st">"ZE2010"</span>,<span class="dt">na.nivgeo.rm=</span>F,<span class="dt">agregation=</span>F)
-exemple_flux_COG2017_etZE &lt;-<span class="st"> </span><span class="kw"><a href="../reference/nivsupra.html">nivsupra</a></span>(<span class="dt">table_entree=</span>exemple_flux_COG2017_etZE,<span class="dt">codgeo_entree=</span><span class="st">"DCLT"</span>,<span class="dt">nivsupra=</span><span class="st">"ZE2010"</span>,<span class="dt">na.nivgeo.rm=</span>F,<span class="dt">agregation=</span>F)
-<span class="kw">head</span>(exemple_flux_COG2017_etZE)</code></pre></div>
-<pre><code>##    DCLT COMMUNE CS1 AGEREVQ   IPONDI ZE2010_COMMUNE ZE2010_DCLT
-## 1 02528   61099   4      35 4.177122           0054        2206
-## 2 03085   61237   5      25 3.924528           2511        8302
-## 3 03085   61006   6      40 2.773158           2511        8302
-## 4 03085   61462   6      25 4.693373           2511        8302
-## 5 03085   61472   6      50 5.095541           2511        8302
-## 6 03085   61006   4      55 2.716909           2511        8302</code></pre>
-</div>
 </div>
   </div>
 
@@ -417,7 +290,6 @@ exemple_flux_COG2017_etZE &lt;-<span class="st"> </span><span class="kw"><a href
       <li><a href="#jongler-avec-les-differentes-possibilites-pour-les-codes-communaux-corses">Jongler avec les différentes possibilités pour les codes communaux corses</a></li>
       <li><a href="#transformer-des-variables-numeriques-en-autre-geographie-dans-des-donnees-de-flux">Transformer des variables numériques en autre géographie dans des données de flux</a></li>
       <li><a href="#inserer-dans-des-tables-de-donnees-de-flux-communales-des-echelons-supra-communaux">Insérer dans des tables de données de flux communales des échelons supra-communaux</a></li>
-      <li><a href="#ensemble-du-code">Ensemble du code</a></li>
       </ul>
 </div>
       </div>
