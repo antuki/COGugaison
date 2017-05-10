@@ -5,11 +5,11 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Apprendre les principales fonctionnalitÃ©s de COGugaison • COGugaison</title>
+<title>Apprendre les principales fonctionnalités de COGugaison • COGugaison</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script><script src="../pkgdown.js"></script><!-- mathjax --><script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
+<script src="../jquery.sticky-kit.min.js"></script><script src="../pkgdown.js"></script><!-- mathjax --><script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
@@ -54,7 +54,7 @@
       </header><div class="row">
   <div class="col-md-9">
     <div class="page-header toc-ignore">
-      <h1>Apprendre les principales fonctionnalitÃ©s de COGugaison</h1>
+      <h1>Apprendre les principales fonctionnalités de COGugaison</h1>
                         <h4 class="author">antuki</h4>
             
           </div>
@@ -62,24 +62,24 @@
     
     
 <div class="contents">
-<div id="introduction-a-cogugaison-v2" class="section level2">
+<div id="introduction-a-cogugaison" class="section level2">
 <h2 class="hasAnchor">
-<html><body><a href="#introduction-a-cogugaison-v2" class="anchor"> </a></body></html>Introduction Ã  COGugaison v2</h2>
-<p>Nous allons balayer dans cette vignette les principales fonctionnalitÃ©s du package <code>COGugaison</code>.</p>
-<p>Ce package a pour objectif global de manipuler des donnÃ©es communales produites Ã  diffÃ©rents millÃ©simes. Il permet actuellement de : - dÃ©tecter le millÃ©sime du code officiel gÃ©ographique d’une table de donnÃ©es communales : fonction <code>COG_akinator</code> - visualiser les modifications communales (fusions, dÃ©fusions, changements de codes ou de noms) qui ont eu lieu entre deux dates : <code>modifications_communales</code> - transformer des tables de donnÃ©es numÃ©riques en gÃ©ographie au premier janvier d’une annÃ©e souhaitÃ©e : <code>changement_COG_varNum</code> - transformer des typologies de communes en gÃ©ographie au premier janvier d’une annÃ©e souhaitÃ©e en ayant le choix entre plusieurs hypothÃ¨ses de classement en cas de fusion de communes de classes diffÃ©rentes (attribuer la classe qui contient le plus de population, dÃ©finir une classe absorbante ou une classe spÃ©cifique aux regroupements de plusieurs communes de classes diffÃ©rentes) : <code>changement_COG_typo</code>.Il est Ã©galement possible d’isoler dans une table les communes fusionnÃ©es appartenant Ã  des classes diffÃ©rentes : <code>changement_COG_typo_details</code>. - permettre d’agrÃ©ger les tables de donnÃ©es communales Ã  de nombreux Ã©chelons supra-communaux administratifs (EPCI, arrondissements, cantons-villes, dÃ©partements, rÃ©gions) ou d’Ã©tude (bassins de vie, zones d’emploi, unitÃ©s urbaines, aires urbaines) : <code>nivsupra</code>. - gÃ©rer des cas particuliers comme les codes Insee des communes corses (<code>modification_Corse</code>) ou des arrondissements municipaux de Paris, Lyon, et Marseille (<code>enlever_PLM</code>)</p>
-<p>Il est Ã  noter que la version actuellement en ligne du package correspond Ã  un premier dÃ©veloppement qui comporte des imperfections. L’idÃ©e est donc Ã  ce stade que les personnes qui utilisent rÃ©guliÃ¨rement des bases de donnÃ©es communales produites Ã  diffÃ©rents millÃ©simes testent ses fonctionnalitÃ©s, dÃ©tectent ses bugs et ses manques pour l’amÃ©liorer.</p>
-<p>Il est Ã©galement important de souligner que les donnÃ©es utilisÃ©es ici s’appuient sur des tables publiÃ©es par l’Insee : - <a href="https://www.insee.fr/fr/information/2666684#titre-bloc-11">l’historique des gÃ©ographies communales</a> - <a href="https://www.insee.fr/fr/information/2028028">les tables d’appartenance des communes aux diffÃ©rents niveaux gÃ©ographiques</a></p>
-<p>Tant que le package n’est pas stabilisÃ©, il est Ã©videmment conseillÃ© de se rÃ©fÃ©rer aux donnÃ©es officielles de l’Insee en cas de doute sur un rÃ©sultat.</p>
-<p>CommenÃ§ons par installer le package <code>COGugaison</code> et Ã  le charger dans R.</p>
+<a href="#introduction-a-cogugaison" class="anchor"></a>Introduction à COGugaison</h2>
+<p>Nous allons balayer dans cette vignette les principales fonctionnalités du package <code>COGugaison</code>.</p>
+<p>Ce package a pour objectif global de manipuler des données communales produites à différents millésimes. Il permet actuellement de : - détecter le millésime du code officiel géographique d’une table de données communales : fonction <code>COG_akinator</code> - visualiser les modifications communales (fusions, défusions, changements de codes ou de noms) qui ont eu lieu entre deux dates : <code>modifications_communales</code> - transformer des tables de données numériques en géographie au premier janvier d’une année souhaitée : <code>changement_COG_varNum</code> - transformer des typologies de communes en géographie au premier janvier d’une année souhaitée en ayant le choix entre plusieurs hypothèses de classement en cas de fusion de communes de classes différentes (attribuer la classe qui contient le plus de population, définir une classe absorbante ou une classe spécifique aux regroupements de plusieurs communes de classes différentes) : <code>changement_COG_typo</code>.Il est également possible d’isoler dans une table les communes fusionnées appartenant à des classes différentes : <code>changement_COG_typo_details</code>. - permettre d’agréger les tables de données communales à de nombreux échelons supra-communaux administratifs (EPCI, arrondissements, cantons-villes, départements, régions) ou d’étude (bassins de vie, zones d’emploi, unités urbaines, aires urbaines) : <code>nivsupra</code>. - gérer des cas particuliers comme les codes Insee des communes corses (<code>modification_Corse</code>) ou des arrondissements municipaux de Paris, Lyon, et Marseille (<code>enlever_PLM</code>)</p>
+<p>Il est à noter que la version actuellement en ligne du package correspond à un premier développement qui comporte des imperfections. L’idée est donc à ce stade que les personnes qui utilisent régulièrement des bases de données communales produites à différents millésimes testent ses fonctionnalités, détectent ses bugs et ses manques pour l’améliorer.</p>
+<p>Il est également important de souligner que les données utilisées ici s’appuient sur des tables publiées par l’Insee : - <a href="https://www.insee.fr/fr/information/2666684#titre-bloc-11">l’historique des géographies communales</a> - <a href="https://www.insee.fr/fr/information/2028028">les tables d’appartenance des communes aux différents niveaux géographiques</a></p>
+<p>Tant que le package n’est pas stabilisé, il est évidemment conseillé de se référer aux données officielles de l’Insee en cas de doute sur un résultat.</p>
+<p>Commençons par installer le package <code>COGugaison</code> et à le charger dans R.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools::<span class="kw">install_github</span>(<span class="st">"antuki/COGugaison"</span>)</code></pre></div>
-<pre><code>## Skipping install of 'COGugaison' from a github remote, the SHA1 (4054c7c2) has not changed since last install.
+<pre><code>## Skipping install of 'COGugaison' from a github remote, the SHA1 (055845a5) has not changed since last install.
 ##   Use `force = TRUE` to force installation</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(COGugaison)</code></pre></div>
 </div>
-<div id="quel-code-officiel-gaographique-est-utilisa" class="section level2">
+<div id="quel-code-officiel-geographique-est-utilise" class="section level2">
 <h2 class="hasAnchor">
-<html><body><a href="#quel-code-officiel-gaographique-est-utilisa" class="anchor"> </a></body></html>Quel code officiel gÃ©ographique est utilisÃ© ?</h2>
-<p>Nous allons maintenant manipuler une table exemple incluse dans le package, la table <code>exemple_popcom</code> qui contient comme variables le code gÃ©ographique de la commune (CODGEO), son nom (LIBGEO), sa population en 2012 (P12_POP), sa superficie (SUPERF) ainsi que deux typologies de territoires gÃ©nÃ©rÃ©es alÃ©atoirement (typoA et typoB). Il faut veiller Ã  ce que les variables numÃ©riques soient au bon format dans R et que les typologies et identifiants soient au format caractÃ¨re (si ce n’est pas le cas, il faudra les transformer avec les fonctions <em>as.numeric</em> et <em>as.character</em>).</p>
+<a href="#quel-code-officiel-geographique-est-utilise" class="anchor"></a>Quel code officiel géographique est utilisé ?</h2>
+<p>Nous allons maintenant manipuler une table exemple incluse dans le package, la table <code>exemple_popcom</code> qui contient comme variables le code géographique de la commune (CODGEO), son nom (LIBGEO), sa population en 2012 (P12_POP), sa superficie (SUPERF) ainsi que deux typologies de territoires générées aléatoirement (typoA et typoB). Il faut veiller à ce que les variables numériques soient au bon format dans R et que les typologies et identifiants soient au format caractère (si ce n’est pas le cas, il faudra les transformer avec les fonctions <em>as.numeric</em> et <em>as.character</em>).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(exemple_popcom)</code></pre></div>
 <pre><code>##   CODGEO                  LIBGEO P12_POP SUPERF    typoA typoB
 ## 1  01001 L'Abergement-Clémenciat     777     16 CLASSE 2     F
@@ -96,16 +96,16 @@
 ##  $ SUPERF : int  16 9 25 16 6 34 5 7 29 15 ...
 ##  $ typoA  : chr  "CLASSE 2" "CLASSE 3" "CLASSE 1" "CLASSE 3" ...
 ##  $ typoB  : chr  "F" "D" "B" "F" ...</code></pre>
-<p>La fonction <code>COG_akinator</code> permet de donner des pistes Ã  l’utilisateur sur le code officiel gÃ©ographique (COG) utilisÃ© dans sa table de donnÃ©es communales, c’est-Ã -dire de savoir si la liste de communes utilisÃ©e correspond Ã  la liste officiel au premier janvier de 2017 ? de 2016 ? ou d’une autre annÃ©e.</p>
-<p>Le paramÃ¨tre <em>donnees_insee</em> vaut TRUE si les donnÃ©es manipulÃ©es sont produites par l’Insee. En effet, quelques rares modifications communales (la dÃ©fusion des communes Loisey et Culey au 1er janvier 2014 par exemple) ont Ã©tÃ© prises en compte dans les bases de donnÃ©es communales de l’Insee plus tard que la date officielle (se rÃ©fÃ©rer Ã  la documentation de la fonction pour plus de prÃ©cisions). Le paramÃ¨tre <em>liste_complete</em> vaut TRUE si le vecteur de communes du paramÃ¨tre <em>vecteur_codgeo</em> liste l’ensemble des communes franÃ§aises et FALSE s’il en liste seulement un extrait.</p>
+<p>La fonction <code>COG_akinator</code> permet de donner des pistes à l’utilisateur sur le code officiel géographique (COG) utilisé dans sa table de données communales, c’est-à-dire de savoir si la liste de communes utilisée correspond à la liste officiel au premier janvier de 2017 ? de 2016 ? ou d’une autre année.</p>
+<p>Le paramètre <em>donnees_insee</em> vaut TRUE si les données manipulées sont produites par l’Insee. En effet, quelques rares modifications communales (la défusion des communes Loisey et Culey au 1er janvier 2014 par exemple) ont été prises en compte dans les bases de données communales de l’Insee plus tard que la date officielle (se référer à la documentation de la fonction pour plus de précisions). Le paramètre <em>liste_complete</em> vaut TRUE si le vecteur de communes du paramètre <em>vecteur_codgeo</em> liste l’ensemble des communes françaises et FALSE s’il en liste seulement un extrait.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/COG_akinator.html">COG_akinator</a></span>(<span class="dt">vecteur_codgeo=</span>exemple_popcom[,<span class="dv">1</span>],<span class="dt">donnees_insee=</span>T, <span class="dt">liste_complete=</span>T)</code></pre></div>
 <pre><code>## [1] "COG2014"</code></pre>
-<p>En l’occurrence la liste de communes utilisÃ©e dans cette table correspond Ã  la liste des communes au 1er janvier 2014.</p>
+<p>En l’occurrence la liste de communes utilisée dans cette table correspond à la liste des communes au 1er janvier 2014.</p>
 </div>
 <div id="quelles-modifications-communales-ont-eu-lieu-entre-deux-dates" class="section level2">
 <h2 class="hasAnchor">
-<html><body><a href="#quelles-modifications-communales-ont-eu-lieu-entre-deux-dates" class="anchor"> </a></body></html>Quelles modifications communales ont eu lieu entre deux dates ?</h2>
-<p>La fonction <code>modifications_communales</code> permet, comme son nom l’indique, de visualiser les modifications communales (fusions, dÃ©fusions, changements de codes ou de noms) qui ont eu lieu entre deux dates. Ici entre le 01/01/2014 et le 01/01/2015. Cette fonction est encore en cours de dÃ©veloppement il est donc possible que certains Ã©vÃ¨nements ne soient pas encore pris en compte. Il ne faut pas hÃ©siter Ã  le signaler.</p>
+<a href="#quelles-modifications-communales-ont-eu-lieu-entre-deux-dates" class="anchor"></a>Quelles modifications communales ont eu lieu entre deux dates ?</h2>
+<p>La fonction <code>modifications_communales</code> permet, comme son nom l’indique, de visualiser les modifications communales (fusions, défusions, changements de codes ou de noms) qui ont eu lieu entre deux dates. Ici entre le 01/01/2014 et le 01/01/2015. Cette fonction est encore en cours de développement il est donc possible que certains évènements ne soient pas encore pris en compte. Il ne faut pas hésiter à le signaler.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">modifs &lt;-<span class="st"> </span><span class="kw"><a href="../reference/modifications_communales.html">modifications_communales</a></span>(<span class="dt">date_debut=</span><span class="st">"01-01-2014"</span>,<span class="dt">date_fin=</span><span class="st">"01-01-2015"</span>)
 <span class="kw">cat</span>(modifs$fusions)</code></pre></div>
 <pre><code>## 2015-01-01 : Notre-Dame-d'Estrées-Corbon (14474) est un rassemblement de Corbon (14178), Notre-Dame-d'Estrées (14474) [commune nouvelle avec commune(s) déléguée(s)].
@@ -135,11 +135,11 @@
 ## 2014-12-06 : La commune de Belbèse (82015) change de nom en Belbèze-en-Lomagne [changement de nom].
 ## 2014-12-06 : La commune de Saint-Vincent (82174) change de nom en Saint-Vincent-d'Autéjac [changement de nom].</code></pre>
 </div>
-<div id="transformer-des-variables-numariques-en-autre-gaographie" class="section level2">
+<div id="transformer-des-variables-numeriques-en-autre-geographie" class="section level2">
 <h2 class="hasAnchor">
-<html><body><a href="#transformer-des-variables-numariques-en-autre-gaographie" class="anchor"> </a></body></html>Transformer des variables numÃ©riques en autre gÃ©ographie</h2>
-<p>La fonction <code>changement_COG_varNum</code> permet de transformer des tables de donnÃ©es numÃ©riques communales en gÃ©ographie au premier janvier d’une annÃ©e souhaitÃ©e.</p>
-<p>Ici, nous allons transformer les variables numÃ©riques de la table <em>exemple_pop</em> afin de rÃ©cupÃ©rer les donnÃ©es de population et de superficie des communes au 1er janvier 2017 (au lieu de 2014).</p>
+<a href="#transformer-des-variables-numeriques-en-autre-geographie" class="anchor"></a>Transformer des variables numériques en autre géographie</h2>
+<p>La fonction <code>changement_COG_varNum</code> permet de transformer des tables de données numériques communales en géographie au premier janvier d’une année souhaitée.</p>
+<p>Ici, nous allons transformer les variables numériques de la table <em>exemple_pop</em> afin de récupérer les données de population et de superficie des communes au 1er janvier 2017 (au lieu de 2014).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">exemple_popcom_COG2017_num &lt;-<span class="st"> </span><span class="kw"><a href="../reference/changement_COG_varNum.html">changement_COG_varNum</a></span>(<span class="dt">table_entree=</span>exemple_popcom,<span class="dt">annees=</span><span class="kw">c</span>(<span class="dv">2014</span>:<span class="dv">2017</span>),<span class="dt">agregation=</span>T,<span class="dt">libgeo=</span><span class="st">"LIBGEO"</span>,<span class="dt">donnees_insee=</span>T)
 <span class="kw">head</span>(exemple_popcom_COG2017_num)</code></pre></div>
 <pre><code>##   CODGEO                  LIBGEO P12_POP SUPERF
@@ -149,13 +149,13 @@
 ## 4  01005     Ambérieux-en-Dombes    1642     16
 ## 5  01006                 Ambléon     110      6
 ## 6  01007                Ambronay    2437     34</code></pre>
-<p>Le paramÃ¨tre <em>agregation</em> vaut TRUE si la table souhaitÃ©e doit sommer toutes les lignes qui concernent une mÃªme commune et FALSE si l’on souhaite volontairement conserver les doublons dans les codes commune (dans les tables de flux par exemple, cf. plus bas). Le paramÃ¨tre <em>libgeo</em> doit Ãªtre conservÃ© Ã  NULL si la table souhaitÃ©e ne contient pas de libellÃ©s de communes, sinon il doit indiquer le nom de la variable renseignant sur le libellÃ© de la commune (celui prÃ©sent dans la table si il existe dÃ©jÃ  ou tout autre nom s’il doit Ãªtre ajoutÃ©).</p>
+<p>Le paramètre <em>agregation</em> vaut TRUE si la table souhaitée doit sommer toutes les lignes qui concernent une même commune et FALSE si l’on souhaite volontairement conserver les doublons dans les codes commune (dans les tables de flux par exemple, cf. plus bas). Le paramètre <em>libgeo</em> doit être conservé à NULL si la table souhaitée ne contient pas de libellés de communes, sinon il doit indiquer le nom de la variable renseignant sur le libellé de la commune (celui présent dans la table si il existe déjà ou tout autre nom s’il doit être ajouté).</p>
 </div>
-<div id="transformer-des-typologies-en-autre-gaographie" class="section level2">
+<div id="transformer-des-typologies-en-autre-geographie" class="section level2">
 <h2 class="hasAnchor">
-<html><body><a href="#transformer-des-typologies-en-autre-gaographie" class="anchor"> </a></body></html>Transformer des typologies en autre gÃ©ographie</h2>
-<p>La fonction <code>changement_COG_typo</code> permet de transformer des typologies de communes en gÃ©ographie au premier janvier d’une annÃ©e souhaitÃ©e. Ici nous allons transformer les deux typologies (typoA et typoB) de la table <em>exemple_pop</em> en gÃ©ographie communale au 1er janvier 2017 (au lieu de 2014).</p>
-<p>Ici, l’hypothÃ¨se de classement en cas de fusion de communes (<em>methode_fusion</em>) choisie est celle d’une classe spÃ©cifique (<em>methode_difference</em>, classe appelÃ©e <em>mot_difference</em>=“differents”) aux regroupements de plusieurs communes de classes diffÃ©rentes. Les autres hypothÃ¨ses possibles auraient pu Ãªtre l’hypothÃ¨se du maximum de population <em>methode_max_pop</em> ou de classe absorbante <em>methode_classe_absorbante</em>.</p>
+<a href="#transformer-des-typologies-en-autre-geographie" class="anchor"></a>Transformer des typologies en autre géographie</h2>
+<p>La fonction <code>changement_COG_typo</code> permet de transformer des typologies de communes en géographie au premier janvier d’une année souhaitée. Ici nous allons transformer les deux typologies (typoA et typoB) de la table <em>exemple_pop</em> en géographie communale au 1er janvier 2017 (au lieu de 2014).</p>
+<p>Ici, l’hypothèse de classement en cas de fusion de communes (<em>methode_fusion</em>) choisie est celle d’une classe spécifique (<em>methode_difference</em>, classe appelée <em>mot_difference</em>=“differents”) aux regroupements de plusieurs communes de classes différentes. Les autres hypothèses possibles auraient pu être l’hypothèse du maximum de population <em>methode_max_pop</em> ou de classe absorbante <em>methode_classe_absorbante</em>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">exemple_popcom_COG2017_typo &lt;-<span class="st"> </span><span class="kw"><a href="../reference/changement_COG_typo.html">changement_COG_typo</a></span>(<span class="dt">table_entree=</span>exemple_popcom[,-<span class="dv">2</span>],<span class="dt">annees=</span><span class="kw">c</span>(<span class="dv">2014</span>:<span class="dv">2017</span>),<span class="dt">methode_fusion=</span><span class="st">"methode_difference"</span>,<span class="dt">typos=</span><span class="kw">c</span>(<span class="st">"typoA"</span>,<span class="st">"typoB"</span>),<span class="dt">mot_difference =</span> <span class="st">"differents"</span>,<span class="dt">libgeo=</span><span class="st">"LIB"</span>,<span class="dt">donnees_insee=</span>T)
 <span class="kw">head</span>(exemple_popcom_COG2017_typo)</code></pre></div>
 <pre><code>##   CODGEO                     LIB    typoA typoB
@@ -165,7 +165,7 @@
 ## 4  01005     Ambérieux-en-Dombes CLASSE 3     F
 ## 5  01006                 Ambléon CLASSE 4     E
 ## 6  01007                Ambronay CLASSE 5     A</code></pre>
-<p>La fonction <code>changement_COG_typo_details</code> permet quant Ã  elle d’isoler dans une table les communes fusionnÃ©es appartenant Ã  des classes diffÃ©rentes, ici selon la typologie “typoA” entre 2014 et 2015 puis 2015 et 2016 et 2016 et 2017.</p>
+<p>La fonction <code>changement_COG_typo_details</code> permet quant à elle d’isoler dans une table les communes fusionnées appartenant à des classes différentes, ici selon la typologie “typoA” entre 2014 et 2015 puis 2015 et 2016 et 2016 et 2017.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">details_exemple_popcom_COG2017_typo &lt;-<span class="st"> </span><span class="kw"><a href="../reference/changement_COG_typo_details.html">changement_COG_typo_details</a></span>(<span class="dt">table_entree=</span>exemple_popcom[,-<span class="dv">2</span>],<span class="dt">annees=</span><span class="kw">c</span>(<span class="dv">2014</span>:<span class="dv">2017</span>),<span class="dt">typo=</span><span class="st">"typoA"</span>, <span class="dt">donnees_insee=</span>T)
 <span class="kw">head</span>(details_exemple_popcom_COG2017_typo[[<span class="st">"2014_2015"</span>]])</code></pre></div>
 <pre><code>##   cod2014              lib2014 cod2015                     lib2015
@@ -199,12 +199,12 @@
 ## 5   03168             Meaulne   03168   Meaulne-Vitray CLASSE 2
 ## 6   03318              Vitray   03168   Meaulne-Vitray CLASSE 5</code></pre>
 </div>
-<div id="agrager-des-tables-de-donnaes-communales-a-des-achelons-supra-communaux" class="section level2">
+<div id="agreger-des-tables-de-donnees-communales-a-des-echelons-supra-communaux" class="section level2">
 <h2 class="hasAnchor">
-<html><body><a href="#agrager-des-tables-de-donnaes-communales-a-des-achelons-supra-communaux" class="anchor"> </a></body></html>AgrÃ©ger des tables de donnÃ©es communales Ã  des Ã©chelons supra-communaux</h2>
-<p>La fonction <code>nivsupra</code> permet d’agrÃ©ger les tables de donnÃ©es communales Ã  de nombreux Ã©chelons supra-communaux administratifs (EPCI, arrondissements, cantons-villes, dÃ©partements, rÃ©gions) ou d’Ã©tude (bassins de vie, zones d’emploi, unitÃ©s urbaines, aires urbaines).</p>
-<p>Ici nous agrÃ©geons la population et la superficie des communes Ã  l’Ã©chelon gÃ©ographique des zones d’emploi afin d’obtenir une table des densitÃ©s de population par zone d’emploi.</p>
-<p>Le paramÃ¨tre <em>na.nivgeo.rm</em> vaut FALSE si la table souhaitÃ©e doit contenir une ligne identifiÃ©e par un code gÃ©ographique valant NA qui somme les valeurs de toutes les communes qui n’appartiennent Ã  aucun regroupement supracommunal et vaut TRUE si cette ligne doit Ãªtre supprimÃ©e.</p>
+<a href="#agreger-des-tables-de-donnees-communales-a-des-echelons-supra-communaux" class="anchor"></a>Agréger des tables de données communales à des échelons supra-communaux</h2>
+<p>La fonction <code>nivsupra</code> permet d’agréger les tables de données communales à de nombreux échelons supra-communaux administratifs (EPCI, arrondissements, cantons-villes, départements, régions) ou d’étude (bassins de vie, zones d’emploi, unités urbaines, aires urbaines).</p>
+<p>Ici nous agrégeons la population et la superficie des communes à l’échelon géographique des zones d’emploi afin d’obtenir une table des densités de population par zone d’emploi.</p>
+<p>Le paramètre <em>na.nivgeo.rm</em> vaut FALSE si la table souhaitée doit contenir une ligne identifiée par un code géographique valant NA qui somme les valeurs de toutes les communes qui n’appartiennent à aucun regroupement supracommunal et vaut TRUE si cette ligne doit être supprimée.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">exemple_popcom_COG2017 &lt;-<span class="st"> </span><span class="kw">merge</span>(exemple_popcom_COG2017_num,exemple_popcom_COG2017_typo[,-<span class="dv">2</span>],<span class="dt">by=</span><span class="st">"CODGEO"</span>,<span class="dt">all=</span>T)
 exemple_popcom_ZE2010 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/nivsupra.html">nivsupra</a></span>(<span class="dt">table_entree=</span>exemple_popcom_COG2017,<span class="dt">nivsupra=</span><span class="st">"ZE2010"</span>,<span class="dt">na.nivgeo.rm=</span>F,<span class="dt">agregation=</span>T)
 exemple_popcom_ZE2010$densite &lt;-<span class="st"> </span>exemple_popcom_ZE2010$P12_POP /<span class="st"> </span>exemple_popcom_ZE2010$SUPERF
@@ -217,10 +217,10 @@ exemple_popcom_ZE2010$densite &lt;-<span class="st"> </span>exemple_popcom_ZE201
 ## 5   0054               Nogent-le-Rotrou   48665   1227 39.66178
 ## 6   0055 La Vallée de la Bresle - Vimeu   99095   1134 87.38536</code></pre>
 </div>
-<div id="enlever-les-arrondissements-municipaux-des-tables-de-donnaes-communales" class="section level2">
+<div id="enlever-les-arrondissements-municipaux-des-tables-de-donnees-communales" class="section level2">
 <h2 class="hasAnchor">
-<html><body><a href="#enlever-les-arrondissements-municipaux-des-tables-de-donnaes-communales" class="anchor"> </a></body></html>Enlever les arrondissements municipaux des tables de donnÃ©es communales</h2>
-<p>Nous allons maintenant manipuler une autre table exemple incluse dans le package, la table <code>exemple_flux</code> qui contient des exemples de flux entre une communes de rÃ©sidences (COMMUNE) et de travail (DCLT). Elle contient comme autres variables le code de la catÃ©gorie socio-professionnelle des individus (CS1), la catÃ©gorie d’Ã¢ge (AGEREVQ) et le poids de l’individu statistique (IPONDI).</p>
+<a href="#enlever-les-arrondissements-municipaux-des-tables-de-donnees-communales" class="anchor"></a>Enlever les arrondissements municipaux des tables de données communales</h2>
+<p>Nous allons maintenant manipuler une autre table exemple incluse dans le package, la table <code>exemple_flux</code> qui contient des exemples de flux entre une communes de résidences (COMMUNE) et de travail (DCLT). Elle contient comme autres variables le code de la catégorie socio-professionnelle des individus (CS1), la catégorie d’âge (AGEREVQ) et le poids de l’individu statistique (IPONDI).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(exemple_flux)</code></pre></div>
 <pre><code>##   COMMUNE  DCLT CS1 AGEREVQ IPONDI
 ## 1   55298 45055   5      25      4
@@ -230,30 +230,30 @@ exemple_popcom_ZE2010$densite &lt;-<span class="st"> </span>exemple_popcom_ZE201
 ## 5   55298 55029   6      20      4
 ## 6   55298 55029   6      40      4</code></pre>
 <p>La fonction <code>enlever_PLM</code> permet de remplacer les codes Insee des arrondissements municipaux de Paris, Lyon et Marseille par leurs codes communes respectifs.</p>
-<p>Le paramÃ¨tre <em>vecteur_entree</em> vaut TRUE si l’Ã©lÃ©ment Ã  transformer est un vecteur de codes insee et FALSE s’il s’agit d’une table de donnÃ©es (data.frame) numÃ©riques. Attention, cette fonction ne gÃ¨re pas les conversions de typologies (variables de type caractÃ¨re).</p>
+<p>Le paramètre <em>vecteur_entree</em> vaut TRUE si l’élément à transformer est un vecteur de codes insee et FALSE s’il s’agit d’une table de données (data.frame) numériques. Attention, cette fonction ne gère pas les conversions de typologies (variables de type caractère).</p>
 <p>Ici nous allons remplacer les arrondissement municipaux par les codes communaux dans la table <code>exemple_flux</code> pour les variables COMMUNE puis DCLT.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">exemple_flux_sansPLM &lt;-<span class="kw"><a href="../reference/enlever_PLM.html">enlever_PLM</a></span>(<span class="dt">table_entree=</span>exemple_flux,<span class="dt">codgeo_entree =</span> <span class="st">"COMMUNE"</span>,<span class="dt">libgeo=</span><span class="ot">NULL</span>,<span class="dt">agregation =</span> F,<span class="dt">vecteur_entree=</span>F)
 exemple_flux_sansPLM &lt;-<span class="kw"><a href="../reference/enlever_PLM.html">enlever_PLM</a></span>(<span class="dt">table_entree=</span>exemple_flux_sansPLM,<span class="dt">codgeo_entree =</span> <span class="st">"DCLT"</span>,<span class="dt">libgeo=</span><span class="ot">NULL</span>,<span class="dt">agregation =</span> F,<span class="dt">vecteur_entree=</span>F)</code></pre></div>
 </div>
-<div id="jongler-avec-les-diffarentes-possibilitas-pour-les-codes-communaux-corses" class="section level2">
+<div id="jongler-avec-les-differentes-possibilites-pour-les-codes-communaux-corses" class="section level2">
 <h2 class="hasAnchor">
-<html><body><a href="#jongler-avec-les-diffarentes-possibilitas-pour-les-codes-communaux-corses" class="anchor"> </a></body></html>Jongler avec les diffÃ©rentes possibilitÃ©s pour les codes communaux corses</h2>
-<p>La fonction <code>modification_Corse</code> permet quant Ã  elle de modifier les codes Insee des communes corses. En effet, en 1976, les codes de toutes les communes corses sont modifiÃ©s : alors qu’ils commenÃ§aient tous par “20”, leurs deux premiers caractÃ¨res sont remplacÃ©s par “2A” (Corse du Sud) ou “2B” (Corse du Nord). Les codes postaux conservent d’ailleurs aujourd’hui le prÃ©fixe historique “20”. Cette fonction est notamment utile pour la raison suivante : dans certaines tables issues des recensements Insee de 1968 ou 1975, les communes sont dÃ©jÃ  codÃ©es avec les prÃ©fixes 2A et 2B.</p>
-<p>Le paramÃ¨tre <em>sens</em> vaut “20vers2A2B” pour changer tous les codes communes corses commenÃ§ant par 20 par 2A ou 2B et vaut “2A2Bvers20” quand l’effet inverse est recherchÃ©.</p>
+<a href="#jongler-avec-les-differentes-possibilites-pour-les-codes-communaux-corses" class="anchor"></a>Jongler avec les différentes possibilités pour les codes communaux corses</h2>
+<p>La fonction <code>modification_Corse</code> permet quant à elle de modifier les codes Insee des communes corses. En effet, en 1976, les codes de toutes les communes corses sont modifiés : alors qu’ils commençaient tous par “20”, leurs deux premiers caractères sont remplacés par “2A” (Corse du Sud) ou “2B” (Corse du Nord). Les codes postaux conservent d’ailleurs aujourd’hui le préfixe historique “20”. Cette fonction est notamment utile pour la raison suivante : dans certaines tables issues des recensements Insee de 1968 ou 1975, les communes sont déjà codées avec les préfixes 2A et 2B.</p>
+<p>Le paramètre <em>sens</em> vaut “20vers2A2B” pour changer tous les codes communes corses commençant par 20 par 2A ou 2B et vaut “2A2Bvers20” quand l’effet inverse est recherché.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">exemple_flux_sansPLMsansCorse &lt;-<span class="st"> </span><span class="kw"><a href="../reference/modification_Corse.html">modification_Corse</a></span>(<span class="dt">table_entree=</span>exemple_flux_sansPLM,<span class="dt">sens=</span><span class="st">"2A2Bvers20"</span>)</code></pre></div>
 </div>
-<div id="transformer-des-variables-numariques-en-autre-gaographie-dans-des-donnaes-de-flux" class="section level2">
+<div id="transformer-des-variables-numeriques-en-autre-geographie-dans-des-donnees-de-flux" class="section level2">
 <h2 class="hasAnchor">
-<html><body><a href="#transformer-des-variables-numariques-en-autre-gaographie-dans-des-donnaes-de-flux" class="anchor"> </a></body></html>Transformer des variables numÃ©riques en autre gÃ©ographie dans des donnÃ©es de flux</h2>
-<p>La fonction <code>changement_COG_varNum</code> peut Ã©galement s’appliquer Ã  des tables de flux (codes communes pouvant comporter des doublons) grÃ¢ce Ã  l’option agregation = FALSE. Les variables de type caractÃ¨re sont alors conservÃ©es comme telles ou dupliquÃ©es en cas de dÃ©fusion et les variables numÃ©riques (ici IPONDI) sommÃ©es en cas de fusion ou rÃ©parties proportionnellement Ã  la population de chaque commune en cas de dÃ©fusion.</p>
+<a href="#transformer-des-variables-numeriques-en-autre-geographie-dans-des-donnees-de-flux" class="anchor"></a>Transformer des variables numériques en autre géographie dans des données de flux</h2>
+<p>La fonction <code>changement_COG_varNum</code> peut également s’appliquer à des tables de flux (codes communes pouvant comporter des doublons) grâce à l’option agregation = FALSE. Les variables de type caractère sont alors conservées comme telles ou dupliquées en cas de défusion et les variables numériques (ici IPONDI) sommées en cas de fusion ou réparties proportionnellement à la population de chaque commune en cas de défusion.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">exemple_flux_COG2017 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/changement_COG_varNum.html">changement_COG_varNum</a></span>(<span class="dt">table_entree=</span>exemple_flux_sansPLMsansCorse,<span class="dt">annees=</span><span class="kw">c</span>(<span class="dv">2014</span>:<span class="dv">2017</span>),<span class="dt">codgeo_entree=</span><span class="st">"COMMUNE"</span>,<span class="dt">agregation=</span>F,<span class="dt">libgeo=</span><span class="ot">NULL</span>,<span class="dt">donnees_insee=</span>T)
 exemple_flux_COG2017 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/changement_COG_varNum.html">changement_COG_varNum</a></span>(<span class="dt">table_entree=</span>exemple_flux_COG2017,<span class="dt">annees=</span><span class="kw">c</span>(<span class="dv">2014</span>:<span class="dv">2017</span>),<span class="dt">codgeo_entree=</span><span class="st">"DCLT"</span>,<span class="dt">agregation=</span>F,<span class="dt">libgeo=</span><span class="ot">NULL</span>,<span class="dt">donnees_insee=</span>T)</code></pre></div>
 </div>
-<div id="insarer-dans-des-tables-de-donnaes-de-flux-communales-des-achelons-supra-communaux" class="section level2">
+<div id="inserer-dans-des-tables-de-donnees-de-flux-communales-des-echelons-supra-communaux" class="section level2">
 <h2 class="hasAnchor">
-<html><body><a href="#insarer-dans-des-tables-de-donnaes-de-flux-communales-des-achelons-supra-communaux" class="anchor"> </a></body></html>InsÃ©rer dans des tables de donnÃ©es de flux communales des Ã©chelons supra-communaux</h2>
-<p>La fonction <code>nivsupra</code> peut Ã©galement s’appliquer Ã  des tables de flux (non agrÃ©gÃ©es par codes communes) grÃ¢ce Ã  l’option agregation = FALSE. La table en entrÃ©e est alors conservÃ©e comme telle avec une nouvelle colonne qui correspond au niveau supracommunal du code commune considÃ©rÃ©.</p>
-<p>Ici, on ajoute les colonnes ZE2010_COMMUNE et ZE2010_DCLT Ã  la table de flux domicile-travail utilisÃ©e prÃ©cÃ©demment.</p>
+<a href="#inserer-dans-des-tables-de-donnees-de-flux-communales-des-echelons-supra-communaux" class="anchor"></a>Insérer dans des tables de données de flux communales des échelons supra-communaux</h2>
+<p>La fonction <code>nivsupra</code> peut également s’appliquer à des tables de flux (non agrégées par codes communes) grâce à l’option agregation = FALSE. La table en entrée est alors conservée comme telle avec une nouvelle colonne qui correspond au niveau supracommunal du code commune considéré.</p>
+<p>Ici, on ajoute les colonnes ZE2010_COMMUNE et ZE2010_DCLT à la table de flux domicile-travail utilisée précédemment.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">exemple_flux_COG2017_etZE &lt;-<span class="st"> </span><span class="kw"><a href="../reference/nivsupra.html">nivsupra</a></span>(<span class="dt">table_entree=</span>exemple_flux_COG2017,<span class="dt">codgeo_entree=</span><span class="st">"COMMUNE"</span>,<span class="dt">nivsupra=</span><span class="st">"ZE2010"</span>,<span class="dt">na.nivgeo.rm=</span>F,<span class="dt">agregation=</span>F)
 exemple_flux_COG2017_etZE &lt;-<span class="st"> </span><span class="kw"><a href="../reference/nivsupra.html">nivsupra</a></span>(<span class="dt">table_entree=</span>exemple_flux_COG2017_etZE,<span class="dt">codgeo_entree=</span><span class="st">"DCLT"</span>,<span class="dt">nivsupra=</span><span class="st">"ZE2010"</span>,<span class="dt">na.nivgeo.rm=</span>F,<span class="dt">agregation=</span>F)
 <span class="kw">head</span>(exemple_flux_COG2017_etZE)</code></pre></div>
@@ -264,11 +264,11 @@ exemple_flux_COG2017_etZE &lt;-<span class="st"> </span><span class="kw"><a href
 ## 4 03085   61462   6      25 4.693373           2511        8302
 ## 5 03085   61472   6      50 5.095541           2511        8302
 ## 6 03085   61006   4      55 2.716909           2511        8302</code></pre>
-<p>Bonne dÃ©couverte…!</p>
+<p>Bonne découverte…!</p>
 </div>
 <div id="ensemble-du-code" class="section level1">
 <h1 class="hasAnchor">
-<html><body><a href="#ensemble-du-code" class="anchor"> </a></body></html>Ensemble du code</h1>
+<a href="#ensemble-du-code" class="anchor"></a>Ensemble du code</h1>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(exemple_popcom)</code></pre></div>
 <pre><code>##   CODGEO                  LIBGEO P12_POP SUPERF    typoA typoB
 ## 1  01001 L'Abergement-Clémenciat     777     16 CLASSE 2     F
@@ -407,16 +407,16 @@ exemple_flux_COG2017_etZE &lt;-<span class="st"> </span><span class="kw"><a href
         <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-<li><a href="#introduction-a-cogugaison-v2">Introduction Ã  COGugaison v2</a></li>
-      <li><a href="#quel-code-officiel-gaographique-est-utilisa">Quel code officiel gÃ©ographique est utilisÃ© ?</a></li>
+<li><a href="#introduction-a-cogugaison">Introduction à COGugaison</a></li>
+      <li><a href="#quel-code-officiel-geographique-est-utilise">Quel code officiel géographique est utilisé ?</a></li>
       <li><a href="#quelles-modifications-communales-ont-eu-lieu-entre-deux-dates">Quelles modifications communales ont eu lieu entre deux dates ?</a></li>
-      <li><a href="#transformer-des-variables-numariques-en-autre-gaographie">Transformer des variables numÃ©riques en autre gÃ©ographie</a></li>
-      <li><a href="#transformer-des-typologies-en-autre-gaographie">Transformer des typologies en autre gÃ©ographie</a></li>
-      <li><a href="#agrager-des-tables-de-donnaes-communales-a-des-achelons-supra-communaux">AgrÃ©ger des tables de donnÃ©es communales Ã  des Ã©chelons supra-communaux</a></li>
-      <li><a href="#enlever-les-arrondissements-municipaux-des-tables-de-donnaes-communales">Enlever les arrondissements municipaux des tables de donnÃ©es communales</a></li>
-      <li><a href="#jongler-avec-les-diffarentes-possibilitas-pour-les-codes-communaux-corses">Jongler avec les diffÃ©rentes possibilitÃ©s pour les codes communaux corses</a></li>
-      <li><a href="#transformer-des-variables-numariques-en-autre-gaographie-dans-des-donnaes-de-flux">Transformer des variables numÃ©riques en autre gÃ©ographie dans des donnÃ©es de flux</a></li>
-      <li><a href="#insarer-dans-des-tables-de-donnaes-de-flux-communales-des-achelons-supra-communaux">InsÃ©rer dans des tables de donnÃ©es de flux communales des Ã©chelons supra-communaux</a></li>
+      <li><a href="#transformer-des-variables-numeriques-en-autre-geographie">Transformer des variables numériques en autre géographie</a></li>
+      <li><a href="#transformer-des-typologies-en-autre-geographie">Transformer des typologies en autre géographie</a></li>
+      <li><a href="#agreger-des-tables-de-donnees-communales-a-des-echelons-supra-communaux">Agréger des tables de données communales à des échelons supra-communaux</a></li>
+      <li><a href="#enlever-les-arrondissements-municipaux-des-tables-de-donnees-communales">Enlever les arrondissements municipaux des tables de données communales</a></li>
+      <li><a href="#jongler-avec-les-differentes-possibilites-pour-les-codes-communaux-corses">Jongler avec les différentes possibilités pour les codes communaux corses</a></li>
+      <li><a href="#transformer-des-variables-numeriques-en-autre-geographie-dans-des-donnees-de-flux">Transformer des variables numériques en autre géographie dans des données de flux</a></li>
+      <li><a href="#inserer-dans-des-tables-de-donnees-de-flux-communales-des-echelons-supra-communaux">Insérer dans des tables de données de flux communales des échelons supra-communaux</a></li>
       <li><a href="#ensemble-du-code">Ensemble du code</a></li>
       </ul>
 </div>
