@@ -46,29 +46,22 @@
 
 changement_COG_varNum <- function(table_entree,annees,codgeo_entree=colnames(table_entree)[1],var_num=colnames(table_entree)[sapply(table_entree, is.numeric)],agregation=T,libgeo=NULL,donnees_insee=T){
 
-  annees <- intersect(annees, c(1968, 1975, 1982, 1990, 1999, 2008:2017))
+  inter <- intersect(c(1968,1975,1982,1990,1999,2008:2017),annees)
+  if(annees[1]<=annees[length(annees)]){
+    inter <- inter[order(inter)]
+  } else{
+    inter <- rev(inter[order(inter)])
+  }
+  annees <- unique(c(annees[1]:inter[1],inter,inter[length(inter)]:annees[length(annees)]))
+
 
   for (i in 1:(length(annees)-1)){
 
-    if(annees[i] < annees[i + 1]){vecteur <- c(1968, 1975, 1982, 1990, 1999, 2013, 2014)} else{vecteur <-c(1975, 1982, 1990, 1999, 2008, 2014, 2015)}
-    if(donnees_insee==T & annees[i]%in%vecteur){
-       assign(paste0("PASSAGE_",annees[i],"_",annees[i+1]),get(paste0("PASSAGE_",annees[i],"_",annees[i+1],"_insee")))
+    if(donnees_insee==T){
+     assign(paste0("PASSAGE_",annees[i],"_",annees[i+1]),get(paste0("PASSAGE_",annees[i],"_",annees[i+1],"_insee")))
     }
 
-     provisoire <- merge(table_entree,get(paste0("PASSAGE_",annees[i],"_",annees[i+1])),by.x=codgeo_entree,by.y=paste0("cod",annees[i]),all.x=T,all.y=F)
-
-     #pour les lignes qui n'entrent pas dans la table de passage
-     if (i == 1) {
-       table_hors_passage <- provisoire[which(is.na(with(provisoire, get(paste0("cod", annees[i + 1]))))), ]
-       if(nrow(table_hors_passage)!=0 && !is.null(libgeo) && !libgeo%in%colnames(table_hors_passage)){
-         table_hors_passage[,libgeo]<- NA
-       }
-     }
-
-
-     provisoire <- provisoire[which(!is.na(with(provisoire, get(paste0("cod", annees[i + 1]))))),]
-
-    #On laisse telles quelles les lignes non connues de notre table de passage (97 hors DOM, pays étrangers...)
+    provisoire <- merge(table_entree,get(paste0("PASSAGE_",annees[i],"_",annees[i+1])),by.x=codgeo_entree,by.y=paste0("cod",annees[i]),all.x=T,all.y=F)
     provisoire[which(is.na(with(provisoire,get(paste0("cod",annees[i+1]))))),"ratio"] <- 1
     provisoire[which(is.na(with(provisoire,get(paste0("cod",annees[i+1]))))),paste0("cod",annees[i+1])] <- as.character(provisoire[which(is.na(with(provisoire,get(paste0("cod",annees[i+1]))))),codgeo_entree])
     provisoire[,c(var_num)] <- (provisoire[,c(var_num,"ratio")] * provisoire[,"ratio"])[,-(length(var_num)+1)]
@@ -79,26 +72,33 @@ changement_COG_varNum <- function(table_entree,annees,codgeo_entree=colnames(tab
     table_entree <- table_finale
   }
 
-  if(agregation==T){
-    table_finale <- aggregate(table_finale[,c(var_num)],by =list(with(table_finale,get(codgeo_entree))),FUN=sum)
-    colnames(table_finale)<- c(codgeo_entree,var_num)
-    }
-
   if(!is.null(libgeo)){
-    if(donnees_insee==T & (annees[length(annees)]%in%c(1968,1975,1982,1990,1999,2014))){
+    if(donnees_insee==T){
       assign(paste0("COG",annees[length(annees)]),get(paste0("COG",annees[length(annees)],"_insee")))
     }
     table_finale <- merge(table_finale,get(paste0("COG",annees[length(annees)]))[,c(1,2)],by.x=codgeo_entree,by.y="CODGEO",all.x=T,all.y=F)
+    colnames(table_finale)[ncol(table_finale)]<- "XaXuXi"
+    if(libgeo%in%colnames(table_finale)){
+      table_finale[is.na(table_finale[,"XaXuXi"]),"XaXuXi"] <- table_finale[is.na(table_finale[,"XaXuXi"]),libgeo]
+      table_finale[,libgeo]<-NULL
+    }
     colnames(table_finale)[ncol(table_finale)]<- libgeo
     table_finale <- table_finale[,c(1,ncol(table_finale),2:(ncol(table_finale)-1))]
   }
 
-  #on ajoute les lignes hors table de passage (Saint Martin...)
-  if(nrow(table_hors_passage)!=0){
-    table_finale <- rbind(table_finale, table_hors_passage[,colnames(table_finale)])
+  if(agregation==T){
+    if(!is.null(libgeo)){
+    table_libgeo <- table_finale[!duplicated(table_finale[,c(codgeo_entree,libgeo)]),c(codgeo_entree,libgeo)]
+    }
+    table_finale <- aggregate(table_finale[,c(var_num)],by =list(with(table_finale,get(codgeo_entree))),FUN=sum)
+    colnames(table_finale)<- c(codgeo_entree,var_num)
+    if(!is.null(libgeo)){
+    table_finale <- merge(table_finale, table_libgeo,by=codgeo_entree,all.x=T,all.y=F)
+    colnames(table_finale)<- c(codgeo_entree,libgeo,var_num)
+    }
   }
 
-  table_finale <- table_finale[order(table_finale[,codgeo_entree]),]#nouveau
+  table_finale <- table_finale[order(table_finale[,codgeo_entree]),]
 
   return(table_finale)
 

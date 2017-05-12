@@ -43,7 +43,14 @@
 
 changement_COG_typo_details <- function(table_entree,annees,codgeo_entree=colnames(table_entree)[1],typo, donnees_insee=T){
 
-  annees <- intersect(annees, c(1968, 1975, 1982, 1990, 1999, 2008:2017))
+  inter <- intersect(c(1968,1975,1982,1990,1999,2008:2017),annees)
+  if(annees[1]<=annees[length(annees)]){
+    inter <- inter[order(inter)]
+  } else{
+    inter <- rev(inter[order(inter)])
+  }
+  annees <- unique(c(annees[1]:inter[1],inter,inter[length(inter)]:annees[length(annees)]))
+
 
   for (i in 1:(length(annees)-1)){
 
