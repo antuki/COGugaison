@@ -72,7 +72,7 @@ nivsupra <- function(table_entree,codgeo_entree=colnames(table_entree)[1],var_nu
     table_sortie <- aggregate(table_entree[,c(var_num)],by=list(table_entree[,nivsupra_nom]),FUN=sum)
     colnames(table_sortie) <- c(nivsupra_nom,var_num)
     table_sortie <- merge(table_sortie,libelles_supracom[which(libelles_supracom$NIVGEO==nivsupra),c(2,3)],by.x=nivsupra_nom,by.y="CODGEO",all.x=T,all.y=F)
-    table_sortie <- table_sortie[,c(nivsupra_nom,"LIBGEO",var_num),]
+    table_sortie <- table_sortie[,c(nivsupra_nom,"LIBGEO",var_num)]
 
 
     if(na.nivgeo.rm==F & !(is.null(nrow(table_entree[is.na(table_entree[,nivsupra_nom]),var_num])) | nrow(table_entree[is.na(table_entree[,nivsupra_nom]),var_num])==0)){
