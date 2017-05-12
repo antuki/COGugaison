@@ -48,7 +48,6 @@
 #' head(details_exemple_popcom_COG2017_typo[["2015_2016"]])
 #' head(details_exemple_popcom_COG2017_typo[["2016_2017"]])
 
-
 changement_COG_typo <- function(table_entree,annees,codgeo_entree=colnames(table_entree)[1],typos=colnames(table_entree)[-which(colnames(table_entree)==codgeo_entree)], methode_fusion="methode_difference",mot_difference=NULL,classe_absorbante=NULL,donnees_insee=T,libgeo=NULL){
 
   inter <- intersect(c(1968,1975,1982,1990,1999,2008:2017),annees)
@@ -73,6 +72,8 @@ changement_COG_typo <- function(table_entree,annees,codgeo_entree=colnames(table
 
     provisoire <- merge(table_entree,get(paste0("PASSAGE_",annees[i],"_",annees[i+1])),by.x=codgeo_entree,by.y=paste0("cod",annees[i]),all.x=T,all.y=F)
     colnames(provisoire)[1]<- paste0("cod",annees[i])
+    provisoire[which(is.na(with(provisoire,get(paste0("cod",annees[i+1]))))),"ratio"] <- 1
+    provisoire[which(is.na(with(provisoire,get(paste0("cod",annees[i+1]))))),paste0("cod",annees[i+1])] <- as.character(provisoire[which(is.na(with(provisoire,get(paste0("cod",annees[i+1]))))),paste0("cod",annees[i])])
 
     if(length(typos)>1){ # choisir quoi faire ici en cas de NA
       provisoire <- provisoire[apply(provisoire[, typos], 1, function(x) !all(is.na(x))), ]
@@ -81,7 +82,6 @@ changement_COG_typo <- function(table_entree,annees,codgeo_entree=colnames(table
     }
 
     for (var in typos){
-
       provisoire_court <- provisoire[,c(paste0("cod",annees[i]),paste0("cod",annees[i+1]),"annee","typemodif","ratio",var)] #erreur
       table_n_d <- provisoire_court[is.na(provisoire_court$typemodif) | (provisoire_court$typemodif=="d")| (provisoire_court$typemodif=="c"),]
       table_f <- provisoire_court[(provisoire_court$typemodif=="f"),]
