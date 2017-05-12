@@ -81,7 +81,8 @@ changement_COG_typo <- function(table_entree,annees,codgeo_entree=colnames(table
 
     for (var in typos){
 
-      provisoire_court <- provisoire[,c(paste0("cod",annees[i]),paste0("cod",annees[i+1]),"annee","typemodif","ratio",var)]
+      provisoire_court <- provisoire[,c("CODGEO",paste0("cod",annees[i+1]),"annee","typemodif","ratio",var)] #erreur
+      colnames(provisoire_court)[1]<- paste0("cod",annees[i+1])
       table_n_d <- provisoire_court[is.na(provisoire_court$typemodif) | (provisoire_court$typemodif=="d")| (provisoire_court$typemodif=="c"),]
       table_f <- provisoire_court[(provisoire_court$typemodif=="f"),]
 

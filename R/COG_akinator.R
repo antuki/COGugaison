@@ -41,9 +41,10 @@ vecteur_codgeo <- unique(vecteur_codgeo[which(substr(vecteur_codgeo,1,2)%in%c(pa
 #modificationCorse #new
 vecteur_codgeo <- COGugaison::modification_Corse(vecteur_codgeo,sens="20vers2A2B")
 
-
 if(donnees_insee==T){
-  assign(paste0("COG",a),get(paste0("COG",a,"_insee")))
+  for (a in c(1968,1975,1982,1990,1999,2008:2014)){
+    assign(paste0("COG",a),get(paste0("COG",a,"_insee")))
+  }
 }
 
 COG1968 <- COGugaison::modification_Corse(COG1968,sens="20vers2A2B") #new
