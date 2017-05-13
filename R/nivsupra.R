@@ -60,6 +60,7 @@ nivsupra <- function(table_entree,codgeo_entree=colnames(table_entree)[1],var_nu
 
   table_entree <- merge(table_entree,table_supracom[,c("CODGEO",nivsupra)],by.x=codgeo_entree,by.y="CODGEO",all.x=T,all.y=F)
   colnames(table_entree)[which(colnames(table_entree)==nivsupra)]<- nivsupra_nom
+  table_entree[,"LIBGEO"]<- NULL
 
   if(agregation==F){
     if(na.nivgeo.rm==F){

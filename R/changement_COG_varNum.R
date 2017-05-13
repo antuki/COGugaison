@@ -35,16 +35,16 @@
 #' @examples
 #' ## Exemple 1
 #' # Ici, nous allons transformer les variables numériques de la table *exemple_pop* afin de récupérer les données de population et de superficie des communes au 1er janvier 2017 (au lieu de 2014).
-#' exemple_popcom_COG2017_num <- changement_COG_varNum(table_entree=exemple_popcom,annees=c(2014:2017),agregation=T,libgeo="LIBGEO",donnees_insee=T)
+#' exemple_popcom_COG2017_num <- changement_COG_varNum(table_entree=exemple_popcom,annees=c(2014:2017),agregation=T,libgeo=T,donnees_insee=T)
 #' head(exemple_popcom_COG2017_num)
 #' ## Exemple 2
 #' # La fonction peut également s'appliquer à des tables de flux (codes communes pouvant comporter des doublons) grâce à l'option agregation = FALSE.
-#' exemple_flux_COG2017 <- changement_COG_varNum(table_entree=exemple_flux,annees=c(2014:2017),codgeo_entree="COMMUNE",agregation=F,libgeo=NULL,donnees_insee=T)
-#' exemple_flux_COG2017 <- changement_COG_varNum(table_entree=exemple_flux_COG2017,annees=c(2014:2017),codgeo_entree="DCLT",agregation=F,libgeo=NULL,donnees_insee=T)
+#' exemple_flux_COG2017 <- changement_COG_varNum(table_entree=exemple_flux,annees=c(2014:2017),codgeo_entree="COMMUNE",agregation=F,libgeo=F,donnees_insee=T)
+#' exemple_flux_COG2017 <- changement_COG_varNum(table_entree=exemple_flux_COG2017,annees=c(2014:2017),codgeo_entree="DCLT",agregation=F,libgeo=F,donnees_insee=T)
 #' @encoding UTF-8
 
 
-changement_COG_varNum <- function(table_entree,annees,codgeo_entree=colnames(table_entree)[1],var_num=colnames(table_entree)[sapply(table_entree, is.numeric)],agregation=T,libgeo=NULL,donnees_insee=T){
+changement_COG_varNum <- function(table_entree,annees,codgeo_entree=colnames(table_entree)[1],var_num=colnames(table_entree)[sapply(table_entree, is.numeric)],agregation=T,libgeo=F,donnees_insee=T){
 
   inter <- intersect(c(1968,1975,1982,1990,1999,2008:2017),annees)
   if(annees[1]<=annees[length(annees)]){
@@ -72,29 +72,23 @@ changement_COG_varNum <- function(table_entree,annees,codgeo_entree=colnames(tab
     table_entree <- table_finale
   }
 
-  if(!is.null(libgeo)){
+  if(libgeo==T){
     if(donnees_insee==T){
       assign(paste0("COG",annees[length(annees)]),get(paste0("COG",annees[length(annees)],"_insee")))
     }
     table_finale <- merge(table_finale,get(paste0("COG",annees[length(annees)]))[,c(1,2)],by.x=codgeo_entree,by.y="CODGEO",all.x=T,all.y=F)
-    colnames(table_finale)[ncol(table_finale)]<- "XaXuXi"
-    if(libgeo%in%colnames(table_finale)){
-      table_finale[is.na(table_finale[,"XaXuXi"]),"XaXuXi"] <- table_finale[is.na(table_finale[,"XaXuXi"]),libgeo]
-      table_finale[,libgeo]<-NULL
-    }
-    colnames(table_finale)[ncol(table_finale)]<- libgeo
     table_finale <- table_finale[,c(1,ncol(table_finale),2:(ncol(table_finale)-1))]
   }
 
   if(agregation==T){
-    if(!is.null(libgeo)){
-    table_libgeo <- table_finale[!duplicated(table_finale[,c(codgeo_entree,libgeo)]),c(codgeo_entree,libgeo)]
+    if(libgeo==T){
+    table_libgeo <- table_finale[!duplicated(table_finale[,c(1,2)]),c(1,2)]
     }
     table_finale <- aggregate(table_finale[,c(var_num)],by =list(with(table_finale,get(codgeo_entree))),FUN=sum)
     colnames(table_finale)<- c(codgeo_entree,var_num)
-    if(!is.null(libgeo)){
+    if(libgeo==T){
     table_finale <- merge(table_finale, table_libgeo,by=codgeo_entree,all.x=T,all.y=F)
-    colnames(table_finale)<- c(codgeo_entree,libgeo,var_num)
+    table_finale <- table_finale[,c(1,ncol(table_finale),var_num)]
     }
   }
 

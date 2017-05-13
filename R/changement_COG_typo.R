@@ -40,7 +40,7 @@
 #' ## Exemple 1
 #' # Ici nous allons transformer les deux typologies (typoA et typoB) de la table exemple_pop en géographie communale au 1er janvier 2017 (au lieu de 2014).
 #' # L'hypothèse de classement en cas de fusion de communes (*methode_fusion*) choisie est celle d'une classe spécifique (*methode_difference*, classe appelée *mot_difference*="differents") aux regroupements de plusieurs communes de classes différentes. Les autres hypothèses possibles auraient pu être l'hypothèse du maximum de population *methode_max_pop* ou de classe absorbante *methode_classe_absorbante*.
-#' exemple_popcom_COG2017_typo <- changement_COG_typo(table_entree=exemple_popcom[,-2],annees=c(2014:2017),methode_fusion="methode_difference",typos=c("typoA","typoB"),mot_difference = "differents",libgeo="LIB",donnees_insee=T)
+#' exemple_popcom_COG2017_typo <- changement_COG_typo(table_entree=exemple_popcom[,-2],annees=c(2014:2017),methode_fusion="methode_difference",typos=c("typoA","typoB"),mot_difference = "differents",libgeo=T,donnees_insee=T)
 #' head(exemple_popcom_COG2017_typo)
 #' # Nous allons maintenant isoler dans une table les communes fusionnées appartenant à des classes différentes, ici selon la typologie "typoA" entre 2014 et 2015, 2015 et 2016 et 2016 et 2017.
 #' details_exemple_popcom_COG2017_typo <- changement_COG_typo_details(table_entree=exemple_popcom[,-2],annees=c(2014:2017),typo="typoA", donnees_insee=T)
@@ -48,7 +48,7 @@
 #' head(details_exemple_popcom_COG2017_typo[["2015_2016"]])
 #' head(details_exemple_popcom_COG2017_typo[["2016_2017"]])
 
-changement_COG_typo <- function(table_entree,annees,codgeo_entree=colnames(table_entree)[1],typos=colnames(table_entree)[-which(colnames(table_entree)==codgeo_entree)], methode_fusion="methode_difference",mot_difference=NULL,classe_absorbante=NULL,donnees_insee=T,libgeo=NULL){
+changement_COG_typo <- function(table_entree,annees,codgeo_entree=colnames(table_entree)[1],typos=colnames(table_entree)[-which(colnames(table_entree)==codgeo_entree)], methode_fusion="methode_difference",mot_difference=NULL,classe_absorbante=NULL,donnees_insee=T,libgeo=F){
 
   inter <- intersect(c(1968,1975,1982,1990,1999,2008:2017),annees)
   if(annees[1]<=annees[length(annees)]){
@@ -57,12 +57,6 @@ changement_COG_typo <- function(table_entree,annees,codgeo_entree=colnames(table
     inter <- rev(inter[order(inter)])
   }
   annees <- unique(c(annees[1]:inter[1],inter,inter[length(inter)]:annees[length(annees)]))
-
-
-  if(!is.null(libgeo) && libgeo%in%colnames(table_entree)){ ###### ou typos ?
-    table_libgeo <- table_entree[,c(codgeo,libgeo)]
-    table_entree[,libgeo] <- NULL
-  }
 
   for (i in 1:(length(annees)-1)){
 
@@ -144,24 +138,17 @@ changement_COG_typo <- function(table_entree,annees,codgeo_entree=colnames(table
 
   }
 
-  if(!is.null(libgeo)){
+  if(libgeo==T){
     if(donnees_insee==T){
       assign(paste0("COG",annees[length(annees)]),get(paste0("COG",annees[length(annees)],"_insee")))
     }
 
     table_finale <- merge(table_finale,get(paste0("COG",annees[length(annees)]))[,c(1,2)],by.x=codgeo_entree,by.y="CODGEO",all.x=T,all.y=F)
-
-    if(exists("table_libgeo")){
-      table_finale <- merge(table_finale,table_libgeo,by=codgeo_entree,all.x=T,all.y=F)
-      table_finale[is.na(table_finale[,"LIBGEO"]),"LIBGEO"] <- table_finale[is.na(table_finale[,"LIBGEO"]),libgeo]
-      table_finale[,libgeo]<-NULL
-    }
-    colnames(table_finale)[ncol(table_finale)]<- libgeo
     table_finale <- table_finale[,c(1,ncol(table_finale),2:(ncol(table_finale)-1))]
   }
 
 
-  table_finale <- table_finale[order(table_finale[,codgeo_entree]),]#nouveau
+  table_finale <- table_finale[order(table_finale[,codgeo_entree]),]
 
   return(table_finale)
 
