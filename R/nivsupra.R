@@ -43,14 +43,14 @@
 #' @examples
 #' ## Exemple 1
 #' # Ici, après avoir transformé les données en géographie communale au 01/01/2017, nous agrégeons la population et la superficie des communes à l'échelon géographique des zones d'emploi afin d'obtenir une table des densités de population par zone d'emploi.
-#' exemple_popcom_COG2017_num <- changement_COG_varNum(table_entree=exemple_popcom,annees=c(2014:2017),agregation=T,libgeo="LIBGEO",donnees_insee=T)
+#' exemple_popcom_COG2017_num <- changement_COG_varNum(table_entree=exemple_popcom,annees=c(2014:2017),agregation=T,libgeo=T,donnees_insee=T)
 #' exemple_popcom_ZE2010 <- nivsupra(table_entree=exemple_popcom_COG2017_num,nivsupra="ZE2010",na.nivgeo.rm=F,agregation=T)
 #' exemple_popcom_ZE2010$densite <- exemple_popcom_ZE2010$P12_POP / exemple_popcom_ZE2010$SUPERF
 #' head(exemple_popcom_ZE2010)
 #' ## Exemple 2
 #' # Ici, on ajoute les colonnes ZE2010_COMMUNE et ZE2010_DCLT à la table exemple de flux domicile-travail.
-#' exemple_flux_COG2017 <- changement_COG_varNum(table_entree=exemple_flux,annees=c(2014:2017),codgeo_entree="COMMUNE",agregation=F,libgeo=NULL,donnees_insee=T)
-#' exemple_flux_COG2017 <- changement_COG_varNum(table_entree=exemple_flux_COG2017,annees=c(2014:2017),codgeo_entree="DCLT",agregation=F,libgeo=NULL,donnees_insee=T)
+#' exemple_flux_COG2017 <- changement_COG_varNum(table_entree=exemple_flux,annees=c(2014:2017),codgeo_entree="COMMUNE",agregation=F,libgeo=F,donnees_insee=T)
+#' exemple_flux_COG2017 <- changement_COG_varNum(table_entree=exemple_flux_COG2017,annees=c(2014:2017),codgeo_entree="DCLT",agregation=F,libgeo=F,donnees_insee=T)
 #' exemple_flux_COG2017_etZE <- nivsupra(table_entree=exemple_flux_COG2017,codgeo_entree="COMMUNE",nivsupra="ZE2010",na.nivgeo.rm=F,agregation=F)
 #' exemple_flux_COG2017_etZE <- nivsupra(table_entree=exemple_flux_COG2017_etZE,codgeo_entree="DCLT",nivsupra="ZE2010",na.nivgeo.rm=F,agregation=F)
 #' head(exemple_flux_COG2017_etZE)
@@ -58,33 +58,33 @@
 nivsupra <- function(table_entree,codgeo_entree=colnames(table_entree)[1],var_num=colnames(table_entree)[sapply(table_entree, is.numeric)]
                      ,nivsupra, nivsupra_nom=ifelse(agregation==T,nivsupra,paste0(nivsupra,"_",codgeo_entree)),na.nivgeo.rm=F,agregation=T){
 
-  table_entree <- merge(table_entree,table_supracom[,c("CODGEO",nivsupra)],by.x=codgeo_entree,by.y="CODGEO",all.x=T,all.y=F)
+  table_entree <- merge(table_entree[,c(codgeo_entree,var_num)],table_supracom[,c("CODGEO",nivsupra)],by.x=codgeo_entree,by.y="CODGEO",all.x=T,all.y=F)
   colnames(table_entree)[which(colnames(table_entree)==nivsupra)]<- nivsupra_nom
-  table_entree[,"LIBGEO"]<- NULL
+
+  if(na.nivgeo.rm==F){
+    table_sortie <- table_entree
+  } else{
+    table_sortie <- table_entree[-which(is.na(table_entree[,nivsupra_nom])),]
+  }
 
   if(agregation==F){
-    if(na.nivgeo.rm==F){
-      table_sortie <- table_entree
-    } else{
-      table_sortie <- table_entree[which(is.na(table_entree[,nivsupra_nom])),]
-    }
-
+    table_sortie <- merge(table_sortie,libelles_supracom[which(libelles_supracom$NIVGEO==nivsupra),c(2,3)],by.x=nivsupra_nom,by.y="CODGEO",all.x=T,all.y=F)
+    colnames(table_sortie)[ncol(table_sortie)]<- paste0(nivsupra,"_nom_",codgeo_entree)
   } else{
     table_sortie <- aggregate(table_entree[,c(var_num)],by=list(table_entree[,nivsupra_nom]),FUN=sum)
     colnames(table_sortie) <- c(nivsupra_nom,var_num)
     table_sortie <- merge(table_sortie,libelles_supracom[which(libelles_supracom$NIVGEO==nivsupra),c(2,3)],by.x=nivsupra_nom,by.y="CODGEO",all.x=T,all.y=F)
     table_sortie <- table_sortie[,c(nivsupra_nom,"LIBGEO",var_num)]
 
-
-    if(na.nivgeo.rm==F & !(is.null(nrow(table_entree[is.na(table_entree[,nivsupra_nom]),var_num])) | nrow(table_entree[is.na(table_entree[,nivsupra_nom]),var_num])==0)){
-      if(length(var_num)>1){
-        vect_NA <- c(NA,NA,colSums(table_entree[is.na(table_entree[,nivsupra_nom]),var_num]))
-      } else {
-        vect_NA <- c(NA,NA,sum(table_entree[is.na(table_entree[,nivsupra_nom]),var_num]))
-      }
-      names(vect_NA)[1:2] <- c(nivsupra_nom,"LIBGEO")
-      table_sortie<- rbind.data.frame(table_sortie,vect_NA)
-    }
+    # if(na.nivgeo.rm==F & !(is.null(nrow(table_entree[is.na(table_entree[,nivsupra_nom]),var_num])) | nrow(table_entree[is.na(table_entree[,nivsupra_nom]),var_num])==0)){
+    #   if(length(var_num)>1){
+    #     vect_NA <- c(NA,NA,colSums(table_entree[is.na(table_entree[,nivsupra_nom]),var_num]))
+    #   } else {
+    #     vect_NA <- c(NA,NA,sum(table_entree[is.na(table_entree[,nivsupra_nom]),var_num]))
+    #   }
+    #   names(vect_NA)[1:2] <- c(nivsupra_nom,"LIBGEO")
+    #   table_sortie<- rbind.data.frame(table_sortie,vect_NA)
+    # }
   }
 
   return(table_sortie)

@@ -85,7 +85,7 @@ La fonction `changement_COG_varNum` permet de transformer des tables de données
 Ici, nous allons transformer les variables numériques de la table *exemple_pop* afin de récupérer les données de population et de superficie des communes au 1er janvier 2017 (au lieu de 2014).
 
 ```{r, fig.show='hold'}
-exemple_popcom_COG2017_num <- changement_COG_varNum(table_entree=exemple_popcom,annees=c(2014:2017),agregation=T,libgeo="LIBGEO",donnees_insee=T)
+exemple_popcom_COG2017_num <- changement_COG_varNum(table_entree=exemple_popcom,annees=c(2014:2017),agregation=T,libgeo=T,donnees_insee=T)
 head(exemple_popcom_COG2017_num)
 ```
 
@@ -101,7 +101,7 @@ Ici, l'hypothèse de classement en cas de fusion de communes (*methode_fusion*) 
 
 
 ```{r, fig.show='hold'}
-exemple_popcom_COG2017_typo <- changement_COG_typo(table_entree=exemple_popcom[,-2],annees=c(2014:2017),methode_fusion="methode_difference",typos=c("typoA","typoB"),mot_difference = "differents",libgeo="LIB",donnees_insee=T)
+exemple_popcom_COG2017_typo <- changement_COG_typo(table_entree=exemple_popcom[,-2],annees=c(2014:2017),methode_fusion="methode_difference",typos=c("typoA","typoB"),mot_difference = "differents",libgeo=T,donnees_insee=T)
 head(exemple_popcom_COG2017_typo)
 ```
 La fonction `changement_COG_typo_details` permet quant à elle d'isoler dans une table les communes fusionnées appartenant à des classes différentes, ici selon la typologie "typoA" entre 2014 et 2015 puis 2015 et 2016 et 2016 et 2017. 
@@ -170,8 +170,8 @@ exemple_flux_sansPLMsansCorse <- modification_Corse(table_entree=exemple_flux_sa
 La fonction `changement_COG_varNum` peut également s'appliquer à des tables de flux (codes communes pouvant comporter des doublons) grâce à l'option agregation = FALSE. Les variables de type caractère sont alors conservées comme telles ou dupliquées en cas de défusion et les variables numériques (ici IPONDI) sommées en cas de fusion ou réparties proportionnellement à la population de chaque commune en cas de défusion. 
 
 ```{r, fig.show='hold'}
-exemple_flux_COG2017 <- changement_COG_varNum(table_entree=exemple_flux_sansPLMsansCorse,annees=c(2014:2017),codgeo_entree="COMMUNE",agregation=F,libgeo=NULL,donnees_insee=T)
-exemple_flux_COG2017 <- changement_COG_varNum(table_entree=exemple_flux_COG2017,annees=c(2014:2017),codgeo_entree="DCLT",agregation=F,libgeo=NULL,donnees_insee=T)
+exemple_flux_COG2017 <- changement_COG_varNum(table_entree=exemple_flux_sansPLMsansCorse,annees=c(2014:2017),codgeo_entree="COMMUNE",agregation=F,libgeo=F,donnees_insee=T)
+exemple_flux_COG2017 <- changement_COG_varNum(table_entree=exemple_flux_COG2017,annees=c(2014:2017),codgeo_entree="DCLT",agregation=F,libgeo=F,donnees_insee=T)
 ```
 
 
