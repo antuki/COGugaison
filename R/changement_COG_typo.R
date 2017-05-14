@@ -11,25 +11,28 @@
 #' - "methode_classe_absorbante" : attribuer la classe dite absorbante à toute commune fusionnée contenant au moins une ancienne commune appartenant à cette classe absorbante
 #' @param mot_difference n'est à définir que si methode_fusion = "methode_difference". Si ce paramètre est laissé à NULL alors la commune fusionnée possède comme libellé de classe l'ensemble des libellés présents dans ses communes fusionnées séparés d'un "et". Sinon, il indique un nom de classe à attribuer aux communes fusionnées de classes différentes.
 #' @param classe_absorbante n'est à définir que si methode_fusion = "methode_classe_absorbante". Si ce paramètre est laissé à NULL alors la commune fusionnée possède comme libellé de classe l'ensemble des libellés présents dans ses communes fusionnées séparés d'un "et". Sinon, il indique le nom de la classe dite absorbante à attribuer à toute commune fusionnée contenant au moins une ancienne commune appartenant à cette classe absorbante.
-#' @param libgeo doit être conservé à NULL si la table souhaitée ne contient pas de libellés de communes, sinon il doit indiquer le nom de la variable renseignant sur le libellé de la commune (celui présent dans la table si il existe déjà ou tout autre nom s'il doit être ajouté).
+#' @param libgeo vaut TRUE si l'on veut rajouter dans la table une colonne nommée "nom_commune" qui indique le nom de la commune issu du code officiel géographique et FALSE sinon.
 #' @param donnees_insee vaut TRUE si les données manipulées sont produites par l'Insee. En effet, quelques rares modifications communales (la défusion des communes Loisey et Culey au 1er janvier 2014 par exemple) ont été prises en compte dans les bases de données communales de l'Insee plus tard que la date officielle. Pour tous les COG officiels datant d'avant 2008, seules les tables de passage Insee sont disponibles dans ce package.
 #' @details
 #' Le code officiel géographique de référence du package est actuellement celui au 01/01/2017. Les données communales devront être dans ce COG pour être agrégées en niveaux supra-communaux (fonction nivsupra). \cr
 #'
-#' Les autres codes officiels géographiques utilisés dans COGugaison sont les suivants :
+#' Les millésimes des COG qui peuvent être utilisés sont à ce stade les suivants : 1968, 1975, 1982, 1990, 1999, 2007 à 2017. \cr
+#'
+#' Les dates de référence des codes officiels géographiques utilisés dans COGugaison sont les suivantes :
 #' \itemize{
-#' \item{COG 1968 : à partir du 01/03/1968 (donnees_insee=T obligatoirement)}
-#' \item{COG 1975 : à partir du 20/02/1975 (donnees_insee=T obligatoirement)}
-#' \item{COG 1982 : à partir du 04/03/1982 (donnees_insee=T obligatoirement)}
-#' \item{COG 1990 : à partir du 05/03/1990 (donnees_insee=T obligatoirement)}
-#' \item{COG 1999 : à partir du 08/03/1999 (donnees_insee=T obligatoirement)}
-#' \item{COG 2008 à 2017 : à partir du 01/01 de chaque année (donnees_insee=T ou F)}} \cr
+#' \item{COG 1968 : à partir du 01/03/1968}
+#' \item{COG 1975 : à partir du 20/02/1975}
+#' \item{COG 1982 : à partir du 04/03/1982}
+#' \item{COG 1990 : à partir du 05/03/1990}
+#' \item{COG 1999 : à partir du 08/03/1999}
+#' \item{Pour tous les autres COG : à partir du 01/01 de chaque année}} \cr
 #'
 #' Les différences entre les tables de passage Insee et non Insee sont les suivantes :\cr
 #' \itemize{
 #' \item{1982-03-03 (pris en compte par l'Insee seulement après le 04/03/1982): Flaignes-Havys (08169) est un rassemblement de Flaignes-Havys (08169), Havys (08221) [fusion simple].}
 #' \item{2014-01-01 (pris en compte par l'Insee seulement au 01/01/2015) : Loisey (55298) s'est séparée en Loisey (55298), Culey (55138) [rétablissement].}
-#' \item{1990-02-01 (pris en compte par l'Insee seulement après le 05/03/1990) : Le code commune de Oudon passe de 14624 à 14697 [changement de code dû à un changement de chef-lieu].}}
+#' \item{1990-02-01 (pris en compte par l'Insee seulement après le 05/03/1990) : Le code commune de Oudon passe de 14624 à 14697 [changement de code dû à un changement de chef-lieu].}
+#' \item{1981-09-28 (pris en compte par l'Insee  dès le 20/02/1975) : Vaudreuil-Ex-Ensemble Urbain (27701) est créée à partir des parcelles d'Incarville (27351), de Léry (27365) , de Porte-Joie (27471) , de Poses  (27474) , de Saint-Étienne-du-Vauvray (27537), de Saint-Pierre-du-Vauvray (27598), de Tournedos-sur-Seine  (27651) et du Vaudreuil (27528) [création]. Cette situation étant complexe, nous avons pour le moment considéré que Vaudreuil-Ex-Ensemble Urbain (27701) est créée à partir de parcelles du Vaudreuil (27528) uniquement.}}
 #' @references
 #' \itemize{
 #' \item{\href{https://www.insee.fr/fr/information/2666684#titre-bloc-11}{historique des géographies communales (Insee)}}
@@ -64,87 +67,91 @@ changement_COG_typo <- function(table_entree,annees,codgeo_entree=colnames(table
       assign(paste0("PASSAGE_",annees[i],"_",annees[i+1]),get(paste0("PASSAGE_",annees[i],"_",annees[i+1],"_insee")))
     }
 
-    provisoire <- merge(table_entree,get(paste0("PASSAGE_",annees[i],"_",annees[i+1])),by.x=codgeo_entree,by.y=paste0("cod",annees[i]),all.x=T,all.y=F)
-    colnames(provisoire)[1]<- paste0("cod",annees[i])
-    provisoire[which(is.na(with(provisoire,get(paste0("cod",annees[i+1]))))),"ratio"] <- 1
-    provisoire[which(is.na(with(provisoire,get(paste0("cod",annees[i+1]))))),paste0("cod",annees[i+1])] <- as.character(provisoire[which(is.na(with(provisoire,get(paste0("cod",annees[i+1]))))),paste0("cod",annees[i])])
+    if(nrow(get(paste0("PASSAGE_",annees[i],"_",annees[i+1])))==0){
+      table_finale <- table_entree
+    } else {
 
-    if(length(typos)>1){ # choisir quoi faire ici en cas de NA
-      provisoire <- provisoire[apply(provisoire[, typos], 1, function(x) !all(is.na(x))), ]
-    } else{
-      provisoire <- provisoire[!is.na(provisoire[,typos]), ]
-    }
+      provisoire <- merge(table_entree,get(paste0("PASSAGE_",annees[i],"_",annees[i+1])),by.x=codgeo_entree,by.y=paste0("cod",annees[i]),all.x=T,all.y=F)
+      colnames(provisoire)[1]<- paste0("cod",annees[i])
+      provisoire[which(is.na(with(provisoire,get(paste0("cod",annees[i+1]))))),"ratio"] <- 1
+      provisoire[which(is.na(with(provisoire,get(paste0("cod",annees[i+1]))))),paste0("cod",annees[i+1])] <- as.character(provisoire[which(is.na(with(provisoire,get(paste0("cod",annees[i+1]))))),paste0("cod",annees[i])])
 
-    for (var in typos){
-      provisoire_court <- provisoire[,c(paste0("cod",annees[i]),paste0("cod",annees[i+1]),"annee","typemodif","ratio",var)] #erreur
-      table_n_d <- provisoire_court[is.na(provisoire_court$typemodif) | (provisoire_court$typemodif=="d")| (provisoire_court$typemodif=="c"),]
-      table_f <- provisoire_court[(provisoire_court$typemodif=="f"),]
-
-      if(nrow(table_f)!=0){
-
-        table_f_liste <- lapply(unique(with(table_f,get(paste0("cod",annees[i+1])))),function(x){table_f[which(with(table_f,get(paste0("cod",annees[i+1])))==x),]})
-        table_f_sanspb <-table_f_liste[which(lapply(table_f_liste, FUN=function(x){ifelse(length(unique(x[,6]))==1,T,F)})==T)]
-        table_f_sanspb <- lapply(table_f_sanspb, FUN=function(x){x[1,]})
-        table_f_sanspb  <- do.call("rbind", table_f_sanspb)
-        table_f_avecpb <-table_f_liste[which(lapply(table_f_liste, FUN=function(x){ifelse(length(unique(x[,6]))==1,T,F)})==F)]
-
-        if (methode_fusion=="methode_difference"){
-          table_f_avecpb <- lapply(table_f_avecpb, FUN=function(x){
-            categories <- unique(x[,var])[order(unique(x[,var]))]
-            mot_diff <- ifelse(is.null(mot_difference),F,T)
-            x[1,var]<- ifelse(mot_diff==T,mot_difference,paste(categories,collapse = " et "))
-            return(x[1,])
-          })
-        }
-
-        if (methode_fusion=="methode_max_pop"){
-           if(donnees_insee==T){
-            assign(paste0("COG",annees[i]),get(paste0("COG",annees[i],"_insee")))
-          }
-
-          table_f_avecpb <- lapply(table_f_avecpb, FUN=function(x){merge(x,get(paste0("COG",annees[i]))[,-2],by.x=paste0("cod",annees[i]),by.y="CODGEO",all.x=T,all.y=F)})
-          table_f_avecpb  <- lapply(table_f_avecpb, FUN=function(x){x[which(x[,6]==(aggregate(POP ~ get(colnames(x)[6]),data =x, FUN=sum)[which.max(aggregate(POP ~ get(colnames(x)[6]),data = x, FUN=sum)$POP),1]))[1],-7]})
-        }
-
-
-        if (methode_fusion=="methode_classe_absorbante"){
-
-          table_f_avecpb <- lapply(table_f_avecpb, FUN=function(x){
-            categories <- unique(x[,var])[order(unique(x[,var]))]
-            absorb <- ifelse(classe_absorbante%in%categories,T,F)
-            x[1,var]<- ifelse(absorb==T,classe_absorbante,paste(categories,collapse = " et "))
-            return(x[1,])
-            })
-        }
-
-        table_f_avecpb <- do.call("rbind", table_f_avecpb)
-
-        table_finale_provisoire <- rbind(table_n_d,table_f_sanspb,table_f_avecpb)[,c(2,6)]
-        names(table_finale_provisoire)[names(table_finale_provisoire)==paste0("cod",annees[i+1])] <- codgeo_entree
-
+      if(length(typos)>1){ # choisir quoi faire ici en cas de NA
+        provisoire <- provisoire[apply(provisoire[, typos], 1, function(x) !all(is.na(x))), ]
       } else{
-        table_finale_provisoire <- table_n_d[,c(2,6)]
-        names(table_finale_provisoire)[names(table_finale_provisoire)==paste0("cod",annees[i+1])] <- codgeo_entree
+        provisoire <- provisoire[!is.na(provisoire[,typos]), ]
       }
 
-      if(var==typos[1]){
-        table_finale <- table_finale_provisoire
-      } else{
-        table_finale <- merge(table_finale,table_finale_provisoire,by=codgeo_entree,all.x=T,all.y=F)
+      for (var in typos){
+        provisoire_court <- provisoire[,c(paste0("cod",annees[i]),paste0("cod",annees[i+1]),"annee","typemodif","ratio",var)] #erreur
+        table_n_d <- provisoire_court[which(is.na(provisoire_court$typemodif) | (provisoire_court$typemodif=="d")| (provisoire_court$typemodif=="c")),]
+        table_f <- provisoire_court[which(provisoire_court$typemodif=="f"),]
+
+        if(nrow(table_f)!=0){
+
+          table_f_liste <- lapply(unique(with(table_f,get(paste0("cod",annees[i+1])))),function(x){table_f[which(with(table_f,get(paste0("cod",annees[i+1])))==x),]})
+          table_f_sanspb <-table_f_liste[which(lapply(table_f_liste, FUN=function(x){ifelse(length(unique(x[,6]))==1,T,F)})==T)]
+          table_f_sanspb <- lapply(table_f_sanspb, FUN=function(x){x[1,]})
+          table_f_sanspb  <- do.call("rbind", table_f_sanspb)
+          table_f_avecpb <-table_f_liste[which(lapply(table_f_liste, FUN=function(x){ifelse(length(unique(x[,6]))==1,T,F)})==F)]
+
+          if (methode_fusion=="methode_difference"){
+            table_f_avecpb <- lapply(table_f_avecpb, FUN=function(x){
+              categories <- unique(x[,var])[order(unique(x[,var]))]
+              mot_diff <- ifelse(is.null(mot_difference),F,T)
+              x[1,var]<- ifelse(mot_diff==T,mot_difference,paste(categories,collapse = " et "))
+              return(x[1,])
+            })
+          }
+
+          if (methode_fusion=="methode_max_pop"){
+            if(donnees_insee==T){
+              assign(paste0("COG",annees[i]),get(paste0("COG",annees[i],"_insee")))
+            }
+
+            table_f_avecpb <- lapply(table_f_avecpb, FUN=function(x){merge(x,get(paste0("COG",annees[i]))[,-2],by.x=paste0("cod",annees[i]),by.y="CODGEO",all.x=T,all.y=F)})
+            table_f_avecpb  <- lapply(table_f_avecpb, FUN=function(x){x[which(x[,6]==(aggregate(POP ~ get(colnames(x)[6]),data =x, FUN=sum)[which.max(aggregate(POP ~ get(colnames(x)[6]),data = x, FUN=sum)$POP),1]))[1],-7]})
+          }
+
+
+          if (methode_fusion=="methode_classe_absorbante"){
+
+            table_f_avecpb <- lapply(table_f_avecpb, FUN=function(x){
+              categories <- unique(x[,var])[order(unique(x[,var]))]
+              absorb <- ifelse(classe_absorbante%in%categories,T,F)
+              x[1,var]<- ifelse(absorb==T,classe_absorbante,paste(categories,collapse = " et "))
+              return(x[1,])
+            })
+          }
+
+          table_f_avecpb <- do.call("rbind", table_f_avecpb)
+
+          table_finale_provisoire <- rbind(table_n_d,table_f_sanspb,table_f_avecpb)[,c(2,6)]
+          names(table_finale_provisoire)[names(table_finale_provisoire)==paste0("cod",annees[i+1])] <- codgeo_entree
+
+        } else{
+          table_finale_provisoire <- table_n_d[,c(2,6)]
+          names(table_finale_provisoire)[names(table_finale_provisoire)==paste0("cod",annees[i+1])] <- codgeo_entree
+        }
+
+        if(var==typos[1]){
+          table_finale <- table_finale_provisoire
+        } else{
+          table_finale <- merge(table_finale,table_finale_provisoire,by=codgeo_entree,all.x=T,all.y=F)
+        }
       }
     }
 
     table_entree <- table_finale
-
   }
 
   if(libgeo==T){
     if(donnees_insee==T){
       assign(paste0("COG",annees[length(annees)]),get(paste0("COG",annees[length(annees)],"_insee")))
     }
-
     table_finale <- merge(table_finale,get(paste0("COG",annees[length(annees)]))[,c(1,2)],by.x=codgeo_entree,by.y="CODGEO",all.x=T,all.y=F)
     table_finale <- table_finale[,c(1,ncol(table_finale),2:(ncol(table_finale)-1))]
+    colnames(table_finale)[2]<-"nom_commune"
   }
 
 

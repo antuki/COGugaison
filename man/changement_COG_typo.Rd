@@ -9,7 +9,7 @@ changement_COG_typo(table_entree, annees,
   typos = colnames(table_entree)[-which(colnames(table_entree) ==
   codgeo_entree)], methode_fusion = "methode_difference",
   mot_difference = NULL, classe_absorbante = NULL, donnees_insee = T,
-  libgeo = NULL)
+  libgeo = F)
 }
 \arguments{
 \item{table_entree}{correspond à la table à transformer en une autre géographie}
@@ -31,7 +31,7 @@ changement_COG_typo(table_entree, annees,
 
 \item{donnees_insee}{vaut TRUE si les données manipulées sont produites par l'Insee. En effet, quelques rares modifications communales (la défusion des communes Loisey et Culey au 1er janvier 2014 par exemple) ont été prises en compte dans les bases de données communales de l'Insee plus tard que la date officielle. Pour tous les COG officiels datant d'avant 2008, seules les tables de passage Insee sont disponibles dans ce package.}
 
-\item{libgeo}{doit être conservé à NULL si la table souhaitée ne contient pas de libellés de communes, sinon il doit indiquer le nom de la variable renseignant sur le libellé de la commune (celui présent dans la table si il existe déjà ou tout autre nom s'il doit être ajouté).}
+\item{libgeo}{vaut TRUE si l'on veut rajouter dans la table une colonne nommée "nom_commune" qui indique le nom de la commune issu du code officiel géographique et FALSE sinon.}
 }
 \description{
 Transformer des typologies en géographie au premier janvier d'une année souhaitée en ayant le choix entre plusieurs hypothèses de classement en cas de fusion de communes de classes différentes (attribuer la classe qui contient le plus de population, définir une classe absorbante ou une classe spécifique aux regroupements de plusieurs communes de classes différentes).
@@ -39,26 +39,29 @@ Transformer des typologies en géographie au premier janvier d'une année souhai
 \details{
 Le code officiel géographique de référence du package est actuellement celui au 01/01/2017. Les données communales devront être dans ce COG pour être agrégées en niveaux supra-communaux (fonction nivsupra). \cr
 
-Les autres codes officiels géographiques utilisés dans COGugaison sont les suivants :
+Les millésimes des COG qui peuvent être utilisés sont à ce stade les suivants : 1968, 1975, 1982, 1990, 1999, 2007 à 2017. \cr
+
+Les dates de référence des codes officiels géographiques utilisés dans COGugaison sont les suivantes :
 \itemize{
-\item{COG 1968 : à partir du 01/03/1968 (donnees_insee=T obligatoirement)}
-\item{COG 1975 : à partir du 20/02/1975 (donnees_insee=T obligatoirement)}
-\item{COG 1982 : à partir du 04/03/1982 (donnees_insee=T obligatoirement)}
-\item{COG 1990 : à partir du 05/03/1990 (donnees_insee=T obligatoirement)}
-\item{COG 1999 : à partir du 08/03/1999 (donnees_insee=T obligatoirement)}
-\item{COG 2008 à 2017 : à partir du 01/01 de chaque année (donnees_insee=T ou F)}} \cr
+\item{COG 1968 : à partir du 01/03/1968}
+\item{COG 1975 : à partir du 20/02/1975}
+\item{COG 1982 : à partir du 04/03/1982}
+\item{COG 1990 : à partir du 05/03/1990}
+\item{COG 1999 : à partir du 08/03/1999}
+\item{Pour tous les autres COG : à partir du 01/01 de chaque année}} \cr
 
 Les différences entre les tables de passage Insee et non Insee sont les suivantes :\cr
 \itemize{
 \item{1982-03-03 (pris en compte par l'Insee seulement après le 04/03/1982): Flaignes-Havys (08169) est un rassemblement de Flaignes-Havys (08169), Havys (08221) [fusion simple].}
 \item{2014-01-01 (pris en compte par l'Insee seulement au 01/01/2015) : Loisey (55298) s'est séparée en Loisey (55298), Culey (55138) [rétablissement].}
-\item{1990-02-01 (pris en compte par l'Insee seulement après le 05/03/1990) : Le code commune de Oudon passe de 14624 à 14697 [changement de code dû à un changement de chef-lieu].}}
+\item{1990-02-01 (pris en compte par l'Insee seulement après le 05/03/1990) : Le code commune de Oudon passe de 14624 à 14697 [changement de code dû à un changement de chef-lieu].}
+\item{1981-09-28 (pris en compte par l'Insee  dès le 20/02/1975) : Vaudreuil-Ex-Ensemble Urbain (27701) est créée à partir des parcelles d'Incarville (27351), de Léry (27365) , de Porte-Joie (27471) , de Poses  (27474) , de Saint-Étienne-du-Vauvray (27537), de Saint-Pierre-du-Vauvray (27598), de Tournedos-sur-Seine  (27651) et du Vaudreuil (27528) [création]. Cette situation étant complexe, nous avons pour le moment considéré que Vaudreuil-Ex-Ensemble Urbain (27701) est créée à partir de parcelles du Vaudreuil (27528) uniquement.}}
 }
 \examples{
 ## Exemple 1
 # Ici nous allons transformer les deux typologies (typoA et typoB) de la table exemple_pop en géographie communale au 1er janvier 2017 (au lieu de 2014).
 # L'hypothèse de classement en cas de fusion de communes (*methode_fusion*) choisie est celle d'une classe spécifique (*methode_difference*, classe appelée *mot_difference*="differents") aux regroupements de plusieurs communes de classes différentes. Les autres hypothèses possibles auraient pu être l'hypothèse du maximum de population *methode_max_pop* ou de classe absorbante *methode_classe_absorbante*.
-exemple_popcom_COG2017_typo <- changement_COG_typo(table_entree=exemple_popcom[,-2],annees=c(2014:2017),methode_fusion="methode_difference",typos=c("typoA","typoB"),mot_difference = "differents",libgeo="LIB",donnees_insee=T)
+exemple_popcom_COG2017_typo <- changement_COG_typo(table_entree=exemple_popcom[,-2],annees=c(2014:2017),methode_fusion="methode_difference",typos=c("typoA","typoB"),mot_difference = "differents",libgeo=T,donnees_insee=T)
 head(exemple_popcom_COG2017_typo)
 # Nous allons maintenant isoler dans une table les communes fusionnées appartenant à des classes différentes, ici selon la typologie "typoA" entre 2014 et 2015, 2015 et 2016 et 2016 et 2017.
 details_exemple_popcom_COG2017_typo <- changement_COG_typo_details(table_entree=exemple_popcom[,-2],annees=c(2014:2017),typo="typoA", donnees_insee=T)

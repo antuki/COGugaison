@@ -114,18 +114,20 @@
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Le code officiel géographique de référence du package est actuellement celui au 01/01/2017. Les données communales devront être dans ce COG pour être agrégées en niveaux supra-communaux (fonction nivsupra).</p>
-<p>Les autres codes officiels géographiques utilisés dans COGugaison sont les suivants :</p><ul>
-<li><p>COG 1968 : à partir du 01/03/1968 (donnees_insee=T obligatoirement)</p></li>
-<li><p>COG 1975 : à partir du 20/02/1975 (donnees_insee=T obligatoirement)</p></li>
-<li><p>COG 1982 : à partir du 04/03/1982 (donnees_insee=T obligatoirement)</p></li>
-<li><p>COG 1990 : à partir du 05/03/1990 (donnees_insee=T obligatoirement)</p></li>
-<li><p>COG 1999 : à partir du 08/03/1999 (donnees_insee=T obligatoirement)</p></li>
-<li><p>COG 2008 à 2017 : à partir du 01/01 de chaque année (donnees_insee=T ou F)</p></li>
+<p>Les millésimes des COG qui peuvent être utilisés sont à ce stade les suivants : 1968, 1975, 1982, 1990, 1999, 2007 à 2017.</p>
+<p>Les dates de référence des codes officiels géographiques utilisés dans COGugaison sont les suivantes :</p><ul>
+<li><p>COG 1968 : à partir du 01/03/1968</p></li>
+<li><p>COG 1975 : à partir du 20/02/1975</p></li>
+<li><p>COG 1982 : à partir du 04/03/1982</p></li>
+<li><p>COG 1990 : à partir du 05/03/1990</p></li>
+<li><p>COG 1999 : à partir du 08/03/1999</p></li>
+<li><p>Pour tous les autres COG : à partir du 01/01 de chaque année</p></li>
 </ul><p></p>
 <p>Les différences entre les tables de passage Insee et non Insee sont les suivantes :</p><ul>
 <li><p>1982-03-03 (pris en compte par l'Insee seulement après le 04/03/1982): Flaignes-Havys (08169) est un rassemblement de Flaignes-Havys (08169), Havys (08221) [fusion simple].</p></li>
 <li><p>2014-01-01 (pris en compte par l'Insee seulement au 01/01/2015) : Loisey (55298) s'est séparée en Loisey (55298), Culey (55138) [rétablissement].</p></li>
 <li><p>1990-02-01 (pris en compte par l'Insee seulement après le 05/03/1990) : Le code commune de Oudon passe de 14624 à 14697 [changement de code dû à un changement de chef-lieu].</p></li>
+<li><p>1981-09-28 (pris en compte par l'Insee  dès le 20/02/1975) : Vaudreuil-Ex-Ensemble Urbain (27701) est créée à partir des parcelles d'Incarville (27351), de Léry (27365) , de Porte-Joie (27471) , de Poses  (27474) , de Saint-Étienne-du-Vauvray (27537), de Saint-Pierre-du-Vauvray (27598), de Tournedos-sur-Seine  (27651) et du Vaudreuil (27528) [création]. Cette situation étant complexe, nous avons pour le moment considéré que Vaudreuil-Ex-Ensemble Urbain (27701) est créée à partir de parcelles du Vaudreuil (27528) uniquement.</p></li>
 </ul>
     
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
@@ -144,8 +146,8 @@
     <pre class="examples"><div class='input'><span class='co'>## Exemple 1</span>
 <span class='co'># Ici nous allons transformer les deux typologies (typoA et typoB) de la table exemple_pop en géographie communale au 1er janvier 2017 (au lieu de 2014).</span>
 <span class='co'># L'hypothèse de classement en cas de fusion de communes (*methode_fusion*) choisie est celle d'une classe spécifique (*methode_difference*, classe appelée *mot_difference*="differents") aux regroupements de plusieurs communes de classes différentes. Les autres hypothèses possibles auraient pu être l'hypothèse du maximum de population *methode_max_pop* ou de classe absorbante *methode_classe_absorbante*.</span>
-<span class='no'>exemple_popcom_COG2017_typo</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='changement_COG_typo.html'>changement_COG_typo</a></span>(<span class='kw'>table_entree</span><span class='kw'>=</span><span class='no'>exemple_popcom</span>[,-<span class='fl'>2</span>],<span class='kw'>annees</span><span class='kw'>=</span><span class='fu'>c</span>(<span class='fl'>2014</span>:<span class='fl'>2017</span>),<span class='kw'>methode_fusion</span><span class='kw'>=</span><span class='st'>"methode_difference"</span>,<span class='kw'>typos</span><span class='kw'>=</span><span class='fu'>c</span>(<span class='st'>"typoA"</span>,<span class='st'>"typoB"</span>),<span class='kw'>mot_difference</span> <span class='kw'>=</span> <span class='st'>"differents"</span>,<span class='kw'>libgeo</span><span class='kw'>=</span><span class='st'>"LIB"</span>,<span class='kw'>donnees_insee</span><span class='kw'>=</span><span class='no'>T</span>)
-<span class='fu'>head</span>(<span class='no'>exemple_popcom_COG2017_typo</span>)</div><div class='output co'>#&gt;   CODGEO                     LIB    typoA typoB
+<span class='no'>exemple_popcom_COG2017_typo</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='changement_COG_typo.html'>changement_COG_typo</a></span>(<span class='kw'>table_entree</span><span class='kw'>=</span><span class='no'>exemple_popcom</span>[,-<span class='fl'>2</span>],<span class='kw'>annees</span><span class='kw'>=</span><span class='fu'>c</span>(<span class='fl'>2014</span>:<span class='fl'>2017</span>),<span class='kw'>methode_fusion</span><span class='kw'>=</span><span class='st'>"methode_difference"</span>,<span class='kw'>typos</span><span class='kw'>=</span><span class='fu'>c</span>(<span class='st'>"typoA"</span>,<span class='st'>"typoB"</span>),<span class='kw'>mot_difference</span> <span class='kw'>=</span> <span class='st'>"differents"</span>,<span class='kw'>libgeo</span><span class='kw'>=</span><span class='no'>T</span>,<span class='kw'>donnees_insee</span><span class='kw'>=</span><span class='no'>T</span>)
+<span class='fu'>head</span>(<span class='no'>exemple_popcom_COG2017_typo</span>)</div><div class='output co'>#&gt;   CODGEO             nom_commune    typoA typoB
 #&gt; 1  01001 L'Abergement-Clémenciat CLASSE 2     F
 #&gt; 2  01002   L'Abergement-de-Varey CLASSE 3     D
 #&gt; 3  01004       Ambérieu-en-Bugey CLASSE 1     B

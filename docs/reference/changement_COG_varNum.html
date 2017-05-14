@@ -86,7 +86,7 @@
     <pre class="usage"><span class='fu'>changement_COG_varNum</span>(<span class='no'>table_entree</span>, <span class='no'>annees</span>,
   <span class='kw'>codgeo_entree</span> <span class='kw'>=</span> <span class='fu'>colnames</span>(<span class='no'>table_entree</span>)[<span class='fl'>1</span>],
   <span class='kw'>var_num</span> <span class='kw'>=</span> <span class='fu'>colnames</span>(<span class='no'>table_entree</span>)[<span class='fu'>sapply</span>(<span class='no'>table_entree</span>, <span class='no'>is.numeric</span>)],
-  <span class='kw'>agregation</span> <span class='kw'>=</span> <span class='no'>T</span>, <span class='kw'>libgeo</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>donnees_insee</span> <span class='kw'>=</span> <span class='no'>T</span>)</pre>
+  <span class='kw'>agregation</span> <span class='kw'>=</span> <span class='no'>T</span>, <span class='kw'>libgeo</span> <span class='kw'>=</span> <span class='no'>F</span>, <span class='kw'>donnees_insee</span> <span class='kw'>=</span> <span class='no'>T</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -113,7 +113,7 @@
     </tr>
     <tr>
       <th>libgeo</th>
-      <td><p>doit être conservé à NULL si la table souhaitée ne contient pas de libellés de communes, sinon il doit indiquer le nom de la variable renseignant sur le libellé de la commune (celui présent dans la table si il existe déjà ou tout autre nom s'il doit être ajouté).</p></td>
+      <td><p>vaut TRUE si l'on veut rajouter dans la table une colonne nommée "nom_commune" qui indique le nom de la commune issu du code officiel géographique et FALSE sinon.</p></td>
     </tr>
     <tr>
       <th>donnees_insee</th>
@@ -124,18 +124,20 @@
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Le code officiel géographique de référence du package est actuellement celui au 01/01/2017. Les données communales devront être dans ce COG pour être agrégées en niveaux supra-communaux (fonction nivsupra).</p>
-<p>Les autres codes officiels géographiques utilisés dans COGugaison sont les suivants :</p><ul>
-<li><p>COG 1968 : à partir du 01/03/1968 (donnees_insee=T obligatoirement)</p></li>
-<li><p>COG 1975 : à partir du 20/02/1975 (donnees_insee=T obligatoirement)</p></li>
-<li><p>COG 1982 : à partir du 04/03/1982 (donnees_insee=T obligatoirement)</p></li>
-<li><p>COG 1990 : à partir du 05/03/1990 (donnees_insee=T obligatoirement)</p></li>
-<li><p>COG 1999 : à partir du 08/03/1999 (donnees_insee=T obligatoirement)</p></li>
-<li><p>COG 2008 à 2017 : à partir du 01/01 de chaque année (donnees_insee=T ou F)</p></li>
+<p>Les millésimes des COG qui peuvent être utilisés sont à ce stade les suivants : 1968, 1975, 1982, 1990, 1999, 2007 à 2017.</p>
+<p>Les dates de référence des codes officiels géographiques utilisés dans COGugaison sont les suivantes :</p><ul>
+<li><p>COG 1968 : à partir du 01/03/1968</p></li>
+<li><p>COG 1975 : à partir du 20/02/1975</p></li>
+<li><p>COG 1982 : à partir du 04/03/1982</p></li>
+<li><p>COG 1990 : à partir du 05/03/1990</p></li>
+<li><p>COG 1999 : à partir du 08/03/1999</p></li>
+<li><p>Pour tous les autres COG : à partir du 01/01 de chaque année</p></li>
 </ul><p></p>
 <p>Les différences entre les tables de passage Insee et non Insee sont les suivantes :</p><ul>
 <li><p>1982-03-03 (pris en compte par l'Insee seulement après le 04/03/1982): Flaignes-Havys (08169) est un rassemblement de Flaignes-Havys (08169), Havys (08221) [fusion simple].</p></li>
 <li><p>2014-01-01 (pris en compte par l'Insee seulement au 01/01/2015) : Loisey (55298) s'est séparée en Loisey (55298), Culey (55138) [rétablissement].</p></li>
 <li><p>1990-02-01 (pris en compte par l'Insee seulement après le 05/03/1990) : Le code commune de Oudon passe de 14624 à 14697 [changement de code dû à un changement de chef-lieu].</p></li>
+<li><p>1981-09-28 (pris en compte par l'Insee  dès le 20/02/1975) : Vaudreuil-Ex-Ensemble Urbain (27701) est créée à partir des parcelles d'Incarville (27351), de Léry (27365) , de Porte-Joie (27471) , de Poses  (27474) , de Saint-Étienne-du-Vauvray (27537), de Saint-Pierre-du-Vauvray (27598), de Tournedos-sur-Seine  (27651) et du Vaudreuil (27528) [création]. Cette situation étant complexe, nous avons pour le moment considéré que Vaudreuil-Ex-Ensemble Urbain (27701) est créée à partir de parcelles du Vaudreuil (27528) uniquement.</p></li>
 </ul>
     
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
@@ -153,8 +155,8 @@
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>## Exemple 1</span>
 <span class='co'># Ici, nous allons transformer les variables numériques de la table *exemple_pop* afin de récupérer les données de population et de superficie des communes au 1er janvier 2017 (au lieu de 2014).</span>
-<span class='no'>exemple_popcom_COG2017_num</span> <span class='kw'>&lt;-</span> <span class='fu'>changement_COG_varNum</span>(<span class='kw'>table_entree</span><span class='kw'>=</span><span class='no'>exemple_popcom</span>,<span class='kw'>annees</span><span class='kw'>=</span><span class='fu'>c</span>(<span class='fl'>2014</span>:<span class='fl'>2017</span>),<span class='kw'>agregation</span><span class='kw'>=</span><span class='no'>T</span>,<span class='kw'>libgeo</span><span class='kw'>=</span><span class='st'>"LIBGEO"</span>,<span class='kw'>donnees_insee</span><span class='kw'>=</span><span class='no'>T</span>)
-<span class='fu'>head</span>(<span class='no'>exemple_popcom_COG2017_num</span>)</div><div class='output co'>#&gt;   CODGEO                  LIBGEO P12_POP SUPERF
+<span class='no'>exemple_popcom_COG2017_num</span> <span class='kw'>&lt;-</span> <span class='fu'>changement_COG_varNum</span>(<span class='kw'>table_entree</span><span class='kw'>=</span><span class='no'>exemple_popcom</span>,<span class='kw'>annees</span><span class='kw'>=</span><span class='fu'>c</span>(<span class='fl'>2014</span>:<span class='fl'>2017</span>),<span class='kw'>agregation</span><span class='kw'>=</span><span class='no'>T</span>,<span class='kw'>libgeo</span><span class='kw'>=</span><span class='no'>T</span>,<span class='kw'>donnees_insee</span><span class='kw'>=</span><span class='no'>T</span>)
+<span class='fu'>head</span>(<span class='no'>exemple_popcom_COG2017_num</span>)</div><div class='output co'>#&gt;   CODGEO             nom_commune P12_POP SUPERF
 #&gt; 1  01001 L'Abergement-Clémenciat     777     16
 #&gt; 2  01002   L'Abergement-de-Varey     235      9
 #&gt; 3  01004       Ambérieu-en-Bugey   14233     25
@@ -162,8 +164,8 @@
 #&gt; 5  01006                 Ambléon     110      6
 #&gt; 6  01007                Ambronay    2437     34</div><div class='input'><span class='co'>## Exemple 2</span>
 <span class='co'># La fonction peut également s'appliquer à des tables de flux (codes communes pouvant comporter des doublons) grâce à l'option agregation = FALSE.</span>
-<span class='no'>exemple_flux_COG2017</span> <span class='kw'>&lt;-</span> <span class='fu'>changement_COG_varNum</span>(<span class='kw'>table_entree</span><span class='kw'>=</span><span class='no'>exemple_flux</span>,<span class='kw'>annees</span><span class='kw'>=</span><span class='fu'>c</span>(<span class='fl'>2014</span>:<span class='fl'>2017</span>),<span class='kw'>codgeo_entree</span><span class='kw'>=</span><span class='st'>"COMMUNE"</span>,<span class='kw'>agregation</span><span class='kw'>=</span><span class='no'>F</span>,<span class='kw'>libgeo</span><span class='kw'>=</span><span class='kw'>NULL</span>,<span class='kw'>donnees_insee</span><span class='kw'>=</span><span class='no'>T</span>)
-<span class='no'>exemple_flux_COG2017</span> <span class='kw'>&lt;-</span> <span class='fu'>changement_COG_varNum</span>(<span class='kw'>table_entree</span><span class='kw'>=</span><span class='no'>exemple_flux_COG2017</span>,<span class='kw'>annees</span><span class='kw'>=</span><span class='fu'>c</span>(<span class='fl'>2014</span>:<span class='fl'>2017</span>),<span class='kw'>codgeo_entree</span><span class='kw'>=</span><span class='st'>"DCLT"</span>,<span class='kw'>agregation</span><span class='kw'>=</span><span class='no'>F</span>,<span class='kw'>libgeo</span><span class='kw'>=</span><span class='kw'>NULL</span>,<span class='kw'>donnees_insee</span><span class='kw'>=</span><span class='no'>T</span>)</div></pre>
+<span class='no'>exemple_flux_COG2017</span> <span class='kw'>&lt;-</span> <span class='fu'>changement_COG_varNum</span>(<span class='kw'>table_entree</span><span class='kw'>=</span><span class='no'>exemple_flux</span>,<span class='kw'>annees</span><span class='kw'>=</span><span class='fu'>c</span>(<span class='fl'>2014</span>:<span class='fl'>2017</span>),<span class='kw'>codgeo_entree</span><span class='kw'>=</span><span class='st'>"COMMUNE"</span>,<span class='kw'>agregation</span><span class='kw'>=</span><span class='no'>F</span>,<span class='kw'>libgeo</span><span class='kw'>=</span><span class='no'>F</span>,<span class='kw'>donnees_insee</span><span class='kw'>=</span><span class='no'>T</span>)
+<span class='no'>exemple_flux_COG2017</span> <span class='kw'>&lt;-</span> <span class='fu'>changement_COG_varNum</span>(<span class='kw'>table_entree</span><span class='kw'>=</span><span class='no'>exemple_flux_COG2017</span>,<span class='kw'>annees</span><span class='kw'>=</span><span class='fu'>c</span>(<span class='fl'>2014</span>:<span class='fl'>2017</span>),<span class='kw'>codgeo_entree</span><span class='kw'>=</span><span class='st'>"DCLT"</span>,<span class='kw'>agregation</span><span class='kw'>=</span><span class='no'>F</span>,<span class='kw'>libgeo</span><span class='kw'>=</span><span class='no'>F</span>,<span class='kw'>donnees_insee</span><span class='kw'>=</span><span class='no'>T</span>)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
