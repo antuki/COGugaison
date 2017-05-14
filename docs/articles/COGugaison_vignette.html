@@ -85,15 +85,8 @@
 <p>Tant que le package n’est pas stabilisé, il est évidemment conseillé de se référer aux données officielles de l’Insee en cas de doute sur un résultat.</p>
 <p>Commençons par installer le package <code>COGugaison</code> et à le charger dans R.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools::<span class="kw">install_github</span>(<span class="st">"antuki/COGugaison"</span>)</code></pre></div>
-<pre><code>## Downloading GitHub repo antuki/COGugaison@master
-## from URL https://api.github.com/repos/antuki/COGugaison/zipball/master</code></pre>
-<pre><code>## Installing COGugaison</code></pre>
-<pre><code>## "C:/PROGRA~1/R/R-33~1.2/bin/x64/R" --no-site-file --no-environ --no-save  \
-##   --no-restore --quiet CMD INSTALL "C:/Users/Kim  \
-##   Antunez/AppData/Local/Temp/RtmpYBRiVt/devtools2278d5e7879/antuki-COGugaison-095958c"  \
-##   --library="C:/Users/Kim Antunez/Documents/R/win-library/3.3"  \
-##   --install-tests</code></pre>
-<pre><code>## </code></pre>
+<pre><code>## Skipping install of 'COGugaison' from a github remote, the SHA1 (ef4f2550) has not changed since last install.
+##   Use `force = TRUE` to force installation</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(COGugaison)</code></pre></div>
 </div>
 <div id="quel-code-officiel-geographique-est-utilise" class="section level2">
@@ -160,25 +153,25 @@
 <a href="#transformer-des-variables-numeriques-en-autre-geographie" class="anchor"></a>Transformer des variables numériques en autre géographie</h2>
 <p>La fonction <code>changement_COG_varNum</code> permet de transformer des tables de données numériques communales en géographie au premier janvier d’une année souhaitée.</p>
 <p>Ici, nous allons transformer les variables numériques de la table <em>exemple_pop</em> afin de récupérer les données de population et de superficie des communes au 1er janvier 2017 (au lieu de 2014).</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">exemple_popcom_COG2017_num &lt;-<span class="st"> </span><span class="kw"><a href="../reference/changement_COG_varNum.html">changement_COG_varNum</a></span>(<span class="dt">table_entree=</span>exemple_popcom,<span class="dt">annees=</span><span class="kw">c</span>(<span class="dv">2014</span>:<span class="dv">2017</span>),<span class="dt">agregation=</span>T,<span class="dt">libgeo=</span><span class="st">"LIBGEO"</span>,<span class="dt">donnees_insee=</span>T)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">exemple_popcom_COG2017_num &lt;-<span class="st"> </span><span class="kw"><a href="../reference/changement_COG_varNum.html">changement_COG_varNum</a></span>(<span class="dt">table_entree=</span>exemple_popcom,<span class="dt">annees=</span><span class="kw">c</span>(<span class="dv">2014</span>:<span class="dv">2017</span>),<span class="dt">agregation=</span>T,<span class="dt">libgeo=</span>T,<span class="dt">donnees_insee=</span>T)
 <span class="kw">head</span>(exemple_popcom_COG2017_num)</code></pre></div>
-<pre><code>##   CODGEO                  LIBGEO P12_POP SUPERF
+<pre><code>##   CODGEO             nom_commune P12_POP SUPERF
 ## 1  01001 L'Abergement-Clémenciat     777     16
 ## 2  01002   L'Abergement-de-Varey     235      9
 ## 3  01004       Ambérieu-en-Bugey   14233     25
 ## 4  01005     Ambérieux-en-Dombes    1642     16
 ## 5  01006                 Ambléon     110      6
 ## 6  01007                Ambronay    2437     34</code></pre>
-<p>Le paramètre <em>agregation</em> vaut TRUE si la table souhaitée doit sommer toutes les lignes qui concernent une même commune et FALSE si l’on souhaite volontairement conserver les doublons dans les codes commune (dans les tables de flux par exemple, cf. plus bas). Le paramètre <em>libgeo</em> doit être conservé à NULL si la table souhaitée ne contient pas de libellés de communes, sinon il doit indiquer le nom de la variable renseignant sur le libellé de la commune (celui présent dans la table si il existe déjà ou tout autre nom s’il doit être ajouté).</p>
+<p>Le paramètre <em>agregation</em> vaut TRUE si la table souhaitée doit sommer toutes les lignes qui concernent une même commune et FALSE si l’on souhaite volontairement conserver les doublons dans les codes commune (dans les tables de flux par exemple, cf. plus bas). Le paramètre <em>libgeo</em> vaut TRUE si l’on veut rajouter dans la table une colonne nommée “nom_commune” qui indique le nom de la commune issu du code officiel géographique et FALSE sinon.</p>
 </div>
 <div id="transformer-des-typologies-en-autre-geographie" class="section level2">
 <h2 class="hasAnchor">
 <a href="#transformer-des-typologies-en-autre-geographie" class="anchor"></a>Transformer des typologies en autre géographie</h2>
 <p>La fonction <code>changement_COG_typo</code> permet de transformer des typologies de communes en géographie au premier janvier d’une année souhaitée. Ici nous allons transformer les deux typologies (typoA et typoB) de la table <em>exemple_pop</em> en géographie communale au 1er janvier 2017 (au lieu de 2014).</p>
 <p>Ici, l’hypothèse de classement en cas de fusion de communes (<em>methode_fusion</em>) choisie est celle d’une classe spécifique (<em>methode_difference</em>, classe appelée <em>mot_difference</em>=“differents”) aux regroupements de plusieurs communes de classes différentes. Les autres hypothèses possibles auraient pu être l’hypothèse du maximum de population <em>methode_max_pop</em> ou de classe absorbante <em>methode_classe_absorbante</em>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">exemple_popcom_COG2017_typo &lt;-<span class="st"> </span><span class="kw"><a href="../reference/changement_COG_typo.html">changement_COG_typo</a></span>(<span class="dt">table_entree=</span>exemple_popcom[,-<span class="dv">2</span>],<span class="dt">annees=</span><span class="kw">c</span>(<span class="dv">2014</span>:<span class="dv">2017</span>),<span class="dt">methode_fusion=</span><span class="st">"methode_difference"</span>,<span class="dt">typos=</span><span class="kw">c</span>(<span class="st">"typoA"</span>,<span class="st">"typoB"</span>),<span class="dt">mot_difference =</span> <span class="st">"differents"</span>,<span class="dt">libgeo=</span><span class="st">"LIB"</span>,<span class="dt">donnees_insee=</span>T)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">exemple_popcom_COG2017_typo &lt;-<span class="st"> </span><span class="kw"><a href="../reference/changement_COG_typo.html">changement_COG_typo</a></span>(<span class="dt">table_entree=</span>exemple_popcom[,-<span class="dv">2</span>],<span class="dt">annees=</span><span class="kw">c</span>(<span class="dv">2014</span>:<span class="dv">2017</span>),<span class="dt">methode_fusion=</span><span class="st">"methode_difference"</span>,<span class="dt">typos=</span><span class="kw">c</span>(<span class="st">"typoA"</span>,<span class="st">"typoB"</span>),<span class="dt">mot_difference =</span> <span class="st">"differents"</span>,<span class="dt">libgeo=</span>T,<span class="dt">donnees_insee=</span>T)
 <span class="kw">head</span>(exemple_popcom_COG2017_typo)</code></pre></div>
-<pre><code>##   CODGEO                     LIB    typoA typoB
+<pre><code>##   CODGEO             nom_commune    typoA typoB
 ## 1  01001 L'Abergement-Clémenciat CLASSE 2     F
 ## 2  01002   L'Abergement-de-Varey CLASSE 3     D
 ## 3  01004       Ambérieu-en-Bugey CLASSE 1     B
@@ -224,9 +217,8 @@
 <a href="#agreger-des-tables-de-donnees-communales-a-des-echelons-supra-communaux" class="anchor"></a>Agréger des tables de données communales à des échelons supra-communaux</h2>
 <p>La fonction <code>nivsupra</code> permet d’agréger les tables de données communales à de nombreux échelons supra-communaux administratifs (EPCI, arrondissements, cantons-villes, départements, régions) ou d’étude (bassins de vie, zones d’emploi, unités urbaines, aires urbaines).</p>
 <p>Ici nous agrégeons la population et la superficie des communes à l’échelon géographique des zones d’emploi afin d’obtenir une table des densités de population par zone d’emploi.</p>
-<p>Le paramètre <em>na.nivgeo.rm</em> vaut FALSE si la table souhaitée doit contenir une ligne identifiée par un code géographique valant NA qui somme les valeurs de toutes les communes qui n’appartiennent à aucun regroupement supracommunal et vaut TRUE si cette ligne doit être supprimée.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">exemple_popcom_COG2017 &lt;-<span class="st"> </span><span class="kw">merge</span>(exemple_popcom_COG2017_num,exemple_popcom_COG2017_typo[,-<span class="dv">2</span>],<span class="dt">by=</span><span class="st">"CODGEO"</span>,<span class="dt">all=</span>T)
-exemple_popcom_ZE2010 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/nivsupra.html">nivsupra</a></span>(<span class="dt">table_entree=</span>exemple_popcom_COG2017,<span class="dt">nivsupra=</span><span class="st">"ZE2010"</span>,<span class="dt">na.nivgeo.rm=</span>F,<span class="dt">agregation=</span>T)
+exemple_popcom_ZE2010 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/nivsupra.html">nivsupra</a></span>(<span class="dt">table_entree=</span>exemple_popcom_COG2017,<span class="dt">nivsupra=</span><span class="st">"ZE2010"</span>,<span class="dt">agregation=</span>T)
 exemple_popcom_ZE2010$densite &lt;-<span class="st"> </span>exemple_popcom_ZE2010$P12_POP /<span class="st"> </span>exemple_popcom_ZE2010$SUPERF
 <span class="kw">head</span>(exemple_popcom_ZE2010)</code></pre></div>
 <pre><code>##   ZE2010                         LIBGEO P12_POP SUPERF  densite
@@ -266,24 +258,31 @@ exemple_flux_sansPLM &lt;-<span class="kw"><a href="../reference/enlever_PLM.htm
 <h2 class="hasAnchor">
 <a href="#transformer-des-variables-numeriques-en-autre-geographie-dans-des-donnees-de-flux" class="anchor"></a>Transformer des variables numériques en autre géographie dans des données de flux</h2>
 <p>La fonction <code>changement_COG_varNum</code> peut également s’appliquer à des tables de flux (codes communes pouvant comporter des doublons) grâce à l’option agregation = FALSE. Les variables de type caractère sont alors conservées comme telles ou dupliquées en cas de défusion et les variables numériques (ici IPONDI) sommées en cas de fusion ou réparties proportionnellement à la population de chaque commune en cas de défusion.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">exemple_flux_COG2017 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/changement_COG_varNum.html">changement_COG_varNum</a></span>(<span class="dt">table_entree=</span>exemple_flux_sansPLMsansCorse,<span class="dt">annees=</span><span class="kw">c</span>(<span class="dv">2014</span>:<span class="dv">2017</span>),<span class="dt">codgeo_entree=</span><span class="st">"COMMUNE"</span>,<span class="dt">agregation=</span>F,<span class="dt">libgeo=</span><span class="ot">NULL</span>,<span class="dt">donnees_insee=</span>T)
-exemple_flux_COG2017 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/changement_COG_varNum.html">changement_COG_varNum</a></span>(<span class="dt">table_entree=</span>exemple_flux_COG2017,<span class="dt">annees=</span><span class="kw">c</span>(<span class="dv">2014</span>:<span class="dv">2017</span>),<span class="dt">codgeo_entree=</span><span class="st">"DCLT"</span>,<span class="dt">agregation=</span>F,<span class="dt">libgeo=</span><span class="ot">NULL</span>,<span class="dt">donnees_insee=</span>T)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">exemple_flux_COG2017 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/changement_COG_varNum.html">changement_COG_varNum</a></span>(<span class="dt">table_entree=</span>exemple_flux_sansPLMsansCorse,<span class="dt">annees=</span><span class="kw">c</span>(<span class="dv">2014</span>:<span class="dv">2017</span>),<span class="dt">codgeo_entree=</span><span class="st">"COMMUNE"</span>,<span class="dt">agregation=</span>F,<span class="dt">libgeo=</span>F,<span class="dt">donnees_insee=</span>T)
+exemple_flux_COG2017 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/changement_COG_varNum.html">changement_COG_varNum</a></span>(<span class="dt">table_entree=</span>exemple_flux_COG2017,<span class="dt">annees=</span><span class="kw">c</span>(<span class="dv">2014</span>:<span class="dv">2017</span>),<span class="dt">codgeo_entree=</span><span class="st">"DCLT"</span>,<span class="dt">agregation=</span>F,<span class="dt">libgeo=</span>F,<span class="dt">donnees_insee=</span>T)</code></pre></div>
 </div>
 <div id="inserer-dans-des-tables-de-donnees-de-flux-communales-des-echelons-supra-communaux" class="section level2">
 <h2 class="hasAnchor">
 <a href="#inserer-dans-des-tables-de-donnees-de-flux-communales-des-echelons-supra-communaux" class="anchor"></a>Insérer dans des tables de données de flux communales des échelons supra-communaux</h2>
 <p>La fonction <code>nivsupra</code> peut également s’appliquer à des tables de flux (non agrégées par codes communes) grâce à l’option agregation = FALSE. La table en entrée est alors conservée comme telle avec une nouvelle colonne qui correspond au niveau supracommunal du code commune considéré.</p>
 <p>Ici, on ajoute les colonnes ZE2010_COMMUNE et ZE2010_DCLT à la table de flux domicile-travail utilisée précédemment.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">exemple_flux_COG2017_etZE &lt;-<span class="st"> </span><span class="kw"><a href="../reference/nivsupra.html">nivsupra</a></span>(<span class="dt">table_entree=</span>exemple_flux_COG2017,<span class="dt">codgeo_entree=</span><span class="st">"COMMUNE"</span>,<span class="dt">nivsupra=</span><span class="st">"ZE2010"</span>,<span class="dt">na.nivgeo.rm=</span>F,<span class="dt">agregation=</span>F)
-exemple_flux_COG2017_etZE &lt;-<span class="st"> </span><span class="kw"><a href="../reference/nivsupra.html">nivsupra</a></span>(<span class="dt">table_entree=</span>exemple_flux_COG2017_etZE,<span class="dt">codgeo_entree=</span><span class="st">"DCLT"</span>,<span class="dt">nivsupra=</span><span class="st">"ZE2010"</span>,<span class="dt">na.nivgeo.rm=</span>F,<span class="dt">agregation=</span>F)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">exemple_flux_COG2017_etZE &lt;-<span class="st"> </span><span class="kw"><a href="../reference/nivsupra.html">nivsupra</a></span>(<span class="dt">table_entree=</span>exemple_flux_COG2017,<span class="dt">codgeo_entree=</span><span class="st">"COMMUNE"</span>,<span class="dt">nivsupra=</span><span class="st">"ZE2010"</span>,<span class="dt">agregation=</span>F)
+exemple_flux_COG2017_etZE &lt;-<span class="st"> </span><span class="kw"><a href="../reference/nivsupra.html">nivsupra</a></span>(<span class="dt">table_entree=</span>exemple_flux_COG2017_etZE,<span class="dt">codgeo_entree=</span><span class="st">"DCLT"</span>,<span class="dt">nivsupra=</span><span class="st">"ZE2010"</span>,<span class="dt">agregation=</span>F)
 <span class="kw">head</span>(exemple_flux_COG2017_etZE)</code></pre></div>
-<pre><code>##    DCLT COMMUNE CS1 AGEREVQ   IPONDI ZE2010_COMMUNE ZE2010_DCLT
-## 1 02528   61099   4      35 4.177122           0054        2206
-## 2 03085   61237   5      25 3.924528           2511        8302
-## 3 03085   61006   6      40 2.773158           2511        8302
-## 4 03085   61462   6      25 4.693373           2511        8302
-## 5 03085   61472   6      50 5.095541           2511        8302
-## 6 03085   61006   4      55 2.716909           2511        8302</code></pre>
+<pre><code>##   COMMUNE  DCLT CS1 AGEREVQ   IPONDI ZE2010_COMMUNE ZE2010_nom_COMMUNE
+## 1   61001 61001   4      25 2.856389           0051            Alençon
+## 2   61001 61001   3      55 3.040441           0051            Alençon
+## 3   61213 53185   2      40 4.142349           0051            Alençon
+## 4   61203 61001   5      25 5.234542           0051            Alençon
+## 5   61491 61500   5      40 5.578419           0051            Alençon
+## 6   61077 61117   4      35 4.153005           0051            Alençon
+##   ZE2010_DCLT ZE2010_nom_DCLT
+## 1        0051         Alençon
+## 2        0051         Alençon
+## 3        0051         Alençon
+## 4        0051         Alençon
+## 5        0051         Alençon
+## 6        0051         Alençon</code></pre>
 <p>Bonne découverte…!</p>
 </div>
 </div>
