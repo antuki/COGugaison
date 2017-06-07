@@ -66,7 +66,8 @@
 <h2 class="hasAnchor">
 <a href="#introduction-a-cogugaison" class="anchor"></a>Introduction à COGugaison</h2>
 <p>Nous allons balayer dans cette vignette les principales fonctionnalités du package <code>COGugaison</code>.</p>
-<p>Ce package a pour objectif global de manipuler des données communales produites à différents millésimes. Il permet actuellement de :</p>
+<p>Le découpage des territoires français, en particulier les communes, n’est pas un phénomène immuable. Chaque année certaines communes changent de codes, ou bien de nom, fusionnent ou encore se divisent. Certains périmètres supra-communaux changent également, comme celui des cantons qui a été récemment redéfini. C’est à l’Insee que revient le suivi de ces changements afin d’établir chaque année le code officiel géographique (COG).</p>
+<p>Ce package R a alors pour objectif global de manipuler des données communales produites à différents millésimes et de les agréger à différents niveaux supra-communaux. Plus précisément, il permet actuellement de :</p>
 <ul>
 <li>détecter le millésime du code officiel géographique d’une table de données communales : fonction <code>COG_akinator</code>.</li>
 <li>visualiser les modifications communales (fusions, défusions, changements de codes ou de noms) qui ont eu lieu entre deux dates : <code>modifications_communales</code>
@@ -85,14 +86,96 @@
 <p>Tant que le package n’est pas stabilisé, il est évidemment conseillé de se référer aux données officielles de l’Insee en cas de doute sur un résultat.</p>
 <p>Commençons par installer le package <code>COGugaison</code> et à le charger dans R.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools::<span class="kw">install_github</span>(<span class="st">"antuki/COGugaison"</span>)</code></pre></div>
-<pre><code>## Skipping install of 'COGugaison' from a github remote, the SHA1 (f14cad3a) has not changed since last install.
+<pre><code>## Skipping install of 'COGugaison' from a github remote, the SHA1 (f3a7001a) has not changed since last install.
 ##   Use `force = TRUE` to force installation</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(COGugaison)</code></pre></div>
+</div>
+<div id="les-bases-de-donnees-utiles-dans-cogugaison" class="section level2">
+<h2 class="hasAnchor">
+<a href="#les-bases-de-donnees-utiles-dans-cogugaison" class="anchor"></a>Les bases de données utiles dans COGugaison</h2>
+<p>En plus de contenir des fonctions permettant la gestion des codes officiels géographiques, COGugaison contient également, dans des Rdata, des bases de données qui peuvent vous être également utiles par ailleurs.</p>
+<blockquote>
+<ul>
+<li>COG</li>
+</ul>
+</blockquote>
+<p>Ce Rdata contient des data.frame (tables de données) intitulés COGXXXX, XXXX étant à remplacer par une année de COG donnée. Les tables intitulées COGXXXX_insee correspondent à des tables selon le COG pris en compte par l’Insee dans la diffusion de ses données (qui est presque identique au COG à quelques exceptions près listées dans la documentations).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(COG2017)</code></pre></div>
+<pre><code>##   CODGEO                  LIBGEO   POP
+## 1  01001 L'Abergement-Clémenciat   767
+## 2  01002   L'Abergement-de-Varey   239
+## 3  01004       Ambérieu-en-Bugey 14022
+## 4  01005     Ambérieux-en-Dombes  1627
+## 5  01006                 Ambléon   109
+## 6  01007                Ambronay  2570</code></pre>
+<p>Les variables des tables sont les suivantes :</p>
+<ul>
+<li>CODGEO contient le code Insee des communes</li>
+<li>LIBGEO contient le nom des communes</li>
+<li>POP contient la population de référence de la commune selon l’année du COG</li>
+</ul>
+<blockquote>
+<ul>
+<li>TABLES_PASSAGE</li>
+</ul>
+</blockquote>
+<p>Ce Rdata contient des data.frame intitulées PASSAGE_XXXX_YYYY, XXXX et YYYY étant à remplacer par des années de COG données. Il s’agit de tables de passages permettant de passer d’un COG à un autre (plus récent ou plus ancien). Le suffixe “_insee" correspond également à des tables qui tiennent compte des COG pris en compte par l’Insee.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(PASSAGE_2015_2016_insee)</code></pre></div>
+<pre><code>##   cod2015 cod2016      annee typemodif ratio
+## 1   14697   14472 2016-01-01         c     1
+## 2   01015   01015 2016-01-01         f     1
+## 3   01340   01015 2016-01-01         f     1
+## 4   01080   01080 2016-01-01         f     1
+## 5   01119   01080 2016-01-01         f     1
+## 6   01176   01187 2016-01-01         f     1</code></pre>
+<p>Les variables des tables sont les suivantes :</p>
+<ul>
+<li>codXXXX : code Insee de la commune de départ</li>
+<li>codYYYY : code Insee de la commune d’arrivée</li>
+<li>annee : année de la modification</li>
+<li>typemodif : type de modification communale (f = fusion, d = défusion, c= changement de code).</li>
+<li>ratio : poids de répartition des effectifs en cas de défusion (vaut 1 sinon). Ce poids est proportionnel à la population des communes défusionnées.</li>
+</ul>
+<blockquote>
+<ul>
+<li>DATA_SUPRACOM</li>
+</ul>
+</blockquote>
+<p>Ce Rdata contient deux data.frame intitulées table_supracom et libelles_supracom qui correspondent aux <a href="https://www.insee.fr/fr/information/2028028">tables d’appartenance des communes aux différents niveaux géographiques</a> produites par l’Insee (cliquez sur le lien pour voir la documentation sur les variables présentes). La première table associe chaque code communal insee aux niveaux supra-communaux associés (en COG le plus actuel, actuellement 2017) et la seconde indique les libellés de ces différents niveaux supra-communaux.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(table_supracom)</code></pre></div>
+<pre><code>##   CODGEO                  LIBGEO DEP REG      EPCI NATURE_EPCI ARR   CV
+## 1  01001 L'Abergement-Clémenciat  01  84 200069193          CC 012 0108
+## 2  01002   L'Abergement-de-Varey  01  84 240100883          CC 011 0101
+## 3  01004       Ambérieu-en-Bugey  01  84 240100883          CC 011 0101
+## 4  01005     Ambérieux-en-Dombes  01  84 200042497          CC 012 0122
+## 5  01006                 Ambléon  01  84 200040350          CC 011 0104
+## 6  01007                Ambronay  01  84 240100883          CC 011 0101
+##   ZE2010 UU2010 TUU2014 TDUU2014 AU2010 TAU2014 CATAEU2010 BV2012
+## 1   8213  01000       0       05    997      00        120  01093
+## 2   8201  01000       0       04    002      09        112  01004
+## 3   8201  01302       3       32    002      09        112  01004
+## 4   8213  01000       0       06    002      09        112  69123
+## 5   8216  01000       0       03    998      00        300  01034
+## 6   8201  01000       0       07    002      09        112  01004</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(libelles_supracom)</code></pre></div>
+<pre><code>##   NIVGEO CODGEO          LIBGEO
+## 1    ARR    011          Belley
+## 2    ARR    012 Bourg-en-Bresse
+## 3    ARR    013             Gex
+## 4    ARR    014          Nantua
+## 5    ARR    021 Château-Thierry
+## 6    ARR    022            Laon</code></pre>
+<blockquote>
+<ul>
+<li>HISTORIQ_MODIF_COM</li>
+</ul>
+</blockquote>
+<p>Ce Rdata contient un data.frame intitulé historiq qui correspond à <a href="https://www.insee.fr/fr/information/2666684#titre-bloc-11">l’historique des géographies communales</a> produit par l’Insee (cliquez sur le lien pour voir la documentation sur les variables présentes).</p>
 </div>
 <div id="quel-code-officiel-geographique-est-utilise" class="section level2">
 <h2 class="hasAnchor">
 <a href="#quel-code-officiel-geographique-est-utilise" class="anchor"></a>Quel code officiel géographique est utilisé ?</h2>
-<p>Nous allons maintenant manipuler une table exemple incluse dans le package, la table <code>exemple_popcom</code> qui contient comme variables le code géographique de la commune (CODGEO), son nom (LIBGEO), sa population en 2012 (P12_POP), sa superficie (SUPERF) ainsi que deux typologies de territoires générées aléatoirement (typoA et typoB). Il faut veiller à ce que les variables numériques soient au bon format dans R et que les typologies et identifiants soient au format caractère (si ce n’est pas le cas, il faudra les transformer avec les fonctions <em>as.numeric</em> et <em>as.character</em>).</p>
+<p>Nous allons maintenant manipuler une table exemple incluse dans le package, la table <code>exemple_popcom</code> qui contient comme variables le code géographique de la commune (CODGEO), son nom (LIBGEO), sa population en 2012 (P12_POP), sa superficie (SUPERF) ainsi que deux typologies de territoires générées aléatoirement (typoA et typoB). Il faut veiller à ce que les variables numériques soient au bon format dans R et que les typologies et identifiants soient au format caractère (si ce n’est pas le cas, il faudra les transformer avec les fonctions <em>as.numeric</em> et <em>as.character</em>).s</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(exemple_popcom)</code></pre></div>
 <pre><code>##   CODGEO                  LIBGEO P12_POP SUPERF    typoA typoB
 ## 1  01001 L'Abergement-Clémenciat     777     16 CLASSE 2     F
@@ -293,6 +376,7 @@ exemple_flux_COG2017_etZE &lt;-<span class="st"> </span><span class="kw"><a href
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#introduction-a-cogugaison">Introduction à COGugaison</a></li>
+      <li><a href="#les-bases-de-donnees-utiles-dans-cogugaison">Les bases de données utiles dans COGugaison</a></li>
       <li><a href="#quel-code-officiel-geographique-est-utilise">Quel code officiel géographique est utilisé ?</a></li>
       <li><a href="#quelles-modifications-communales-ont-eu-lieu-entre-deux-dates">Quelles modifications communales ont eu lieu entre deux dates ?</a></li>
       <li><a href="#transformer-des-variables-numeriques-en-autre-geographie">Transformer des variables numériques en autre géographie</a></li>

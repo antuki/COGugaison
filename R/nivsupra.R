@@ -61,7 +61,8 @@
 nivsupra <- function(table_entree,codgeo_entree=colnames(table_entree)[1],var_num=colnames(table_entree)[sapply(table_entree, is.numeric)]
                      ,nivsupra, nivsupra_nom=ifelse(agregation==T,nivsupra,paste0(nivsupra,"_",codgeo_entree)),agregation=T){
 
-  table_sortie <- merge(table_entree,table_supracom[,c("CODGEO",nivsupra)],by.x=codgeo_entree,by.y="CODGEO",all.x=T,all.y=F)
+  table_sortie <- enlever_PLM(table_entree=table_entree,codgeo_entree = codgeo_entree,agregation=F) #nouveau
+  table_sortie <- merge(table_sortie,table_supracom[,c("CODGEO",nivsupra)],by.x=codgeo_entree,by.y="CODGEO",all.x=T,all.y=F)
   colnames(table_sortie)[which(colnames(table_sortie)==nivsupra)]<- nivsupra_nom
 
   # if(na.nivgeo.rm==F){

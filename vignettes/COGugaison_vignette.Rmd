@@ -14,7 +14,9 @@ vignette: >
 
 Nous allons balayer dans cette vignette les principales fonctionnalités du package `COGugaison`. 
 
-Ce package a pour objectif global de manipuler des données communales produites à différents millésimes. Il permet actuellement de : 
+Le découpage des territoires français, en particulier les communes, n'est pas un phénomène immuable. Chaque année certaines communes changent de codes, ou bien de nom, fusionnent ou encore se divisent. Certains périmètres supra-communaux changent également, comme celui des cantons qui a été récemment redéfini. C'est à l'Insee que revient le suivi de ces changements afin d'établir chaque année le code officiel géographique (COG).
+
+Ce package R a alors pour objectif global de manipuler des données communales produites à différents millésimes et de les agréger à différents niveaux supra-communaux. Plus précisément, il permet actuellement de : 
 
 - détecter le millésime du code officiel géographique d'une table de données communales : fonction `COG_akinator`. 
 - visualiser les modifications communales (fusions, défusions, changements de codes ou de noms) qui ont eu lieu entre deux dates : `modifications_communales`
@@ -41,11 +43,58 @@ library(COGugaison)
 ```
 
 
+## Les bases de données utiles dans COGugaison
+
+En plus de contenir des fonctions permettant la gestion des codes officiels géographiques, COGugaison contient également, dans des Rdata, des bases de données qui peuvent vous être également utiles par ailleurs.
+
+> - COG
+
+Ce Rdata contient des data.frame (tables de données) intitulés COGXXXX, XXXX étant à remplacer par une année de COG donnée. Les tables intitulées COGXXXX_insee correspondent à des tables selon le COG pris en compte par l'Insee dans la diffusion de ses données (qui est presque identique au COG à quelques exceptions près listées dans la documentations).
+
+```{r, fig.show='hold'}
+head(COG2017)
+```
+
+Les variables des tables sont les suivantes : 
+ 
+- CODGEO contient le code Insee des communes
+- LIBGEO contient le nom des communes
+- POP contient la population de référence de la commune selon l'année du COG
+
+> - TABLES_PASSAGE
+
+Ce Rdata contient des data.frame intitulées PASSAGE_XXXX_YYYY, XXXX et YYYY étant à remplacer par des années de COG données. Il s'agit de tables de passages permettant de passer d'un COG à un autre (plus récent ou plus ancien). Le suffixe "_insee" correspond également à des tables qui tiennent compte des COG pris en compte par l'Insee. 
+
+```{r, fig.show='hold'}
+head(PASSAGE_2015_2016_insee)
+```
+
+Les variables des tables sont les suivantes : 
+
+- codXXXX : code Insee de la commune de départ
+- codYYYY : code Insee de la commune d'arrivée
+- annee : année de la modification
+- typemodif : type de modification communale (f = fusion, d = défusion, c= changement de code). 
+- ratio : poids de répartition des effectifs en cas de défusion (vaut 1 sinon). Ce poids est proportionnel à la population des communes défusionnées. 
+
+> - DATA_SUPRACOM
+
+Ce Rdata contient deux data.frame intitulées table_supracom et libelles_supracom qui correspondent aux [tables d'appartenance des communes aux différents niveaux géographiques](https://www.insee.fr/fr/information/2028028) produites par l'Insee (cliquez sur le lien pour voir la documentation sur les variables présentes). La première table associe chaque code communal insee aux niveaux supra-communaux associés (en COG le plus actuel, actuellement 2017) et la seconde indique les libellés de ces différents niveaux supra-communaux. 
+
+```{r, fig.show='hold'}
+head(table_supracom)
+head(libelles_supracom)
+```
+
+> - HISTORIQ_MODIF_COM
+
+Ce Rdata contient un data.frame intitulé historiq qui correspond à [l'historique des géographies communales](https://www.insee.fr/fr/information/2666684#titre-bloc-11) produit par l'Insee (cliquez sur le lien pour voir la documentation sur les variables présentes). 
+
 
 ## Quel code officiel géographique est utilisé ? 
 
 
-Nous allons maintenant manipuler une table exemple incluse dans le package, la table `exemple_popcom` qui contient comme variables le code géographique de la commune (CODGEO), son nom (LIBGEO), sa population en 2012 (P12_POP), sa superficie (SUPERF) ainsi que deux typologies de territoires générées aléatoirement (typoA et typoB). Il faut veiller à ce que les variables numériques soient au bon format dans R et que les typologies et identifiants soient au format caractère (si ce n'est pas le cas, il faudra les transformer avec les fonctions *as.numeric* et *as.character*).
+Nous allons maintenant manipuler une table exemple incluse dans le package, la table `exemple_popcom` qui contient comme variables le code géographique de la commune (CODGEO), son nom (LIBGEO), sa population en 2012 (P12_POP), sa superficie (SUPERF) ainsi que deux typologies de territoires générées aléatoirement (typoA et typoB). Il faut veiller à ce que les variables numériques soient au bon format dans R et que les typologies et identifiants soient au format caractère (si ce n'est pas le cas, il faudra les transformer avec les fonctions *as.numeric* et *as.character*).s
 
 ```{r, fig.show='hold'}
 head(exemple_popcom)
