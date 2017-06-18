@@ -86,8 +86,15 @@
 <p>Tant que le package n’est pas stabilisé, il est évidemment conseillé de se référer aux données officielles de l’Insee en cas de doute sur un résultat.</p>
 <p>Commençons par installer le package <code>COGugaison</code> et à le charger dans R.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools::<span class="kw">install_github</span>(<span class="st">"antuki/COGugaison"</span>)</code></pre></div>
-<pre><code>## Skipping install of 'COGugaison' from a github remote, the SHA1 (f3a7001a) has not changed since last install.
-##   Use `force = TRUE` to force installation</code></pre>
+<pre><code>## Downloading GitHub repo antuki/COGugaison@master
+## from URL https://api.github.com/repos/antuki/COGugaison/zipball/master</code></pre>
+<pre><code>## Installing COGugaison</code></pre>
+<pre><code>## "C:/PROGRA~1/R/R-33~1.2/bin/x64/R" --no-site-file --no-environ --no-save  \
+##   --no-restore --quiet CMD INSTALL "C:/Users/Kim  \
+##   Antunez/AppData/Local/Temp/RtmpwXL8IO/devtools2748778b1091/antuki-COGugaison-cd7eb84"  \
+##   --library="C:/Users/Kim Antunez/Documents/R/win-library/3.3"  \
+##   --install-tests</code></pre>
+<pre><code>## </code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(COGugaison)</code></pre></div>
 </div>
 <div id="les-bases-de-donnees-utiles-dans-cogugaison" class="section level2">
@@ -373,7 +380,8 @@ exemple_flux_COG2017_etZE &lt;-<span class="st"> </span><span class="kw"><a href
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
         <div id="tocnav">
-      <h2>Contents</h2>
+      <h2 class="hasAnchor">
+<a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#introduction-a-cogugaison">Introduction à COGugaison</a></li>
       <li><a href="#les-bases-de-donnees-utiles-dans-cogugaison">Les bases de données utiles dans COGugaison</a></li>
