@@ -29,10 +29,25 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="../reference/index.html">Reference</a>
+  <a href="..//index.html">
+    <span class="fa fa-home fa-lg"></span>
+     
+  </a>
 </li>
 <li>
-  <a href="../articles/index.html">Articles</a>
+  <a href="../reference/index.html">Reference</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+<li>
+      <a href="../articles/COGugaison_vignette.html">Apprendre les principales fonctionnalités de COGugaison</a>
+    </li>
+  </ul>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
@@ -86,15 +101,8 @@
 <p>Tant que le package n’est pas stabilisé, il est évidemment conseillé de se référer aux données officielles de l’Insee en cas de doute sur un résultat.</p>
 <p>Commençons par installer le package <code>COGugaison</code> et à le charger dans R.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools::<span class="kw">install_github</span>(<span class="st">"antuki/COGugaison"</span>)</code></pre></div>
-<pre><code>## Downloading GitHub repo antuki/COGugaison@master
-## from URL https://api.github.com/repos/antuki/COGugaison/zipball/master</code></pre>
-<pre><code>## Installing COGugaison</code></pre>
-<pre><code>## "C:/PROGRA~1/R/R-33~1.2/bin/x64/R" --no-site-file --no-environ --no-save  \
-##   --no-restore --quiet CMD INSTALL "C:/Users/Kim  \
-##   Antunez/AppData/Local/Temp/RtmpwXL8IO/devtools2748778b1091/antuki-COGugaison-cd7eb84"  \
-##   --library="C:/Users/Kim Antunez/Documents/R/win-library/3.3"  \
-##   --install-tests</code></pre>
-<pre><code>## </code></pre>
+<pre><code>## Skipping install of 'COGugaison' from a github remote, the SHA1 (bd008ea5) has not changed since last install.
+##   Use `force = TRUE` to force installation</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(COGugaison)</code></pre></div>
 </div>
 <div id="les-bases-de-donnees-utiles-dans-cogugaison" class="section level2">
