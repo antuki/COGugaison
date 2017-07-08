@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Modifier les codes Insee des communes corses — modification_Corse â€¢ COGugaison</title>
+<title>Modifier les codes Insee des communes corses â€” modification_Corse Ã¢â‚¬Â¢ COGugaison</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -52,25 +52,10 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="..//index.html">
-    <span class="fa fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Articles
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="../articles/COGugaison_vignette.html">Apprendre les principales fonctionnalitÃ©s de COGugaison</a>
-    </li>
-  </ul>
+<li>
+  <a href="../articles/index.html">Articles</a>
 </li>
       </ul>
       
@@ -96,7 +81,7 @@
     </div>
 
     
-    <p>Modifier les codes Insee des communes corses. En effet, en 1976, les codes de toutes les communes corses sont modifiés : alors qu'ils commençaient tous par "20", leurs deux premiers caractères sont remplacés par "2A" (Corse du Sud) ou "2B" (Corse du Nord). Les codes postaux conservent d'ailleurs aujourd'hui le préfixe historique "20". Cette fonction est notamment utile pour la raison suivante :  dans certaines tables issues des recensements Insee de 1968 ou 1975, les communes sont déjà codées avec les préfixes 2A et 2B.</p>
+    <p>Modifier les codes Insee des communes corses. En effet, en 1976, les codes de toutes les communes corses sont modifiÃ©s : alors qu'ils commenÃ§aient tous par "20", leurs deux premiers caractÃ¨res sont remplacÃ©s par "2A" (Corse du Sud) ou "2B" (Corse du Nord). Les codes postaux conservent d'ailleurs aujourd'hui le prÃ©fixe historique "20". Cette fonction est notamment utile pour la raison suivante :  dans certaines tables issues des recensements Insee de 1968 ou 1975, les communes sont dÃ©jÃ  codÃ©es avec les prÃ©fixes 2A et 2B.</p>
     
 
     <pre class="usage"><span class='fu'>modification_Corse</span>(<span class='no'>table_entree</span>, <span class='kw'>codgeo_entree</span> <span class='kw'>=</span> <span class='fu'>colnames</span>(<span class='no'>table_entree</span>)[<span class='fl'>1</span>],
@@ -107,11 +92,11 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>table_entree</th>
-      <td><p>correspond à la table (ou le vecteur, cf. paramètre vecteur_entree) à transformer de manière à modifier les codes des communes corses.</p></td>
+      <td><p>correspond Ã  la table (ou le vecteur, cf. paramÃ¨tre vecteur_entree) Ã  transformer de maniÃ¨re Ã  modifier les codes des communes corses.</p></td>
     </tr>
     <tr>
       <th>codgeo_entree</th>
-      <td><p>est une chaîne de caractères qui indique le nom de la variable contenant les codes communes Insee. Par défaut, il s'agit du nom de la première colonne de table_entree.</p></td>
+      <td><p>est une chaÃ®ne de caractÃ¨res qui indique le nom de la variable contenant les codes communes Insee. Par dÃ©faut, il s'agit du nom de la premiÃ¨re colonne de table_entree.</p></td>
     </tr>
     <tr>
       <th>vecteur_entree</th>
@@ -119,35 +104,35 @@
     </tr>
     <tr>
       <th>sens</th>
-      <td><p>vaut "20vers2A2B" pour changer tous les codes communes corses commençant par 20 par 2A ou 2B et vaut "2A2Bvers20" quand l'effet inverse est recherché.</p></td>
+      <td><p>vaut "20vers2A2B" pour changer tous les codes communes corses commenÃ§ant par 20 par 2A ou 2B et vaut "2A2Bvers20" quand l'effet inverse est recherchÃ©.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Le code officiel géographique de référence du package est actuellement celui au 01/01/2017. Les données communales devront être dans ce COG pour être agrégées en niveaux supra-communaux (fonction nivsupra).</p>
-<p>Les millésimes des COG qui peuvent être utilisés sont à ce stade les suivants : 1968, 1975, 1982, 1990, 1999, 2007 à 2017.</p>
-<p>Les dates de référence des codes officiels géographiques utilisés dans COGugaison sont les suivantes :</p><ul>
-<li><p>COG 1968 : à partir du 01/03/1968</p></li>
-<li><p>COG 1975 : à partir du 20/02/1975</p></li>
-<li><p>COG 1982 : à partir du 04/03/1982</p></li>
-<li><p>COG 1990 : à partir du 05/03/1990</p></li>
-<li><p>COG 1999 : à partir du 08/03/1999</p></li>
-<li><p>Pour tous les autres COG : à partir du 01/01 de chaque année</p></li>
+    <p>Le code officiel gÃ©ographique de rÃ©fÃ©rence du package est actuellement celui au 01/01/2017. Les donnÃ©es communales devront Ãªtre dans ce COG pour Ãªtre agrÃ©gÃ©es en niveaux supra-communaux (fonction nivsupra).</p>
+<p>Les millÃ©simes des COG qui peuvent Ãªtre utilisÃ©s sont Ã  ce stade les suivants : 1968, 1975, 1982, 1990, 1999, 2007 Ã  2017.</p>
+<p>Les dates de rÃ©fÃ©rence des codes officiels gÃ©ographiques utilisÃ©s dans COGugaison sont les suivantes :</p><ul>
+<li><p>COG 1968 : Ã  partir du 01/03/1968</p></li>
+<li><p>COG 1975 : Ã  partir du 20/02/1975</p></li>
+<li><p>COG 1982 : Ã  partir du 04/03/1982</p></li>
+<li><p>COG 1990 : Ã  partir du 05/03/1990</p></li>
+<li><p>COG 1999 : Ã  partir du 08/03/1999</p></li>
+<li><p>Pour tous les autres COG : Ã  partir du 01/01 de chaque annÃ©e</p></li>
 </ul><p></p>
-<p>Les différences entre les tables de passage Insee et non Insee sont les suivantes :</p><ul>
-<li><p>1982-03-03 (pris en compte par l'Insee seulement après le 04/03/1982): Flaignes-Havys (08169) est un rassemblement de Flaignes-Havys (08169), Havys (08221) [fusion simple].</p></li>
-<li><p>2014-01-01 (pris en compte par l'Insee seulement au 01/01/2015) : Loisey (55298) s'est séparée en Loisey (55298), Culey (55138) [rétablissement].</p></li>
-<li><p>1990-02-01 (pris en compte par l'Insee seulement après le 05/03/1990) : Le code commune de Oudon passe de 14624 à 14697 [changement de code dû à un changement de chef-lieu].</p></li>
-<li><p>1981-09-28 (pris en compte par l'Insee  dès le 20/02/1975) : Vaudreuil-Ex-Ensemble Urbain (27701) est créée à partir des parcelles d'Incarville (27351), de Léry (27365) , de Porte-Joie (27471) , de Poses  (27474) , de Saint-Étienne-du-Vauvray (27537), de Saint-Pierre-du-Vauvray (27598), de Tournedos-sur-Seine  (27651) et du Vaudreuil (27528) [création]. Cette situation étant complexe, nous avons pour le moment considéré que Vaudreuil-Ex-Ensemble Urbain (27701) est créée à partir de parcelles du Vaudreuil (27528) uniquement.</p></li>
-<li><p>En 1968, les 4 communes qui auraient dû d'après le COG être codées 2B044,2B076,2B151 et 2A325 sont codées 20044,20076,20151 et 20325 dans les données Insee.</p></li>
+<p>Les diffÃ©rences entre les tables de passage Insee et non Insee sont les suivantes :</p><ul>
+<li><p>1982-03-03 (pris en compte par l'Insee seulement aprÃ¨s le 04/03/1982): Flaignes-Havys (08169) est un rassemblement de Flaignes-Havys (08169), Havys (08221) [fusion simple].</p></li>
+<li><p>2014-01-01 (pris en compte par l'Insee seulement au 01/01/2015) : Loisey (55298) s'est sÃ©parÃ©e en Loisey (55298), Culey (55138) [rÃ©tablissement].</p></li>
+<li><p>1990-02-01 (pris en compte par l'Insee seulement aprÃ¨s le 05/03/1990) : Le code commune de Oudon passe de 14624 Ã  14697 [changement de code dÃ» Ã  un changement de chef-lieu].</p></li>
+<li><p>1981-09-28 (pris en compte par l'Insee  dÃ¨s le 20/02/1975) : Vaudreuil-Ex-Ensemble Urbain (27701) est crÃ©Ã©e Ã  partir des parcelles d'Incarville (27351), de LÃ©ry (27365) , de Porte-Joie (27471) , de Poses  (27474) , de Saint-Ã‰tienne-du-Vauvray (27537), de Saint-Pierre-du-Vauvray (27598), de Tournedos-sur-Seine  (27651) et du Vaudreuil (27528) [crÃ©ation]. Cette situation Ã©tant complexe, nous avons pour le moment considÃ©rÃ© que Vaudreuil-Ex-Ensemble Urbain (27701) est crÃ©Ã©e Ã  partir de parcelles du Vaudreuil (27528) uniquement.</p></li>
+<li><p>En 1968, les 4 communes qui auraient dÃ» d'aprÃ¨s le COG Ãªtre codÃ©es 2B044,2B076,2B151 et 2A325 sont codÃ©es 20044,20076,20151 et 20325 dans les donnÃ©es Insee.</p></li>
 </ul>
     
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <ul>
-<li><p><a href='https://www.insee.fr/fr/information/2666684#titre-bloc-11'>historique des géographies communales (Insee)</a></p></li>
-<li><p><a href='https://www.insee.fr/fr/information/2028028'>tables d'appartenance des communes aux différents niveaux géographiques (Insee)</a></p></li>
+<li><p><a href='https://www.insee.fr/fr/information/2666684#titre-bloc-11'>historique des gÃ©ographies communales (Insee)</a></p></li>
+<li><p><a href='https://www.insee.fr/fr/information/2028028'>tables d'appartenance des communes aux diffÃ©rents niveaux gÃ©ographiques (Insee)</a></p></li>
 </ul>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
@@ -157,7 +142,7 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>## Exemple 1</span>
-<span class='co'># Ici, nous allons remplacer les codes communes corses commençant par 2A ou 2B par 20 (l'exemple actuel ne contient pas de commune Corse donc le code n'a pas d'impact).</span>
+<span class='co'># Ici, nous allons remplacer les codes communes corses commenÃ§ant par 2A ou 2B par 20 (l'exemple actuel ne contient pas de commune Corse donc le code n'a pas d'impact).</span>
 <span class='no'>exemple_flux_sansCorse</span> <span class='kw'>&lt;-</span> <span class='fu'>modification_Corse</span>(<span class='kw'>table_entree</span><span class='kw'>=</span><span class='no'>exemple_flux</span>,<span class='kw'>sens</span><span class='kw'>=</span><span class='st'>"2A2Bvers20"</span>)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Agréger des données à des échelons supra-communaux — nivsupra â€¢ COGugaison</title>
+<title>AgrÃ©ger des donnÃ©es Ã  des Ã©chelons supra-communaux â€” nivsupra Ã¢â‚¬Â¢ COGugaison</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -52,25 +52,10 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="..//index.html">
-    <span class="fa fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Articles
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="../articles/COGugaison_vignette.html">Apprendre les principales fonctionnalitÃ©s de COGugaison</a>
-    </li>
-  </ul>
+<li>
+  <a href="../articles/index.html">Articles</a>
 </li>
       </ul>
       
@@ -92,11 +77,11 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Agréger des données à des échelons supra-communaux</h1>
+    <h1>AgrÃ©ger des donnÃ©es Ã  des Ã©chelons supra-communaux</h1>
     </div>
 
     
-    <p>Permettre d'agréger les tables de données communales à de nombreux échelons supra-communaux administratifs (EPCI, arrondissements, cantons-villes, départements, régions) ou d'étude (bassins de vie, zones d'emploi, unités urbaines, aires urbaines). La fonction `nivsupra` peut également s'appliquer à des tables de flux (non agrégées par codes communes) grâce à l'option agregation = FALSE. La table en entrée est alors conservée comme telle avec une nouvelle colonne qui correspond au niveau supracommunal du code commune considéré.</p>
+    <p>Permettre d'agrÃ©ger les tables de donnÃ©es communales Ã  de nombreux Ã©chelons supra-communaux administratifs (EPCI, arrondissements, cantons-villes, dÃ©partements, rÃ©gions) ou d'Ã©tude (bassins de vie, zones d'emploi, unitÃ©s urbaines, aires urbaines). La fonction `nivsupra` peut Ã©galement s'appliquer Ã  des tables de flux (non agrÃ©gÃ©es par codes communes) grÃ¢ce Ã  l'option agregation = FALSE. La table en entrÃ©e est alors conservÃ©e comme telle avec une nouvelle colonne qui correspond au niveau supracommunal du code commune considÃ©rÃ©.</p>
     
 
     <pre class="usage"><span class='fu'>nivsupra</span>(<span class='no'>table_entree</span>, <span class='kw'>codgeo_entree</span> <span class='kw'>=</span> <span class='fu'>colnames</span>(<span class='no'>table_entree</span>)[<span class='fl'>1</span>],
@@ -109,64 +94,64 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>table_entree</th>
-      <td><p>correspond à la table (ou le vecteur, cf. paramètre vecteur_entree) à transformer de manière à modifier les codes des communes corses.</p></td>
+      <td><p>correspond Ã  la table (ou le vecteur, cf. paramÃ¨tre vecteur_entree) Ã  transformer de maniÃ¨re Ã  modifier les codes des communes corses.</p></td>
     </tr>
     <tr>
       <th>codgeo_entree</th>
-      <td><p>est une chaîne de caractères qui indique le nom de la variable contenant les codes communes Insee. Par défaut, il s'agit du nom de la première colonne de table_entree.</p></td>
+      <td><p>est une chaÃ®ne de caractÃ¨res qui indique le nom de la variable contenant les codes communes Insee. Par dÃ©faut, il s'agit du nom de la premiÃ¨re colonne de table_entree.</p></td>
     </tr>
     <tr>
       <th>var_num</th>
-      <td><p>est un vecteur de chaînes de caractères qui indique les noms des variables numériques à convertir. Par défaut, il s'agit de l'ensemble des variables de types numériques dans table_entree.</p></td>
+      <td><p>est un vecteur de chaÃ®nes de caractÃ¨res qui indique les noms des variables numÃ©riques Ã  convertir. Par dÃ©faut, il s'agit de l'ensemble des variables de types numÃ©riques dans table_entree.</p></td>
     </tr>
     <tr>
       <th>nivsupra</th>
-      <td><p>est une chaîne de caractères qui indique le nom du niveau supra-communale souhaité :
-- "DEP" : départements
-- "REG" : régions
+      <td><p>est une chaÃ®ne de caractÃ¨res qui indique le nom du niveau supra-communale souhaitÃ© :
+- "DEP" : dÃ©partements
+- "REG" : rÃ©gions
 - "EPCI" : EPCI au 01/01/2017
 - "ARR" : arrondissements au 01/01/2017
 - "CV" : cantons-villes au 01/01/2017
 - "ZE2010" : zones d'emploi 2010
-- "UU2010" : unités urbaines 2010
+- "UU2010" : unitÃ©s urbaines 2010
 - "AU2010" : aires urbaines 2010
 - "BV2012" : bassins de vie 2012</p></td>
     </tr>
     <tr>
       <th>nivsupra_nom</th>
-      <td><p>indique le nom à donner au niveau supra-communal dans la table de sortie. Il faut par défaut la chaîne de caractère contenue dans nivsupra si agregation = T et la concaténation de nivsupra et codgeo_entree séparée d'un "_" si agregation = F.</p></td>
+      <td><p>indique le nom Ã  donner au niveau supra-communal dans la table de sortie. Il faut par dÃ©faut la chaÃ®ne de caractÃ¨re contenue dans nivsupra si agregation = T et la concatÃ©nation de nivsupra et codgeo_entree sÃ©parÃ©e d'un "_" si agregation = F.</p></td>
     </tr>
     <tr>
       <th>agregation</th>
-      <td><p>vaut TRUE si la table souhaitée doit sommer toutes les lignes qui concernent une même commune et FALSE si l'on souhaite volontairement conserver les doublons dans les codes commune (dans les tables de flux par exemple). Si agregation = F, les variables de type caractère sont alors conservées comme telles ou dupliquées en cas de défusion et les variables numériques sommées en cas de fusion ou réparties proportionnellement à la population de chaque commune en cas de défusion.</p></td>
+      <td><p>vaut TRUE si la table souhaitÃ©e doit sommer toutes les lignes qui concernent une mÃªme commune et FALSE si l'on souhaite volontairement conserver les doublons dans les codes commune (dans les tables de flux par exemple). Si agregation = F, les variables de type caractÃ¨re sont alors conservÃ©es comme telles ou dupliquÃ©es en cas de dÃ©fusion et les variables numÃ©riques sommÃ©es en cas de fusion ou rÃ©parties proportionnellement Ã  la population de chaque commune en cas de dÃ©fusion.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Le code officiel géographique de référence du package est actuellement celui au 01/01/2017. Les données communales devront être dans ce COG pour être agrégées en niveaux supra-communaux (fonction nivsupra).</p>
-<p>Les millésimes des COG qui peuvent être utilisés sont à ce stade les suivants : 1968, 1975, 1982, 1990, 1999, 2007 à 2017.</p>
-<p>Les dates de référence des codes officiels géographiques utilisés dans COGugaison sont les suivantes :</p><ul>
-<li><p>COG 1968 : à partir du 01/03/1968</p></li>
-<li><p>COG 1975 : à partir du 20/02/1975</p></li>
-<li><p>COG 1982 : à partir du 04/03/1982</p></li>
-<li><p>COG 1990 : à partir du 05/03/1990</p></li>
-<li><p>COG 1999 : à partir du 08/03/1999</p></li>
-<li><p>Pour tous les autres COG : à partir du 01/01 de chaque année</p></li>
+    <p>Le code officiel gÃ©ographique de rÃ©fÃ©rence du package est actuellement celui au 01/01/2017. Les donnÃ©es communales devront Ãªtre dans ce COG pour Ãªtre agrÃ©gÃ©es en niveaux supra-communaux (fonction nivsupra).</p>
+<p>Les millÃ©simes des COG qui peuvent Ãªtre utilisÃ©s sont Ã  ce stade les suivants : 1968, 1975, 1982, 1990, 1999, 2007 Ã  2017.</p>
+<p>Les dates de rÃ©fÃ©rence des codes officiels gÃ©ographiques utilisÃ©s dans COGugaison sont les suivantes :</p><ul>
+<li><p>COG 1968 : Ã  partir du 01/03/1968</p></li>
+<li><p>COG 1975 : Ã  partir du 20/02/1975</p></li>
+<li><p>COG 1982 : Ã  partir du 04/03/1982</p></li>
+<li><p>COG 1990 : Ã  partir du 05/03/1990</p></li>
+<li><p>COG 1999 : Ã  partir du 08/03/1999</p></li>
+<li><p>Pour tous les autres COG : Ã  partir du 01/01 de chaque annÃ©e</p></li>
 </ul><p></p>
-<p>Les différences entre les tables de passage Insee et non Insee sont les suivantes :</p><ul>
-<li><p>1982-03-03 (pris en compte par l'Insee seulement après le 04/03/1982): Flaignes-Havys (08169) est un rassemblement de Flaignes-Havys (08169), Havys (08221) [fusion simple].</p></li>
-<li><p>2014-01-01 (pris en compte par l'Insee seulement au 01/01/2015) : Loisey (55298) s'est séparée en Loisey (55298), Culey (55138) [rétablissement].</p></li>
-<li><p>1990-02-01 (pris en compte par l'Insee seulement après le 05/03/1990) : Le code commune de Oudon passe de 14624 à 14697 [changement de code dû à un changement de chef-lieu].</p></li>
-<li><p>1981-09-28 (pris en compte par l'Insee  dès le 20/02/1975) : Vaudreuil-Ex-Ensemble Urbain (27701) est créée à partir des parcelles d'Incarville (27351), de Léry (27365) , de Porte-Joie (27471) , de Poses  (27474) , de Saint-Étienne-du-Vauvray (27537), de Saint-Pierre-du-Vauvray (27598), de Tournedos-sur-Seine  (27651) et du Vaudreuil (27528) [création]. Cette situation étant complexe, nous avons pour le moment considéré que Vaudreuil-Ex-Ensemble Urbain (27701) est créée à partir de parcelles du Vaudreuil (27528) uniquement.</p></li>
-<li><p>En 1968, les 4 communes qui auraient dû d'après le COG être codées 2B044,2B076,2B151 et 2A325 sont codées 20044,20076,20151 et 20325 dans les données Insee.</p></li>
+<p>Les diffÃ©rences entre les tables de passage Insee et non Insee sont les suivantes :</p><ul>
+<li><p>1982-03-03 (pris en compte par l'Insee seulement aprÃ¨s le 04/03/1982): Flaignes-Havys (08169) est un rassemblement de Flaignes-Havys (08169), Havys (08221) [fusion simple].</p></li>
+<li><p>2014-01-01 (pris en compte par l'Insee seulement au 01/01/2015) : Loisey (55298) s'est sÃ©parÃ©e en Loisey (55298), Culey (55138) [rÃ©tablissement].</p></li>
+<li><p>1990-02-01 (pris en compte par l'Insee seulement aprÃ¨s le 05/03/1990) : Le code commune de Oudon passe de 14624 Ã  14697 [changement de code dÃ» Ã  un changement de chef-lieu].</p></li>
+<li><p>1981-09-28 (pris en compte par l'Insee  dÃ¨s le 20/02/1975) : Vaudreuil-Ex-Ensemble Urbain (27701) est crÃ©Ã©e Ã  partir des parcelles d'Incarville (27351), de LÃ©ry (27365) , de Porte-Joie (27471) , de Poses  (27474) , de Saint-Ã‰tienne-du-Vauvray (27537), de Saint-Pierre-du-Vauvray (27598), de Tournedos-sur-Seine  (27651) et du Vaudreuil (27528) [crÃ©ation]. Cette situation Ã©tant complexe, nous avons pour le moment considÃ©rÃ© que Vaudreuil-Ex-Ensemble Urbain (27701) est crÃ©Ã©e Ã  partir de parcelles du Vaudreuil (27528) uniquement.</p></li>
+<li><p>En 1968, les 4 communes qui auraient dÃ» d'aprÃ¨s le COG Ãªtre codÃ©es 2B044,2B076,2B151 et 2A325 sont codÃ©es 20044,20076,20151 et 20325 dans les donnÃ©es Insee.</p></li>
 </ul>
     
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <ul>
-<li><p><a href='https://www.insee.fr/fr/information/2666684#titre-bloc-11'>historique des géographies communales (Insee)</a></p></li>
-<li><p><a href='https://www.insee.fr/fr/information/2028028'>tables d'appartenance des communes aux différents niveaux géographiques (Insee)</a></p></li>
+<li><p><a href='https://www.insee.fr/fr/information/2666684#titre-bloc-11'>historique des gÃ©ographies communales (Insee)</a></p></li>
+<li><p><a href='https://www.insee.fr/fr/information/2028028'>tables d'appartenance des communes aux diffÃ©rents niveaux gÃ©ographiques (Insee)</a></p></li>
 </ul>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
@@ -176,10 +161,10 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>## Exemple 1</span>
-<span class='co'># Ici, après avoir transformé les données en géographie communale au 01/01/2017, nous agrégeons la population et la superficie des communes à l'échelon géographique des zones d'emploi afin d'obtenir une table des densités de population par zone d'emploi.</span>
+<span class='co'># Ici, aprÃ¨s avoir transformÃ© les donnÃ©es en gÃ©ographie communale au 01/01/2017, nous agrÃ©geons la population et la superficie des communes Ã  l'Ã©chelon gÃ©ographique des zones d'emploi afin d'obtenir une table des densitÃ©s de population par zone d'emploi.</span>
 <span class='no'>exemple_popcom_COG2017_num</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='changement_COG_varNum.html'>changement_COG_varNum</a></span>(<span class='kw'>table_entree</span><span class='kw'>=</span><span class='no'>exemple_popcom</span>,<span class='kw'>annees</span><span class='kw'>=</span><span class='fu'>c</span>(<span class='fl'>2014</span>:<span class='fl'>2017</span>),<span class='kw'>agregation</span><span class='kw'>=</span><span class='no'>T</span>,<span class='kw'>libgeo</span><span class='kw'>=</span><span class='no'>T</span>,<span class='kw'>donnees_insee</span><span class='kw'>=</span><span class='no'>T</span>)
 <span class='no'>exemple_popcom_ZE2010</span> <span class='kw'>&lt;-</span> <span class='fu'>nivsupra</span>(<span class='kw'>table_entree</span><span class='kw'>=</span><span class='no'>exemple_popcom_COG2017_num</span>,<span class='kw'>nivsupra</span><span class='kw'>=</span><span class='st'>"ZE2010"</span>,<span class='kw'>na.nivgeo.rm</span><span class='kw'>=</span><span class='no'>F</span>,<span class='kw'>agregation</span><span class='kw'>=</span><span class='no'>T</span>)</div><div class='output co'>#&gt; <span class='error'>Error in nivsupra(table_entree = exemple_popcom_COG2017_num, nivsupra = "ZE2010",     na.nivgeo.rm = F, agregation = T): unused argument (na.nivgeo.rm = F)</span></div><div class='input'><span class='no'>exemple_popcom_ZE2010</span>$<span class='no'>densite</span> <span class='kw'>&lt;-</span> <span class='no'>exemple_popcom_ZE2010</span>$<span class='no'>P12_POP</span> / <span class='no'>exemple_popcom_ZE2010</span>$<span class='no'>SUPERF</span></div><div class='output co'>#&gt; <span class='error'>Error in eval(expr, envir, enclos): object 'exemple_popcom_ZE2010' not found</span></div><div class='input'><span class='fu'>head</span>(<span class='no'>exemple_popcom_ZE2010</span>)</div><div class='output co'>#&gt; <span class='error'>Error in head(exemple_popcom_ZE2010): object 'exemple_popcom_ZE2010' not found</span></div><div class='input'><span class='co'>## Exemple 2</span>
-<span class='co'># Ici, on ajoute les colonnes ZE2010_COMMUNE et ZE2010_DCLT à la table exemple de flux domicile-travail.</span>
+<span class='co'># Ici, on ajoute les colonnes ZE2010_COMMUNE et ZE2010_DCLT Ã  la table exemple de flux domicile-travail.</span>
 <span class='no'>exemple_flux_COG2017</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='changement_COG_varNum.html'>changement_COG_varNum</a></span>(<span class='kw'>table_entree</span><span class='kw'>=</span><span class='no'>exemple_flux</span>,<span class='kw'>annees</span><span class='kw'>=</span><span class='fu'>c</span>(<span class='fl'>2014</span>:<span class='fl'>2017</span>),<span class='kw'>codgeo_entree</span><span class='kw'>=</span><span class='st'>"COMMUNE"</span>,<span class='kw'>agregation</span><span class='kw'>=</span><span class='no'>F</span>,<span class='kw'>libgeo</span><span class='kw'>=</span><span class='no'>F</span>,<span class='kw'>donnees_insee</span><span class='kw'>=</span><span class='no'>T</span>)
 <span class='no'>exemple_flux_COG2017</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='changement_COG_varNum.html'>changement_COG_varNum</a></span>(<span class='kw'>table_entree</span><span class='kw'>=</span><span class='no'>exemple_flux_COG2017</span>,<span class='kw'>annees</span><span class='kw'>=</span><span class='fu'>c</span>(<span class='fl'>2014</span>:<span class='fl'>2017</span>),<span class='kw'>codgeo_entree</span><span class='kw'>=</span><span class='st'>"DCLT"</span>,<span class='kw'>agregation</span><span class='kw'>=</span><span class='no'>F</span>,<span class='kw'>libgeo</span><span class='kw'>=</span><span class='no'>F</span>,<span class='kw'>donnees_insee</span><span class='kw'>=</span><span class='no'>T</span>)
 <span class='no'>exemple_flux_COG2017_etZE</span> <span class='kw'>&lt;-</span> <span class='fu'>nivsupra</span>(<span class='kw'>table_entree</span><span class='kw'>=</span><span class='no'>exemple_flux_COG2017</span>,<span class='kw'>codgeo_entree</span><span class='kw'>=</span><span class='st'>"COMMUNE"</span>,<span class='kw'>nivsupra</span><span class='kw'>=</span><span class='st'>"ZE2010"</span>,<span class='kw'>na.nivgeo.rm</span><span class='kw'>=</span><span class='no'>F</span>,<span class='kw'>agregation</span><span class='kw'>=</span><span class='no'>F</span>)</div><div class='output co'>#&gt; <span class='error'>Error in nivsupra(table_entree = exemple_flux_COG2017, codgeo_entree = "COMMUNE",     nivsupra = "ZE2010", na.nivgeo.rm = F, agregation = F): unused argument (na.nivgeo.rm = F)</span></div><div class='input'><span class='no'>exemple_flux_COG2017_etZE</span> <span class='kw'>&lt;-</span> <span class='fu'>nivsupra</span>(<span class='kw'>table_entree</span><span class='kw'>=</span><span class='no'>exemple_flux_COG2017_etZE</span>,<span class='kw'>codgeo_entree</span><span class='kw'>=</span><span class='st'>"DCLT"</span>,<span class='kw'>nivsupra</span><span class='kw'>=</span><span class='st'>"ZE2010"</span>,<span class='kw'>na.nivgeo.rm</span><span class='kw'>=</span><span class='no'>F</span>,<span class='kw'>agregation</span><span class='kw'>=</span><span class='no'>F</span>)</div><div class='output co'>#&gt; <span class='error'>Error in nivsupra(table_entree = exemple_flux_COG2017_etZE, codgeo_entree = "DCLT",     nivsupra = "ZE2010", na.nivgeo.rm = F, agregation = F): unused argument (na.nivgeo.rm = F)</span></div><div class='input'><span class='fu'>head</span>(<span class='no'>exemple_flux_COG2017_etZE</span>)</div><div class='output co'>#&gt; <span class='error'>Error in head(exemple_flux_COG2017_etZE): object 'exemple_flux_COG2017_etZE' not found</span></div></pre>
