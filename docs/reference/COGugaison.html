@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Deviner la géographie communale — COG_akinator â€¢ COGugaison</title>
+<title>COGugaison : Package R utile à la gestion des codes officiels géographiques (COG) dans les tables de données géographiques. — COGugaison â€¢ COGugaison</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -80,28 +80,22 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Deviner la géographie communale</h1>
+    <h1>COGugaison : Package R utile à la gestion des codes officiels géographiques (COG) dans les tables de données géographiques.</h1>
     </div>
 
     
-    <p>Détecter le millésime du code officiel géographique d'une table de données communales.</p>
+    <p>Le découpage des territoires français, en particulier les communes, n’est pas un phénomène immuable. Chaque année certaines communes changent de codes, ou bien de nom, fusionnent ou encore se divisent. Certains périmètres supra-communaux changent également, comme celui des cantons qui a été récemment redéfini. C’est à l’Insee que revient le suivi de ces changements afin d’établir chaque année le code officiel géographique (COG).</p>
+<p>Ce package R a alors pour objectif global de manipuler des données communales produites à différents millésimes et de les agréger à différents niveaux supra-communaux. Plus précisément, il permet actuellement de :</p><ul>
+<li><p>détecter le millésime du code officiel géographique d’une table de données communales : fonction COG_akinator</p></li>
+<li><p>visualiser les modifications communales (fusions, défusions, changements de codes ou de noms) qui ont eu lieu entre deux dates : modifications_communales</p></li>
+<li><p>transformer des tables de données numériques en géographie au premier janvier d’une année souhaitée : changement_COG_varNum</p></li>
+<li><p>transformer des typologies de communes en géographie au premier janvier d’une année souhaitée en ayant le choix entre plusieurs hypothèses de classement en cas de fusion de communes de classes différentes (attribuer la classe qui contient le plus de population, définir une classe absorbante ou une classe spécifique aux regroupements de plusieurs communes de classes différentes) : changement_COG_typo.Il est également possible d’isoler dans une table les communes fusionnées appartenant à des classes différentes : changement_COG_typo_details.</p></li>
+<li><p>permettre d’agréger les tables de données communales à de nombreux échelons supra-communaux administratifs (EPCI, arrondissements, cantons-villes, départements, régions) ou d’étude (bassins de vie, zones d’emploi, unités urbaines, aires urbaines) : nivsupra.</p></li>
+<li><p>gérer des cas particuliers comme les codes Insee des communes corses (modification_Corse) ou des arrondissements municipaux de Paris, Lyon, et Marseille (enlever_PLM)</p></li>
+</ul><p>Il est à noter que la version actuellement en ligne du package correspond à un premier développement qui comporte des imperfections. L’idée est donc à ce stade que les personnes qui utilisent régulièrement des bases de données communales produites à différents millésimes testent ses fonctionnalités, détectent ses bugs et ses manques pour l’améliorer.</p>
     
 
-    <pre class="usage"><span class='fu'>COG_akinator</span>(<span class='no'>vecteur_codgeo</span>, <span class='kw'>donnees_insee</span> <span class='kw'>=</span> <span class='no'>T</span>)</pre>
-    
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>vecteur_codgeo</th>
-      <td><p>correspond à un vecteur de codes Insee communaux pour lequel on cherche à déterminer le millésime de la géographie.</p></td>
-    </tr>
-    <tr>
-      <th>donnees_insee</th>
-      <td><p>vaut TRUE si les données manipulées sont produites par l'Insee. En effet, quelques rares modifications communales (la défusion des communes Loisey et Culey au 1er janvier 2014 par exemple) ont été prises en compte dans les bases de données communales de l'Insee plus tard que la date officielle. Pour tous les COG officiels datant d'avant 2008, seules les tables de passage Insee sont disponibles dans ce package.</p></td>
-    </tr>
-    </table>
-    
+        
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Le code officiel géographique le plus récent du package est actuellement celui au 01/01/2017.</p>
@@ -132,27 +126,20 @@
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p><a href='changement_COG_varNum.html'>changement_COG_varNum</a>, <a href='changement_COG_typo.html'>changement_COG_typo</a>,<a href='changement_COG_typo_details.html'>changement_COG_typo_details</a>, <a href='enlever_PLM.html'>enlever_PLM</a>, <a href='modification_Corse.html'>modification_Corse</a>, <a href='modifications_communales.html'>modifications_communales</a>,<a href='nivsupra.html'>nivsupra</a>,<a href='apparier_COG.html'>apparier_COG</a>,<a href='modification_Oudon.html'>modification_Oudon</a></p>
+    <p><a href='changement_COG_varNum.html'>changement_COG_varNum</a>,<a href='changement_COG_typo.html'>changement_COG_typo</a>, <a href='changement_COG_typo_details.html'>changement_COG_typo_details</a>,  <a href='COG_akinator.html'>COG_akinator</a>, <a href='enlever_PLM.html'>enlever_PLM</a>, <a href='modification_Corse.html'>modification_Corse</a>, <a href='modifications_communales.html'>modifications_communales</a>,<a href='nivsupra.html'>nivsupra</a>,<a href='apparier_COG.html'>apparier_COG</a>,<a href='modification_Oudon.html'>modification_Oudon</a></p>
     
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>## Exemple 1</span>
-<span class='co'># Ici, nous cherchons le millésime du code officiel géographique (COG) utilisé dans la table de données communales exemple_popcom.</span>
-<span class='fu'>COG_akinator</span>(<span class='kw'>vecteur_codgeo</span><span class='kw'>=</span><span class='no'>exemple_popcom</span>[,<span class='fl'>1</span>],<span class='kw'>donnees_insee</span><span class='kw'>=</span><span class='no'>T</span>)</div><div class='output co'>#&gt; [1] "COG2014"</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#details">Details</a></li>
 
       <li><a href="#references">References</a></li>
 
       <li><a href="#see-also">See also</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
+          </ul>
 
   </div>
 </div>

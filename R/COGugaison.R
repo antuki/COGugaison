@@ -1,7 +1,8 @@
-#' \title{COGugaison}
-#'Le découpage des territoires français, en particulier les communes, n’est pas un phénomène immuable. Chaque année certaines communes changent de codes, ou bien de nom, fusionnent ou encore se divisent. Certains périmètres supra-communaux changent également, comme celui des cantons qui a été récemment redéfini. C’est à l’Insee que revient le suivi de ces changements afin d’établir chaque année le code officiel géographique (COG).\cr
+#' COGugaison : Package R utile à la gestion des codes officiels géographiques (COG) dans les tables de données géographiques.
 #'
-#'Ce package R a alors pour objectif global de manipuler des données communales produites à différents millésimes et de les agréger à différents niveaux supra-communaux. Plus précisément, il permet actuellement de :
+#' @description Le découpage des territoires français, en particulier les communes, n’est pas un phénomène immuable. Chaque année certaines communes changent de codes, ou bien de nom, fusionnent ou encore se divisent. Certains périmètres supra-communaux changent également, comme celui des cantons qui a été récemment redéfini. C’est à l’Insee que revient le suivi de ces changements afin d’établir chaque année le code officiel géographique (COG).\cr
+#'
+#' Ce package R a alors pour objectif global de manipuler des données communales produites à différents millésimes et de les agréger à différents niveaux supra-communaux. Plus précisément, il permet actuellement de :
 #' \itemize{
 #' \item{détecter le millésime du code officiel géographique d’une table de données communales : fonction COG_akinator}
 #' \item{visualiser les modifications communales (fusions, défusions, changements de codes ou de noms) qui ont eu lieu entre deux dates : modifications_communales}
@@ -10,8 +11,7 @@
 #' \item{permettre d’agréger les tables de données communales à de nombreux échelons supra-communaux administratifs (EPCI, arrondissements, cantons-villes, départements, régions) ou d’étude (bassins de vie, zones d’emploi, unités urbaines, aires urbaines) : nivsupra.}
 #' \item{gérer des cas particuliers comme les codes Insee des communes corses (modification_Corse) ou des arrondissements municipaux de Paris, Lyon, et Marseille (enlever_PLM)}} \cr
 #' Il est à noter que la version actuellement en ligne du package correspond à un premier développement qui comporte des imperfections. L’idée est donc à ce stade que les personnes qui utilisent régulièrement des bases de données communales produites à différents millésimes testent ses fonctionnalités, détectent ses bugs et ses manques pour l’améliorer.
-#' \title{détails}
-#' Le code officiel géographique le plus récent du package est actuellement celui au 01/01/2017. \cr
+#' @details Le code officiel géographique le plus récent du package est actuellement celui au 01/01/2017. \cr
 #'
 #' Les millésimes des COG qui peuvent être utilisés sont à ce stade les suivants : 1968, 1975, 1982, 1990, 1999, 2007 à 2017. \cr
 #'
@@ -32,9 +32,12 @@
 #' \item{2014-01-07 (pris en compte par l'Insee  dès le 01/01/2016) : Tôtes est rattachée à Notre-Dame-de-Fresnay qui devient L'Oudon (changement de code de l'Oudon de 14697 à 14472) [transfert de chef-lieu].}
 #' \item{1981-09-28 (pris en compte par l'Insee  dès le 20/02/1975) : Vaudreuil-Ex-Ensemble Urbain (27701) est créée à partir des parcelles d'Incarville (27351), de Léry (27365) , de Porte-Joie (27471) , de Poses  (27474) , de Saint-Étienne-du-Vauvray (27537), de Saint-Pierre-du-Vauvray (27598), de Tournedos-sur-Seine  (27651) et du Vaudreuil (27528) [création]. Cette situation étant complexe, nous avons pour le moment considéré que Vaudreuil-Ex-Ensemble Urbain (27701) est créée à partir de parcelles du Vaudreuil (27528) uniquement.}
 #' \item{En 1968, les 4 communes qui auraient dû d'après le COG être codées 2B044,2B076,2B151 et 2A325 sont codées 20044,20076,20151 et 20325 dans les données Insee.}}
-#' \title{references}
+#' @references
 #' \itemize{
 #' \item{\href{https://www.insee.fr/fr/information/2666684#titre-bloc-11}{historique des géographies communales (Insee)}}
 #' \item{\href{https://www.insee.fr/fr/information/2028028}{tables d'appartenance des communes aux différents niveaux géographiques (Insee)}}}
-#' \title{voir aussi}
-#' \link{changement_COG_varNum},\link{changement_COG_typo}, \link{changement_COG_typo_details},  \link{COG_akinator}, \link{enlever_PLM}, \link{modification_Corse}, \link{modifications_communales},\link{nivsupra},\link{apparier_COG},\link{modification_Oudon}
+#' @seealso \link{changement_COG_varNum},\link{changement_COG_typo}, \link{changement_COG_typo_details},  \link{COG_akinator}, \link{enlever_PLM}, \link{modification_Corse}, \link{modifications_communales},\link{nivsupra},\link{apparier_COG},\link{modification_Oudon}
+#' @docType package
+#' @name COGugaison
+#' @encoding UTF-8
+NULL
