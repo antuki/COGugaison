@@ -4,13 +4,17 @@
 #' @param table_entree correspond à la table à transformer en une autre géographie
 #' @param annees est un vecteur qui liste l'ensemble des années qui séparent le code officiel géographique de départ et d'arrivée. Par exemple c(1968:1985). Le package rend possible l'utilisation de tables de passages d'une année de COG vers une année antiérieure (par exemple c(2016:2014)).
 #' @param codgeo_entree est une chaîne de caractères qui indique le nom de la variable contenant les codes Insee communaux. Par défaut, il s'agit du nom de la première colonne de table_entree.
-#' @param typos est un vecteur de chaînes de caractères qui indique les noms des typologies à convertir. Par défaut, il s'agit de l'ensemble des variables de table_entree sauf codgeo_entree.
+#' @param typos est un vecteur de chaînes de caractères qui indique les noms des typologies à convertir . Elles peuvent être de types numeric, character ou factor. Par défaut, il s'agit de l'ensemble des variables de table_entree sauf codgeo_entree.
 #' @param methode_fusion méthode choisie en cas de fusion de communes de classes différentes :
+#' - "methode_classe_fusion" : pour toutes les communes qui ont fusionné entre 2 dates indiquer comme classe la valeur inscrite dans "mot_fusion" y compris pour les fusions de communes de mêmes classes (sinon utiliser la méthode : "methode_difference"). Remarque : La fonction changement_COG_typo peut très bien s'utiliser avec des variables numériques (populations...) si l'on choisit cette hypothèse en cas de fusions de communes.
 #' - "methode_difference" : créer une classe spécifique dont le nom est contenu dans mot_difference
 #' - "methode_max_pop" : attribuer la classe contenant le maximum de population des communes fusionnées
 #' - "methode_classe_absorbante" : attribuer la classe dite absorbante à toute commune fusionnée contenant au moins une ancienne commune appartenant à cette classe absorbante
+#' - "methode_classe_absorbee" : ne pas tenir compte de cette classe dite "absorbée" pour toute commune fusionnée contenant au moins une ancienne commune appartenant à cette classe absorbée
 #' @param mot_difference n'est à définir que si methode_fusion = "methode_difference". Si ce paramètre est laissé à NULL alors la commune fusionnée possède comme libellé de classe l'ensemble des libellés présents dans ses communes fusionnées séparés d'un "et". Sinon, il indique un nom de classe à attribuer aux communes fusionnées de classes différentes.
+#' @param mot_fusion n'est à définir que si methode_fusion = "methode_classe_fusion". Sa valeur par défaut vaut NA.
 #' @param classe_absorbante n'est à définir que si methode_fusion = "methode_classe_absorbante". Si ce paramètre est laissé à NULL alors la commune fusionnée possède comme libellé de classe l'ensemble des libellés présents dans ses communes fusionnées séparés d'un "et". Sinon, il indique le nom de la classe dite absorbante à attribuer à toute commune fusionnée contenant au moins une ancienne commune appartenant à cette classe absorbante.
+#' @param classe_absorbee n'est à définir que si methode_fusion = "methode_classe_absorbee". Si ce paramètre est laissé à NULL alors la commune fusionnée possède comme libellé de classe l'ensemble des libellés présents dans ses communes fusionnées séparés d'un "et". Sinon, il indique le nom de la classe dite absorbée à attribuer à toute commune fusionnée contenant au moins une ancienne commune appartenant à cette classe absorbante.
 #' @param libgeo vaut TRUE si l'on veut rajouter dans la table une colonne nommée "nom_commune" qui indique le nom de la commune issu du code officiel géographique et FALSE sinon.
 #' @param donnees_insee vaut TRUE si les données manipulées sont produites par l'Insee. En effet, quelques rares modifications communales (la défusion des communes Loisey et Culey au 1er janvier 2014 par exemple) ont été prises en compte dans les bases de données communales de l'Insee plus tard que la date officielle. Pour tous les COG officiels datant d'avant 2008, seules les tables de passage Insee sont disponibles dans ce package.
 #' @details
@@ -54,7 +58,7 @@
 #' head(details_exemple_popcom_COG2017_typo[["2016_2017"]])
 #' @encoding UTF-8
 
-changement_COG_typo <- function(table_entree,annees,codgeo_entree=colnames(table_entree)[1],typos=colnames(table_entree)[-which(colnames(table_entree)==codgeo_entree)], methode_fusion="methode_difference",mot_difference=NULL,classe_absorbante=NULL,donnees_insee=T,libgeo=F){
+changement_COG_typo <- function(table_entree,annees,codgeo_entree=colnames(table_entree)[1],typos=colnames(table_entree)[-which(colnames(table_entree)==codgeo_entree)], methode_fusion="methode_difference",mot_difference=NULL,mot_fusion=NA,classe_absorbante=NULL,classe_absorbee=NULL,donnees_insee=T,libgeo=F){
 
   inter <- intersect(c(1968,1975,1982,1990,1999,2008:2017),annees)
   if(annees[1]<=annees[length(annees)]){
@@ -87,7 +91,9 @@ changement_COG_typo <- function(table_entree,annees,codgeo_entree=colnames(table
 
       for (var in typos){
         provisoire_court <- provisoire[,c(paste0("cod",annees[i]),paste0("cod",annees[i+1]),"annee","typemodif","ratio",var)]
-        provisoire_court[,var] <- ifelse(is.factor(provisoire_court[,var]), as.character(provisoire_court[,var]), provisoire_court[,var]) # nouveau : enlever factor
+        if(is.factor(provisoire_court[,var])){ ## nouveau : possibilité de mettre des factor en typologie (transformés en caractère)
+          provisoire_court[,var] <- as.character(provisoire_court[,var])
+        }
         table_n_d <- provisoire_court[which(is.na(provisoire_court$typemodif) | (provisoire_court$typemodif=="d")| (provisoire_court$typemodif=="c")),]
         table_f <- provisoire_court[which(provisoire_court$typemodif=="f"),]
 
@@ -98,6 +104,14 @@ changement_COG_typo <- function(table_entree,annees,codgeo_entree=colnames(table
           table_f_sanspb <- lapply(table_f_sanspb, FUN=function(x){x[1,]})
           table_f_sanspb  <- do.call("rbind", table_f_sanspb)
           table_f_avecpb <-table_f_liste[which(lapply(table_f_liste, FUN=function(x){ifelse(length(unique(x[,6]))==1,T,F)})==F)]
+
+          if (methode_fusion=="methode_classe_fusion"){ ### nouveau : août 2017
+            table_f_sanspb[,ncol(table_f_sanspb)] <- mot_fusion
+            table_f_avecpb <- lapply(table_f_avecpb, FUN=function(x){
+              x[1,var]<- mot_fusion
+              return(x[1,])
+            })
+          }
 
           if (methode_fusion=="methode_difference"){
             table_f_avecpb <- lapply(table_f_avecpb, FUN=function(x){
@@ -112,18 +126,25 @@ changement_COG_typo <- function(table_entree,annees,codgeo_entree=colnames(table
             if(donnees_insee){
               assign(paste0("COG",annees[i]),get(paste0("COG",annees[i],"_insee")))
             }
-
             table_f_avecpb <- lapply(table_f_avecpb, FUN=function(x){merge(x,get(paste0("COG",annees[i]))[,-2],by.x=paste0("cod",annees[i]),by.y="CODGEO",all.x=T,all.y=F)})
             table_f_avecpb  <- lapply(table_f_avecpb, FUN=function(x){x[which(x[,6]==(aggregate(POP ~ get(colnames(x)[6]),data =x, FUN=sum)[which.max(aggregate(POP ~ get(colnames(x)[6]),data = x, FUN=sum)$POP),1]))[1],-7]})
           }
 
 
           if (methode_fusion=="methode_classe_absorbante"){
-
-            table_f_avecpb <- lapply(table_f_avecpb, FUN=function(x){
+           table_f_avecpb <- lapply(table_f_avecpb, FUN=function(x){
               categories <- unique(x[,var])[order(unique(x[,var]))]
               absorb <- ifelse(classe_absorbante%in%categories,T,F)
               x[1,var]<- ifelse(absorb==T,classe_absorbante,paste(categories,collapse = " et "))
+              return(x[1,])
+            })
+          }
+
+          if (methode_fusion=="methode_classe_absorbee"){ ## new 31/07
+            table_f_avecpb <- lapply(table_f_avecpb, FUN=function(x){
+              categories <- unique(x[,var])[order(unique(x[,var]))]
+              absorb <- ifelse(classe_absorbee%in%categories,T,F)
+              x[1,var]<- ifelse(absorb==T,paste(categories[-which(categories==classe_absorbee)],collapse = " et "),paste(categories,collapse = " et "))
               return(x[1,])
             })
           }

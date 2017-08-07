@@ -8,6 +8,12 @@
 * Ajout du paramètre *COG* dans la fonction `nivsupra` permettant d'agréger à des niveaux supra-communaux de plusieurs millésimes (et pas uniquement le dernier).
 * Suppression du paramètre *liste_complete* de `COG_akinator` qui n'était pas très utile.
 
+### août 2017
+
+* ajout des options methode_fusion="methode_classe_absorbee" et methode_fusion="methode_classe_absorbee" dans `changement_COG_typo` et des paramètres associés *classe_absorbee* et *mot_fusion*
+* ajout des niveaux supra-communaux des COG de 2008 à 2013
+
+
 ## correction de bugs
 
 ### août 2017

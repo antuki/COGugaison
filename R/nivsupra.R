@@ -3,9 +3,9 @@
 #' @description Permettre d'agréger les tables de données communales à de nombreux échelons supra-communaux administratifs (EPCI, arrondissements, cantons-villes, départements, régions) ou d'étude (bassins de vie, zones d'emploi, unités urbaines, aires urbaines). La fonction `nivsupra` peut également s'appliquer à des tables de flux (non agrégées par codes communes) grâce à l'option agregation = FALSE. La table en entrée est alors conservée comme telle avec une nouvelle colonne qui correspond au niveau supracommunal du code commune considéré.
 #' @param table_entree correspond à la table (ou le vecteur, cf. paramètre vecteur_entree) à transformer de manière à modifier les codes des communes corses.
 #' @param codgeo_entree est une chaîne de caractères qui indique le nom de la variable contenant les codes communes Insee. Par défaut, il s'agit du nom de la première colonne de table_entree.
-#' @param COG indique l'année de COG de la table communale considérée. (exemple 2014). Années possibles : 2014,2015,2016 et 2017. Par défaut, vaut 2017.
+#' @param COG indique l'année de COG de la table communale considérée. (exemple 2014). Années possibles : de 2008 à 2017. Par défaut, vaut 2017.
 #' @param var_num est un vecteur de chaînes de caractères qui indique les noms des variables numériques à convertir. Par défaut, il s'agit de l'ensemble des variables de types numériques dans table_entree.
-#' @param nivsupra est une chaîne de caractères qui indique le nom du niveau supra-communale souhaité :
+#' @param nivsupra est une chaîne de caractères qui indique le nom du niveau supra-communale souhaité. Pour les années récentes :
 #' - "DEP" : départements
 #' - "REG" : régions
 #' - "EPCI" : EPCI au 01/01/20XX
@@ -15,6 +15,7 @@
 #' - "UU2010" : unités urbaines 2010
 #' - "AU2010" : aires urbaines 2010
 #' - "BV2012" : bassins de vie 2012
+#' Pour les COG plus anciens, regarder au cas par cas selon les années. Par exemple, str(table_supracom_2008)
 #' @param nivsupra_nom indique le nom à donner au niveau supra-communal dans la table de sortie. Il faut par défaut la chaîne de caractère contenue dans nivsupra si agregation = T et la concaténation de nivsupra et codgeo_entree séparée d'un "_" si agregation = F.
 #' @param agregation vaut TRUE si la table souhaitée doit sommer toutes les lignes qui concernent une même commune et FALSE si l'on souhaite volontairement conserver les doublons dans les codes commune (dans les tables de flux par exemple). Si agregation = F, les variables de type caractère sont alors conservées comme telles ou dupliquées en cas de défusion et les variables numériques sommées en cas de fusion ou réparties proportionnellement à la population de chaque commune en cas de défusion.
 #' @details

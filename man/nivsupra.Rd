@@ -14,11 +14,11 @@ nivsupra(table_entree, codgeo_entree = colnames(table_entree)[1],
 
 \item{codgeo_entree}{est une chaîne de caractères qui indique le nom de la variable contenant les codes communes Insee. Par défaut, il s'agit du nom de la première colonne de table_entree.}
 
-\item{COG}{indique l'année de COG de la table communale considérée. (exemple 2014). Années possibles : 2014,2015,2016 et 2017. Par défaut, vaut 2017.}
+\item{COG}{indique l'année de COG de la table communale considérée. (exemple 2014). Années possibles : de 2008 à 2017. Par défaut, vaut 2017.}
 
 \item{var_num}{est un vecteur de chaînes de caractères qui indique les noms des variables numériques à convertir. Par défaut, il s'agit de l'ensemble des variables de types numériques dans table_entree.}
 
-\item{nivsupra}{est une chaîne de caractères qui indique le nom du niveau supra-communale souhaité :
+\item{nivsupra}{est une chaîne de caractères qui indique le nom du niveau supra-communale souhaité. Pour les années récentes :
 - "DEP" : départements
 - "REG" : régions
 - "EPCI" : EPCI au 01/01/20XX
@@ -27,7 +27,8 @@ nivsupra(table_entree, codgeo_entree = colnames(table_entree)[1],
 - "ZE2010" : zones d'emploi 2010
 - "UU2010" : unités urbaines 2010
 - "AU2010" : aires urbaines 2010
-- "BV2012" : bassins de vie 2012}
+- "BV2012" : bassins de vie 2012
+Pour les COG plus anciens, regarder au cas par cas selon les années. Par exemple, str(table_supracom_2008)}
 
 \item{nivsupra_nom}{indique le nom à donner au niveau supra-communal dans la table de sortie. Il faut par défaut la chaîne de caractère contenue dans nivsupra si agregation = T et la concaténation de nivsupra et codgeo_entree séparée d'un "_" si agregation = F.}
 

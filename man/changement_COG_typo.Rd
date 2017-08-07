@@ -9,8 +9,8 @@ changement_COG_typo(table_entree, annees,
   codgeo_entree = colnames(table_entree)[1],
   typos = colnames(table_entree)[-which(colnames(table_entree) ==
   codgeo_entree)], methode_fusion = "methode_difference",
-  mot_difference = NULL, classe_absorbante = NULL, donnees_insee = T,
-  libgeo = F)
+  mot_difference = NULL, mot_fusion = NA, classe_absorbante = NULL,
+  classe_absorbee = NULL, donnees_insee = T, libgeo = F)
 }
 \arguments{
 \item{table_entree}{correspond à la table à transformer en une autre géographie}
@@ -19,16 +19,22 @@ changement_COG_typo(table_entree, annees,
 
 \item{codgeo_entree}{est une chaîne de caractères qui indique le nom de la variable contenant les codes Insee communaux. Par défaut, il s'agit du nom de la première colonne de table_entree.}
 
-\item{typos}{est un vecteur de chaînes de caractères qui indique les noms des typologies à convertir. Par défaut, il s'agit de l'ensemble des variables de table_entree sauf codgeo_entree.}
+\item{typos}{est un vecteur de chaînes de caractères qui indique les noms des typologies à convertir . Elles peuvent être de types numeric, character ou factor. Par défaut, il s'agit de l'ensemble des variables de table_entree sauf codgeo_entree.}
 
 \item{methode_fusion}{méthode choisie en cas de fusion de communes de classes différentes :
+- "methode_classe_fusion" : pour toutes les communes qui ont fusionné entre 2 dates indiquer comme classe la valeur inscrite dans "mot_fusion" y compris pour les fusions de communes de mêmes classes (sinon utiliser la méthode : "methode_difference"). Remarque : La fonction changement_COG_typo peut très bien s'utiliser avec des variables numériques (populations...) si l'on choisit cette hypothèse en cas de fusions de communes.
 - "methode_difference" : créer une classe spécifique dont le nom est contenu dans mot_difference
 - "methode_max_pop" : attribuer la classe contenant le maximum de population des communes fusionnées
-- "methode_classe_absorbante" : attribuer la classe dite absorbante à toute commune fusionnée contenant au moins une ancienne commune appartenant à cette classe absorbante}
+- "methode_classe_absorbante" : attribuer la classe dite absorbante à toute commune fusionnée contenant au moins une ancienne commune appartenant à cette classe absorbante
+- "methode_classe_absorbee" : ne pas tenir compte de cette classe dite "absorbée" pour toute commune fusionnée contenant au moins une ancienne commune appartenant à cette classe absorbée}
 
 \item{mot_difference}{n'est à définir que si methode_fusion = "methode_difference". Si ce paramètre est laissé à NULL alors la commune fusionnée possède comme libellé de classe l'ensemble des libellés présents dans ses communes fusionnées séparés d'un "et". Sinon, il indique un nom de classe à attribuer aux communes fusionnées de classes différentes.}
 
+\item{mot_fusion}{n'est à définir que si methode_fusion = "methode_classe_fusion". Sa valeur par défaut vaut NA.}
+
 \item{classe_absorbante}{n'est à définir que si methode_fusion = "methode_classe_absorbante". Si ce paramètre est laissé à NULL alors la commune fusionnée possède comme libellé de classe l'ensemble des libellés présents dans ses communes fusionnées séparés d'un "et". Sinon, il indique le nom de la classe dite absorbante à attribuer à toute commune fusionnée contenant au moins une ancienne commune appartenant à cette classe absorbante.}
+
+\item{classe_absorbee}{n'est à définir que si methode_fusion = "methode_classe_absorbee". Si ce paramètre est laissé à NULL alors la commune fusionnée possède comme libellé de classe l'ensemble des libellés présents dans ses communes fusionnées séparés d'un "et". Sinon, il indique le nom de la classe dite absorbée à attribuer à toute commune fusionnée contenant au moins une ancienne commune appartenant à cette classe absorbante.}
 
 \item{donnees_insee}{vaut TRUE si les données manipulées sont produites par l'Insee. En effet, quelques rares modifications communales (la défusion des communes Loisey et Culey au 1er janvier 2014 par exemple) ont été prises en compte dans les bases de données communales de l'Insee plus tard que la date officielle. Pour tous les COG officiels datant d'avant 2008, seules les tables de passage Insee sont disponibles dans ce package.}
 
