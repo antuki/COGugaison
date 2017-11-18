@@ -29,7 +29,7 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="..//index.html">
+  <a href="../index.html">
     <span class="fa fa-home fa-lg"></span>
      
   </a>
@@ -60,7 +60,8 @@
 <!--/.navbar -->
 
       
-      </header><div class="row">
+      </header><script src="COGugaison_files/htmlwidgets-0.9/htmlwidgets.js"></script><link href="COGugaison_files/vis-4.20.0/vis.css" rel="stylesheet">
+<script src="COGugaison_files/vis-4.20.0/vis.min.js"></script><script src="COGugaison_files/visNetwork-binding-2.0.1/visNetwork.js"></script><div class="row">
   <div class="col-md-9">
     <div class="page-header toc-ignore">
       <h1>Apprendre les principales fonctionnalités de COGugaison</h1>
@@ -82,6 +83,8 @@
 </li>
 <li>visualiser les modifications communales (fusions, défusions, changements de codes ou de noms) qui ont eu lieu entre deux dates : <code>modifications_communales</code>
 </li>
+<li>visualiser sur un graphique interactif la trajectoire d’une commune donnée, c’est-à-dire toutes les modifications qui ont eu lieu depuis 1968 : <code>trajectoire_commune</code> et <code>trajectoire_commune_shiny</code><br>
+</li>
 <li>transformer des tables de données numériques en géographie au premier janvier d’une année souhaitée : <code>changement_COG_varNum</code>.</li>
 <li>transformer des typologies de communes en géographie au premier janvier d’une année souhaitée en ayant le choix entre plusieurs hypothèses de classement en cas de fusion de communes de classes différentes (attribuer une unique classe à toutes les communes fusionnées, attribuer la classe qui contient le plus de population, définir une classe absorbante, une classe absorbée ou une classe spécifique aux regroupements de plusieurs communes de classes différentes) : <code>changement_COG_typo</code>. Il est également possible d’isoler dans une table les communes fusionnées appartenant à des classes différentes : <code>changement_COG_typo_details</code>.</li>
 <li>permettre d’agréger les tables de données communales à de nombreux échelons supra-communaux administratifs (EPCI, arrondissements, cantons-villes, départements, régions) ou d’étude (bassins de vie, zones d’emploi, unités urbaines, aires urbaines) : <code>nivsupra</code>.</li>
@@ -96,7 +99,7 @@
 <p>Tant que le package n’est pas stabilisé, il est évidemment conseillé de se référer aux données officielles de l’Insee en cas de doute sur un résultat.</p>
 <p>Commençons par installer le package <code>COGugaison</code> et à le charger dans R.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools::<span class="kw">install_github</span>(<span class="st">"antuki/COGugaison"</span>)</code></pre></div>
-<pre><code>## Skipping install of 'COGugaison' from a github remote, the SHA1 (9b107085) has not changed since last install.
+<pre><code>## Skipping install of 'COGugaison' from a github remote, the SHA1 (d0b271c7) has not changed since last install.
 ##   Use `force = TRUE` to force installation</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(COGugaison)</code></pre></div>
 </div>
@@ -245,9 +248,26 @@ COG2014_insee[<span class="kw">which</span>(COG2014_insee$CODGEO%in%appariement$
 ## 36680  97616                    Sada
 ## 36681  97617                Tsingoni</code></pre>
 </div>
-<div id="quelles-modifications-communales-ont-eu-lieu-entre-deux-dates" class="section level2">
+<div id="visualiser-les-modifications-communales" class="section level2">
 <h2 class="hasAnchor">
-<a href="#quelles-modifications-communales-ont-eu-lieu-entre-deux-dates" class="anchor"></a>Quelles modifications communales ont eu lieu entre deux dates ?</h2>
+<a href="#visualiser-les-modifications-communales" class="anchor"></a>Visualiser les modifications communales</h2>
+<p>La fonction <code>trajectoire_commune</code> permet d’observer sur un diagramme interactif la trajectoire d’une commune depuis 1968 (aucun changement, fusions, défusions ou changements de codes).</p>
+<p>Le paramètre <em>codgeo</em> est une chaîne de 5 caractères qui indique le code Insee de la commune considérée et le paramètre <em>COG</em> indique l’année de COG de la communes considérée.</p>
+<p>La fonction <code>trajectoire_commune_shiny</code> lance une application shiny qui permet de sélectionner la commune pour laquelle vous souhaitez observer ses modifications depuis 1968.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Ici, nous allons observer sur un graphique interactif la trajectoire de la commune ayant pour code 01003 en 1968 (fusion avec 2 autres communes le 1er janvier 1974)</span>
+<span class="kw"><a href="../reference/trajectoire_commune.html">trajectoire_commune</a></span>(<span class="st">"01003"</span>, <span class="dv">1968</span>,<span class="dt">donnees_insee=</span>F)</code></pre></div>
+<pre><code>## 
+## Attachement du package : 'dplyr'</code></pre>
+<pre><code>## The following objects are masked from 'package:stats':
+## 
+##     filter, lag</code></pre>
+<pre><code>## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union</code></pre>
+<pre><code>## Warning: le package 'visNetwork' a été compilé avec la version R 3.4.2</code></pre>
+<div id="htmlwidget-f59065d789ce609557e9" style="width:100%;height:800px;" class="visNetwork html-widget"></div>
+<script type="application/json" data-for="htmlwidget-f59065d789ce609557e9">{"x":{"nodes":{"id":["01003_1968","01070_1968","01165_1968","01165_1975","01165_2017"],"comm":["01003","01070","01165","01165","01165"],"COG":["1968","1968","1968","1975","2017"],"label":["01003\n(1968)","01070\n(1968)","01165\n(1968)","01165\n(1975)","01165\n(2017)"],"level":[1,1,1,2,3],"pop":["140","100","128","470","1515"],"libgeo":["AMAREINS","CESSEINS","FRANCHELEINS","FRANCHELEINS","Francheleins"],"ratio":[1,1,1,1,1],"title":["<b><a target=\"_blank\" href=https://www.insee.fr/fr/recherche/recherche-geographique?geo=COM-01003&debut=0>01003<\/a> AMAREINS<\/b><br>Population : 140 hab.","<b><a target=\"_blank\" href=https://www.insee.fr/fr/recherche/recherche-geographique?geo=COM-01070&debut=0>01070<\/a> CESSEINS<\/b><br>Population : 100 hab.","<b><a target=\"_blank\" href=https://www.insee.fr/fr/recherche/recherche-geographique?geo=COM-01165&debut=0>01165<\/a> FRANCHELEINS<\/b><br>Population : 128 hab.","<b><a target=\"_blank\" href=https://www.insee.fr/fr/recherche/recherche-geographique?geo=COM-01165&debut=0>01165<\/a> FRANCHELEINS<\/b><br>Population : 470 hab.","<b><a target=\"_blank\" href=https://www.insee.fr/fr/recherche/recherche-geographique?geo=COM-01165&debut=0>01165<\/a> Francheleins<\/b><br>Population : 1515 hab."]},"edges":{"from":["01003_1968","01070_1968","01165_1968","01165_1975"],"to":["01165_1975","01165_1975","01165_1975","01165_2017"],"LIBGEO":["AMAREINS","CESSEINS","FRANCHELEINS",null],"POP":[140,100,128,null],"annee":["1974-01-01","1974-01-01","1974-01-01",null],"typemodif":["f","f","f",null],"ratio":[1,1,1,1],"arrows.middle.enabled":[true,true,true,false],"dashes":[false,false,false,true],"value":[1,1,1,0.2],"title":["<b>fusion<\/b><br>Date : 01 janv. 1974<br>","<b>fusion<\/b><br>Date : 01 janv. 1974<br>","<b>fusion<\/b><br>Date : 01 janv. 1974<br>",null]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"ellipse","color":{"border":"black","background":"#000000","highlight":{"border":"#000000","background":"#000000"}},"fixed":{"allowedToMoveX":true,"allowedToMoveY":true},"font":{"face":"verdana","color":"#FFFFFF","size":20}},"manipulation":{"enabled":false},"edges":{"width":10,"arrows":{"middle":{"enabled":true,"scaleFactor":3}},"color":{"color":"#2AA198"},"shadow":false},"layout":{"hierarchical":{"enabled":true,"levelSeparation":500,"direction":"LR"},"randomSeed":12},"interaction":{"hoverConnectedEdges":false,"navigationButtons":true,"selectable":false,"selectConnectedEdges":false},"physics":{"hierarchicalRepulsion":{"centralGravity":0,"springConstant":0,"nodeDistance":0}},"configure":{"enabled":false}},"groups":null,"width":"100%","height":"800px","idselection":{"enabled":false},"byselection":{"enabled":false},"main":null,"submain":null,"footer":null,"tooltipStay":300,"tooltipStyle":"position: fixed;visibility:hidden;padding: 5px;white-space: nowrap;font-family: verdana;font-size:14px;font-color:#000000;background-color: #f5f4ed;-moz-border-radius: 3px;-webkit-border-radius: 3px;border-radius: 3px;border: 1px solid #808074;box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);"},"evals":[],"jsHooks":[]}</script><div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Cette fonction lance une application shiny permettant d'observer toutes les trajectoires des communes.</span>
+<span class="co">#trajectoire_commune_shiny()</span></code></pre></div>
 <p>La fonction <code>modifications_communales</code> permet, comme son nom l’indique, de visualiser les modifications communales (fusions, défusions, changements de codes ou de noms) qui ont eu lieu entre deux dates. Ici entre le 01/01/2014 et le 01/01/2015. Cette fonction est encore en cours de développement il est donc possible que certains évènements ne soient pas encore pris en compte. Il ne faut pas hésiter à le signaler.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">modifs &lt;-<span class="st"> </span><span class="kw"><a href="../reference/modifications_communales.html">modifications_communales</a></span>(<span class="dt">date_debut=</span><span class="st">"01-01-2014"</span>,<span class="dt">date_fin=</span><span class="st">"01-01-2015"</span>)
 <span class="kw">cat</span>(modifs$fusions)</code></pre></div>
@@ -443,7 +463,7 @@ exemple_flux_COG2017_etZE &lt;-<span class="st"> </span><span class="kw"><a href
 <li><a href="#introduction-a-cogugaison">Introduction à COGugaison</a></li>
       <li><a href="#les-bases-de-donnees-utiles-dans-cogugaison">Les bases de données utiles dans COGugaison</a></li>
       <li><a href="#quel-code-officiel-geographique-est-utilise">Quel code officiel géographique est utilisé ?</a></li>
-      <li><a href="#quelles-modifications-communales-ont-eu-lieu-entre-deux-dates">Quelles modifications communales ont eu lieu entre deux dates ?</a></li>
+      <li><a href="#visualiser-les-modifications-communales">Visualiser les modifications communales</a></li>
       <li><a href="#transformer-des-variables-numeriques-en-autre-geographie">Transformer des variables numériques en autre géographie</a></li>
       <li><a href="#transformer-des-typologies-en-autre-geographie">Transformer des typologies en autre géographie</a></li>
       <li><a href="#agreger-des-tables-de-donnees-communales-a-des-echelons-supra-communaux">Agréger des tables de données communales à des échelons supra-communaux</a></li>

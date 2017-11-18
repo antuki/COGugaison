@@ -34,7 +34,8 @@
 #' \link{changement_COG_typo}, \link{changement_COG_typo_details},  \link{COG_akinator}, \link{enlever_PLM}, \link{modification_Corse}, \link{modifications_communales},\link{nivsupra},\link{apparier_COG},\link{modification_Oudon},\link{trajectoire_commune}
 #' @examples
 #' ## Exemple 1
-#' # Ici, nous allons observer sur un graphique interactif la trajectoire des communes ayant pour codes 14697 en 1968 et 76108 en 2014.
+#' # Ici, nous allons observer sur un graphique interactif la trajectoire des communes ayant pour codes 01003 en 1968, 14697 en 1968, 76108 en 2014.
+#' trajectoire_commune("01003", 1968,donnees_insee=F)
 #' trajectoire_commune("14697", 1968,donnees_insee=F)
 #' trajectoire_commune("76108", 2014,donnees_insee=F)
 #' ## Exemple 2

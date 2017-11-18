@@ -134,10 +134,8 @@ Le paramètre *codgeo* est une chaîne de 5 caractères qui indique le code Inse
 La fonction `trajectoire_commune_shiny` lance une application shiny qui permet de sélectionner la commune pour laquelle vous souhaitez observer ses modifications depuis 1968.
 
 ```{r, fig.show='hold'}
-# Ici, nous allons observer sur un graphique interactif la trajectoire des communes ayant pour codes 14697 en 1968 et 76108 en 2014.
-trajectoire_commune("14697", 1968,donnees_insee=F)
-trajectoire_commune("76108", 2014,donnees_insee=F)
-
+# Ici, nous allons observer sur un graphique interactif la trajectoire de la commune ayant pour code 01003 en 1968 (fusion avec 2 autres communes le 1er janvier 1974)
+trajectoire_commune("01003", 1968,donnees_insee=F)
 # Cette fonction lance une application shiny permettant d'observer toutes les trajectoires des communes.
 #trajectoire_commune_shiny()
 ```
