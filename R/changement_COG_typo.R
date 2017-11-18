@@ -16,7 +16,7 @@
 #' @param classe_absorbante n'est à définir que si methode_fusion = "methode_classe_absorbante". Si ce paramètre est laissé à NULL alors la commune fusionnée possède comme libellé de classe l'ensemble des libellés présents dans ses communes fusionnées séparés d'un "et". Sinon, il indique le nom de la classe dite absorbante à attribuer à toute commune fusionnée contenant au moins une ancienne commune appartenant à cette classe absorbante.
 #' @param classe_absorbee n'est à définir que si methode_fusion = "methode_classe_absorbee". Si ce paramètre est laissé à NULL alors la commune fusionnée possède comme libellé de classe l'ensemble des libellés présents dans ses communes fusionnées séparés d'un "et". Sinon, il indique le nom de la classe dite absorbée à attribuer à toute commune fusionnée contenant au moins une ancienne commune appartenant à cette classe absorbante.
 #' @param libgeo vaut TRUE si l'on veut rajouter dans la table une colonne nommée "nom_commune" qui indique le nom de la commune issu du code officiel géographique et FALSE sinon.
-#' @param donnees_insee vaut TRUE si les données manipulées sont produites par l'Insee. En effet, quelques rares modifications communales (la défusion des communes Loisey et Culey au 1er janvier 2014 par exemple) ont été prises en compte dans les bases de données communales de l'Insee plus tard que la date officielle. Pour tous les COG officiels datant d'avant 2008, seules les tables de passage Insee sont disponibles dans ce package.
+#' @param donnees_insee vaut TRUE si les données manipulées sont produites par l'Insee. En effet, quelques rares modifications communales (la défusion des communes Loisey et Culey au 1er janvier 2014 par exemple) ont été prises en compte dans les bases de données communales de l'Insee plus tard que la date officielle.
 #' @details
 #' Le code officiel géographique le plus récent du package est actuellement celui au 01/01/2017. \cr
 #'
@@ -43,7 +43,7 @@
 #' \itemize{
 #' \item{\href{https://www.insee.fr/fr/information/2666684#titre-bloc-11}{historique des géographies communales (Insee)}}
 #' \item{\href{https://www.insee.fr/fr/information/2028028}{tables d'appartenance des communes aux différents niveaux géographiques (Insee)}}}
-#' @seealso \link{changement_COG_varNum}, \link{changement_COG_typo_details},  \link{COG_akinator}, \link{enlever_PLM}, \link{modification_Corse}, \link{modifications_communales},\link{nivsupra},\link{apparier_COG},\link{modification_Oudon}
+#' @seealso \link{changement_COG_varNum}, \link{changement_COG_typo_details},  \link{COG_akinator}, \link{enlever_PLM}, \link{modification_Corse}, \link{modifications_communales},\link{nivsupra},\link{apparier_COG},\link{modification_Oudon},\link{trajectoire_commune}
 #' @export
 #' @examples
 #' ## Exemple 1

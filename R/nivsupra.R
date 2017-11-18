@@ -44,7 +44,7 @@
 #' \itemize{
 #' \item{\href{https://www.insee.fr/fr/information/2666684#titre-bloc-11}{historique des géographies communales (Insee)}}
 #' \item{\href{https://www.insee.fr/fr/information/2028028}{tables d'appartenance des communes aux différents niveaux géographiques (Insee)}}}
-#' @seealso \link{changement_COG_varNum}, \link{changement_COG_typo},\link{changement_COG_typo_details}, \link{COG_akinator}, \link{enlever_PLM}, \link{modification_Corse},\link{modifications_communales},\link{apparier_COG},\link{modification_Oudon}
+#' @seealso \link{changement_COG_varNum}, \link{changement_COG_typo},\link{changement_COG_typo_details}, \link{COG_akinator}, \link{enlever_PLM}, \link{modification_Corse},\link{modifications_communales},\link{apparier_COG},\link{modification_Oudon},\link{trajectoire_commune}
 #' @export
 #' @examples
 #' ## Exemple 1

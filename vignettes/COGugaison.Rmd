@@ -20,6 +20,7 @@ Ce package R a alors pour objectif global de manipuler des données communales p
 
 - détecter le millésime du code officiel géographique d'une table de données communales : fonction `COG_akinator` et apparier une liste de communes d'une base de données avec celle du COG d'un millésime donné avec `apparier_COG`
 - visualiser les modifications communales (fusions, défusions, changements de codes ou de noms) qui ont eu lieu entre deux dates : `modifications_communales`
+- visualiser sur un graphique interactif la trajectoire d'une commune donnée, c'est-à-dire toutes les modifications qui ont eu lieu depuis 1968 : `trajectoire_commune` et `trajectoire_commune_shiny`  
 - transformer des tables de données numériques en géographie au premier janvier d'une année souhaitée : `changement_COG_varNum`. 
 - transformer des typologies de communes en géographie au premier janvier d'une année souhaitée en ayant le choix entre plusieurs hypothèses de classement en cas de fusion de communes de classes différentes (attribuer une unique classe à toutes les communes fusionnées, attribuer la classe qui contient le plus de population, définir une classe absorbante, une classe absorbée ou une classe spécifique aux regroupements de plusieurs communes de classes différentes) : `changement_COG_typo`. Il est également possible d'isoler dans une table les communes fusionnées appartenant à des classes différentes : `changement_COG_typo_details`.
 - permettre d'agréger les tables de données communales à de nombreux échelons supra-communaux administratifs (EPCI, arrondissements, cantons-villes, départements, régions) ou d'étude (bassins de vie, zones d'emploi, unités urbaines, aires urbaines) : `nivsupra`. 
@@ -124,8 +125,22 @@ COG2014_insee[which(COG2014_insee$CODGEO%in%appariement$absent_de_bdd),c(1,2)]
 ```
 
 
-## Quelles modifications communales ont eu lieu entre deux dates ? 
+## Visualiser les modifications communales
 
+La fonction `trajectoire_commune` permet d'observer sur un diagramme interactif la trajectoire d'une commune depuis 1968 (aucun changement, fusions, défusions ou changements de codes).
+
+Le paramètre *codgeo* est une chaîne de 5 caractères qui indique le code Insee de la commune considérée et le paramètre *COG* indique l'année de COG de la communes considérée.
+
+La fonction `trajectoire_commune_shiny` lance une application shiny qui permet de sélectionner la commune pour laquelle vous souhaitez observer ses modifications depuis 1968.
+
+```{r, fig.show='hold'}
+# Ici, nous allons observer sur un graphique interactif la trajectoire des communes ayant pour codes 14697 en 1968 et 76108 en 2014.
+trajectoire_commune("14697", 1968,donnees_insee=F)
+trajectoire_commune("76108", 2014,donnees_insee=F)
+
+# Cette fonction lance une application shiny permettant d'observer toutes les trajectoires des communes.
+#trajectoire_commune_shiny()
+```
 
 La fonction `modifications_communales` permet, comme son nom l'indique, de visualiser les modifications communales (fusions, défusions, changements de codes ou de noms) qui ont eu lieu entre deux dates. Ici entre le 01/01/2014 et le 01/01/2015. Cette fonction est encore en cours de développement il est donc possible que certains évènements ne soient pas encore pris en compte. Il ne faut pas hésiter à le signaler. 
 

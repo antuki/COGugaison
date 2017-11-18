@@ -2,7 +2,7 @@
 #' @name apparier_COG
 #' @description Comparer la liste des communes présente dans une table de données avec le COG d'un millésime donné. Fonction souvent utile après l'utilisation de la fonction COG_akinator.
 #' @param vecteur_codgeo correspond à un vecteur de codes Insee communaux que l'on cherche à comparer au COG d'un millésime donné.
-#' @param donnees_insee vaut TRUE si les données manipulées sont produites par l'Insee. En effet, quelques rares modifications communales (la défusion des communes Loisey et Culey au 1er janvier 2014 par exemple) ont été prises en compte dans les bases de données communales de l'Insee plus tard que la date officielle. Pour tous les COG officiels datant d'avant 2008, seules les tables de passage Insee sont disponibles dans ce package.
+#' @param donnees_insee vaut TRUE si les données manipulées sont produites par l'Insee. En effet, quelques rares modifications communales (la défusion des communes Loisey et Culey au 1er janvier 2014 par exemple) ont été prises en compte dans les bases de données communales de l'Insee plus tard que la date officielle.
 #' @param COG indique l'année de COG de la table considérée. (exemple 1968). Par défaut renvoie l'année retournée par la fonction COG_akinator
 #' @return renvoie une liste composée de deux éléments :
 #' \itemize{
@@ -34,7 +34,7 @@
 #' \itemize{
 #' \item{\href{https://www.insee.fr/fr/information/2666684#titre-bloc-11}{historique des géographies communales (Insee)}}
 #' \item{\href{https://www.insee.fr/fr/information/2028028}{tables d'appartenance des communes aux différents niveaux géographiques (Insee)}}}
-#' @seealso \link{changement_COG_varNum}, \link{changement_COG_typo},\link{changement_COG_typo_details}, \link{COG_akinator}, \link{enlever_PLM}, \link{modifications_communales},\link{nivsupra},\link{modification_Corse},\link{modification_Oudon}
+#' @seealso \link{changement_COG_varNum}, \link{changement_COG_typo},\link{changement_COG_typo_details}, \link{COG_akinator}, \link{enlever_PLM}, \link{modifications_communales},\link{nivsupra},\link{modification_Corse},\link{modification_Oudon},\link{trajectoire_commune}
 #' @export
 #' @examples
 #' ## Exemple 1

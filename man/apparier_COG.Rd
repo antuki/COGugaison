@@ -12,7 +12,7 @@ apparier_COG(vecteur_codgeo, donnees_insee = T,
 \arguments{
 \item{vecteur_codgeo}{correspond à un vecteur de codes Insee communaux que l'on cherche à comparer au COG d'un millésime donné.}
 
-\item{donnees_insee}{vaut TRUE si les données manipulées sont produites par l'Insee. En effet, quelques rares modifications communales (la défusion des communes Loisey et Culey au 1er janvier 2014 par exemple) ont été prises en compte dans les bases de données communales de l'Insee plus tard que la date officielle. Pour tous les COG officiels datant d'avant 2008, seules les tables de passage Insee sont disponibles dans ce package.}
+\item{donnees_insee}{vaut TRUE si les données manipulées sont produites par l'Insee. En effet, quelques rares modifications communales (la défusion des communes Loisey et Culey au 1er janvier 2014 par exemple) ont été prises en compte dans les bases de données communales de l'Insee plus tard que la date officielle.}
 
 \item{COG}{indique l'année de COG de la table considérée. (exemple 1968). Par défaut renvoie l'année retournée par la fonction COG_akinator}
 }
@@ -64,5 +64,5 @@ COG2014_insee[which(COG2014_insee$CODGEO\%in\%appariement$absent_de_bdd),c(1,2)]
 \item{\href{https://www.insee.fr/fr/information/2028028}{tables d'appartenance des communes aux différents niveaux géographiques (Insee)}}}
 }
 \seealso{
-\link{changement_COG_varNum}, \link{changement_COG_typo},\link{changement_COG_typo_details}, \link{COG_akinator}, \link{enlever_PLM}, \link{modifications_communales},\link{nivsupra},\link{modification_Corse},\link{modification_Oudon}
+\link{changement_COG_varNum}, \link{changement_COG_typo},\link{changement_COG_typo_details}, \link{COG_akinator}, \link{enlever_PLM}, \link{modifications_communales},\link{nivsupra},\link{modification_Corse},\link{modification_Oudon},\link{trajectoire_commune}
 }

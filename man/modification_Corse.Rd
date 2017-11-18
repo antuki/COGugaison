@@ -53,5 +53,5 @@ exemple_flux_sansCorse <- modification_Corse(table_entree=exemple_flux,sens="2A2
 \item{\href{https://www.insee.fr/fr/information/2028028}{tables d'appartenance des communes aux différents niveaux géographiques (Insee)}}}
 }
 \seealso{
-\link{changement_COG_varNum}, \link{changement_COG_typo},\link{changement_COG_typo_details}, \link{COG_akinator}, \link{enlever_PLM}, \link{modifications_communales},\link{nivsupra},\link{apparier_COG},\link{modification_Oudon}
+\link{changement_COG_varNum}, \link{changement_COG_typo},\link{changement_COG_typo_details}, \link{COG_akinator}, \link{enlever_PLM}, \link{modifications_communales},\link{nivsupra},\link{apparier_COG},\link{modification_Oudon},\link{trajectoire_commune}
 }

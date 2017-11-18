@@ -36,7 +36,7 @@ changement_COG_typo(table_entree, annees,
 
 \item{classe_absorbee}{n'est à définir que si methode_fusion = "methode_classe_absorbee". Si ce paramètre est laissé à NULL alors la commune fusionnée possède comme libellé de classe l'ensemble des libellés présents dans ses communes fusionnées séparés d'un "et". Sinon, il indique le nom de la classe dite absorbée à attribuer à toute commune fusionnée contenant au moins une ancienne commune appartenant à cette classe absorbante.}
 
-\item{donnees_insee}{vaut TRUE si les données manipulées sont produites par l'Insee. En effet, quelques rares modifications communales (la défusion des communes Loisey et Culey au 1er janvier 2014 par exemple) ont été prises en compte dans les bases de données communales de l'Insee plus tard que la date officielle. Pour tous les COG officiels datant d'avant 2008, seules les tables de passage Insee sont disponibles dans ce package.}
+\item{donnees_insee}{vaut TRUE si les données manipulées sont produites par l'Insee. En effet, quelques rares modifications communales (la défusion des communes Loisey et Culey au 1er janvier 2014 par exemple) ont été prises en compte dans les bases de données communales de l'Insee plus tard que la date officielle.}
 
 \item{libgeo}{vaut TRUE si l'on veut rajouter dans la table une colonne nommée "nom_commune" qui indique le nom de la commune issu du code officiel géographique et FALSE sinon.}
 }
@@ -84,5 +84,5 @@ head(details_exemple_popcom_COG2017_typo[["2016_2017"]])
 \item{\href{https://www.insee.fr/fr/information/2028028}{tables d'appartenance des communes aux différents niveaux géographiques (Insee)}}}
 }
 \seealso{
-\link{changement_COG_varNum}, \link{changement_COG_typo_details},  \link{COG_akinator}, \link{enlever_PLM}, \link{modification_Corse}, \link{modifications_communales},\link{nivsupra},\link{apparier_COG},\link{modification_Oudon}
+\link{changement_COG_varNum}, \link{changement_COG_typo_details},  \link{COG_akinator}, \link{enlever_PLM}, \link{modification_Corse}, \link{modifications_communales},\link{nivsupra},\link{apparier_COG},\link{modification_Oudon},\link{trajectoire_commune}
 }

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Visualiser les modifications communales entre deux dates â€” modifications_communales Ã¢â‚¬Â¢ COGugaison</title>
+<title>Visualiser les modifications communales entre deux dates — modifications_communales â€¢ COGugaison</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -52,10 +52,16 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../reference/index.html">Reference</a>
+  <a href="../index.html">
+    <span class="fa fa-home fa-lg"></span>
+     
+  </a>
 </li>
 <li>
-  <a href="../articles/index.html">Articles</a>
+  <a href="../articles/COGugaison.html">Get Started</a>
+</li>
+<li>
+  <a href="../reference/index.html">Reference</a>
 </li>
 <li>
   <a href="../news/index.html">News</a>
@@ -84,8 +90,8 @@
     </div>
 
     
-    <p>Visualiser les modifications communales (fusions, dÃ©fusions, changements de codes ou de noms) qui ont eu lieu entre deux dates.
-Attention, cette fonction est encore en cours de dÃ©veloppement il est donc possible que certains Ã©vÃ¨nements ne soient pas encore pris en compte.</p>
+    <p>Visualiser les modifications communales (fusions, défusions, changements de codes ou de noms) qui ont eu lieu entre deux dates.
+Attention, cette fonction est encore en cours de développement il est donc possible que certains évènements ne soient pas encore pris en compte.</p>
     
 
     <pre class="usage"><span class='fu'>modifications_communales</span>(<span class='no'>date_debut</span>, <span class='no'>date_fin</span>)</pre>
@@ -95,71 +101,71 @@ Attention, cette fonction est encore en cours de dÃ©veloppement il est donc poss
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>date_debut</th>
-      <td><p>date de dÃ©but de la liste de modifications communales souhaitÃ©e</p></td>
+      <td><p>date de début de la liste de modifications communales souhaitée</p></td>
     </tr>
     <tr>
       <th>date_fin</th>
-      <td><p>date de fin de la liste de modifications communales souhaitÃ©e</p></td>
+      <td><p>date de fin de la liste de modifications communales souhaitée</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Le code officiel gÃ©ographique le plus rÃ©cent du package est actuellement celui au 01/01/2017.</p>
-<p>Les millÃ©simes des COG qui peuvent Ãªtre utilisÃ©s sont Ã  ce stade les suivants : 1968, 1975, 1982, 1990, 1999, 2007 Ã  2017.</p>
-<p>Les dates de rÃ©fÃ©rence des codes officiels gÃ©ographiques utilisÃ©s dans COGugaison sont les suivantes :</p><ul>
-<li><p>COG 1968 : Ã  partir du 01/03/1968</p></li>
-<li><p>COG 1975 : Ã  partir du 20/02/1975</p></li>
-<li><p>COG 1982 : Ã  partir du 04/03/1982</p></li>
-<li><p>COG 1990 : Ã  partir du 05/03/1990</p></li>
-<li><p>COG 1999 : Ã  partir du 08/03/1999</p></li>
-<li><p>Pour tous les autres COG : Ã  partir du 01/01 de chaque annÃ©e</p></li>
+    <p>Le code officiel géographique le plus récent du package est actuellement celui au 01/01/2017.</p>
+<p>Les millésimes des COG qui peuvent être utilisés sont à ce stade les suivants : 1968, 1975, 1982, 1990, 1999, 2007 à 2017.</p>
+<p>Les dates de référence des codes officiels géographiques utilisés dans COGugaison sont les suivantes :</p><ul>
+<li><p>COG 1968 : à partir du 01/03/1968</p></li>
+<li><p>COG 1975 : à partir du 20/02/1975</p></li>
+<li><p>COG 1982 : à partir du 04/03/1982</p></li>
+<li><p>COG 1990 : à partir du 05/03/1990</p></li>
+<li><p>COG 1999 : à partir du 08/03/1999</p></li>
+<li><p>Pour tous les autres COG : à partir du 01/01 de chaque année</p></li>
 </ul><p></p>
-<p>Les diffÃ©rences entre les tables de passage Insee et non Insee sont les suivantes :</p><ul>
-<li><p>1982-03-03 (pris en compte par l'Insee seulement aprÃ¨s le 04/03/1982): Flaignes-Havys (08169) est un rassemblement de Flaignes-Havys (08169), Havys (08221) [fusion simple].</p></li>
-<li><p>2014-01-01 (pris en compte par l'Insee seulement au 01/01/2015) : Loisey (55298) s'est sÃ©parÃ©e en Loisey (55298), Culey (55138) [rÃ©tablissement].</p></li>
-<li><p>1990-02-01 (pris en compte par l'Insee seulement aprÃ¨s le 05/03/1990) : Le code commune de Oudon passe de 14624 Ã  14697 [changement de code dÃ» Ã  un changement de chef-lieu].</p></li>
-<li><p>2014-01-07 (pris en compte par l'Insee  dÃ¨s le 01/01/2016) : TÃ´tes est rattachÃ©e Ã  Notre-Dame-de-Fresnay qui devient L'Oudon (changement de code de l'Oudon de 14697 Ã  14472) [transfert de chef-lieu].</p></li>
-<li><p>1981-09-28 (pris en compte par l'Insee  dÃ¨s le 20/02/1975) : Vaudreuil-Ex-Ensemble Urbain (27701) est crÃ©Ã©e Ã  partir des parcelles d'Incarville (27351), de LÃ©ry (27365) , de Porte-Joie (27471) , de Poses  (27474) , de Saint-Ã‰tienne-du-Vauvray (27537), de Saint-Pierre-du-Vauvray (27598), de Tournedos-sur-Seine  (27651) et du Vaudreuil (27528) [crÃ©ation]. Cette situation Ã©tant complexe, nous avons pour le moment considÃ©rÃ© que Vaudreuil-Ex-Ensemble Urbain (27701) est crÃ©Ã©e Ã  partir de parcelles du Vaudreuil (27528) uniquement.</p></li>
-<li><p>En 1968, les 4 communes qui auraient dÃ» d'aprÃ¨s le COG Ãªtre codÃ©es 2B044,2B076,2B151 et 2A325 sont codÃ©es 20044,20076,20151 et 20325 dans les donnÃ©es Insee.</p></li>
+<p>Les différences entre les tables de passage Insee et non Insee sont les suivantes :</p><ul>
+<li><p>1982-03-03 (pris en compte par l'Insee seulement après le 04/03/1982): Flaignes-Havys (08169) est un rassemblement de Flaignes-Havys (08169), Havys (08221) [fusion simple].</p></li>
+<li><p>2014-01-01 (pris en compte par l'Insee seulement au 01/01/2015) : Loisey (55298) s'est séparée en Loisey (55298), Culey (55138) [rétablissement].</p></li>
+<li><p>1990-02-01 (pris en compte par l'Insee seulement après le 05/03/1990) : Le code commune de Oudon passe de 14624 à 14697 [changement de code dû à un changement de chef-lieu].</p></li>
+<li><p>2014-01-07 (pris en compte par l'Insee  dès le 01/01/2016) : Tôtes est rattachée à Notre-Dame-de-Fresnay qui devient L'Oudon (changement de code de l'Oudon de 14697 à 14472) [transfert de chef-lieu].</p></li>
+<li><p>1981-09-28 (pris en compte par l'Insee  dès le 20/02/1975) : Vaudreuil-Ex-Ensemble Urbain (27701) est créée à partir des parcelles d'Incarville (27351), de Léry (27365) , de Porte-Joie (27471) , de Poses  (27474) , de Saint-Étienne-du-Vauvray (27537), de Saint-Pierre-du-Vauvray (27598), de Tournedos-sur-Seine  (27651) et du Vaudreuil (27528) [création]. Cette situation étant complexe, nous avons pour le moment considéré que Vaudreuil-Ex-Ensemble Urbain (27701) est créée à partir de parcelles du Vaudreuil (27528) uniquement.</p></li>
+<li><p>En 1968, les 4 communes qui auraient dû d'après le COG être codées 2B044,2B076,2B151 et 2A325 sont codées 20044,20076,20151 et 20325 dans les données Insee.</p></li>
 </ul>
     
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <ul>
-<li><p><a href='https://www.insee.fr/fr/information/2666684#titre-bloc-11'>historique des gÃ©ographies communales (Insee)</a></p></li>
-<li><p><a href='https://www.insee.fr/fr/information/2028028'>tables d'appartenance des communes aux diffÃ©rents niveaux gÃ©ographiques (Insee)</a></p></li>
+<li><p><a href='https://www.insee.fr/fr/information/2666684#titre-bloc-11'>historique des géographies communales (Insee)</a></p></li>
+<li><p><a href='https://www.insee.fr/fr/information/2028028'>tables d'appartenance des communes aux différents niveaux géographiques (Insee)</a></p></li>
 </ul>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p><a href='changement_COG_varNum.html'>changement_COG_varNum</a>, <a href='changement_COG_typo.html'>changement_COG_typo</a>,<a href='changement_COG_typo_details.html'>changement_COG_typo_details</a>, <a href='COG_akinator.html'>COG_akinator</a>, <a href='enlever_PLM.html'>enlever_PLM</a>, <a href='modification_Corse.html'>modification_Corse</a>,<a href='nivsupra.html'>nivsupra</a>,<a href='apparier_COG.html'>apparier_COG</a>,<a href='modification_Oudon.html'>modification_Oudon</a></p>
+    <p><a href='changement_COG_varNum.html'>changement_COG_varNum</a>, <a href='changement_COG_typo.html'>changement_COG_typo</a>,<a href='changement_COG_typo_details.html'>changement_COG_typo_details</a>, <a href='COG_akinator.html'>COG_akinator</a>, <a href='enlever_PLM.html'>enlever_PLM</a>, <a href='modification_Corse.html'>modification_Corse</a>,<a href='nivsupra.html'>nivsupra</a>,<a href='apparier_COG.html'>apparier_COG</a>,<a href='modification_Oudon.html'>modification_Oudon</a>,<a href='trajectoire_commune.html'>trajectoire_commune</a></p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>## Exemple 1</span>
 <span class='co'># modifications communales ayant eu lieu entre 2014 et 2015</span>
 <span class='no'>modifs</span> <span class='kw'>&lt;-</span> <span class='fu'>modifications_communales</span>(<span class='kw'>date_debut</span><span class='kw'>=</span><span class='st'>"01-01-2014"</span>,<span class='kw'>date_fin</span><span class='kw'>=</span><span class='st'>"01-01-2015"</span>)
-<span class='fu'>cat</span>(<span class='no'>modifs</span>$<span class='no'>fusions</span>)</div><div class='output co'>#&gt; 2015-01-01 : Notre-Dame-d'EstrÃ©es-Corbon (14474) est un rassemblement de Corbon (14178), Notre-Dame-d'EstrÃ©es (14474) [commune nouvelle avec commune(s) dÃ©lÃ©guÃ©e(s)].
-#&gt; 2015-01-01 : Auxons (25035) est un rassemblement de Auxon-Dessous (25034), Auxon-Dessus (25035) [commune nouvelle avec commune(s) dÃ©lÃ©guÃ©e(s)].
-#&gt; 2015-01-01 : Goussainville (28185) est un rassemblement de Champagne (28069), Goussainville (28185) [commune nouvelle avec commune(s) dÃ©lÃ©guÃ©e(s)].
-#&gt; 2015-01-01 : Eclose-BadiniÃ¨res (38152) est un rassemblement de BadiniÃ¨res (38024), Eclose (38152) [commune nouvelle avec commune(s) dÃ©lÃ©guÃ©e(s)].
-#&gt; 2015-01-01 : Saint-CrÃ©pin-Ibouvillers (60570) est un rassemblement de Montherlant (60417), Saint-CrÃ©pin-Ibouvillers (60570) [commune nouvelle avec commune(s) dÃ©lÃ©guÃ©e(s)].
-#&gt; 2015-01-01 : Montsecret-ClairefougÃ¨re (61292) est un rassemblement de ClairefougÃ¨re (61109), Montsecret (61292) [commune nouvelle avec commune(s) dÃ©lÃ©guÃ©e(s)].
-#&gt; 2015-01-01 : BoischamprÃ© (61375) est un rassemblement de Marcei (61249), Saint-Christophe-le-Jajolet (61375), Saint-Loyer-des-Champs (61417), Vrigny (61511) [commune nouvelle avec commune(s) dÃ©lÃ©guÃ©e(s)].
-#&gt; 2015-01-01 : Tinchebray-Bocage (61486) est un rassemblement de BeauchÃªne (61031), FrÃªnes (61177), Larchamp (61223), Saint-Cornier-des-Landes (61377), Saint-Jean-des-Bois (61410), Tinchebray (61486), Yvrandes (61513) [commune nouvelle avec commune(s) dÃ©lÃ©guÃ©e(s)].
-#&gt; 2015-01-01 : Vaugneray (69255) est un rassemblement de Saint-Laurent-de-Vaux (69221), Vaugneray (69255) [commune nouvelle avec commune(s) dÃ©lÃ©guÃ©e(s)].
-#&gt; 2015-01-01 : Clux-Villeneuve (71578) est un rassemblement de Clux (71138), Villeneuve (71578) [commune nouvelle avec commune(s) dÃ©lÃ©guÃ©e(s)].
-#&gt; 2015-01-01 : Villeneuve-en-Perseigne (72137) est un rassemblement de ChassÃ© (72069), Fresnaye-sur-ChÃ©douet (72137), LigniÃ¨res-la-Carelle (72162), Montigny (72207), RoullÃ©e (72258), Saint-Rigomer-des-Bois (72318) [commune nouvelle avec commune(s) dÃ©lÃ©guÃ©e(s)].
-#&gt; 2015-01-01 : Saint-Offenge (73263) est un rassemblement de Saint-Offenge-Dessous (73263), Saint-Offenge-Dessus (73264) [commune nouvelle avec commune(s) dÃ©lÃ©guÃ©e(s)].
-#&gt; 2015-01-01 : Orvanne (77316) est un rassemblement de Ã‰cuelles (77166), Moret-sur-Loing (77316) [commune nouvelle avec commune(s) dÃ©lÃ©guÃ©e(s)].</div><div class='input'><span class='fu'>cat</span>(<span class='no'>modifs</span>$<span class='no'>defusions</span>)</div><div class='output co'>#&gt; ATTENTION, l'Ã©vÃ¨nement suivant a Ã©tÃ© pris en compte dans les donnÃ©es de l'Insee seulement au 01/01/2015 : 2014-01-01 : Loisey (55298) s'est sÃ©parÃ©e en Loisey (55298), Culey (55138) [rÃ©tablissement].</div><div class='input'><span class='fu'>cat</span>(<span class='no'>modifs</span>$<span class='no'>changements_codes</span>)</div><div class='output co'>#&gt; 2014-01-07 : Le code commune de Oudon passe de 14697 Ã  14472 [changement de code dÃ» Ã  un changement de chef-lieu].</div><div class='input'><span class='fu'>cat</span>(<span class='no'>modifs</span>$<span class='no'>changements_noms</span>)</div><div class='output co'>#&gt; 2014-12-06 : La commune de Barisis (02049) change de nom en Barisis-aux-Bois [changement de nom].
+<span class='fu'>cat</span>(<span class='no'>modifs</span>$<span class='no'>fusions</span>)</div><div class='output co'>#&gt; 2015-01-01 : Notre-Dame-d'Estrées-Corbon (14474) est un rassemblement de Corbon (14178), Notre-Dame-d'Estrées (14474) [commune nouvelle avec commune(s) déléguée(s)].
+#&gt; 2015-01-01 : Auxons (25035) est un rassemblement de Auxon-Dessous (25034), Auxon-Dessus (25035) [commune nouvelle avec commune(s) déléguée(s)].
+#&gt; 2015-01-01 : Goussainville (28185) est un rassemblement de Champagne (28069), Goussainville (28185) [commune nouvelle avec commune(s) déléguée(s)].
+#&gt; 2015-01-01 : Eclose-Badinières (38152) est un rassemblement de Badinières (38024), Eclose (38152) [commune nouvelle avec commune(s) déléguée(s)].
+#&gt; 2015-01-01 : Saint-Crépin-Ibouvillers (60570) est un rassemblement de Montherlant (60417), Saint-Crépin-Ibouvillers (60570) [commune nouvelle avec commune(s) déléguée(s)].
+#&gt; 2015-01-01 : Montsecret-Clairefougère (61292) est un rassemblement de Clairefougère (61109), Montsecret (61292) [commune nouvelle avec commune(s) déléguée(s)].
+#&gt; 2015-01-01 : Boischampré (61375) est un rassemblement de Marcei (61249), Saint-Christophe-le-Jajolet (61375), Saint-Loyer-des-Champs (61417), Vrigny (61511) [commune nouvelle avec commune(s) déléguée(s)].
+#&gt; 2015-01-01 : Tinchebray-Bocage (61486) est un rassemblement de Beauchêne (61031), Frênes (61177), Larchamp (61223), Saint-Cornier-des-Landes (61377), Saint-Jean-des-Bois (61410), Tinchebray (61486), Yvrandes (61513) [commune nouvelle avec commune(s) déléguée(s)].
+#&gt; 2015-01-01 : Vaugneray (69255) est un rassemblement de Saint-Laurent-de-Vaux (69221), Vaugneray (69255) [commune nouvelle avec commune(s) déléguée(s)].
+#&gt; 2015-01-01 : Clux-Villeneuve (71578) est un rassemblement de Clux (71138), Villeneuve (71578) [commune nouvelle avec commune(s) déléguée(s)].
+#&gt; 2015-01-01 : Villeneuve-en-Perseigne (72137) est un rassemblement de Chassé (72069), Fresnaye-sur-Chédouet (72137), Lignières-la-Carelle (72162), Montigny (72207), Roullée (72258), Saint-Rigomer-des-Bois (72318) [commune nouvelle avec commune(s) déléguée(s)].
+#&gt; 2015-01-01 : Saint-Offenge (73263) est un rassemblement de Saint-Offenge-Dessous (73263), Saint-Offenge-Dessus (73264) [commune nouvelle avec commune(s) déléguée(s)].
+#&gt; 2015-01-01 : Orvanne (77316) est un rassemblement de Écuelles (77166), Moret-sur-Loing (77316) [commune nouvelle avec commune(s) déléguée(s)].</div><div class='input'><span class='fu'>cat</span>(<span class='no'>modifs</span>$<span class='no'>defusions</span>)</div><div class='output co'>#&gt; ATTENTION, l'évènement suivant a été pris en compte dans les données de l'Insee seulement au 01/01/2015 : 2014-01-01 : Loisey (55298) s'est séparée en Loisey (55298), Culey (55138) [rétablissement].</div><div class='input'><span class='fu'>cat</span>(<span class='no'>modifs</span>$<span class='no'>changements_codes</span>)</div><div class='output co'>#&gt; 2014-01-07 : Le code commune de Oudon passe de 14697 à 14472 [changement de code dû à un changement de chef-lieu].</div><div class='input'><span class='fu'>cat</span>(<span class='no'>modifs</span>$<span class='no'>changements_noms</span>)</div><div class='output co'>#&gt; 2014-12-06 : La commune de Barisis (02049) change de nom en Barisis-aux-Bois [changement de nom].
 #&gt; 2014-12-06 : La commune de Sainte-Colombe (21544) change de nom en Sainte-Colombe-en-Auxois [changement de nom].
 #&gt; 2014-12-06 : La commune de Pont-de-Roide (25463) change de nom en Pont-de-Roide-Vermondans [changement de nom].
-#&gt; 2014-12-06 : La commune de Cazaril-LaspÃ¨nes (31129) change de nom en Cazarilh-LaspÃ¨nes [changement de nom].
+#&gt; 2014-12-06 : La commune de Cazaril-Laspènes (31129) change de nom en Cazarilh-Laspènes [changement de nom].
 #&gt; 2014-12-06 : La commune de Saint-Martin (66184) change de nom en Saint-Martin-de-Fenouillet [changement de nom].
-#&gt; 2014-12-06 : La commune de CrÃ© (72108) change de nom en CrÃ©-sur-Loir [changement de nom].
-#&gt; 2014-12-06 : La commune de BelbÃ¨se (82015) change de nom en BelbÃ¨ze-en-Lomagne [changement de nom].
-#&gt; 2014-12-06 : La commune de Saint-Vincent (82174) change de nom en Saint-Vincent-d'AutÃ©jac [changement de nom].</div></pre>
+#&gt; 2014-12-06 : La commune de Cré (72108) change de nom en Cré-sur-Loir [changement de nom].
+#&gt; 2014-12-06 : La commune de Belbèse (82015) change de nom en Belbèze-en-Lomagne [changement de nom].
+#&gt; 2014-12-06 : La commune de Saint-Vincent (82174) change de nom en Saint-Vincent-d'Autéjac [changement de nom].</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

@@ -13,6 +13,8 @@
 * ajout des options methode_fusion="methode_classe_absorbee" et methode_fusion="methode_classe_absorbee" dans `changement_COG_typo` et des paramètres associés *classe_absorbee* et *mot_fusion*
 * ajout des niveaux supra-communaux des COG de 2008 à 2013
 
+### novembre 2017
+* création des fonctions `trajectoire_commune` et `trajectoire_commune_shiny`
 
 ## correction de bugs
 

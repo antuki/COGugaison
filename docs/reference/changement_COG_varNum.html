@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Changer les variables numÃ©riques de gÃ©ographie communale â€” changement_COG_varNum Ã¢â‚¬Â¢ COGugaison</title>
+<title>Changer les variables numériques de géographie communale — changement_COG_varNum â€¢ COGugaison</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -52,10 +52,16 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../reference/index.html">Reference</a>
+  <a href="../index.html">
+    <span class="fa fa-home fa-lg"></span>
+     
+  </a>
 </li>
 <li>
-  <a href="../articles/index.html">Articles</a>
+  <a href="../articles/COGugaison.html">Get Started</a>
+</li>
+<li>
+  <a href="../reference/index.html">Reference</a>
 </li>
 <li>
   <a href="../news/index.html">News</a>
@@ -80,11 +86,11 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Changer les variables numÃ©riques de gÃ©ographie communale</h1>
+    <h1>Changer les variables numériques de géographie communale</h1>
     </div>
 
     
-    <p>Transformer des tables de donnÃ©es numÃ©riques en gÃ©ographie au premier janvier d'une annÃ©e souhaitÃ©e.</p>
+    <p>Transformer des tables de données numériques en géographie au premier janvier d'une année souhaitée.</p>
     
 
     <pre class="usage"><span class='fu'>changement_COG_varNum</span>(<span class='no'>table_entree</span>, <span class='no'>annees</span>,
@@ -97,79 +103,79 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>table_entree</th>
-      <td><p>correspond Ã  la table Ã  transformer en une autre gÃ©ographie</p></td>
+      <td><p>correspond à la table à transformer en une autre géographie</p></td>
     </tr>
     <tr>
       <th>annees</th>
-      <td><p>est un vecteur qui liste l'ensemble des annÃ©es qui sÃ©parent le code officiel gÃ©ographique de dÃ©part et d'arrivÃ©e. Par exemple c(1968:1985). Le package rend possible l'utilisation de tables de passages d'une annÃ©e de COG vers une annÃ©e antiÃ©rieure (par exemple c(2016:2014)).</p></td>
+      <td><p>est un vecteur qui liste l'ensemble des années qui séparent le code officiel géographique de départ et d'arrivée. Par exemple c(1968:1985). Le package rend possible l'utilisation de tables de passages d'une année de COG vers une année antiérieure (par exemple c(2016:2014)).</p></td>
     </tr>
     <tr>
       <th>codgeo_entree</th>
-      <td><p>est une chaÃ®ne de caractÃ¨res qui indique le nom de la variable contenant les codes Insee communaux. Par dÃ©faut, il s'agit du nom de la premiÃ¨re colonne de table_entree.</p></td>
+      <td><p>est une chaîne de caractères qui indique le nom de la variable contenant les codes Insee communaux. Par défaut, il s'agit du nom de la première colonne de table_entree.</p></td>
     </tr>
     <tr>
       <th>var_num</th>
-      <td><p>est un vecteur de chaÃ®nes de caractÃ¨res qui indique les noms des variables numÃ©riques Ã  convertir. Par dÃ©faut, il s'agit de l'ensemble des variables de types numÃ©riques dans table_entree.</p></td>
+      <td><p>est un vecteur de chaînes de caractères qui indique les noms des variables numériques à convertir. Par défaut, il s'agit de l'ensemble des variables de types numériques dans table_entree.</p></td>
     </tr>
     <tr>
       <th>agregation</th>
-      <td><p>vaut TRUE si la table souhaitÃ©e doit sommer toutes les lignes qui concernent une mÃªme commune et FALSE si l'on souhaite volontairement conserver les doublons dans les codes commune (dans les tables de flux par exemple). Si agregation = F, les variables de type caractÃ¨re sont alors conservÃ©es comme telles ou dupliquÃ©es en cas de dÃ©fusion et les variables numÃ©riques sommÃ©es en cas de fusion ou rÃ©parties proportionnellement Ã  la population de chaque commune en cas de dÃ©fusion.</p></td>
+      <td><p>vaut TRUE si la table souhaitée doit sommer toutes les lignes qui concernent une même commune et FALSE si l'on souhaite volontairement conserver les doublons dans les codes commune (dans les tables de flux par exemple). Si agregation = F, les variables de type caractère sont alors conservées comme telles ou dupliquées en cas de défusion et les variables numériques sommées en cas de fusion ou réparties proportionnellement à la population de chaque commune en cas de défusion.</p></td>
     </tr>
     <tr>
       <th>libgeo</th>
-      <td><p>vaut TRUE si l'on veut rajouter dans la table une colonne nommÃ©e "nom_commune" qui indique le nom de la commune issu du code officiel gÃ©ographique et FALSE sinon.</p></td>
+      <td><p>vaut TRUE si l'on veut rajouter dans la table une colonne nommée "nom_commune" qui indique le nom de la commune issu du code officiel géographique et FALSE sinon.</p></td>
     </tr>
     <tr>
       <th>donnees_insee</th>
-      <td><p>vaut TRUE si les donnÃ©es manipulÃ©es sont produites par l'Insee. En effet, quelques rares modifications communales (la dÃ©fusion des communes Loisey et Culey au 1er janvier 2014 par exemple) ont Ã©tÃ© prises en compte dans les bases de donnÃ©es communales de l'Insee plus tard que la date officielle. Pour tous les COG officiels datant d'avant 2008, seules les tables de passage Insee sont disponibles dans ce package.</p></td>
+      <td><p>vaut TRUE si les données manipulées sont produites par l'Insee. En effet, quelques rares modifications communales (la défusion des communes Loisey et Culey au 1er janvier 2014 par exemple) ont été prises en compte dans les bases de données communales de l'Insee plus tard que la date officielle.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Le code officiel gÃ©ographique le plus rÃ©cent du package est actuellement celui au 01/01/2017.</p>
-<p>Les millÃ©simes des COG qui peuvent Ãªtre utilisÃ©s sont Ã  ce stade les suivants : 1968, 1975, 1982, 1990, 1999, 2007 Ã  2017.</p>
-<p>Les dates de rÃ©fÃ©rence des codes officiels gÃ©ographiques utilisÃ©s dans COGugaison sont les suivantes :</p><ul>
-<li><p>COG 1968 : Ã  partir du 01/03/1968</p></li>
-<li><p>COG 1975 : Ã  partir du 20/02/1975</p></li>
-<li><p>COG 1982 : Ã  partir du 04/03/1982</p></li>
-<li><p>COG 1990 : Ã  partir du 05/03/1990</p></li>
-<li><p>COG 1999 : Ã  partir du 08/03/1999</p></li>
-<li><p>Pour tous les autres COG : Ã  partir du 01/01 de chaque annÃ©e</p></li>
+    <p>Le code officiel géographique le plus récent du package est actuellement celui au 01/01/2017.</p>
+<p>Les millésimes des COG qui peuvent être utilisés sont à ce stade les suivants : 1968, 1975, 1982, 1990, 1999, 2007 à 2017.</p>
+<p>Les dates de référence des codes officiels géographiques utilisés dans COGugaison sont les suivantes :</p><ul>
+<li><p>COG 1968 : à partir du 01/03/1968</p></li>
+<li><p>COG 1975 : à partir du 20/02/1975</p></li>
+<li><p>COG 1982 : à partir du 04/03/1982</p></li>
+<li><p>COG 1990 : à partir du 05/03/1990</p></li>
+<li><p>COG 1999 : à partir du 08/03/1999</p></li>
+<li><p>Pour tous les autres COG : à partir du 01/01 de chaque année</p></li>
 </ul><p></p>
-<p>Les diffÃ©rences entre les tables de passage Insee et non Insee sont les suivantes :</p><ul>
-<li><p>1982-03-03 (pris en compte par l'Insee seulement aprÃ¨s le 04/03/1982): Flaignes-Havys (08169) est un rassemblement de Flaignes-Havys (08169), Havys (08221) [fusion simple].</p></li>
-<li><p>2014-01-01 (pris en compte par l'Insee seulement au 01/01/2015) : Loisey (55298) s'est sÃ©parÃ©e en Loisey (55298), Culey (55138) [rÃ©tablissement].</p></li>
-<li><p>1990-02-01 (pris en compte par l'Insee seulement aprÃ¨s le 05/03/1990) : Le code commune de Oudon passe de 14624 Ã  14697 [changement de code dÃ» Ã  un changement de chef-lieu].</p></li>
-<li><p>2014-01-07 (pris en compte par l'Insee  dÃ¨s le 01/01/2016) : TÃ´tes est rattachÃ©e Ã  Notre-Dame-de-Fresnay qui devient L'Oudon (changement de code de l'Oudon de 14697 Ã  14472) [transfert de chef-lieu].</p></li>
-<li><p>1981-09-28 (pris en compte par l'Insee  dÃ¨s le 20/02/1975) : Vaudreuil-Ex-Ensemble Urbain (27701) est crÃ©Ã©e Ã  partir des parcelles d'Incarville (27351), de LÃ©ry (27365) , de Porte-Joie (27471) , de Poses  (27474) , de Saint-Ã‰tienne-du-Vauvray (27537), de Saint-Pierre-du-Vauvray (27598), de Tournedos-sur-Seine  (27651) et du Vaudreuil (27528) [crÃ©ation]. Cette situation Ã©tant complexe, nous avons pour le moment considÃ©rÃ© que Vaudreuil-Ex-Ensemble Urbain (27701) est crÃ©Ã©e Ã  partir de parcelles du Vaudreuil (27528) uniquement.</p></li>
-<li><p>En 1968, les 4 communes qui auraient dÃ» d'aprÃ¨s le COG Ãªtre codÃ©es 2B044,2B076,2B151 et 2A325 sont codÃ©es 20044,20076,20151 et 20325 dans les donnÃ©es Insee.</p></li>
+<p>Les différences entre les tables de passage Insee et non Insee sont les suivantes :</p><ul>
+<li><p>1982-03-03 (pris en compte par l'Insee seulement après le 04/03/1982): Flaignes-Havys (08169) est un rassemblement de Flaignes-Havys (08169), Havys (08221) [fusion simple].</p></li>
+<li><p>2014-01-01 (pris en compte par l'Insee seulement au 01/01/2015) : Loisey (55298) s'est séparée en Loisey (55298), Culey (55138) [rétablissement].</p></li>
+<li><p>1990-02-01 (pris en compte par l'Insee seulement après le 05/03/1990) : Le code commune de Oudon passe de 14624 à 14697 [changement de code dû à un changement de chef-lieu].</p></li>
+<li><p>2014-01-07 (pris en compte par l'Insee  dès le 01/01/2016) : Tôtes est rattachée à Notre-Dame-de-Fresnay qui devient L'Oudon (changement de code de l'Oudon de 14697 à 14472) [transfert de chef-lieu].</p></li>
+<li><p>1981-09-28 (pris en compte par l'Insee  dès le 20/02/1975) : Vaudreuil-Ex-Ensemble Urbain (27701) est créée à partir des parcelles d'Incarville (27351), de Léry (27365) , de Porte-Joie (27471) , de Poses  (27474) , de Saint-Étienne-du-Vauvray (27537), de Saint-Pierre-du-Vauvray (27598), de Tournedos-sur-Seine  (27651) et du Vaudreuil (27528) [création]. Cette situation étant complexe, nous avons pour le moment considéré que Vaudreuil-Ex-Ensemble Urbain (27701) est créée à partir de parcelles du Vaudreuil (27528) uniquement.</p></li>
+<li><p>En 1968, les 4 communes qui auraient dû d'après le COG être codées 2B044,2B076,2B151 et 2A325 sont codées 20044,20076,20151 et 20325 dans les données Insee.</p></li>
 </ul>
     
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <ul>
-<li><p><a href='https://www.insee.fr/fr/information/2666684#titre-bloc-11'>historique des gÃ©ographies communales (Insee)</a></p></li>
-<li><p><a href='https://www.insee.fr/fr/information/2028028'>tables d'appartenance des communes aux diffÃ©rents niveaux gÃ©ographiques (Insee)</a></p></li>
+<li><p><a href='https://www.insee.fr/fr/information/2666684#titre-bloc-11'>historique des géographies communales (Insee)</a></p></li>
+<li><p><a href='https://www.insee.fr/fr/information/2028028'>tables d'appartenance des communes aux différents niveaux géographiques (Insee)</a></p></li>
 </ul>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p><a href='changement_COG_typo.html'>changement_COG_typo</a>, <a href='changement_COG_typo_details.html'>changement_COG_typo_details</a>,  <a href='COG_akinator.html'>COG_akinator</a>, <a href='enlever_PLM.html'>enlever_PLM</a>, <a href='modification_Corse.html'>modification_Corse</a>, <a href='modifications_communales.html'>modifications_communales</a>,<a href='nivsupra.html'>nivsupra</a>,<a href='apparier_COG.html'>apparier_COG</a>,<a href='modification_Oudon.html'>modification_Oudon</a></p>
+    <p><a href='changement_COG_typo.html'>changement_COG_typo</a>, <a href='changement_COG_typo_details.html'>changement_COG_typo_details</a>,  <a href='COG_akinator.html'>COG_akinator</a>, <a href='enlever_PLM.html'>enlever_PLM</a>, <a href='modification_Corse.html'>modification_Corse</a>, <a href='modifications_communales.html'>modifications_communales</a>,<a href='nivsupra.html'>nivsupra</a>,<a href='apparier_COG.html'>apparier_COG</a>,<a href='modification_Oudon.html'>modification_Oudon</a>,<a href='trajectoire_commune.html'>trajectoire_commune</a></p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>## Exemple 1</span>
-<span class='co'># Ici, nous allons transformer les variables numÃ©riques de la table *exemple_pop* afin de rÃ©cupÃ©rer les donnÃ©es de population et de superficie des communes au 1er janvier 2017 (au lieu de 2014).</span>
+<span class='co'># Ici, nous allons transformer les variables numériques de la table *exemple_pop* afin de récupérer les données de population et de superficie des communes au 1er janvier 2017 (au lieu de 2014).</span>
 <span class='no'>exemple_popcom_COG2017_num</span> <span class='kw'>&lt;-</span> <span class='fu'>changement_COG_varNum</span>(<span class='kw'>table_entree</span><span class='kw'>=</span><span class='no'>exemple_popcom</span>,<span class='kw'>annees</span><span class='kw'>=</span><span class='fu'>c</span>(<span class='fl'>2014</span>:<span class='fl'>2017</span>),<span class='kw'>agregation</span><span class='kw'>=</span><span class='no'>T</span>,<span class='kw'>libgeo</span><span class='kw'>=</span><span class='no'>T</span>,<span class='kw'>donnees_insee</span><span class='kw'>=</span><span class='no'>T</span>)
 <span class='fu'>head</span>(<span class='no'>exemple_popcom_COG2017_num</span>)</div><div class='output co'>#&gt;   CODGEO             nom_commune P12_POP SUPERF
-#&gt; 1  01001 L'Abergement-ClÃ©menciat     777     16
+#&gt; 1  01001 L'Abergement-Clémenciat     777     16
 #&gt; 2  01002   L'Abergement-de-Varey     235      9
-#&gt; 3  01004       AmbÃ©rieu-en-Bugey   14233     25
-#&gt; 4  01005     AmbÃ©rieux-en-Dombes    1642     16
-#&gt; 5  01006                 AmblÃ©on     110      6
+#&gt; 3  01004       Ambérieu-en-Bugey   14233     25
+#&gt; 4  01005     Ambérieux-en-Dombes    1642     16
+#&gt; 5  01006                 Ambléon     110      6
 #&gt; 6  01007                Ambronay    2437     34</div><div class='input'><span class='co'>## Exemple 2</span>
-<span class='co'># La fonction peut Ã©galement s'appliquer Ã  des tables de flux (codes communes pouvant comporter des doublons) grÃ¢ce Ã  l'option agregation = FALSE.</span>
+<span class='co'># La fonction peut également s'appliquer à des tables de flux (codes communes pouvant comporter des doublons) grâce à l'option agregation = FALSE.</span>
 <span class='no'>exemple_flux_COG2017</span> <span class='kw'>&lt;-</span> <span class='fu'>changement_COG_varNum</span>(<span class='kw'>table_entree</span><span class='kw'>=</span><span class='no'>exemple_flux</span>,<span class='kw'>annees</span><span class='kw'>=</span><span class='fu'>c</span>(<span class='fl'>2014</span>:<span class='fl'>2017</span>),<span class='kw'>codgeo_entree</span><span class='kw'>=</span><span class='st'>"COMMUNE"</span>,<span class='kw'>agregation</span><span class='kw'>=</span><span class='no'>F</span>,<span class='kw'>libgeo</span><span class='kw'>=</span><span class='no'>F</span>,<span class='kw'>donnees_insee</span><span class='kw'>=</span><span class='no'>T</span>)
 <span class='no'>exemple_flux_COG2017</span> <span class='kw'>&lt;-</span> <span class='fu'>changement_COG_varNum</span>(<span class='kw'>table_entree</span><span class='kw'>=</span><span class='no'>exemple_flux_COG2017</span>,<span class='kw'>annees</span><span class='kw'>=</span><span class='fu'>c</span>(<span class='fl'>2014</span>:<span class='fl'>2017</span>),<span class='kw'>codgeo_entree</span><span class='kw'>=</span><span class='st'>"DCLT"</span>,<span class='kw'>agregation</span><span class='kw'>=</span><span class='no'>F</span>,<span class='kw'>libgeo</span><span class='kw'>=</span><span class='no'>F</span>,<span class='kw'>donnees_insee</span><span class='kw'>=</span><span class='no'>T</span>)</div></pre>
   </div>
