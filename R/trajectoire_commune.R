@@ -63,6 +63,7 @@ trajectoire_commune_shiny <- function(donnees_insee=F){
       stop("Package shiny needed for this function to work. Please install it.",
            call. = FALSE)
     }
+  library(shiny)
 
   # créer la grande base
   annees <- c(1968,1975,1982,1990,1999,2008:2017)
@@ -113,7 +114,7 @@ trajectoire_commune_shiny <- function(donnees_insee=F){
     uiOutput("ui")
   )
 
-  shiny::shinyApp(ui, server)
+ shinyApp(ui, server)
 
 }
 
