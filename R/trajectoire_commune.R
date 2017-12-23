@@ -80,7 +80,8 @@ trajectoire_commune_shiny <- function(donnees_insee=F){
     output$text  <- renderText({
       paste0(input$commune," n'est pas un code Insee présent dans le code officiel géographique de ",input$COG)
     })
-
+    
+    library(visNetwork)
     output$network <- renderVisNetwork({
       afficher_visNetwork(base_exhaustive=base_exhaustive, codgeo=input$commune, COG=input$COG,donnees_insee=donnees_insee)
       })
@@ -88,7 +89,7 @@ trajectoire_commune_shiny <- function(donnees_insee=F){
     output$ui <- renderUI({
       if(input$commune==""){
       } else if(input$commune%in%get(paste0("COG",input$COG))[,"CODGEO"]){
-        visNetworkOutput("network", height="800px")
+        visNetworkOutput("network", height="500px")
       } else{
         verbatimTextOutput("text")
       }
