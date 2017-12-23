@@ -250,7 +250,7 @@ afficher_visNetwork <- function(base_exhaustive,codgeo, COG,donnees_insee=F){
       )
 
     library(visNetwork)
-    network <- visNetwork(nodes, edges,height="800px",width = "100%") %>%
+    network <- visNetwork(nodes, edges,height="500px",width = "100%") %>%
       visNodes(color = list(border = "black", background="#000000", highlight = list(border="#000000",background="#000000")),
                font = list(face="verdana", color="#FFFFFF",size=20),
                fixed = list(allowedToMoveX=T,allowedToMoveY=T),
