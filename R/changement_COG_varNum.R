@@ -49,9 +49,19 @@
 #' @encoding UTF-8
 
 
-changement_COG_varNum <- function(table_entree,annees,codgeo_entree=colnames(table_entree)[1],var_num=colnames(table_entree)[sapply(table_entree, is.numeric)],agregation=T,libgeo=F,donnees_insee=T){
+changement_COG_varNum <- function(table_entree,annees,codgeo_entree=colnames(table_entree)[1],var_num=colnames(table_entree)[sapply(table_entree, is.numeric)],agregation=TRUE,libgeo=FALSE,donnees_insee=TRUE){
 
-  inter <- intersect(c(1968,1975,1982,1990,1999,2008:2017),annees)
+  if(!codgeo_entree%in%colnames(table_entree)){ #NEW
+    stop(paste0("codgeo_entree doit être une colonne de table_entree."))
+  }
+  if(any(annees>annee_ref) | any(annees<1968)){ #NEW
+    stop(paste0("annees ne doit contenir que des années comprises entre 1968 et ",annee_ref,"."))
+  }
+  if(any(!var_num%in%colnames(table_entree))){ #NEW
+    stop(paste0("var_num doit être un vecteur de colonne(s) de type numérique de table_entree."))
+  }
+  inter <- intersect(annees_possibles,annees)
+
   if(annees[1]<=annees[length(annees)]){
     inter <- inter[order(inter)]
   } else{

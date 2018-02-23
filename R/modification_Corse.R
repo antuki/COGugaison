@@ -38,8 +38,12 @@
 #' # Ici, nous allons remplacer les codes communes corses commençant par 2A ou 2B par 20 (l'exemple actuel ne contient pas de commune Corse donc le code n'a pas d'impact).
 #' exemple_flux_sansCorse <- modification_Corse(table_entree=exemple_flux,sens="2A2Bvers20")
 
+modification_Corse <- function(table_entree,codgeo_entree = colnames(table_entree)[1],vecteur_entree=is.vector(table_entree),sens=c("20vers2A2B","2A2Bvers20")){
 
-modification_Corse <- function(table_entree,codgeo_entree = colnames(table_entree)[1],vecteur_entree=is.vector(table_entree),sens="20vers2A2B"){
+  sens = match.arg(sens) #NEW
+  if(!vecteur_entree && !codgeo_entree%in%colnames(table_entree)){ #NEW
+    stop(paste0("codgeo_entree doit être une colonne de table_entree."))
+  }
 
   table_sortie <- table_entree
 

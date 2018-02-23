@@ -6,9 +6,9 @@
 \alias{trajectoire_commune_shiny}
 \title{Observer la trajectoire d'une commune}
 \usage{
-trajectoire_commune(codgeo, COG = 2017, donnees_insee = F)
+trajectoire_commune(codgeo, COG = annee_ref, donnees_insee = F)
 
-trajectoire_commune_shiny(donnees_insee = F)
+trajectoire_commune_shiny(donnees_insee = FALSE)
 }
 \arguments{
 \item{codgeo}{est une chaîne de 5 caractères qui indique le code Insee de la commune considérée.}
@@ -51,7 +51,7 @@ trajectoire_commune("14697", 1968,donnees_insee=F)
 trajectoire_commune("76108", 2014,donnees_insee=F)
 ## Exemple 2
 # Cette fonction lance une application shiny permettant d'observer toutes les trajectoires des communes.
-trajectoire_commune_shiny()
+# trajectoire_commune_shiny()
 }
 \references{
 \itemize{

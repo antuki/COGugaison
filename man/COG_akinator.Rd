@@ -5,7 +5,7 @@
 \alias{COG_akinator}
 \title{Deviner la géographie communale}
 \usage{
-COG_akinator(vecteur_codgeo, donnees_insee = T)
+COG_akinator(vecteur_codgeo, donnees_insee = TRUE)
 }
 \arguments{
 \item{vecteur_codgeo}{correspond à un vecteur de codes Insee communaux pour lequel on cherche à déterminer le millésime de la géographie.}

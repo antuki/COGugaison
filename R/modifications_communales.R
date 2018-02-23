@@ -41,8 +41,11 @@
 #' cat(modifs$changements_codes)
 #' cat(modifs$changements_noms)
 
-
 modifications_communales <- function(date_debut,date_fin){
+
+  if(substr(date_debut,7,10)>annee_ref |  substr(date_fin,7,10)>annee_ref | substr(date_debut,7,10)<1968 |  substr(date_fin,7,10)<1968   ){ #NEW
+    stop(paste0("date_debut et date_fin doivent avoir des années (4 derniers digits) comprises entre 1968 et ",annee_ref," et doivent être de la forme jj-mm-aaaa"))
+  }
 
 donnees <- historiq
 donnees <- donnees[which(donnees$EFF > as.Date(date_debut,"%d-%m-%Y") & donnees$EFF <= as.Date(date_fin,"%d-%m-%Y")),]

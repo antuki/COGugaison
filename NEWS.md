@@ -1,4 +1,4 @@
-# COGugaison 1.0.0
+﻿# COGugaison 1.0.0
 
 ## nouveautés
 
@@ -14,11 +14,17 @@
 * ajout des niveaux supra-communaux des COG de 2008 à 2013
 
 ### novembre 2017
+
 * création des fonctions `trajectoire_commune` et `trajectoire_commune_shiny`
 
-## correction de bugs
+## correction de bugs / optimisation du code
 
 ### août 2017
 
 * NA pris en compte dans la fonction `changement_COG_typo`
 * transformation automatique des variables de typologie de type "factor" dans `changement_COG_typo`. 
+
+### février 2018
+
+* création des variables globales annees_possibles et annee_ref, intégrées dans les différentes fonctions pour faciliter les mises à jours de COG notamment
+* ajout de tests de vérification du contenu des paramètres (fonctions types match.arg ou if(){stop()}) dans l'ensemble des fonctions

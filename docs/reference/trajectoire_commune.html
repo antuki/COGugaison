@@ -18,6 +18,8 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -25,6 +27,10 @@
 <script src="../pkgdown.js"></script>
   
   
+<meta property="og:title" content="Observer la trajectoire d'une commune — trajectoire_commune" />
+
+<meta property="og:description" content="Observer sur un diagramme interactif la trajectoire d'une commune depuis 1968 (aucun changement, fusions, défusions ou changements de codes) notamment via une application shiny." />
+<meta name="twitter:card" content="summary" />
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -52,10 +58,16 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../reference/index.html">Reference</a>
+  <a href="../index.html">
+    <span class="fa fa-home fa-lg"></span>
+     
+  </a>
 </li>
 <li>
-  <a href="../articles/index.html">Articles</a>
+  <a href="../articles/COGugaison.html">Get Started</a>
+</li>
+<li>
+  <a href="../reference/index.html">Reference</a>
 </li>
 <li>
   <a href="../news/index.html">News</a>
@@ -87,9 +99,9 @@
     <p>Observer sur un diagramme interactif la trajectoire d'une commune depuis 1968 (aucun changement, fusions, défusions ou changements de codes) notamment via une application shiny.</p>
     
 
-    <pre class="usage"><span class='fu'>trajectoire_commune</span>(<span class='no'>codgeo</span>, <span class='kw'>COG</span> <span class='kw'>=</span> <span class='fl'>2017</span>, <span class='kw'>donnees_insee</span> <span class='kw'>=</span> <span class='no'>F</span>)
+    <pre class="usage"><span class='fu'>trajectoire_commune</span>(<span class='no'>codgeo</span>, <span class='kw'>COG</span> <span class='kw'>=</span> <span class='no'>annee_ref</span>, <span class='kw'>donnees_insee</span> <span class='kw'>=</span> <span class='no'>F</span>)
 
-<span class='fu'>trajectoire_commune_shiny</span>(<span class='kw'>donnees_insee</span> <span class='kw'>=</span> <span class='no'>F</span>)</pre>
+<span class='fu'>trajectoire_commune_shiny</span>(<span class='kw'>donnees_insee</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -144,16 +156,12 @@
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>## Exemple 1</span>
 <span class='co'># Ici, nous allons observer sur un graphique interactif la trajectoire des communes ayant pour codes 01003 en 1968, 14697 en 1968, 76108 en 2014.</span>
-<span class='fu'>trajectoire_commune</span>(<span class='st'>"01003"</span>, <span class='fl'>1968</span>,<span class='kw'>donnees_insee</span><span class='kw'>=</span><span class='no'>F</span>)</div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Attaching package: ‘dplyr’</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from ‘package:stats’:</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    filter, lag</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from ‘package:base’:</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    intersect, setdiff, setequal, union</span></div><div class='output co'>#&gt; <span class='warning'>Warning: package ‘visNetwork’ was built under R version 3.4.2</span></div><div class='input'><span class='fu'>trajectoire_commune</span>(<span class='st'>"14697"</span>, <span class='fl'>1968</span>,<span class='kw'>donnees_insee</span><span class='kw'>=</span><span class='no'>F</span>)
+<span class='fu'>trajectoire_commune</span>(<span class='st'>"01003"</span>, <span class='fl'>1968</span>,<span class='kw'>donnees_insee</span><span class='kw'>=</span><span class='no'>F</span>)
+<span class='fu'>trajectoire_commune</span>(<span class='st'>"14697"</span>, <span class='fl'>1968</span>,<span class='kw'>donnees_insee</span><span class='kw'>=</span><span class='no'>F</span>)
 <span class='fu'>trajectoire_commune</span>(<span class='st'>"76108"</span>, <span class='fl'>2014</span>,<span class='kw'>donnees_insee</span><span class='kw'>=</span><span class='no'>F</span>)
 <span class='co'>## Exemple 2</span>
 <span class='co'># Cette fonction lance une application shiny permettant d'observer toutes les trajectoires des communes.</span>
-<span class='fu'>trajectoire_commune_shiny</span>()</div><div class='output co'>#&gt; <span class='error'>Error in fluidPage(fluidRow(column(2, selectInput("COG", label = "Année",     choices = annees, selected = "2017")), column(10, textInput("commune",     label = "Commune", placeholder = "Entrez le code Insee de la commune"))),     uiOutput("ui")): could not find function "fluidPage"</span></div></pre>
+<span class='co'># trajectoire_commune_shiny()</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -178,7 +186,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>

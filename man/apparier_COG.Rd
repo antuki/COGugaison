@@ -5,7 +5,7 @@
 \alias{apparier_COG}
 \title{Apparier une liste de communes avec un millésime de COG}
 \usage{
-apparier_COG(vecteur_codgeo, donnees_insee = T,
+apparier_COG(vecteur_codgeo, donnees_insee = TRUE,
   COG = as.numeric(substr(COG_akinator(vecteur_codgeo = vecteur_codgeo,
   donnees_insee = donnees_insee_entree), 4, 7)))
 }

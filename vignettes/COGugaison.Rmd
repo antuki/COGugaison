@@ -39,7 +39,7 @@ Tant que le package n'est pas stabilisé, il est évidemment conseillé de se r�
 Commençons par installer le package `COGugaison` et à le charger dans R. 
  
 ```{r, fig.show='hold'}
-devtools::install_github("antuki/COGugaison")
+#devtools::install_github("antuki/COGugaison")
 library(COGugaison)
 ```
 
@@ -133,7 +133,7 @@ Le paramètre *codgeo* est une chaîne de 5 caractères qui indique le code Inse
 
 La fonction `trajectoire_commune_shiny` lance une application shiny qui permet de sélectionner la commune pour laquelle vous souhaitez observer ses modifications depuis 1968.
 
-```{r, fig.show='hold'}
+```{r, fig.show='hold',warning=F,error=F}
 # Ici, nous allons observer sur un graphique interactif la trajectoire de la commune ayant pour code 01003 en 1968 (fusion avec 2 autres communes le 1er janvier 1974)
 trajectoire_commune("01003", 1968,donnees_insee=F)
 # Cette fonction lance une application shiny permettant d'observer toutes les trajectoires des communes.

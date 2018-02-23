@@ -12,7 +12,7 @@
 #' - "methode_classe_absorbante" : attribuer la classe dite absorbante à toute commune fusionnée contenant au moins une ancienne commune appartenant à cette classe absorbante
 #' - "methode_classe_absorbee" : ne pas tenir compte de cette classe dite "absorbée" pour toute commune fusionnée contenant au moins une ancienne commune appartenant à cette classe absorbée
 #' @param mot_difference n'est à définir que si methode_fusion = "methode_difference". Si ce paramètre est laissé à NULL alors la commune fusionnée possède comme libellé de classe l'ensemble des libellés présents dans ses communes fusionnées séparés d'un "et". Sinon, il indique un nom de classe à attribuer aux communes fusionnées de classes différentes.
-#' @param mot_fusion n'est à définir que si methode_fusion = "methode_classe_fusion". Sa valeur par défaut vaut NA.
+#' @param mot_fusion n'est à définir que si methode_fusion = "methode_classe_fusion". Sa valeur par défaut vaut "commune fusionnée".
 #' @param classe_absorbante n'est à définir que si methode_fusion = "methode_classe_absorbante". Si ce paramètre est laissé à NULL alors la commune fusionnée possède comme libellé de classe l'ensemble des libellés présents dans ses communes fusionnées séparés d'un "et". Sinon, il indique le nom de la classe dite absorbante à attribuer à toute commune fusionnée contenant au moins une ancienne commune appartenant à cette classe absorbante.
 #' @param classe_absorbee n'est à définir que si methode_fusion = "methode_classe_absorbee". Si ce paramètre est laissé à NULL alors la commune fusionnée possède comme libellé de classe l'ensemble des libellés présents dans ses communes fusionnées séparés d'un "et". Sinon, il indique le nom de la classe dite absorbée à attribuer à toute commune fusionnée contenant au moins une ancienne commune appartenant à cette classe absorbante.
 #' @param libgeo vaut TRUE si l'on veut rajouter dans la table une colonne nommée "nom_commune" qui indique le nom de la commune issu du code officiel géographique et FALSE sinon.
@@ -58,9 +58,20 @@
 #' head(details_exemple_popcom_COG2017_typo[["2016_2017"]])
 #' @encoding UTF-8
 
-changement_COG_typo <- function(table_entree,annees,codgeo_entree=colnames(table_entree)[1],typos=colnames(table_entree)[-which(colnames(table_entree)==codgeo_entree)], methode_fusion="methode_difference",mot_difference=NULL,mot_fusion=NA,classe_absorbante=NULL,classe_absorbee=NULL,donnees_insee=T,libgeo=F){
+changement_COG_typo <- function(table_entree,annees,codgeo_entree=colnames(table_entree)[1],typos=colnames(table_entree)[-which(colnames(table_entree)==codgeo_entree)], methode_fusion=c("methode_difference","methode_classe_fusion","methode_max_pop","methode_classe_absorbante","methode_classe_absorbee"),mot_difference=NULL,mot_fusion="commune fusionnée",classe_absorbante=NULL,classe_absorbee=NULL,donnees_insee=TRUE,libgeo=FALSE){
+  if(!codgeo_entree%in%colnames(table_entree)){ #NEW
+    stop(paste0("codgeo_entree doit être une colonne de table_entree."))
+  }
+  if(any(!typos%in%colnames(table_entree))){ #NEW
+      stop(paste0("typo doit être un vecteur de colonne(s) de table_entree."))
+  }
+  methode_fusion <- match.arg(methode_fusion) #NEW
+  if(any(annees>annee_ref) | any(annees<1968)){ #NEW
+    stop(paste0("annees ne doit contenir que des années comprises entre 1968 et ",annee_ref,"."))
+  }
+  inter <- intersect(annees_possibles,annees)
 
-  inter <- intersect(c(1968,1975,1982,1990,1999,2008:2017),annees)
+
   if(annees[1]<=annees[length(annees)]){
     inter <- inter[order(inter)]
   } else{
@@ -82,13 +93,6 @@ changement_COG_typo <- function(table_entree,annees,codgeo_entree=colnames(table
       colnames(provisoire)[1]<- paste0("cod",annees[i])
       provisoire[which(is.na(with(provisoire,get(paste0("cod",annees[i+1]))))),"ratio"] <- 1
       provisoire[which(is.na(with(provisoire,get(paste0("cod",annees[i+1]))))),paste0("cod",annees[i+1])] <- as.character(provisoire[which(is.na(with(provisoire,get(paste0("cod",annees[i+1]))))),paste0("cod",annees[i])])
-
-      # if(length(typos)>1){ # choisir quoi faire ici en cas de NA
-      #   provisoire <- provisoire[apply(provisoire[, typos], 1, function(x) !all(is.na(x))), ]
-      # } else{
-      #   provisoire <- provisoire[!is.na(provisoire[,typos]), ]
-      # }
-
       for (var in typos){
         provisoire_court <- provisoire[,c(paste0("cod",annees[i]),paste0("cod",annees[i+1]),"annee","typemodif","ratio",var)]
         if(is.factor(provisoire_court[,var])){ ## nouveau : possibilité de mettre des factor en typologie (transformés en caractère)
@@ -105,8 +109,10 @@ changement_COG_typo <- function(table_entree,annees,codgeo_entree=colnames(table
           table_f_sanspb  <- do.call("rbind", table_f_sanspb)
           table_f_avecpb <-table_f_liste[which(lapply(table_f_liste, FUN=function(x){ifelse(length(unique(x[,6]))==1,T,F)})==F)]
 
-          if (methode_fusion=="methode_classe_fusion"){ ### nouveau : août 2017
-            table_f_sanspb[,ncol(table_f_sanspb)] <- mot_fusion
+          if (methode_fusion=="methode_classe_fusion"){
+            if(!is.null(table_f_sanspb)){ #NEW suite à bug
+              table_f_sanspb[,ncol(table_f_sanspb)] <- mot_fusion
+            }
             table_f_avecpb <- lapply(table_f_avecpb, FUN=function(x){
               x[1,var]<- mot_fusion
               return(x[1,])
@@ -140,7 +146,7 @@ changement_COG_typo <- function(table_entree,annees,codgeo_entree=colnames(table
             })
           }
 
-          if (methode_fusion=="methode_classe_absorbee"){ ## new 31/07
+          if (methode_fusion=="methode_classe_absorbee"){
             table_f_avecpb <- lapply(table_f_avecpb, FUN=function(x){
               categories <- unique(x[,var])[order(unique(x[,var]))]
               absorb <- ifelse(classe_absorbee%in%categories,T,F)

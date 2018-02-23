@@ -8,7 +8,7 @@
 changement_COG_varNum(table_entree, annees,
   codgeo_entree = colnames(table_entree)[1],
   var_num = colnames(table_entree)[sapply(table_entree, is.numeric)],
-  agregation = T, libgeo = F, donnees_insee = T)
+  agregation = TRUE, libgeo = FALSE, donnees_insee = TRUE)
 }
 \arguments{
 \item{table_entree}{correspond à la table à transformer en une autre géographie}

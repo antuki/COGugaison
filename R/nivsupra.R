@@ -61,8 +61,21 @@
 #' exemple_flux_COG2017_etZE <- nivsupra(table_entree=exemple_flux_COG2017_etZE,codgeo_entree="DCLT",nivsupra="ZE2010",COG=2017,agregation=F)
 #' head(exemple_flux_COG2017_etZE)
 
-nivsupra <- function(table_entree,codgeo_entree=colnames(table_entree)[1],COG=2017,var_num=colnames(table_entree)[sapply(table_entree, is.numeric)]
-                     ,nivsupra, nivsupra_nom=ifelse(agregation==T,nivsupra,paste0(nivsupra,"_",codgeo_entree)),agregation=T){
+nivsupra <- function(table_entree,codgeo_entree=colnames(table_entree)[1] ,COG=annee_ref,var_num=colnames(table_entree)[sapply(table_entree, is.numeric)]
+                     ,nivsupra, nivsupra_nom=ifelse(agregation==TRUE,nivsupra,paste0(nivsupra,"_",codgeo_entree)),agregation=T){
+
+  if(!codgeo_entree%in%colnames(table_entree)){ #NEW
+    stop(paste0("codgeo_entree doit être une colonne de table_entree."))
+  }
+  if(!COG%in%c(2008:annee_ref)){ #NEW
+    stop(paste0("COG doit être compris entre 2008 et ",annee_ref," pour cette fonction."))
+  }
+  if(any(!var_num%in%colnames(table_entree))){ #NEW
+    stop(paste0("var_num doit être une colonne de table_entree."))
+  }
+  if(!nivsupra%in%colnames(get(paste0("table_supracom_",COG)))[-c(1,2)]){ #NEW
+    stop(paste0("nivsupra doit être un des niveaux géo suivants : ",paste0(colnames(get(paste0("table_supracom_",COG)))[-c(1,2)],collapse=", ")))
+  }
 
   table_sortie <- enlever_PLM(table_entree=table_entree,codgeo_entree = codgeo_entree,agregation=F) #nouveau
   table_sortie <- merge(table_sortie,get(paste0("table_supracom_",COG))[,c("CODGEO",nivsupra)],by.x=codgeo_entree,by.y="CODGEO",all.x=T,all.y=F)

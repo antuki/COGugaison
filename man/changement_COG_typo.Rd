@@ -8,9 +8,11 @@
 changement_COG_typo(table_entree, annees,
   codgeo_entree = colnames(table_entree)[1],
   typos = colnames(table_entree)[-which(colnames(table_entree) ==
-  codgeo_entree)], methode_fusion = "methode_difference",
-  mot_difference = NULL, mot_fusion = NA, classe_absorbante = NULL,
-  classe_absorbee = NULL, donnees_insee = T, libgeo = F)
+  codgeo_entree)], methode_fusion = c("methode_difference",
+  "methode_classe_fusion", "methode_max_pop", "methode_classe_absorbante",
+  "methode_classe_absorbee"), mot_difference = NULL,
+  mot_fusion = "commune fusionnée", classe_absorbante = NULL,
+  classe_absorbee = NULL, donnees_insee = TRUE, libgeo = FALSE)
 }
 \arguments{
 \item{table_entree}{correspond à la table à transformer en une autre géographie}
@@ -30,7 +32,7 @@ changement_COG_typo(table_entree, annees,
 
 \item{mot_difference}{n'est à définir que si methode_fusion = "methode_difference". Si ce paramètre est laissé à NULL alors la commune fusionnée possède comme libellé de classe l'ensemble des libellés présents dans ses communes fusionnées séparés d'un "et". Sinon, il indique un nom de classe à attribuer aux communes fusionnées de classes différentes.}
 
-\item{mot_fusion}{n'est à définir que si methode_fusion = "methode_classe_fusion". Sa valeur par défaut vaut NA.}
+\item{mot_fusion}{n'est à définir que si methode_fusion = "methode_classe_fusion". Sa valeur par défaut vaut "commune fusionnée".}
 
 \item{classe_absorbante}{n'est à définir que si methode_fusion = "methode_classe_absorbante". Si ce paramètre est laissé à NULL alors la commune fusionnée possède comme libellé de classe l'ensemble des libellés présents dans ses communes fusionnées séparés d'un "et". Sinon, il indique le nom de la classe dite absorbante à attribuer à toute commune fusionnée contenant au moins une ancienne commune appartenant à cette classe absorbante.}
 

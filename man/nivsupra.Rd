@@ -5,8 +5,8 @@
 \title{Agréger des données à des échelons supra-communaux}
 \usage{
 nivsupra(table_entree, codgeo_entree = colnames(table_entree)[1],
-  COG = 2017, var_num = colnames(table_entree)[sapply(table_entree,
-  is.numeric)], nivsupra, nivsupra_nom = ifelse(agregation == T, nivsupra,
+  COG = annee_ref, var_num = colnames(table_entree)[sapply(table_entree,
+  is.numeric)], nivsupra, nivsupra_nom = ifelse(agregation == TRUE, nivsupra,
   paste0(nivsupra, "_", codgeo_entree)), agregation = T)
 }
 \arguments{

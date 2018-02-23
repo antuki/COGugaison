@@ -48,7 +48,15 @@
 #' @encoding UTF-8
 
 
-apparier_COG <- function(vecteur_codgeo, donnees_insee = T,COG=as.numeric(substr(COG_akinator(vecteur_codgeo = vecteur_codgeo,donnees_insee = donnees_insee_entree),4,7))){
+apparier_COG <- function(vecteur_codgeo, donnees_insee = TRUE,COG=as.numeric(substr(COG_akinator(vecteur_codgeo = vecteur_codgeo,donnees_insee = donnees_insee_entree),4,7))){
+  # vérifier que COG est bien dans les annees_possibles
+  if(!COG%in%annees_possibles){
+    stop(paste0("COG doit être compris dans ",paste0(annees_possibles,collapse=", ")))
+  }
+  if(!is.vector(vecteur_codgeo)){
+    stop("vecteur_codgeo doit être un vecteur.")
+
+  }
 
  if(donnees_insee){
     assign(paste0("COG",COG),get(paste0("COG",COG,"_insee")))

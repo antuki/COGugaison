@@ -44,7 +44,13 @@
 #' @encoding UTF-8
 
 
-modification_Oudon <- function(table_entree,codgeo_entree = colnames(table_entree)[1],vecteur_entree=is.vector(table_entree),donnees_insee_entree=T,donnees_insee_sortie=T,COG=as.numeric(substr(COG_akinator(vecteur_codgeo = table_entree[,codgeo_entree],donnees_insee = donnees_insee_entree),4,7))){
+modification_Oudon <- function(table_entree,codgeo_entree = colnames(table_entree)[1], vecteur_entree=is.vector(table_entree),donnees_insee_entree=TRUE,donnees_insee_sortie=TRUE,COG=as.numeric(substr(COG_akinator(vecteur_codgeo = table_entree[,codgeo_entree],donnees_insee = donnees_insee_entree),4,7))){
+  if(!codgeo_entree%in%colnames(table_entree)){ #NEW
+    stop(paste0("codgeo_entree doit être une colonne de table_entree."))
+  }
+  if(!COG%in%annees_possibles){ #NEW
+    stop(paste0("COG doit être contenu dans ",paste0(annees_possibles,collapse = ", ")))
+  }
 
   table_sortie <- table_entree
 

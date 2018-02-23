@@ -40,12 +40,13 @@
 #' trajectoire_commune("76108", 2014,donnees_insee=F)
 #' ## Exemple 2
 #' # Cette fonction lance une application shiny permettant d'observer toutes les trajectoires des communes.
-#' trajectoire_commune_shiny()
+#' # trajectoire_commune_shiny()
 #' @encoding UTF-8
 
 #' @rdname trajectoire_commune
 #' @export
-trajectoire_commune <- function(codgeo,COG=2017,donnees_insee=F){
+trajectoire_commune <- function(codgeo,COG=annee_ref,donnees_insee=F){
+  COG <- as.numeric(match.arg(as.character(COG),annees_possibles)) ## new
   base_exhaustive <-  creer_base_empilee(donnees_insee=donnees_insee)
   if(codgeo%in%get(paste0("COG",COG))[,"CODGEO"]){
     afficher_visNetwork(base_exhaustive,codgeo, COG,donnees_insee=donnees_insee)
@@ -57,7 +58,7 @@ trajectoire_commune <- function(codgeo,COG=2017,donnees_insee=F){
 
 #' @rdname trajectoire_commune
 #' @export
-trajectoire_commune_shiny <- function(donnees_insee=F){
+trajectoire_commune_shiny <- function(donnees_insee=FALSE){
 
     if (!requireNamespace("shiny", quietly = TRUE)) {
       stop("Package shiny needed for this function to work. Please install it.",
@@ -66,7 +67,7 @@ trajectoire_commune_shiny <- function(donnees_insee=F){
   library(shiny)
 
   # créer la grande base
-  annees <- c(1968,1975,1982,1990,1999,2008:2017)
+  annees <- annees_possibles
 
   base_exhaustive <-  creer_base_empilee(donnees_insee=donnees_insee)
 
@@ -80,7 +81,7 @@ trajectoire_commune_shiny <- function(donnees_insee=F){
     output$text  <- renderText({
       paste0(input$commune," n'est pas un code Insee présent dans le code officiel géographique de ",input$COG)
     })
-    
+
     library(visNetwork)
     output$network <- renderVisNetwork({
       afficher_visNetwork(base_exhaustive=base_exhaustive, codgeo=input$commune, COG=input$COG,donnees_insee=donnees_insee)
@@ -107,7 +108,7 @@ trajectoire_commune_shiny <- function(donnees_insee=F){
 
   ui <- fluidPage(
     fluidRow(
-      column(2, selectInput("COG", label = "Année", choices = annees, selected = "2017")),
+      column(2, selectInput("COG", label = "Année", choices = annees, selected = as.character(annee_ref))),
       column(10, textInput("commune", label = "Commune", placeholder = "Entrez le code Insee de la commune"))
       #column(10, uiOutput("ui"))
     ),
@@ -123,7 +124,7 @@ trajectoire_commune_shiny <- function(donnees_insee=F){
 
 creer_base_empilee <- function(donnees_insee=F){
   library(dplyr)
-  annees <- c(1968,1975,1982,1990,1999,2008:2017)
+  annees <- annees_possibles
   if (donnees_insee) {
     for (i in 1:(length(annees))) {
       assign(paste0("COG", annees[i]), get(paste0("COG", annees[i], "_insee")))
@@ -159,7 +160,7 @@ afficher_visNetwork <- function(base_exhaustive,codgeo, COG,donnees_insee=F){
   }
   #library(dplyr)
 
-  annees <- c(1968,1975,1982,1990,1999,2008:2017)
+  annees <- annees_possibles
 
   if (donnees_insee) {
     for (i in 1:(length(annees))) {

@@ -5,7 +5,8 @@
 \title{Modifier les codes Insee des communes corses}
 \usage{
 modification_Corse(table_entree, codgeo_entree = colnames(table_entree)[1],
-  vecteur_entree = is.vector(table_entree), sens = "20vers2A2B")
+  vecteur_entree = is.vector(table_entree), sens = c("20vers2A2B",
+  "2A2Bvers20"))
 }
 \arguments{
 \item{table_entree}{correspond à la table (ou le vecteur, cf. paramètre vecteur_entree) à transformer de manière à modifier les codes des communes corses.}

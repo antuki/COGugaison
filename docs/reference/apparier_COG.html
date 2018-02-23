@@ -18,6 +18,8 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -25,6 +27,10 @@
 <script src="../pkgdown.js"></script>
   
   
+<meta property="og:title" content="Apparier une liste de communes avec un millésime de COG — apparier_COG" />
+
+<meta property="og:description" content="Comparer la liste des communes présente dans une table de données avec le COG d'un millésime donné. Fonction souvent utile après l'utilisation de la fonction COG_akinator." />
+<meta name="twitter:card" content="summary" />
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -52,10 +58,16 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../reference/index.html">Reference</a>
+  <a href="../index.html">
+    <span class="fa fa-home fa-lg"></span>
+     
+  </a>
 </li>
 <li>
-  <a href="../articles/index.html">Articles</a>
+  <a href="../articles/COGugaison.html">Get Started</a>
+</li>
+<li>
+  <a href="../reference/index.html">Reference</a>
 </li>
 <li>
   <a href="../news/index.html">News</a>
@@ -87,7 +99,7 @@
     <p>Comparer la liste des communes présente dans une table de données avec le COG d'un millésime donné. Fonction souvent utile après l'utilisation de la fonction COG_akinator.</p>
     
 
-    <pre class="usage"><span class='fu'>apparier_COG</span>(<span class='no'>vecteur_codgeo</span>, <span class='kw'>donnees_insee</span> <span class='kw'>=</span> <span class='no'>T</span>,
+    <pre class="usage"><span class='fu'>apparier_COG</span>(<span class='no'>vecteur_codgeo</span>, <span class='kw'>donnees_insee</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>COG</span> <span class='kw'>=</span> <span class='fu'>as.numeric</span>(<span class='fu'>substr</span>(<span class='fu'><a href='COG_akinator.html'>COG_akinator</a></span>(<span class='kw'>vecteur_codgeo</span> <span class='kw'>=</span> <span class='no'>vecteur_codgeo</span>,
   <span class='kw'>donnees_insee</span> <span class='kw'>=</span> <span class='no'>donnees_insee_entree</span>), <span class='fl'>4</span>, <span class='fl'>7</span>)))</pre>
     
@@ -204,7 +216,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>

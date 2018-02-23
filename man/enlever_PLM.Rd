@@ -5,7 +5,8 @@
 \title{Remplacer les arrondissements municipaux par les codes communes}
 \usage{
 enlever_PLM(table_entree, codgeo_entree = colnames(table_entree)[1],
-  libgeo = NULL, agregation = T, vecteur_entree = is.vector(table_entree))
+  libgeo = NULL, agregation = TRUE,
+  vecteur_entree = is.vector(table_entree))
 }
 \arguments{
 \item{table_entree}{correspond à la table (ou le vecteur, cf. paramètre vecteur_entree) à transformer de manière à remplacer les codes des arrondissements municipaux de Paris, Lyon et Marseille par leurs codes Insee communaux.}

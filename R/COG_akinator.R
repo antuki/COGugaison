@@ -37,10 +37,13 @@
 #' COG_akinator(vecteur_codgeo=exemple_popcom[,1],donnees_insee=T)
 #' @encoding UTF-8
 
-COG_akinator <- function (vecteur_codgeo, donnees_insee = T)
+COG_akinator <- function (vecteur_codgeo, donnees_insee = TRUE)
 {
-  annees <- c(1968, 1975, 1982, 1990, 1999, 2008:2017)
-  vecteur_codgeo <- COGugaison::enlever_PLM(vecteur_codgeo,vecteur_entree = T)
+ if(!is.vector(vecteur_codgeo)){ #NEW
+   stop("vecteur_codgeo doit être un vecteur")
+ }
+  annees <- annees_possibles
+  vecteur_codgeo <- COGugaison::enlever_PLM(vecteur_codgeo,vecteur_entree = TRUE)
   vecteur_codgeo <- unique(vecteur_codgeo[which(substr(vecteur_codgeo, 1, 2) %in% c(paste0("0", 1:9), 10:96, "2A", "2B") & nchar(vecteur_codgeo) == 5)])
   vecteur_codgeo <- COGugaison::modification_Corse(vecteur_codgeo, sens = "20vers2A2B")
   vecteur_codgeo[which(vecteur_codgeo%in%c("14472"))] <-"14697" #cas l'Oudon qui est souvent présent dans les tables...

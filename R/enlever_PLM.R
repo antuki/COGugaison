@@ -40,9 +40,10 @@
 #' exemple_flux_sansPLM <-enlever_PLM(table_entree=exemple_flux,codgeo_entree = "COMMUNE",libgeo=NULL,agregation = F,vecteur_entree=F)
 #' exemple_flux_sansPLM <-enlever_PLM(table_entree=exemple_flux_sansPLM,codgeo_entree = "DCLT",libgeo=NULL,agregation = F,vecteur_entree=F)
 
-
-enlever_PLM <- function(table_entree,codgeo_entree = colnames(table_entree)[1],libgeo=NULL,agregation = T,vecteur_entree=is.vector(table_entree)){
-
+enlever_PLM <- function(table_entree,codgeo_entree = colnames(table_entree)[1],libgeo=NULL,agregation = TRUE,vecteur_entree=is.vector(table_entree)){
+  if(!vecteur_entree && !codgeo_entree%in%colnames(table_entree)){ #NEW
+    stop(paste0("codgeo_entree doit être une colonne de table_entree."))
+  }
 
   if(vecteur_entree==T){
     table_entree[substr(table_entree,1,2)=="75"] <- "75056"

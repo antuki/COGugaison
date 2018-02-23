@@ -46,9 +46,19 @@
 #' head(details_exemple_popcom_COG2017_typo[["2015_2016"]])
 #' head(details_exemple_popcom_COG2017_typo[["2016_2017"]])
 
-changement_COG_typo_details <- function(table_entree,annees,codgeo_entree=colnames(table_entree)[1],typo, donnees_insee=T){
+changement_COG_typo_details <- function(table_entree,annees,codgeo_entree=colnames(table_entree)[1],typo, donnees_insee=TRUE){
 
-  inter <- intersect(c(1968,1975,1982,1990,1999,2008:2017),annees)
+  if(!codgeo_entree%in%colnames(table_entree)){ #NEW
+    stop(paste0("codgeo_entree doit être une colonne de table_entree."))
+  }
+  if(any(annees>annee_ref) | any(annees<1968)){ #NEW
+    stop(paste0("annees ne doit contenir que des années comprises entre 1968 et ",annee_ref,"."))
+  }
+  if(any(!typos%in%colnames(table_entree))){ #NEW
+    stop(paste0("typo doit être un vecteur de colonne(s) de table_entree."))
+  }
+  inter <- intersect(annees_possibles,annees)
+
   if(annees[1]<=annees[length(annees)]){
     inter <- inter[order(inter)]
   } else{
