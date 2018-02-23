@@ -63,7 +63,7 @@ changement_COG_typo <- function(table_entree,annees,codgeo_entree=colnames(table
     stop(paste0("codgeo_entree doit être une colonne de table_entree."))
   }
   if(any(!typos%in%colnames(table_entree))){ #NEW
-      stop(paste0("typo doit être un vecteur de colonne(s) de table_entree."))
+      stop(paste0("typos doit être un vecteur de colonne(s) de table_entree."))
   }
   methode_fusion <- match.arg(methode_fusion) #NEW
   if(any(annees>annee_ref) | any(annees<1968)){ #NEW

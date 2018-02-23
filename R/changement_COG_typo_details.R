@@ -54,8 +54,8 @@ changement_COG_typo_details <- function(table_entree,annees,codgeo_entree=colnam
   if(any(annees>annee_ref) | any(annees<1968)){ #NEW
     stop(paste0("annees ne doit contenir que des années comprises entre 1968 et ",annee_ref,"."))
   }
-  if(any(!typos%in%colnames(table_entree))){ #NEW
-    stop(paste0("typo doit être un vecteur de colonne(s) de table_entree."))
+  if(!typo%in%colnames(table_entree)){ #NEW
+    stop(paste0("typo doit être une colonne de table_entree."))
   }
   inter <- intersect(annees_possibles,annees)
 

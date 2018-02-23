@@ -207,7 +207,26 @@
 #&gt; 4  01005     Ambérieux-en-Dombes CLASSE 3     F
 #&gt; 5  01006                 Ambléon CLASSE 4     E
 #&gt; 6  01007                Ambronay CLASSE 5     A</div><div class='input'><span class='co'># Nous allons maintenant isoler dans une table les communes fusionnées appartenant à des classes différentes, ici selon la typologie "typoA" entre 2014 et 2015, 2015 et 2016 et 2016 et 2017.</span>
-<span class='no'>details_exemple_popcom_COG2017_typo</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='changement_COG_typo_details.html'>changement_COG_typo_details</a></span>(<span class='kw'>table_entree</span><span class='kw'>=</span><span class='no'>exemple_popcom</span>[,-<span class='fl'>2</span>],<span class='kw'>annees</span><span class='kw'>=</span><span class='fu'>c</span>(<span class='fl'>2014</span>:<span class='fl'>2017</span>),<span class='kw'>typo</span><span class='kw'>=</span><span class='st'>"typoA"</span>, <span class='kw'>donnees_insee</span><span class='kw'>=</span><span class='no'>T</span>)</div><div class='output co'>#&gt; <span class='error'>Error in typos %in% colnames(table_entree): object 'typos' not found</span></div><div class='input'><span class='fu'>head</span>(<span class='no'>details_exemple_popcom_COG2017_typo</span><span class='kw'>[[</span><span class='st'>"2014_2015"</span>]])</div><div class='output co'>#&gt; <span class='error'>Error in head(details_exemple_popcom_COG2017_typo[["2014_2015"]]): object 'details_exemple_popcom_COG2017_typo' not found</span></div><div class='input'><span class='fu'>head</span>(<span class='no'>details_exemple_popcom_COG2017_typo</span><span class='kw'>[[</span><span class='st'>"2015_2016"</span>]])</div><div class='output co'>#&gt; <span class='error'>Error in head(details_exemple_popcom_COG2017_typo[["2015_2016"]]): object 'details_exemple_popcom_COG2017_typo' not found</span></div><div class='input'><span class='fu'>head</span>(<span class='no'>details_exemple_popcom_COG2017_typo</span><span class='kw'>[[</span><span class='st'>"2016_2017"</span>]])</div><div class='output co'>#&gt; <span class='error'>Error in head(details_exemple_popcom_COG2017_typo[["2016_2017"]]): object 'details_exemple_popcom_COG2017_typo' not found</span></div></pre>
+<span class='no'>details_exemple_popcom_COG2017_typo</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='changement_COG_typo_details.html'>changement_COG_typo_details</a></span>(<span class='kw'>table_entree</span><span class='kw'>=</span><span class='no'>exemple_popcom</span>[,-<span class='fl'>2</span>],<span class='kw'>annees</span><span class='kw'>=</span><span class='fu'>c</span>(<span class='fl'>2014</span>:<span class='fl'>2017</span>),<span class='kw'>typo</span><span class='kw'>=</span><span class='st'>"typoA"</span>, <span class='kw'>donnees_insee</span><span class='kw'>=</span><span class='no'>T</span>)
+<span class='fu'>head</span>(<span class='no'>details_exemple_popcom_COG2017_typo</span><span class='kw'>[[</span><span class='st'>"2014_2015"</span>]])</div><div class='output co'>#&gt;   cod2014              lib2014 cod2015                     lib2015    typoA
+#&gt; 1   14178               Corbon   14474 Notre-Dame-d'Estrées-Corbon CLASSE 2
+#&gt; 2   14474 Notre-Dame-d'Estrées   14474 Notre-Dame-d'Estrées-Corbon CLASSE 4
+#&gt; 3   25034        Auxon-Dessous   25035                  Les Auxons CLASSE 1
+#&gt; 4   25035         Auxon-Dessus   25035                  Les Auxons CLASSE 3
+#&gt; 5   38024           Badinières   38152           Eclose-Badinières CLASSE 4
+#&gt; 6   38152               Eclose   38152           Eclose-Badinières CLASSE 3</div><div class='input'><span class='fu'>head</span>(<span class='no'>details_exemple_popcom_COG2017_typo</span><span class='kw'>[[</span><span class='st'>"2015_2016"</span>]])</div><div class='output co'>#&gt;   cod2015             lib2015 cod2016            lib2016    typoA
+#&gt; 1   01015           Arbignieu   01015    Arboys en Bugey CLASSE 3
+#&gt; 2   01340          Saint-Bois   01015    Arboys en Bugey CLASSE 2
+#&gt; 3   01119           Corcelles   01080 Champdor-Corcelles CLASSE 1
+#&gt; 4   01080            Champdor   01080 Champdor-Corcelles CLASSE 2
+#&gt; 5   01176 Le Grand-Abergement   01187      Haut Valromey CLASSE 2
+#&gt; 6   01409             Songieu   01187      Haut Valromey CLASSE 5</div><div class='input'><span class='fu'>head</span>(<span class='no'>details_exemple_popcom_COG2017_typo</span><span class='kw'>[[</span><span class='st'>"2016_2017"</span>]])</div><div class='output co'>#&gt;   cod2016             lib2016 cod2017          lib2017    typoA
+#&gt; 1   01095 Chavannes-sur-Suran   01095 Nivigne et Suran CLASSE 5
+#&gt; 2   01172           Germagnat   01095 Nivigne et Suran CLASSE 1
+#&gt; 3   01098         Chazey-Bons   01098      Chazey-Bons CLASSE 3
+#&gt; 4   01316              Pugieu   01098      Chazey-Bons CLASSE 4
+#&gt; 5   03168             Meaulne   03168   Meaulne-Vitray CLASSE 2
+#&gt; 6   03318              Vitray   03168   Meaulne-Vitray CLASSE 5</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
