@@ -40,7 +40,6 @@
 #' cat(modifs$defusions)
 #' cat(modifs$changements_codes)
 #' cat(modifs$changements_noms)
-
 modifications_communales <- function(date_debut,date_fin){
 
   if(substr(date_debut,7,10)>annee_ref |  substr(date_fin,7,10)>annee_ref | substr(date_debut,7,10)<1968 |  substr(date_fin,7,10)<1968   ){ #NEW
@@ -121,21 +120,34 @@ if((as.Date("2014-01-01") >= as.Date(date_debut,"%d-%m-%Y") & as.Date("2014-01-0
 #### partie changements de codes
 donnees_changements_codes <- donnees[which(donnees$MOD%in%c("410","411","130","500")),]
 phrase_changements_codes <- NULL
-for(codgeo in unique(donnees_changements_codes[which(donnees$MOD%in%c("410","411")),c("DEPCOM")])){
-  for(date in   unique(as.character(donnees_changements_codes[which(donnees_changements_codes$DEPCOM==codgeo & donnees$MOD%in%c("410","411")),c("EFF")]))){
+for(codgeo in unique(donnees_changements_codes[which(donnees_changements_codes$MOD%in%c("410","411")),c("DEPCOM")])){
+  for(date in   unique(as.character(donnees_changements_codes[which(donnees_changements_codes$DEPCOM==codgeo & donnees_changements_codes$MOD%in%c("410","411")),c("EFF")]))){
+    phrase_changements_codes <- paste0(phrase_changements_codes,
+                                       date," : ",
+                                       "Le code commune de ",donnees_changements_codes[which(donnees_changements_codes$DEPCOM==codgeo & donnees_changements_codes$EFF==date & donnees_changements_codes$MOD%in%c("410","411")),"NCCOFF"], " passe de ",
+                                       donnees_changements_codes[which(donnees_changements_codes$DEPCOM==codgeo & donnees_changements_codes$EFF==date & donnees_changements_codes$MOD%in%c("410","411")),"DEPANC"], " à ", donnees_changements_codes[which(donnees_changements_codes$DEPCOM==codgeo & donnees_changements_codes$EFF==date & donnees_changements_codes$MOD%in%c("410","411")),"DEPCOM"],
+                                       sapply(as.character(unique(donnees_changements_codes[which(donnees_changements_codes$DEPCOM==codgeo & donnees_changements_codes$EFF==date & donnees_changements_codes$MOD%in%c("410","411")),"MOD"])),FUN=function(x){switch(x,
+                                                                                                                                                                                                                                                                    "410"={" [changement de département]"},
+                                                                                                                                                                                                                                                                    "411"={" [changement de département dû à la création d'une commune nouvelle]"})}),
 
-  phrase_changements_codes <- paste0(phrase_changements_codes,
-    date," : ",
-    "Le code commune de ",donnees_changements_codes[which(donnees_changements_codes$DEPCOM==codgeo & donnees_changements_codes$EFF==date & donnees$MOD%in%c("410","411")),"NCCOFF"], " passe de ",
-    donnees_changements_codes[which(donnees_changements_codes$DEPCOM==codgeo & donnees_changements_codes$EFF==date & donnees$MOD%in%c("410","411")),"DEPANC"], " à ", donnees_changements_codes[which(donnees_changements_codes$DEPCOM==codgeo & donnees_changements_codes$EFF==date & donnees$MOD%in%c("410","411")),"DEPCOM"],
-    sapply(as.character(unique(donnees_changements_codes[which(donnees_changements_codes$DEPCOM==codgeo & donnees_changements_codes$EFF==date & donnees$MOD%in%c("410","411")),"MOD"])),FUN=function(x){switch(x,
-                                                                                                                                         "410"={" [changement de département]"},
-                                                                                                                                         "411"={" [changement de département dû à la création d'une commune nouvelle]"})}),
-
-    ".\n"
-  )
+                                       ".\n"
+    )
+  }
 }
-}
+# for(codgeo in unique(donnees_changements_codes[which(donnees$MOD%in%c("410","411")),c("DEPCOM")])){
+#   for(date in   unique(as.character(donnees_changements_codes[which(donnees_changements_codes$DEPCOM==codgeo & donnees$MOD%in%c("410","411")),c("EFF")]))){
+#   phrase_changements_codes <- paste0(phrase_changements_codes,
+#     date," : ",
+#     "Le code commune de ",donnees_changements_codes[which(donnees_changements_codes$DEPCOM==codgeo & donnees_changements_codes$EFF==date & donnees$MOD%in%c("410","411")),"NCCOFF"], " passe de ",
+#     donnees_changements_codes[which(donnees_changements_codes$DEPCOM==codgeo & donnees_changements_codes$EFF==date & donnees$MOD%in%c("410","411")),"DEPANC"], " à ", donnees_changements_codes[which(donnees_changements_codes$DEPCOM==codgeo & donnees_changements_codes$EFF==date & donnees$MOD%in%c("410","411")),"DEPCOM"],
+#     sapply(as.character(unique(donnees_changements_codes[which(donnees_changements_codes$DEPCOM==codgeo & donnees_changements_codes$EFF==date & donnees$MOD%in%c("410","411")),"MOD"])),FUN=function(x){switch(x,
+#                                                                                                                                          "410"={" [changement de département]"},
+#                                                                                                                                          "411"={" [changement de département dû à la création d'une commune nouvelle]"})}),
+#
+#     ".\n"
+#   )
+# }
+# }
 
 for(codgeo in unique(donnees_changements_codes[which(donnees_changements_codes$MOD%in%c("500")),c("C_LOFF")])){
   for(date in   unique(as.character(donnees_changements_codes[which(donnees_changements_codes$C_LOFF==codgeo & donnees_changements_codes$MOD%in%c("500")),c("EFF")]))){
