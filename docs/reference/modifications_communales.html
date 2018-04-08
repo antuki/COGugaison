@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Visualiser les modifications communales entre deux dates — modifications_communales â€¢ COGugaison</title>
+<title>Visualiser les modifications communales entre deux dates — modifications_communales • COGugaison</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -25,13 +25,13 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  
-  
 <meta property="og:title" content="Visualiser les modifications communales entre deux dates — modifications_communales" />
 
 <meta property="og:description" content="Visualiser les modifications communales (fusions, défusions, changements de codes ou de noms) qui ont eu lieu entre deux dates.
 Attention, cette fonction est encore en cours de développement il est donc possible que certains évènements ne soient pas encore pris en compte." />
 <meta name="twitter:card" content="summary" />
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -39,6 +39,8 @@ Attention, cette fonction est encore en cours de développement il est donc poss
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
+
 
 
   </head>
@@ -54,8 +56,12 @@ Attention, cette fonction est encore en cours de développement il est donc poss
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">COGugaison</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">COGugaison</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.0.0</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -65,13 +71,13 @@ Attention, cette fonction est encore en cours de développement il est donc poss
   </a>
 </li>
 <li>
-  <a href="../articles/COGugaison.html">Get Started</a>
+  <a href="../articles/COGugaison.html">Get started</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li>
-  <a href="../news/index.html">News</a>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       
@@ -83,6 +89,7 @@ Attention, cette fonction est encore en cours de développement il est donc poss
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -90,10 +97,12 @@ Attention, cette fonction est encore en cours de développement il est donc poss
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Visualiser les modifications communales entre deux dates</h1>
+    <small>Source: <a href='http://github.com/antuki/COGugaison/blob/master/R/modifications_communales.R'><code>R/modifications_communales.R</code></a></small>
+    <div class="hidden name"><code>modifications_communales.Rd</code></div>
     </div>
 
     
@@ -103,7 +112,7 @@ Attention, cette fonction est encore en cours de développement il est donc poss
 
     <pre class="usage"><span class='fu'>modifications_communales</span>(<span class='no'>date_debut</span>, <span class='no'>date_fin</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -118,8 +127,8 @@ Attention, cette fonction est encore en cours de développement il est donc poss
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Le code officiel géographique le plus récent du package est actuellement celui au 01/01/2017.</p>
-<p>Les millésimes des COG qui peuvent être utilisés sont à ce stade les suivants : 1968, 1975, 1982, 1990, 1999, 2007 à 2017.</p>
+    <p>Le code officiel géographique le plus récent du package est actuellement celui au 01/01/2017. <br /></p>
+<p>Les millésimes des COG qui peuvent être utilisés sont à ce stade les suivants : 1968, 1975, 1982, 1990, 1999, 2007 à 2017. <br /></p>
 <p>Les dates de référence des codes officiels géographiques utilisés dans COGugaison sont les suivantes :</p><ul>
 <li><p>COG 1968 : à partir du 01/03/1968</p></li>
 <li><p>COG 1975 : à partir du 20/02/1975</p></li>
@@ -127,8 +136,8 @@ Attention, cette fonction est encore en cours de développement il est donc poss
 <li><p>COG 1990 : à partir du 05/03/1990</p></li>
 <li><p>COG 1999 : à partir du 08/03/1999</p></li>
 <li><p>Pour tous les autres COG : à partir du 01/01 de chaque année</p></li>
-</ul><p></p>
-<p>Les différences entre les tables de passage Insee et non Insee sont les suivantes :</p><ul>
+</ul><p><br /></p>
+<p>Les différences entre les tables de passage Insee et non Insee sont les suivantes :<br /></p><ul>
 <li><p>1982-03-03 (pris en compte par l'Insee seulement après le 04/03/1982): Flaignes-Havys (08169) est un rassemblement de Flaignes-Havys (08169), Havys (08221) [fusion simple].</p></li>
 <li><p>2014-01-01 (pris en compte par l'Insee seulement au 01/01/2015) : Loisey (55298) s'est séparée en Loisey (55298), Culey (55138) [rétablissement].</p></li>
 <li><p>1990-02-01 (pris en compte par l'Insee seulement après le 05/03/1990) : Le code commune de Oudon passe de 14624 à 14697 [changement de code dû à un changement de chef-lieu].</p></li>
@@ -146,7 +155,7 @@ Attention, cette fonction est encore en cours de développement il est donc poss
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p><a href='changement_COG_varNum.html'>changement_COG_varNum</a>, <a href='changement_COG_typo.html'>changement_COG_typo</a>,<a href='changement_COG_typo_details.html'>changement_COG_typo_details</a>, <a href='COG_akinator.html'>COG_akinator</a>, <a href='enlever_PLM.html'>enlever_PLM</a>, <a href='modification_Corse.html'>modification_Corse</a>,<a href='nivsupra.html'>nivsupra</a>,<a href='apparier_COG.html'>apparier_COG</a>,<a href='modification_Oudon.html'>modification_Oudon</a>,<a href='trajectoire_commune.html'>trajectoire_commune</a></p>
+    <div class='dont-index'><p><a href='changement_COG_varNum.html'>changement_COG_varNum</a>, <a href='changement_COG_typo.html'>changement_COG_typo</a>,<a href='changement_COG_typo_details.html'>changement_COG_typo_details</a>, <a href='COG_akinator.html'>COG_akinator</a>, <a href='enlever_PLM.html'>enlever_PLM</a>, <a href='modification_Corse.html'>modification_Corse</a>,<a href='nivsupra.html'>nivsupra</a>,<a href='apparier_COG.html'>apparier_COG</a>,<a href='modification_Oudon.html'>modification_Oudon</a>,<a href='trajectoire_commune.html'>trajectoire_commune</a></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -203,5 +212,8 @@ Attention, cette fonction est encore en cours de développement il est donc poss
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+

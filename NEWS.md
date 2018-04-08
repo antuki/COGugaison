@@ -1,4 +1,4 @@
-﻿# COGugaison 1.0.0
+# COGugaison 1.0.0
 
 ## nouveautés
 
@@ -16,6 +16,11 @@
 ### novembre 2017
 
 * création des fonctions `trajectoire_commune` et `trajectoire_commune_shiny`
+
+### avril 2018
+
+* mise à jour des données de population du COG2017 suite à la publication des données de population du RP2015 (géographie 2017) sorties en janvier 2018 
+* ajout du COG2018 sortie en avril 2018
 
 ## correction de bugs / optimisation du code
 
