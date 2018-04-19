@@ -23,4 +23,14 @@ Tant que le package n'est pas stabilisé, il est évidemment conseillé de se r�
 Pour installer le package `COGugaison` et le charger dans R :
  
     devtools::install_github("antuki/COGugaison")
+    
+    # Résoudre les problèmes d'affichage des accents dans l'index de l'aide
+    if (.Platform$OS.type == "windows") {
+      path <- system.file("html", "00Index.html", package = "COGugaison")
+      content <- readLines(index, encoding = "latin1")
+      out <- file(index, encoding="UTF-8")
+      writeLines(iconv(content, from = "latin1", to = "UTF8"), out)
+      close(out)
+    }
+    
     library(COGugaison)
