@@ -1,11 +1,11 @@
 Package: COGugaison
 Type: Package
-Title: Gestion des codes officiels géographiques (COG)
+Encoding: UTF-8
+Title: Gestion des codes officiels gÃ©ographiques (COG)
 Version: 1.0.0
 Authors@R: c(person(family="antuki", role = c("cre","aut"),email="kim.antunez@laposte.net"))
-Description: Le package COGugaison permet de gérer les codes officiels géographiques dans les tables de données géographiques.
+Description: Le package COGugaison permet de gÃ©rer les codes officiels gÃ©ographiques dans les tables de donnÃ©es gÃ©ographiques.
 License: GPL (>= 2) | file LICENSE
-Encoding: UTF-8
 LazyData: true
 URL: http://github.com/antuki/COGugaison
 BugReports: http://github.com/antuki/COGugaison/issues
