@@ -17,3 +17,4 @@ Suggests:
     shiny
 Imports: dplyr
 VignetteBuilder: knitr
+Biarch: TRUE
