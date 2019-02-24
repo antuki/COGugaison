@@ -61,8 +61,17 @@
 #' exemple_flux_COG2017_etZE <- nivsupra(table_entree=exemple_flux_COG2017_etZE,codgeo_entree="DCLT",nivsupra="ZE2010",COG=2017,agregation=F)
 #' head(exemple_flux_COG2017_etZE)
 
-nivsupra <- function(table_entree,codgeo_entree=colnames(table_entree)[1] ,COG=annee_ref,var_num=colnames(table_entree)[sapply(table_entree, is.numeric)]
+nivsupra <- function(table_entree,codgeo_entree=colnames(table_entree)[1] ,COG=2018,var_num=colnames(table_entree)[sapply(table_entree, is.numeric)]
                      ,nivsupra, nivsupra_nom=ifelse(agregation==TRUE,nivsupra,paste0(nivsupra,"_",codgeo_entree)),agregation=T){
+
+  ######################### ATTENTION CHANGER 2018 A annee_ref + tard ##################
+  #+ supprimer cette instruction
+  annees_possibles <- c(1968,1975,1982,1990,1999,2008:2018)
+  annee_ref <- 2018
+  if(COG==2019){ #NEW
+    stop(paste0("codgeo_entree ne peut pas être égal à 2019 (niveaux supra non mis à jour)"))
+  }
+
 
   if(!codgeo_entree%in%colnames(table_entree)){ #NEW
     stop(paste0("codgeo_entree doit être une colonne de table_entree."))

@@ -4,7 +4,8 @@
 \alias{modification_Corse}
 \title{Modifier les codes Insee des communes corses}
 \usage{
-modification_Corse(table_entree, codgeo_entree = colnames(table_entree)[1],
+modification_Corse(table_entree,
+  codgeo_entree = colnames(table_entree)[1],
   vecteur_entree = is.vector(table_entree), sens = c("20vers2A2B",
   "2A2Bvers20"))
 }

@@ -5,9 +5,9 @@
 \title{Agréger des données à des échelons supra-communaux}
 \usage{
 nivsupra(table_entree, codgeo_entree = colnames(table_entree)[1],
-  COG = annee_ref, var_num = colnames(table_entree)[sapply(table_entree,
-  is.numeric)], nivsupra, nivsupra_nom = ifelse(agregation == TRUE, nivsupra,
-  paste0(nivsupra, "_", codgeo_entree)), agregation = T)
+  COG = 2018, var_num = colnames(table_entree)[sapply(table_entree,
+  is.numeric)], nivsupra, nivsupra_nom = ifelse(agregation == TRUE,
+  nivsupra, paste0(nivsupra, "_", codgeo_entree)), agregation = T)
 }
 \arguments{
 \item{table_entree}{correspond à la table (ou le vecteur, cf. paramètre vecteur_entree) à transformer de manière à modifier les codes des communes corses.}

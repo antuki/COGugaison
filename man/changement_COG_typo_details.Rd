@@ -5,7 +5,8 @@
 \title{Créer une table de communes fusionnées appartenant à des classes différentes selon une typologie}
 \usage{
 changement_COG_typo_details(table_entree, annees,
-  codgeo_entree = colnames(table_entree)[1], typo, donnees_insee = TRUE)
+  codgeo_entree = colnames(table_entree)[1], typo,
+  donnees_insee = TRUE)
 }
 \arguments{
 \item{table_entree}{correspond à la table à transformer en une autre géographie}

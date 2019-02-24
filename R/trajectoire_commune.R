@@ -46,6 +46,7 @@
 #' @rdname trajectoire_commune
 #' @export
 trajectoire_commune <- function(codgeo,COG=annee_ref,donnees_insee=F){
+
   COG <- as.numeric(match.arg(as.character(COG),annees_possibles)) ## new
   base_exhaustive <-  creer_base_empilee(donnees_insee=donnees_insee)
   if(codgeo%in%get(paste0("COG",COG))[,"CODGEO"]){

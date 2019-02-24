@@ -22,6 +22,11 @@
 * mise à jour des données de population du COG2017 suite à la publication des données de population du RP2015 (géographie 2017) sorties en janvier 2018 
 * ajout du COG2018 sortie en avril 2018
 
+### mars 2019
+
+* mise à jour de COG2019, PASSAGE_2018_2019 et PASSAGE_2019_2018 (informations partielles en attendant de la sortie officielle du COG par l'Insee plus tard dans l'année)
+[penser plus tard à remodifier les fonctions nivsupra et modifications_communales en restaurant annee_ref au moment de la MaJ officielle du COG]
+
 ## correction de bugs / optimisation du code
 
 ### août 2017

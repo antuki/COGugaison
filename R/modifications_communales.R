@@ -42,6 +42,12 @@
 #' cat(modifs$changements_noms)
 modifications_communales <- function(date_debut,date_fin){
 
+
+  ######################### ATTENTION CHANGER 2018 A annee_ref + tard ##################
+  #+ supprimer ces instruction
+  annees_possibles <- c(1968,1975,1982,1990,1999,2008:2018)
+  annee_ref <- 2018
+
   if(substr(date_debut,7,10)>annee_ref |  substr(date_fin,7,10)>annee_ref | substr(date_debut,7,10)<1968 |  substr(date_fin,7,10)<1968   ){ #NEW
     stop(paste0("date_debut et date_fin doivent avoir des années (4 derniers digits) comprises entre 1968 et ",annee_ref," et doivent être de la forme jj-mm-aaaa"))
   }
