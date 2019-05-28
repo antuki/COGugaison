@@ -5,9 +5,12 @@
 #' @param date_debut date de début de la liste de modifications communales souhaitée
 #' @param date_fin date de fin de la liste de modifications communales souhaitée
 #' @details
-#' Le code officiel géographique le plus récent du package est actuellement celui au 01/01/2017. \cr
 #'
-#' Les millésimes des COG qui peuvent être utilisés sont à ce stade les suivants : 1968, 1975, 1982, 1990, 1999, 2007 à 2017. \cr
+#' ATTENTION. En raison d'un changement de fichier d'historique de l'Insee en 2019, cette fonction n'est à ce stade plus maintenue pour les millésimes après 2018.
+#'
+#' Le code officiel géographique le plus récent du package est actuellement celui au 01/01/2019. \cr
+#'
+#' Les millésimes des COG qui peuvent être utilisés sont à ce stade les suivants : 1968, 1975, 1982, 1990, 1999, 2007 à 2019. \cr
 #'
 #' Les dates de référence des codes officiels géographiques utilisés dans COGugaison sont les suivantes :
 #' \itemize{
@@ -42,6 +45,7 @@
 #' cat(modifs$changements_noms)
 modifications_communales <- function(date_debut,date_fin){
 
+  warning("En raison d'un changement de fichier d'historique de l'Insee en 2019, cette fonction n'est à ce stade plus maintenue pour les millésimes après 2018.", call. = FALSE)
 
   ######################### ATTENTION CHANGER 2018 A annee_ref + tard ##################
   #+ supprimer ces instruction

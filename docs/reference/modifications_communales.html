@@ -144,8 +144,9 @@ Attention, cette fonction est encore en cours de développement il est donc poss
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Le code officiel géographique le plus récent du package est actuellement celui au 01/01/2017. <br /></p>
-<p>Les millésimes des COG qui peuvent être utilisés sont à ce stade les suivants : 1968, 1975, 1982, 1990, 1999, 2007 à 2017. <br /></p>
+    <p>ATTENTION. En raison d'un changement de fichier d'historique de l'Insee en 2019, cette fonction n'est à ce stade plus maintenue pour les millésimes après 2018.</p>
+<p>Le code officiel géographique le plus récent du package est actuellement celui au 01/01/2019. <br /></p>
+<p>Les millésimes des COG qui peuvent être utilisés sont à ce stade les suivants : 1968, 1975, 1982, 1990, 1999, 2007 à 2019. <br /></p>
 <p>Les dates de référence des codes officiels géographiques utilisés dans COGugaison sont les suivantes :</p><ul>
 <li><p>COG 1968 : à partir du 01/03/1968</p></li>
 <li><p>COG 1975 : à partir du 20/02/1975</p></li>
@@ -178,8 +179,7 @@ Attention, cette fonction est encore en cours de développement il est donc poss
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>## Exemple 1</span>
 <span class='co'># modifications communales ayant eu lieu entre 2014 et 2015</span>
-<span class='no'>modifs</span> <span class='kw'>&lt;-</span> <span class='fu'>modifications_communales</span>(<span class='kw'>date_debut</span><span class='kw'>=</span><span class='st'>"01-01-2014"</span>,<span class='kw'>date_fin</span><span class='kw'>=</span><span class='st'>"01-01-2015"</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/cat'>cat</a></span>(<span class='no'>modifs</span>$<span class='no'>fusions</span>)</div><div class='output co'>#&gt; 2015-01-01 : Notre-Dame-d'Estrées-Corbon (14474) est un rassemblement de Corbon (14178), Notre-Dame-d'Estrées (14474) [commune nouvelle avec commune(s) déléguée(s)].
+<span class='no'>modifs</span> <span class='kw'>&lt;-</span> <span class='fu'>modifications_communales</span>(<span class='kw'>date_debut</span><span class='kw'>=</span><span class='st'>"01-01-2014"</span>,<span class='kw'>date_fin</span><span class='kw'>=</span><span class='st'>"01-01-2015"</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: En raison d'un changement de fichier d'historique de l'Insee en 2019, cette fonction n'est à ce stade plus maintenue pour les millésimes après 2018.</span></div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/cat'>cat</a></span>(<span class='no'>modifs</span>$<span class='no'>fusions</span>)</div><div class='output co'>#&gt; 2015-01-01 : Notre-Dame-d'Estrées-Corbon (14474) est un rassemblement de Corbon (14178), Notre-Dame-d'Estrées (14474) [commune nouvelle avec commune(s) déléguée(s)].
 #&gt; 2015-01-01 : Auxons (25035) est un rassemblement de Auxon-Dessous (25034), Auxon-Dessus (25035) [commune nouvelle avec commune(s) déléguée(s)].
 #&gt; 2015-01-01 : Goussainville (28185) est un rassemblement de Champagne (28069), Goussainville (28185) [commune nouvelle avec commune(s) déléguée(s)].
 #&gt; 2015-01-01 : Eclose-Badinières (38152) est un rassemblement de Badinières (38024), Eclose (38152) [commune nouvelle avec commune(s) déléguée(s)].

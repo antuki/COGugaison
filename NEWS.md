@@ -25,7 +25,10 @@
 ### mars 2019
 
 * mise à jour de COG2019, PASSAGE_2018_2019 et PASSAGE_2019_2018 (informations partielles en attendant de la sortie officielle du COG par l'Insee plus tard dans l'année)
-[penser plus tard à remodifier les fonctions nivsupra et modifications_communales en restaurant annee_ref au moment de la MaJ officielle du COG]
+
+### mai 2019
+
+* mise à jour de table_supracom_2019 et libelles_supracom_2019 [la fonction modifications_communales n'est pour le moment plus maintenue en 2019 suite à un changement de fichier fourni par l'Insee]
 
 ## correction de bugs / optimisation du code
 

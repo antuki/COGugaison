@@ -5,16 +5,17 @@
 \title{Agréger des données à des échelons supra-communaux}
 \usage{
 nivsupra(table_entree, codgeo_entree = colnames(table_entree)[1],
-  COG = 2018, var_num = colnames(table_entree)[sapply(table_entree,
-  is.numeric)], nivsupra, nivsupra_nom = ifelse(agregation == TRUE,
-  nivsupra, paste0(nivsupra, "_", codgeo_entree)), agregation = T)
+  COG = annee_ref,
+  var_num = colnames(table_entree)[sapply(table_entree, is.numeric)],
+  nivsupra, nivsupra_nom = ifelse(agregation == TRUE, nivsupra,
+  paste0(nivsupra, "_", codgeo_entree)), agregation = T)
 }
 \arguments{
 \item{table_entree}{correspond à la table (ou le vecteur, cf. paramètre vecteur_entree) à transformer de manière à modifier les codes des communes corses.}
 
 \item{codgeo_entree}{est une chaîne de caractères qui indique le nom de la variable contenant les codes communes Insee. Par défaut, il s'agit du nom de la première colonne de table_entree.}
 
-\item{COG}{indique l'année de COG de la table communale considérée. (exemple 2014). Années possibles : de 2008 à 2017. Par défaut, vaut 2017.}
+\item{COG}{indique l'année de COG de la table communale considérée. (exemple 2014). Années possibles : de 2008 à 2019. Par défaut, vaut 2019.}
 
 \item{var_num}{est un vecteur de chaînes de caractères qui indique les noms des variables numériques à convertir. Par défaut, il s'agit de l'ensemble des variables de types numériques dans table_entree.}
 
@@ -40,7 +41,7 @@ Permettre d'agréger les tables de données communales à de nombreux échelons 
 \details{
 Le code officiel géographique le plus récent du package est actuellement celui au 01/01/2017. \cr
 
-Les millésimes des COG qui peuvent être utilisés sont à ce stade les suivants : 1968, 1975, 1982, 1990, 1999, 2007 à 2017. \cr
+Les millésimes des COG qui peuvent être utilisés sont à ce stade les suivants : 1968, 1975, 1982, 1990, 1999, 2007 à 2019. \cr
 
 Les dates de référence des codes officiels géographiques utilisés dans COGugaison sont les suivantes :
 \itemize{

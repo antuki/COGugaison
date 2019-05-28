@@ -7,9 +7,9 @@
 #' @param agregation vaut TRUE si la table souhaitée doit sommer toutes les lignes qui concernent une même commune et FALSE si l'on souhaite volontairement conserver les doublons dans les codes commune (dans les tables de flux par exemple). Si agregation = F, les variables de type caractère sont alors conservées comme telles ou dupliquées en cas de défusion et les variables numériques sommées en cas de fusion ou réparties proportionnellement à la population de chaque commune en cas de défusion.
 #' @param vecteur_entree vaut TRUE si table_entree est un simple vecteur.
 #' @details
-#' Le code officiel géographique le plus récent du package est actuellement celui au 01/01/2017. \cr
+#' Le code officiel géographique le plus récent du package est actuellement celui au 01/01/2019. \cr
 #'
-#' Les millésimes des COG qui peuvent être utilisés sont à ce stade les suivants : 1968, 1975, 1982, 1990, 1999, 2007 à 2017. \cr
+#' Les millésimes des COG qui peuvent être utilisés sont à ce stade les suivants : 1968, 1975, 1982, 1990, 1999, 2007 à 2019. \cr
 #'
 #' Les dates de référence des codes officiels géographiques utilisés dans COGugaison sont les suivantes :
 #' \itemize{

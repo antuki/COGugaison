@@ -26,9 +26,9 @@ renvoie une liste composée de deux éléments :
 Comparer la liste des communes présente dans une table de données avec le COG d'un millésime donné. Fonction souvent utile après l'utilisation de la fonction COG_akinator.
 }
 \details{
-Le code officiel géographique le plus récent du package est actuellement celui au 01/01/2017. \cr
+Le code officiel géographique le plus récent du package est actuellement celui au 01/01/2019. \cr
 
-Les millésimes des COG qui peuvent être utilisés sont à ce stade les suivants : 1968, 1975, 1982, 1990, 1999, 2007 à 2017. \cr
+Les millésimes des COG qui peuvent être utilisés sont à ce stade les suivants : 1968, 1975, 1982, 1990, 1999, 2007 à 2019. \cr
 
 Les dates de référence des codes officiels géographiques utilisés dans COGugaison sont les suivantes :
 \itemize{

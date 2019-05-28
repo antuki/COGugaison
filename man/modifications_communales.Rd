@@ -16,9 +16,11 @@ Visualiser les modifications communales (fusions, défusions, changements de cod
 Attention, cette fonction est encore en cours de développement il est donc possible que certains évènements ne soient pas encore pris en compte.
 }
 \details{
-Le code officiel géographique le plus récent du package est actuellement celui au 01/01/2017. \cr
+ATTENTION. En raison d'un changement de fichier d'historique de l'Insee en 2019, cette fonction n'est à ce stade plus maintenue pour les millésimes après 2018.
 
-Les millésimes des COG qui peuvent être utilisés sont à ce stade les suivants : 1968, 1975, 1982, 1990, 1999, 2007 à 2017. \cr
+Le code officiel géographique le plus récent du package est actuellement celui au 01/01/2019. \cr
+
+Les millésimes des COG qui peuvent être utilisés sont à ce stade les suivants : 1968, 1975, 1982, 1990, 1999, 2007 à 2019. \cr
 
 Les dates de référence des codes officiels géographiques utilisés dans COGugaison sont les suivantes :
 \itemize{
