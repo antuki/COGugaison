@@ -33,8 +33,7 @@ Il est également important de souligner que les données utilisées ici s'appui
 - [l'historique des géographies communales](https://www.insee.fr/fr/information/2666684#titre-bloc-11) 
 - [les tables d'appartenance des communes aux différents niveaux géographiques](https://www.insee.fr/fr/information/2028028) 
 
-Tant que le package n'est pas stabilisé, il est évidemment conseillé de se référer aux données officielles de l'Insee en cas de doute sur un résultat.  
-
+Il est évidemment conseillé de se référer aux données officielles de l'Insee en cas de doute sur un résultat.  
 
 Commençons par installer le package `COGugaison` et à le charger dans R. 
  
@@ -43,6 +42,11 @@ Commençons par installer le package `COGugaison` et à le charger dans R.
 library(COGugaison)
 ```
 
+Le millésime le plus récent contenu dans le package peut être visualisé de la manière suivante : 
+
+```{r, fig.show='hold'}
+COGugaison:::annee_ref
+```
 
 ## Les bases de données utiles dans COGugaison
 
@@ -89,13 +93,13 @@ head(libelles_supracom_2017)
 
 > - HISTORIQ_MODIF_COM
 
-Ce Rdata contient un data.frame intitulé historiq qui correspond à [l'historique des géographies communales](https://www.insee.fr/fr/information/2666684#titre-bloc-11) produit par l'Insee (cliquez sur le lien pour voir la documentation sur les variables présentes). A terme, cette base de données pourrait être remplacée par celle de [geohisto](https://github.com/etalab/geohisto) sur laquelle travaille actuellement Etalab.
+Ce Rdata contient un data.frame intitulé historiq qui correspond à [l'historique des géographies communales](https://www.insee.fr/fr/information/2666684#titre-bloc-11) produit par l'Insee (cliquez sur le lien pour voir la documentation sur les variables présentes). La dernière édition de ce fichier date de 2018 car l'Insee a changé le format de mise à disposition de cette base en 2019 et cette mise à jour n'a pas encore été effectuée dans le package. 
 
 
 ## Quel code officiel géographique est utilisé ? 
 
 
-Nous allons maintenant manipuler une table exemple incluse dans le package, la table `exemple_popcom` qui contient comme variables le code géographique de la commune (CODGEO), son nom (LIBGEO), sa population en 2012 (P12_POP), sa superficie (SUPERF) ainsi que deux typologies de territoires générées aléatoirement (typoA et typoB). Il faut veiller à ce que les variables numériques soient au bon format dans R et que les typologies et identifiants soient au format caractère (si ce n'est pas le cas, il faudra les transformer avec les fonctions *as.numeric* et *as.character*).s
+Nous allons maintenant manipuler une table exemple incluse dans le package, la table `exemple_popcom` qui contient comme variables le code géographique de la commune (CODGEO), son nom (LIBGEO), sa population en 2012 (P12_POP), sa superficie (SUPERF) ainsi que deux typologies de territoires générées aléatoirement (typoA et typoB). Il faut veiller à ce que les variables numériques soient au bon format dans R et que les typologies et identifiants soient au format caractère (si ce n'est pas le cas, il faudra les transformer avec les fonctions *as.numeric* et *as.character*).
 
 ```{r, fig.show='hold'}
 head(exemple_popcom)
@@ -107,7 +111,7 @@ La fonction `COG_akinator` permet de donner des pistes à l'utilisateur sur le c
 Le paramètre *donnees_insee* vaut TRUE si les données manipulées sont produites par l'Insee. En effet, quelques rares modifications communales (la défusion des communes Loisey et Culey au 1er janvier 2014 par exemple) ont été prises en compte dans les bases de données communales de l'Insee plus tard que la date officielle (se référer à la documentation de la fonction pour plus de précisions).
 
 ```{r, fig.show='hold'}
-COG_akinator(vecteur_codgeo=exemple_popcom[,1],donnees_insee=T)
+COG_akinator(vecteur_codgeo = exemple_popcom[,1], donnees_insee = TRUE)
 ```
 
 En l'occurrence la liste de communes utilisée dans cette table correspond à la liste des communes au 1er janvier 2014. 
@@ -115,13 +119,15 @@ En l'occurrence la liste de communes utilisée dans cette table correspond à la
 Une fois que le COG d'une base de données est détecté, ou bien si justement le COG n'arrive pas à être détecté par la fonction `COG_akinator`, il est possible d'utiliser la fonction `apparier_COG` pour comparer la liste des communes présente dans une table de données avec le COG d'un millésime donné.
 
 ```{r, fig.show='hold'}
-COG_akinator(exemple_popcom$CODGEO,donnees_insee = T)
-apparier_COG(vecteur_codgeo=c(exemple_popcom[which(exemple_popcom$CODGEO!="01001"),1],"XXXXX"), donnees_insee = T,COG=2014)
-appariement <- apparier_COG(vecteur_codgeo=c(exemple_popcom[which(exemple_popcom$CODGEO!="01001"),1],"XXXXX"), donnees_insee = T,COG=2014)
+COG_akinator(exemple_popcom$CODGEO, donnees_insee = TRUE)
+apparier_COG(vecteur_codgeo = c(exemple_popcom[which(exemple_popcom$CODGEO!="01001"),1],"XXXXX"),
+             donnees_insee = TRUE, COG = 2014)
+appariement <- apparier_COG(vecteur_codgeo = c(exemple_popcom[which(exemple_popcom$CODGEO!="01001"),1],"XXXXX"),
+                            donnees_insee = TRUE, COG = 2014)
 cat(appariement$absent_de_bdd)
 cat(appariement$absent_de_COG)
 # regarder le libellé des communes présentes dans le COG mais pas dans la base de données
-COG2014_insee[which(COG2014_insee$CODGEO%in%appariement$absent_de_bdd),c(1,2)]
+COG2014_insee[which(COG2014_insee$CODGEO %in% appariement$absent_de_bdd),c(1,2)]
 ```
 
 
@@ -133,9 +139,10 @@ Le paramètre *codgeo* est une chaîne de 5 caractères qui indique le code Inse
 
 La fonction `trajectoire_commune_shiny` lance une application shiny qui permet de sélectionner la commune pour laquelle vous souhaitez observer ses modifications depuis 1968.
 
-```{r, fig.show='hold',warning=F,error=F}
-# Ici, nous allons observer sur un graphique interactif la trajectoire de la commune ayant pour code 01003 en 1968 (fusion avec 2 autres communes le 1er janvier 1974)
-trajectoire_commune("01003", 1968,donnees_insee=F)
+```{r, fig.show='hold',warning=F,error=F, message=FALSE}
+# Ici, nous allons observer sur un graphique interactif la trajectoire de la commune ayant pour code 01003 en 1968
+# (fusion avec 2 autres communes le 1er janvier 1974)
+trajectoire_commune("01003", 1968, donnees_insee = FALSE)
 # Cette fonction lance une application shiny permettant d'observer toutes les trajectoires des communes.
 #trajectoire_commune_shiny()
 ```
@@ -143,7 +150,7 @@ trajectoire_commune("01003", 1968,donnees_insee=F)
 La fonction `modifications_communales` permet, comme son nom l'indique, de visualiser les modifications communales (fusions, défusions, changements de codes ou de noms) qui ont eu lieu entre deux dates. Ici entre le 01/01/2014 et le 01/01/2015. Cette fonction est encore en cours de développement il est donc possible que certains évènements ne soient pas encore pris en compte. Il ne faut pas hésiter à le signaler. 
 
 ```{r, fig.show='hold'}
-modifs <- modifications_communales(date_debut="01-01-2014",date_fin="01-01-2015")
+modifs <- modifications_communales(date_debut = "01-01-2014", date_fin = "01-01-2015")
 cat(modifs$fusions)
 cat(modifs$defusions)
 cat(modifs$changements_codes)
@@ -159,7 +166,8 @@ La fonction `changement_COG_varNum` permet de transformer des tables de données
 Ici, nous allons transformer les variables numériques de la table *exemple_pop* afin de récupérer les données de population et de superficie des communes au 1er janvier 2017 (au lieu de 2014).
 
 ```{r, fig.show='hold'}
-exemple_popcom_COG2017_num <- changement_COG_varNum(table_entree=exemple_popcom,annees=c(2014:2017),agregation=T,libgeo=T,donnees_insee=T)
+exemple_popcom_COG2017_num <- changement_COG_varNum(table_entree = exemple_popcom, annees = c(2014:2017),
+                                                    agregation = TRUE, libgeo = TRUE, donnees_insee = TRUE)
 head(exemple_popcom_COG2017_num)
 ```
 
@@ -175,13 +183,18 @@ Ici, l'hypothèse de classement en cas de fusion de communes (*methode_fusion*) 
 
 
 ```{r, fig.show='hold'}
-exemple_popcom_COG2017_typo <- changement_COG_typo(table_entree=exemple_popcom[,-2],annees=c(2014:2017),methode_fusion="methode_difference",typos=c("typoA","typoB"),mot_difference = "differents",libgeo=T,donnees_insee=T)
+exemple_popcom_COG2017_typo <- changement_COG_typo(table_entree = exemple_popcom[,-2], annees = c(2014:2017),
+                                                   methode_fusion = "methode_difference", typos = c("typoA","typoB"),
+                                                   mot_difference = "differents", libgeo=TRUE,
+                                                   donnees_insee=TRUE)
 head(exemple_popcom_COG2017_typo)
 ```
 La fonction `changement_COG_typo_details` permet quant à elle d'isoler dans une table les communes fusionnées appartenant à des classes différentes, ici selon la typologie "typoA" entre 2014 et 2015 puis 2015 et 2016 et 2016 et 2017. 
 
 ```{r, fig.show='hold'}
-details_exemple_popcom_COG2017_typo <- changement_COG_typo_details(table_entree=exemple_popcom[,-2],annees=c(2014:2017),typo="typoA", donnees_insee=T)
+details_exemple_popcom_COG2017_typo <- changement_COG_typo_details(table_entree = exemple_popcom[,-2],
+                                                                   annees = c(2014:2017), typo = "typoA",
+                                                                   donnees_insee = TRUE)
 head(details_exemple_popcom_COG2017_typo[["2014_2015"]])
 head(details_exemple_popcom_COG2017_typo[["2015_2016"]])
 head(details_exemple_popcom_COG2017_typo[["2016_2017"]])
@@ -191,13 +204,15 @@ head(details_exemple_popcom_COG2017_typo[["2016_2017"]])
 ## Agréger des tables de données communales à des échelons supra-communaux
 
 
-La fonction `nivsupra` permet d'agréger les tables de données communales à de nombreux échelons supra-communaux administratifs (EPCI, arrondissements, cantons-villes, départements, régions) ou d'étude (bassins de vie, zones d'emploi, unités urbaines, aires urbaines) en indiquant le COG de la base de donnée en entrée et de référence des niveaux supra-communaux grâce au paramètre *COG* (par défaut renvoie le COG renvoyé par `COG_akinator`). Le paramètre *COG* peut prendre les valeurs 2008 à l'année de COG la plus récente (2017).
+La fonction `nivsupra` permet d'agréger les tables de données communales à de nombreux échelons supra-communaux administratifs (EPCI, arrondissements, cantons-villes, départements, régions) ou d'étude (bassins de vie, zones d'emploi, unités urbaines, aires urbaines) en indiquant le COG de la base de donnée en entrée et de référence des niveaux supra-communaux grâce au paramètre *COG* (par défaut renvoie le COG renvoyé par `COG_akinator`). Le paramètre *COG* peut prendre les valeurs 2008 à l'année de COG la plus récente contenue dans le package (annee_ref).
 
 Ici nous agrégeons la population et la superficie des communes à l'échelon géographique des zones d'emploi afin d'obtenir une table des densités de population par zone d'emploi.  
 
 ```{r, fig.show='hold'}
-exemple_popcom_COG2017 <- merge(exemple_popcom_COG2017_num,exemple_popcom_COG2017_typo[,-2],by="CODGEO",all=T)
-exemple_popcom_ZE2010 <- nivsupra(table_entree=exemple_popcom_COG2017,nivsupra="ZE2010",agregation=T,COG=2017)
+exemple_popcom_COG2017 <- merge(exemple_popcom_COG2017_num, exemple_popcom_COG2017_typo[,-2], by = "CODGEO",
+                                all = TRUE)
+exemple_popcom_ZE2010 <- nivsupra(table_entree = exemple_popcom_COG2017, nivsupra="ZE2010", agregation = TRUE,
+                                  COG = 2017)
 exemple_popcom_ZE2010$densite <- exemple_popcom_ZE2010$P12_POP / exemple_popcom_ZE2010$SUPERF
 head(exemple_popcom_ZE2010)
 ```
@@ -220,8 +235,10 @@ Le paramètre *vecteur_entree* vaut TRUE si l'élément à transformer est un ve
 Ici nous allons remplacer les arrondissement municipaux par les codes communaux dans la table `exemple_flux` pour les variables COMMUNE puis DCLT.
 
 ```{r, fig.show='hold'}
-exemple_flux_sansPLM <-enlever_PLM(table_entree=exemple_flux,codgeo_entree = "COMMUNE",libgeo=NULL,agregation = F,vecteur_entree=F)
-exemple_flux_sansPLM <-enlever_PLM(table_entree=exemple_flux_sansPLM,codgeo_entree = "DCLT",libgeo=NULL,agregation = F,vecteur_entree=F)
+exemple_flux_sansPLM <- enlever_PLM(table_entree = exemple_flux, codgeo_entree = "COMMUNE", libgeo = NULL,
+                                    agregation = FALSE, vecteur_entree = FALSE)
+exemple_flux_sansPLM <- enlever_PLM(table_entree = exemple_flux_sansPLM, codgeo_entree = "DCLT", libgeo = NULL,
+                                    agregation = FALSE, vecteur_entree = FALSE)
 ```
 
 ###  Jongler avec les différentes possibilités pour les codes communaux corses
@@ -231,7 +248,7 @@ La fonction `modification_Corse` permet quant à elle de modifier les codes Inse
 Le paramètre *sens* vaut "20vers2A2B" pour changer tous les codes communes corses commençant par 20 par 2A ou 2B et vaut "2A2Bvers20" quand l'effet inverse est recherché. 
 
 ```{r, fig.show='hold'}
-exemple_flux_sansPLMsansCorse <- modification_Corse(table_entree=exemple_flux_sansPLM,sens="2A2Bvers20")
+exemple_flux_sansPLMsansCorse <- modification_Corse(table_entree = exemple_flux_sansPLM, sens = "2A2Bvers20")
 ```
 
 ### Corriger le code commune de l'Oudon dans le Calvados
@@ -239,9 +256,11 @@ exemple_flux_sansPLMsansCorse <- modification_Corse(table_entree=exemple_flux_sa
 La fonction `modification_Oudon` permet de modifier les codes Insee de l'ancienne commune de l'Oudon (Calvados, 14). Cette commune a connu une modification assez rare (transfert de chef-lieu) qui implique donc parfois des erreurs de codage de la commune dans certaines bases de données. En effet, la commune de l'Oudon a toujours été codée "14697" puis a changé de code devenant "14472" à partir du 07/01/2014 suite à un transfert de chef lieu. Cette commune a depuis disparu puisqu'elle est devenue commune déléguée au sein de Saint-Pierre-en-Auge (14654).
 
 ```{r, fig.show='hold'}
-# Ici, nous allons remplacer les codes communes de l'Oudon dans une table de l'Insee (en COG 2014 mais que nous considérons en COG 2015 uniquement pour cet exemple).
-head(exemple_popcom[which(exemple_popcom$CODGEO%in%c("14472","14697")),])
-exemple_popcom_oudon <- modification_Oudon(table_entree=exemple_popcom,donnees_insee_entree=T,donnees_insee_sortie=F,COG=2015)
+# Ici, nous allons remplacer les codes communes de l'Oudon dans une table de l'Insee
+# (en COG 2014 mais que nous considérons en COG 2015 uniquement pour cet exemple).
+head(exemple_popcom[which(exemple_popcom$CODGEO %in% c("14472","14697")),])
+exemple_popcom_oudon <- modification_Oudon(table_entree = exemple_popcom,
+                                           donnees_insee_entree = TRUE, donnees_insee_sortie = FALSE, COG = 2015)
 head(exemple_popcom_oudon[which(exemple_popcom$CODGEO%in%c("14472","14697")),])
 ```
 
@@ -252,8 +271,12 @@ head(exemple_popcom_oudon[which(exemple_popcom$CODGEO%in%c("14472","14697")),])
 La fonction `changement_COG_varNum` peut également s'appliquer à des tables de flux (codes communes pouvant comporter des doublons) grâce à l'option agregation = FALSE. Les variables de type caractère sont alors conservées comme telles ou dupliquées en cas de défusion et les variables numériques (ici IPONDI) sommées en cas de fusion ou réparties proportionnellement à la population de chaque commune en cas de défusion. 
 
 ```{r, fig.show='hold'}
-exemple_flux_COG2017 <- changement_COG_varNum(table_entree=exemple_flux_sansPLMsansCorse,annees=c(2014:2017),codgeo_entree="COMMUNE",agregation=F,libgeo=F,donnees_insee=T)
-exemple_flux_COG2017 <- changement_COG_varNum(table_entree=exemple_flux_COG2017,annees=c(2014:2017),codgeo_entree="DCLT",agregation=F,libgeo=F,donnees_insee=T)
+exemple_flux_COG2017 <- changement_COG_varNum(table_entree = exemple_flux_sansPLMsansCorse,
+                                              annees = c(2014:2017), codgeo_entree = "COMMUNE", agregation = FALSE,
+                                              libgeo = FALSE, donnees_insee = TRUE)
+exemple_flux_COG2017 <- changement_COG_varNum(table_entree = exemple_flux_COG2017,
+                                              annees = c(2014:2017), codgeo_entree = "DCLT",
+                                              agregation = FALSE, libgeo = FALSE, donnees_insee = TRUE)
 ```
 
 
@@ -265,8 +288,10 @@ La fonction `nivsupra` peut également s'appliquer à des tables de flux (non ag
 Ici, on ajoute les colonnes ZE2010_COMMUNE et ZE2010_DCLT à la table de flux domicile-travail utilisée précédemment.
 
 ```{r, fig.show='hold'}
-exemple_flux_COG2017_etZE <- nivsupra(table_entree=exemple_flux_COG2017,codgeo_entree="COMMUNE",nivsupra="ZE2010",agregation=F,COG=2017)
-exemple_flux_COG2017_etZE <- nivsupra(table_entree=exemple_flux_COG2017_etZE,codgeo_entree="DCLT",nivsupra="ZE2010",agregation=F,COG=2017)
+exemple_flux_COG2017_etZE <- nivsupra(table_entree = exemple_flux_COG2017, codgeo_entree = "COMMUNE",
+                                      nivsupra = "ZE2010", agregation = FALSE, COG = 2017)
+exemple_flux_COG2017_etZE <- nivsupra(table_entree = exemple_flux_COG2017_etZE, codgeo_entree = "DCLT",
+                                      nivsupra = "ZE2010", agregation = FALSE, COG = 2017)
 head(exemple_flux_COG2017_etZE)
 ```
 
