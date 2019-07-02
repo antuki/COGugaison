@@ -204,7 +204,7 @@ head(details_exemple_popcom_COG2017_typo[["2016_2017"]])
 ## Agréger des tables de données communales à des échelons supra-communaux
 
 
-La fonction `nivsupra` permet d'agréger les tables de données communales à de nombreux échelons supra-communaux administratifs (EPCI, arrondissements, cantons-villes, départements, régions) ou d'étude (bassins de vie, zones d'emploi, unités urbaines, aires urbaines) en indiquant le COG de la base de donnée en entrée et de référence des niveaux supra-communaux grâce au paramètre *COG* (par défaut renvoie le COG renvoyé par `COG_akinator`). Le paramètre *COG* peut prendre les valeurs 2008 à l'année de COG la plus récente contenue dans le package (annee_ref).
+La fonction `nivsupra` permet d'agréger les tables de données communales à de nombreux échelons supra-communaux administratifs (EPCI, arrondissements, cantons-villes, départements, régions) ou d'étude (bassins de vie, zones d'emploi, unités urbaines, aires urbaines) en indiquant le COG de la base de donnée en entrée et de référence des niveaux supra-communaux grâce au paramètre *COG* (par défaut vaut la valeur de `annee_ref`, la plus récente valeur contenue dans le package). Le paramètre *COG* peut prendre les valeurs 2008 à `annee_ref`.
 
 Ici nous agrégeons la population et la superficie des communes à l'échelon géographique des zones d'emploi afin d'obtenir une table des densités de population par zone d'emploi.  
 
