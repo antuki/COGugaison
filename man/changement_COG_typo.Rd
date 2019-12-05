@@ -11,7 +11,7 @@ changement_COG_typo(table_entree, annees,
   codgeo_entree)], methode_fusion = c("methode_difference",
   "methode_classe_fusion", "methode_max_pop", "methode_classe_absorbante",
   "methode_classe_absorbee"), mot_difference = NULL,
-  mot_fusion = "commune fusionnÃ©e", classe_absorbante = NULL,
+  mot_fusion = "commune fusionnée", classe_absorbante = NULL,
   classe_absorbee = NULL, donnees_insee = TRUE, libgeo = FALSE)
 }
 \arguments{
