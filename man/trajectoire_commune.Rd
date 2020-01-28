@@ -23,7 +23,7 @@ Observer sur un diagramme interactif la trajectoire d'une commune depuis 1968 (a
 \details{
 Le code officiel géographique le plus récent du package est actuellement celui au 01/01/2019. \cr
 
-Les millésimes des COG qui peuvent être utilisés sont à ce stade les suivants : 1968, 1975, 1982, 1990, 1999, 2007 à 2019. \cr
+Les millésimes des COG qui peuvent être utilisés sont à ce stade les suivants : 1968, 1975, 1982, 1990, 1999, 2008 à 2019. \cr
 
 Les dates de référence des codes officiels géographiques utilisés dans COGugaison sont les suivantes :
 \itemize{
