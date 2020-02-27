@@ -21,9 +21,9 @@ modification_Oudon(table_entree,
 
 \item{donnees_insee_entree}{vaut TRUE si les données en entrée sont des bases de données de l'Insee}
 
-\item{COG}{indique l'année de COG de la table considérée. (exemple 1968). Par défaut renvoie l'année retournée par la fonction COG_akinator}
+\item{donnees_insee_sortie}{vaut TRUE si les données souhaitées en sorties doivent respecter le même COG que les données Insee}
 
-\item{donnees_insee_entree}{vaut TRUE si les données souhaitées en sorties doivent respecter le même COG que les données Insee}
+\item{COG}{indique l'année de COG de la table considérée. (exemple 1968). Par défaut renvoie l'année retournée par la fonction COG_akinator}
 }
 \description{
 Modifier les codes Insee de l'ancienne commune de l'Oudon (Calvados, 14). En effet, la commune de l'Oudon a toujours été codée "14697" puis a changé de code devenant "14472" à partir du 07/01/2014 suite à un transfert de chef lieu. Cette commune a depuis disparu puisqu'elle est devenue commune déléguée au sein de Saint-Pierre-en-Auge (14654).

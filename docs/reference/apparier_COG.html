@@ -77,26 +77,20 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">COGugaison</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.2</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
+  <a href="../articles/COGugaison.html">Introduction à COGugaison</a>
 </li>
 <li>
-  <a href="../articles/COGugaison.html">Get started</a>
+  <a href="../reference/index.html">Documentation des fonctions</a>
 </li>
 <li>
-  <a href="../reference/index.html">Reference</a>
-</li>
-<li>
-  <a href="../news/index.html">Changelog</a>
+  <a href="../news/index.html">Nouveautés</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -191,7 +185,7 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>## Exemple 1</span>
-<span class='fu'><a href='COG_akinator.html'>COG_akinator</a></span>(<span class='no'>exemple_popcom</span>$<span class='no'>CODGEO</span>,<span class='kw'>donnees_insee</span> <span class='kw'>=</span> <span class='no'>T</span>)</div><div class='output co'>#&gt; [1] "COG2014"</div><div class='input'><span class='fu'>apparier_COG</span>(<span class='kw'>vecteur_codgeo</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='no'>exemple_popcom</span>[<span class='fu'><a href='https://rdrr.io/r/base/which.html'>which</a></span>(<span class='no'>exemple_popcom</span>$<span class='no'>CODGEO</span><span class='kw'>!=</span><span class='st'>"01001"</span>),<span class='fl'>1</span>],<span class='st'>"XXXXX"</span>), <span class='kw'>donnees_insee</span> <span class='kw'>=</span> <span class='no'>T</span>,<span class='kw'>COG</span><span class='kw'>=</span><span class='fl'>2014</span>)</div><div class='output co'>#&gt; $absent_de_bdd
+<span class='fu'><a href='COG_akinator.html'>COG_akinator</a></span>(<span class='no'>exemple_popcom</span>$<span class='no'>CODGEO</span>,<span class='kw'>donnees_insee</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; [1] "COG2014"</div><div class='input'><span class='fu'>apparier_COG</span>(<span class='kw'>vecteur_codgeo</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='no'>exemple_popcom</span>[<span class='fu'><a href='https://rdrr.io/r/base/which.html'>which</a></span>(<span class='no'>exemple_popcom</span>$<span class='no'>CODGEO</span><span class='kw'>!=</span><span class='st'>"01001"</span>),<span class='fl'>1</span>],<span class='st'>"XXXXX"</span>), <span class='kw'>donnees_insee</span> <span class='kw'>=</span> <span class='no'>T</span>,<span class='kw'>COG</span><span class='kw'>=</span><span class='fl'>2014</span>)</div><div class='output co'>#&gt; $absent_de_bdd
 #&gt;  [1] "01001" "97601" "97602" "97603" "97604" "97605" "97606" "97607" "97608"
 #&gt; [10] "97609" "97610" "97611" "97612" "97613" "97614" "97615" "97616" "97617"
 #&gt; 

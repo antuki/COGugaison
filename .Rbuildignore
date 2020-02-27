@@ -1,2 +1,10 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
+^docs$
+^_pkgdown\.yml$
+^README\.Rmd$
+^README-.*\.png$
+^pkgdown$
+^doc$
+^NEWS$
+^NEWS.md$

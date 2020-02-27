@@ -5,7 +5,7 @@
 #' @param codgeo_entree est une chaîne de caractères qui indique le nom de la variable contenant les codes communes Insee. Par défaut, il s'agit du nom de la première colonne de table_entree.
 #' @param vecteur_entree vaut TRUE si table_entree est un simple vecteur.
 #' @param donnees_insee_entree vaut TRUE si les données en entrée sont des bases de données de l'Insee
-#' @param donnees_insee_entree vaut TRUE si les données souhaitées en sorties doivent respecter le même COG que les données Insee
+#' @param donnees_insee_sortie vaut TRUE si les données souhaitées en sorties doivent respecter le même COG que les données Insee
 #' @param COG indique l'année de COG de la table considérée. (exemple 1968). Par défaut renvoie l'année retournée par la fonction COG_akinator
 #' @details
 #' Le code officiel géographique le plus récent du package est actuellement celui au 01/01/2020. \cr

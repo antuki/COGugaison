@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
 
 <meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
@@ -5416,7 +5415,7 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 
 
 
-<div id="introduction-a-cogugaison" class="section level2">
+<div id="introduction-à-cogugaison" class="section level2">
 <h2>Introduction à COGugaison</h2>
 <p>Nous allons balayer dans cette vignette les principales fonctionnalités du package <code>COGugaison</code>.</p>
 <p>Le découpage des territoires français, en particulier les communes, n’est pas un phénomène immuable. Chaque année certaines communes changent de codes, ou bien de nom, fusionnent ou encore se divisent. Certains périmètres supra-communaux changent également, comme celui des cantons qui a été récemment redéfini. C’est à l’Insee que revient le suivi de ces changements afin d’établir chaque année le code officiel géographique (COG).</p>
@@ -5431,8 +5430,7 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <li>permettre d’agréger les tables de données communales à de nombreux échelons supra-communaux administratifs (EPCI, arrondissements, cantons-villes, départements, régions) ou d’étude (bassins de vie, zones d’emploi, unités urbaines, aires urbaines) : <code>nivsupra</code>.</li>
 <li>gérer des cas particuliers comme les codes Insee des communes corses (<code>modification_Corse</code>) ou des arrondissements municipaux de Paris, Lyon, et Marseille (<code>enlever_PLM</code>) ou encore l’ancienne commune de l’Oudon (<code>modification_Oudon</code>)</li>
 </ul>
-<p>Il est à noter que la version actuellement en ligne du package correspond à un premier développement qui comporte des imperfections. L’idée est donc à ce stade que les personnes qui utilisent régulièrement des bases de données communales produites à différents millésimes testent ses fonctionnalités, détectent ses bugs et ses manques pour l’améliorer.</p>
-<p>Il est également important de souligner que les données utilisées ici s’appuient sur des tables publiées par l’Insee :</p>
+<p>Il est important de souligner que les données utilisées ici s’appuient sur des tables publiées par l’Insee :</p>
 <ul>
 <li><a href="https://www.insee.fr/fr/information/2666684#titre-bloc-11">l’historique des géographies communales</a></li>
 <li><a href="https://www.insee.fr/fr/information/2028028">les tables d’appartenance des communes aux différents niveaux géographiques</a></li>
@@ -5443,9 +5441,9 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">library</span>(COGugaison)</a></code></pre></div>
 <p>Le millésime le plus récent contenu dans le package peut être visualisé de la manière suivante :</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">COGugaison<span class="op">:::</span>annee_ref</a></code></pre></div>
-<pre><code>## [1] 2019</code></pre>
+<pre><code>## [1] 2020</code></pre>
 </div>
-<div id="les-bases-de-donnees-utiles-dans-cogugaison" class="section level2">
+<div id="les-bases-de-données-utiles-dans-cogugaison" class="section level2">
 <h2>Les bases de données utiles dans COGugaison</h2>
 <p>En plus de contenir des fonctions permettant la gestion des codes officiels géographiques, COGugaison contient également, dans des Rdata, des bases de données qui peuvent vous être également utiles par ailleurs.</p>
 <blockquote>
@@ -5453,7 +5451,7 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <li>COG</li>
 </ul>
 </blockquote>
-<p>Ce Rdata contient des data.frame (tables de données) intitulés COGXXXX, XXXX étant à remplacer par une année de COG donnée. Les tables intitulées COGXXXX_insee correspondent à des tables selon le COG pris en compte par l’Insee dans la diffusion de ses données (qui est presque identique au COG à quelques exceptions près listées dans la documentations).</p>
+<p>Ce Rdata contient des data.frame (tables de données) intitulés COGXXXX, XXXX étant à remplacer par une année de COG donnée. Les tables intitulées COGXXXX_insee correspondent à des tables selon le COG pris en compte par l’Insee dans la diffusion de ses données (qui est presque identique au COG à quelques exceptions près listées dans la documentation).</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">head</span>(COG2017)</a></code></pre></div>
 <pre><code>##   CODGEO                  LIBGEO   POP
 ## 1  01001 L'Abergement-Clémenciat   767
@@ -5497,20 +5495,20 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 </blockquote>
 <p>Ce Rdata contient, pour chaque année depuis 2014, deux data.frame intitulées table_supracom_20XX et libelles_supracom_20XX qui correspondent aux <a href="https://www.insee.fr/fr/information/2028028">tables d’appartenance des communes aux différents niveaux géographiques</a> produites par l’Insee (cliquez sur le lien pour voir la documentation sur les variables présentes). La première table associe chaque code communal insee aux niveaux supra-communaux associés (en COG le plus actuel, actuellement 2017) et la seconde indique les libellés de ces différents niveaux supra-communaux.</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw">head</span>(table_supracom_<span class="dv">2017</span>)</a></code></pre></div>
-<pre><code>##   CODGEO                  LIBGEO DEP REG      EPCI NATURE_EPCI ARR   CV
-## 1  01001 L'Abergement-Clémenciat  01  84 200069193          CC 012 0108
-## 2  01002   L'Abergement-de-Varey  01  84 240100883          CC 011 0101
-## 3  01004       Ambérieu-en-Bugey  01  84 240100883          CC 011 0101
-## 4  01005     Ambérieux-en-Dombes  01  84 200042497          CC 012 0122
-## 5  01006                 Ambléon  01  84 200040350          CC 011 0104
-## 6  01007                Ambronay  01  84 240100883          CC 011 0101
-##   ZE2010 UU2010 TUU2014 TDUU2014 AU2010 TAU2014 CATAEU2010 BV2012
-## 1   8213  01000       0       05    997      00        120  01093
-## 2   8201  01000       0       04    002      09        112  01004
-## 3   8201  01302       3       32    002      09        112  01004
-## 4   8213  01000       0       06    002      09        112  69123
-## 5   8216  01000       0       03    998      00        300  01034
-## 6   8201  01000       0       07    002      09        112  01004</code></pre>
+<pre><code>##   CODGEO                  LIBGEO DEP REG      EPCI NATURE_EPCI ARR   CV ZE2010
+## 1  01001 L'Abergement-Clémenciat  01  84 200069193          CC 012 0108   8213
+## 2  01002   L'Abergement-de-Varey  01  84 240100883          CC 011 0101   8201
+## 3  01004       Ambérieu-en-Bugey  01  84 240100883          CC 011 0101   8201
+## 4  01005     Ambérieux-en-Dombes  01  84 200042497          CC 012 0122   8213
+## 5  01006                 Ambléon  01  84 200040350          CC 011 0104   8216
+## 6  01007                Ambronay  01  84 240100883          CC 011 0101   8201
+##   UU2010 TUU2014 TDUU2014 AU2010 TAU2014 CATAEU2010 BV2012
+## 1  01000       0       05    997      00        120  01093
+## 2  01000       0       04    002      09        112  01004
+## 3  01302       3       32    002      09        112  01004
+## 4  01000       0       06    002      09        112  69123
+## 5  01000       0       03    998      00        300  01034
+## 6  01000       0       07    002      09        112  01004</code></pre>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw">head</span>(libelles_supracom_<span class="dv">2017</span>)</a></code></pre></div>
 <pre><code>##   NIVGEO CODGEO          LIBGEO NB_COM
 ## 1    ARR    011          Belley    115
@@ -5526,7 +5524,7 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 </blockquote>
 <p>Ce Rdata contient un data.frame intitulé historiq qui correspond à <a href="https://www.insee.fr/fr/information/2666684#titre-bloc-11">l’historique des géographies communales</a> produit par l’Insee (cliquez sur le lien pour voir la documentation sur les variables présentes). La dernière édition de ce fichier date de 2018 car l’Insee a changé le format de mise à disposition de cette base en 2019 et cette mise à jour n’a pas encore été effectuée dans le package.</p>
 </div>
-<div id="quel-code-officiel-geographique-est-utilise" class="section level2">
+<div id="quel-code-officiel-géographique-est-utilisé" class="section level2">
 <h2>Quel code officiel géographique est utilisé ?</h2>
 <p>Nous allons maintenant manipuler une table exemple incluse dans le package, la table <code>exemple_popcom</code> qui contient comme variables le code géographique de la commune (CODGEO), son nom (LIBGEO), sa population en 2012 (P12_POP), sa superficie (SUPERF) ainsi que deux typologies de territoires générées aléatoirement (typoA et typoB). Il faut veiller à ce que les variables numériques soient au bon format dans R et que les typologies et identifiants soient au format caractère (si ce n’est pas le cas, il faudra les transformer avec les fonctions <em>as.numeric</em> et <em>as.character</em>).</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw">head</span>(exemple_popcom)</a></code></pre></div>
@@ -5573,9 +5571,8 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="kw">apparier_COG</span>(<span class="dt">vecteur_codgeo =</span> <span class="kw">c</span>(exemple_popcom[<span class="kw">which</span>(exemple_popcom<span class="op">$</span>CODGEO<span class="op">!=</span><span class="st">&quot;01001&quot;</span>),<span class="dv">1</span>],<span class="st">&quot;XXXXX&quot;</span>),</a>
 <a class="sourceLine" id="cb20-2" data-line-number="2">             <span class="dt">donnees_insee =</span> <span class="ot">TRUE</span>, <span class="dt">COG =</span> <span class="dv">2014</span>)</a></code></pre></div>
 <pre><code>## $absent_de_bdd
-##  [1] &quot;01001&quot; &quot;97601&quot; &quot;97602&quot; &quot;97603&quot; &quot;97604&quot; &quot;97605&quot; &quot;97606&quot; &quot;97607&quot;
-##  [9] &quot;97608&quot; &quot;97609&quot; &quot;97610&quot; &quot;97611&quot; &quot;97612&quot; &quot;97613&quot; &quot;97614&quot; &quot;97615&quot;
-## [17] &quot;97616&quot; &quot;97617&quot;
+##  [1] &quot;01001&quot; &quot;97601&quot; &quot;97602&quot; &quot;97603&quot; &quot;97604&quot; &quot;97605&quot; &quot;97606&quot; &quot;97607&quot; &quot;97608&quot;
+## [10] &quot;97609&quot; &quot;97610&quot; &quot;97611&quot; &quot;97612&quot; &quot;97613&quot; &quot;97614&quot; &quot;97615&quot; &quot;97616&quot; &quot;97617&quot;
 ## 
 ## $absent_de_COG
 ## [1] &quot;XXXXX&quot;</code></pre>
@@ -5615,15 +5612,14 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" data-line-number="1"><span class="co"># Ici, nous allons observer sur un graphique interactif la trajectoire de la commune ayant pour code 01003 en 1968</span></a>
 <a class="sourceLine" id="cb28-2" data-line-number="2"><span class="co"># (fusion avec 2 autres communes le 1er janvier 1974)</span></a>
 <a class="sourceLine" id="cb28-3" data-line-number="3"><span class="kw">trajectoire_commune</span>(<span class="st">&quot;01003&quot;</span>, <span class="dv">1968</span>, <span class="dt">donnees_insee =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
-<div id="htmlwidget-0316414d2d447389f0bf" style="width:100%;height:500px;" class="visNetwork html-widget"></div>
-<script type="application/json" data-for="htmlwidget-0316414d2d447389f0bf">{"x":{"nodes":{"id":["01003_1968","01070_1968","01165_1968","01165_1975","01165_2019"],"comm":["01003","01070","01165","01165","01165"],"COG":["1968","1968","1968","1975","2019"],"label":["01003\n(1968)","01070\n(1968)","01165\n(1968)","01165\n(1975)","01165\n(2019)"],"level":[1,1,1,2,3],"pop":["140","100","128","470","1548"],"libgeo":["AMAREINS","CESSEINS","FRANCHELEINS","FRANCHELEINS","Francheleins"],"ratio":[1,1,1,1,1],"title":["<b><a target=\"_blank\" href=https://www.insee.fr/fr/recherche/recherche-geographique?geo=COM-01003&debut=0>01003<\/a> AMAREINS<\/b><br>Population : 140 hab.","<b><a target=\"_blank\" href=https://www.insee.fr/fr/recherche/recherche-geographique?geo=COM-01070&debut=0>01070<\/a> CESSEINS<\/b><br>Population : 100 hab.","<b><a target=\"_blank\" href=https://www.insee.fr/fr/recherche/recherche-geographique?geo=COM-01165&debut=0>01165<\/a> FRANCHELEINS<\/b><br>Population : 128 hab.","<b><a target=\"_blank\" href=https://www.insee.fr/fr/recherche/recherche-geographique?geo=COM-01165&debut=0>01165<\/a> FRANCHELEINS<\/b><br>Population : 470 hab.","<b><a target=\"_blank\" href=https://www.insee.fr/fr/recherche/recherche-geographique?geo=COM-01165&debut=0>01165<\/a> Francheleins<\/b><br>Population : 1548 hab."]},"edges":{"from":["01003_1968","01070_1968","01165_1968","01165_1975"],"to":["01165_1975","01165_1975","01165_1975","01165_2019"],"LIBGEO":["AMAREINS","CESSEINS","FRANCHELEINS",null],"POP":[140,100,128,null],"annee":["1974-01-01","1974-01-01","1974-01-01",null],"typemodif":["f","f","f",null],"ratio":[1,1,1,1],"arrows.middle.enabled":[true,true,true,false],"dashes":[false,false,false,true],"value":[1,1,1,0.2],"title":["<b>fusion<\/b><br>Date : 01 janv. 1974<br>","<b>fusion<\/b><br>Date : 01 janv. 1974<br>","<b>fusion<\/b><br>Date : 01 janv. 1974<br>",null]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"ellipse","color":{"border":"black","background":"#000000","highlight":{"border":"#000000","background":"#000000"}},"fixed":{"allowedToMoveX":true,"allowedToMoveY":true},"font":{"face":"verdana","color":"#FFFFFF","size":20}},"manipulation":{"enabled":false},"edges":{"width":10,"arrows":{"middle":{"enabled":true,"scaleFactor":3}},"color":{"color":"#2AA198"},"shadow":false},"layout":{"hierarchical":{"enabled":true,"levelSeparation":500,"direction":"LR"},"randomSeed":12},"interaction":{"hoverConnectedEdges":false,"navigationButtons":true,"selectable":false,"selectConnectedEdges":false},"physics":{"hierarchicalRepulsion":{"centralGravity":0,"springConstant":0,"nodeDistance":0}},"configure":{"enabled":false}},"groups":null,"width":"100%","height":"500px","idselection":{"enabled":false},"byselection":{"enabled":false},"main":null,"submain":null,"footer":null,"background":"rgba(0, 0, 0, 0)","tooltipStay":300,"tooltipStyle":"position: fixed;visibility:hidden;padding: 5px;white-space: nowrap;font-family: verdana;font-size:14px;font-color:#000000;background-color: #f5f4ed;-moz-border-radius: 3px;-webkit-border-radius: 3px;border-radius: 3px;border: 1px solid #808074;box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-d6a7ffc4cbbcf2c1cfe6" style="width:100%;height:500px;" class="visNetwork html-widget"></div>
+<script type="application/json" data-for="htmlwidget-d6a7ffc4cbbcf2c1cfe6">{"x":{"nodes":{"id":["01003_1968","01070_1968","01165_1968","01165_1975","01165_2020"],"comm":["01003","01070","01165","01165","01165"],"COG":["1968","1968","1968","1975","2020"],"label":["01003\n(1968)","01070\n(1968)","01165\n(1968)","01165\n(1975)","01165\n(2020)"],"level":[1,1,1,2,3],"pop":["140","100","128","470","1611"],"libgeo":["AMAREINS","CESSEINS","FRANCHELEINS","FRANCHELEINS","Francheleins"],"ratio":[1,1,1,1,1],"title":["<b><a target=\"_blank\" href=https://www.insee.fr/fr/recherche/recherche-geographique?geo=COM-01003&debut=0>01003<\/a> AMAREINS<\/b><br>Population : 140 hab.","<b><a target=\"_blank\" href=https://www.insee.fr/fr/recherche/recherche-geographique?geo=COM-01070&debut=0>01070<\/a> CESSEINS<\/b><br>Population : 100 hab.","<b><a target=\"_blank\" href=https://www.insee.fr/fr/recherche/recherche-geographique?geo=COM-01165&debut=0>01165<\/a> FRANCHELEINS<\/b><br>Population : 128 hab.","<b><a target=\"_blank\" href=https://www.insee.fr/fr/recherche/recherche-geographique?geo=COM-01165&debut=0>01165<\/a> FRANCHELEINS<\/b><br>Population : 470 hab.","<b><a target=\"_blank\" href=https://www.insee.fr/fr/recherche/recherche-geographique?geo=COM-01165&debut=0>01165<\/a> Francheleins<\/b><br>Population : 1611 hab."]},"edges":{"from":["01003_1968","01070_1968","01165_1968","01165_1975"],"to":["01165_1975","01165_1975","01165_1975","01165_2020"],"LIBGEO":["AMAREINS","CESSEINS","FRANCHELEINS",null],"POP":[140,100,128,null],"annee":["1974-01-01","1974-01-01","1974-01-01",null],"typemodif":["f","f","f",null],"ratio":[1,1,1,1],"arrows.middle.enabled":[true,true,true,false],"dashes":[false,false,false,true],"value":[1,1,1,0.2],"title":["<b>fusion<\/b><br>Date : 01 janv. 1974<br>","<b>fusion<\/b><br>Date : 01 janv. 1974<br>","<b>fusion<\/b><br>Date : 01 janv. 1974<br>",null]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"ellipse","color":{"border":"black","background":"#000000","highlight":{"border":"#000000","background":"#000000"}},"fixed":{"allowedToMoveX":true,"allowedToMoveY":true},"font":{"face":"verdana","color":"#FFFFFF","size":20}},"manipulation":{"enabled":false},"edges":{"width":10,"arrows":{"middle":{"enabled":true,"scaleFactor":3}},"color":{"color":"#2AA198"},"shadow":false},"layout":{"hierarchical":{"enabled":true,"levelSeparation":500,"direction":"LR"},"randomSeed":12},"interaction":{"hoverConnectedEdges":false,"navigationButtons":true,"selectable":false,"selectConnectedEdges":false},"physics":{"hierarchicalRepulsion":{"centralGravity":0,"springConstant":0,"nodeDistance":0}},"configure":{"enabled":false}},"groups":null,"width":"100%","height":"500px","idselection":{"enabled":false},"byselection":{"enabled":false},"main":null,"submain":null,"footer":null,"background":"rgba(0, 0, 0, 0)","tooltipStay":300,"tooltipStyle":"position: fixed;visibility:hidden;padding: 5px;white-space: nowrap;font-family: verdana;font-size:14px;font-color:#000000;background-color: #f5f4ed;-moz-border-radius: 3px;-webkit-border-radius: 3px;border-radius: 3px;border: 1px solid #808074;box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);"},"evals":[],"jsHooks":[]}</script>
 <div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" data-line-number="1"><span class="co"># Cette fonction lance une application shiny permettant d'observer toutes les trajectoires des communes.</span></a>
 <a class="sourceLine" id="cb29-2" data-line-number="2"><span class="co">#trajectoire_commune_shiny()</span></a></code></pre></div>
 <p>La fonction <code>modifications_communales</code> permet, comme son nom l’indique, de visualiser les modifications communales (fusions, défusions, changements de codes ou de noms) qui ont eu lieu entre deux dates. Ici entre le 01/01/2014 et le 01/01/2015. Cette fonction est encore en cours de développement il est donc possible que certains évènements ne soient pas encore pris en compte. Il ne faut pas hésiter à le signaler.</p>
 <div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" data-line-number="1">modifs &lt;-<span class="st"> </span><span class="kw">modifications_communales</span>(<span class="dt">date_debut =</span> <span class="st">&quot;01-01-2014&quot;</span>, <span class="dt">date_fin =</span> <span class="st">&quot;01-01-2015&quot;</span>)</a></code></pre></div>
-<pre><code>## Warning: En raison d'un changement de fichier d'historique de l'Insee en
-## 2019, cette fonction n'est à ce stade plus maintenue pour les millésimes
-## après 2018.</code></pre>
+<pre><code>## Warning: En raison d'un changement de fichier d'historique de l'Insee en 2019,
+## cette fonction n'est à ce stade plus maintenue pour les millésimes après 2018.</code></pre>
 <div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" data-line-number="1"><span class="kw">cat</span>(modifs<span class="op">$</span>fusions)</a></code></pre></div>
 <pre><code>## 2015-01-01 : Notre-Dame-d'Estrées-Corbon (14474) est un rassemblement de Corbon (14178), Notre-Dame-d'Estrées (14474) [commune nouvelle avec commune(s) déléguée(s)].
 ## 2015-01-01 : Auxons (25035) est un rassemblement de Auxon-Dessous (25034), Auxon-Dessus (25035) [commune nouvelle avec commune(s) déléguée(s)].
@@ -5652,7 +5648,7 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 ## 2014-12-06 : La commune de Belbèse (82015) change de nom en Belbèze-en-Lomagne [changement de nom].
 ## 2014-12-06 : La commune de Saint-Vincent (82174) change de nom en Saint-Vincent-d'Autéjac [changement de nom].</code></pre>
 </div>
-<div id="transformer-des-variables-numeriques-en-autre-geographie" class="section level2">
+<div id="transformer-des-variables-numériques-en-autre-géographie" class="section level2">
 <h2>Transformer des variables numériques en autre géographie</h2>
 <p>La fonction <code>changement_COG_varNum</code> permet de transformer des tables de données numériques communales en géographie au premier janvier d’une année souhaitée.</p>
 <p>Ici, nous allons transformer les variables numériques de la table <em>exemple_pop</em> afin de récupérer les données de population et de superficie des communes au 1er janvier 2017 (au lieu de 2014).</p>
@@ -5668,7 +5664,7 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 ## 6  01007                Ambronay    2437     34</code></pre>
 <p>Le paramètre <em>agregation</em> vaut TRUE si la table souhaitée doit sommer toutes les lignes qui concernent une même commune et FALSE si l’on souhaite volontairement conserver les doublons dans les codes commune (dans les tables de flux par exemple, cf. plus bas). Le paramètre <em>libgeo</em> vaut TRUE si l’on veut rajouter dans la table une colonne nommée “nom_commune” qui indique le nom de la commune issu du code officiel géographique et FALSE sinon.</p>
 </div>
-<div id="transformer-des-typologies-en-autre-geographie" class="section level2">
+<div id="transformer-des-typologies-en-autre-géographie" class="section level2">
 <h2>Transformer des typologies en autre géographie</h2>
 <p>La fonction <code>changement_COG_typo</code> permet de transformer des typologies de communes en géographie au premier janvier d’une année souhaitée. Ici nous allons transformer les deux typologies (typoA et typoB) de la table <em>exemple_pop</em> en géographie communale au 1er janvier 2017 (au lieu de 2014).</p>
 <p>Ici, l’hypothèse de classement en cas de fusion de communes (<em>methode_fusion</em>) choisie est celle d’une classe spécifique (<em>methode_difference</em>, classe appelée <em>mot_difference</em>=“differents”) aux regroupements de plusieurs communes de classes différentes. Les autres hypothèses possibles auraient pu être l’hypothèse du maximum de population <em>methode_max_pop</em>, de classe absorbée <em>methode_classe_absorbee</em>, de classe absorbante <em>methode_classe_absorbante</em> ou d’indiquer un nom de classe spécifique pour toutes les communes qui ont fusionnées : <em>methode_classe_fusion</em>. Pour plus de détails, référez-vous à ?changement_COG_typo.</p>
@@ -5689,20 +5685,13 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <a class="sourceLine" id="cb44-2" data-line-number="2">                                                                   <span class="dt">annees =</span> <span class="kw">c</span>(<span class="dv">2014</span><span class="op">:</span><span class="dv">2017</span>), <span class="dt">typo =</span> <span class="st">&quot;typoA&quot;</span>,</a>
 <a class="sourceLine" id="cb44-3" data-line-number="3">                                                                   <span class="dt">donnees_insee =</span> <span class="ot">TRUE</span>)</a>
 <a class="sourceLine" id="cb44-4" data-line-number="4"><span class="kw">head</span>(details_exemple_popcom_COG2017_typo[[<span class="st">&quot;2014_2015&quot;</span>]])</a></code></pre></div>
-<pre><code>##   cod2014              lib2014 cod2015                     lib2015
-## 1   14178               Corbon   14474 Notre-Dame-d'Estrées-Corbon
-## 2   14474 Notre-Dame-d'Estrées   14474 Notre-Dame-d'Estrées-Corbon
-## 3   25034        Auxon-Dessous   25035                  Les Auxons
-## 4   25035         Auxon-Dessus   25035                  Les Auxons
-## 5   38024           Badinières   38152           Eclose-Badinières
-## 6   38152               Eclose   38152           Eclose-Badinières
-##      typoA
-## 1 CLASSE 2
-## 2 CLASSE 4
-## 3 CLASSE 1
-## 4 CLASSE 3
-## 5 CLASSE 4
-## 6 CLASSE 3</code></pre>
+<pre><code>##   cod2014              lib2014 cod2015                     lib2015    typoA
+## 1   14178               Corbon   14474 Notre-Dame-d'Estrées-Corbon CLASSE 2
+## 2   14474 Notre-Dame-d'Estrées   14474 Notre-Dame-d'Estrées-Corbon CLASSE 4
+## 3   25034        Auxon-Dessous   25035                  Les Auxons CLASSE 1
+## 4   25035         Auxon-Dessus   25035                  Les Auxons CLASSE 3
+## 5   38024           Badinières   38152           Eclose-Badinières CLASSE 4
+## 6   38152               Eclose   38152           Eclose-Badinières CLASSE 3</code></pre>
 <div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" data-line-number="1"><span class="kw">head</span>(details_exemple_popcom_COG2017_typo[[<span class="st">&quot;2015_2016&quot;</span>]])</a></code></pre></div>
 <pre><code>##   cod2015             lib2015 cod2016            lib2016    typoA
 ## 1   01015           Arbignieu   01015    Arboys en Bugey CLASSE 3
@@ -5720,7 +5709,7 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 ## 5   03168             Meaulne   03168   Meaulne-Vitray CLASSE 2
 ## 6   03318              Vitray   03168   Meaulne-Vitray CLASSE 5</code></pre>
 </div>
-<div id="agreger-des-tables-de-donnees-communales-a-des-echelons-supra-communaux" class="section level2">
+<div id="agréger-des-tables-de-données-communales-à-des-échelons-supra-communaux" class="section level2">
 <h2>Agréger des tables de données communales à des échelons supra-communaux</h2>
 <p>La fonction <code>nivsupra</code> permet d’agréger les tables de données communales à de nombreux échelons supra-communaux administratifs (EPCI, arrondissements, cantons-villes, départements, régions) ou d’étude (bassins de vie, zones d’emploi, unités urbaines, aires urbaines) en indiquant le COG de la base de donnée en entrée et de référence des niveaux supra-communaux grâce au paramètre <em>COG</em> (par défaut vaut la valeur de <code>annee_ref</code>, la plus récente valeur contenue dans le package). Le paramètre <em>COG</em> peut prendre les valeurs 2008 à <code>annee_ref</code>.</p>
 <p>Ici nous agrégeons la population et la superficie des communes à l’échelon géographique des zones d’emploi afin d’obtenir une table des densités de population par zone d’emploi.</p>
@@ -5738,9 +5727,9 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 ## 5   0054               Nogent-le-Rotrou   48665   1227 39.66178
 ## 6   0055 La Vallée de la Bresle - Vimeu   99095   1134 87.38536</code></pre>
 </div>
-<div id="gerer-des-cas-particuliers-dans-les-bases-de-donnees" class="section level2">
+<div id="gérer-des-cas-particuliers-dans-les-bases-de-données" class="section level2">
 <h2>Gérer des cas particuliers dans les bases de données</h2>
-<div id="enlever-les-arrondissements-municipaux-des-tables-de-donnees-communales" class="section level3">
+<div id="enlever-les-arrondissements-municipaux-des-tables-de-données-communales" class="section level3">
 <h3>Enlever les arrondissements municipaux des tables de données communales</h3>
 <p>Nous allons maintenant manipuler une autre table exemple incluse dans le package, la table <code>exemple_flux</code> qui contient des exemples de flux entre une communes de résidences (COMMUNE) et de travail (DCLT). Elle contient comme autres variables le code de la catégorie socio-professionnelle des individus (CS1), la catégorie d’âge (AGEREVQ) et le poids de l’individu statistique (IPONDI).</p>
 <div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" data-line-number="1"><span class="kw">head</span>(exemple_flux)</a></code></pre></div>
@@ -5759,7 +5748,7 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <a class="sourceLine" id="cb54-3" data-line-number="3">exemple_flux_sansPLM &lt;-<span class="st"> </span><span class="kw">enlever_PLM</span>(<span class="dt">table_entree =</span> exemple_flux_sansPLM, <span class="dt">codgeo_entree =</span> <span class="st">&quot;DCLT&quot;</span>, <span class="dt">libgeo =</span> <span class="ot">NULL</span>,</a>
 <a class="sourceLine" id="cb54-4" data-line-number="4">                                    <span class="dt">agregation =</span> <span class="ot">FALSE</span>, <span class="dt">vecteur_entree =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 </div>
-<div id="jongler-avec-les-differentes-possibilites-pour-les-codes-communaux-corses" class="section level3">
+<div id="jongler-avec-les-différentes-possibilités-pour-les-codes-communaux-corses" class="section level3">
 <h3>Jongler avec les différentes possibilités pour les codes communaux corses</h3>
 <p>La fonction <code>modification_Corse</code> permet quant à elle de modifier les codes Insee des communes corses. En effet, en 1976, les codes de toutes les communes corses sont modifiés : alors qu’ils commençaient tous par “20”, leurs deux premiers caractères sont remplacés par “2A” (Corse du Sud) ou “2B” (Corse du Nord). Les codes postaux conservent d’ailleurs aujourd’hui le préfixe historique “20”. Cette fonction est notamment utile pour la raison suivante : dans certaines tables issues des recensements Insee de 1968 ou 1975, les communes sont déjà codées avec les préfixes 2A et 2B.</p>
 <p>Le paramètre <em>sens</em> vaut “20vers2A2B” pour changer tous les codes communes corses commençant par 20 par 2A ou 2B et vaut “2A2Bvers20” quand l’effet inverse est recherché.</p>
@@ -5780,7 +5769,7 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 ## 5159  14472 L'Oudon    1551     55 CLASSE 1     D</code></pre>
 </div>
 </div>
-<div id="transformer-des-variables-numeriques-en-autre-geographie-dans-des-donnees-de-flux" class="section level2">
+<div id="transformer-des-variables-numériques-en-autre-géographie-dans-des-données-de-flux" class="section level2">
 <h2>Transformer des variables numériques en autre géographie dans des données de flux</h2>
 <p>La fonction <code>changement_COG_varNum</code> peut également s’appliquer à des tables de flux (codes communes pouvant comporter des doublons) grâce à l’option agregation = FALSE. Les variables de type caractère sont alors conservées comme telles ou dupliquées en cas de défusion et les variables numériques (ici IPONDI) sommées en cas de fusion ou réparties proportionnellement à la population de chaque commune en cas de défusion.</p>
 <div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" data-line-number="1">exemple_flux_COG2017 &lt;-<span class="st"> </span><span class="kw">changement_COG_varNum</span>(<span class="dt">table_entree =</span> exemple_flux_sansPLMsansCorse,</a>
@@ -5790,7 +5779,7 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <a class="sourceLine" id="cb60-5" data-line-number="5">                                              <span class="dt">annees =</span> <span class="kw">c</span>(<span class="dv">2014</span><span class="op">:</span><span class="dv">2017</span>), <span class="dt">codgeo_entree =</span> <span class="st">&quot;DCLT&quot;</span>,</a>
 <a class="sourceLine" id="cb60-6" data-line-number="6">                                              <span class="dt">agregation =</span> <span class="ot">FALSE</span>, <span class="dt">libgeo =</span> <span class="ot">FALSE</span>, <span class="dt">donnees_insee =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 </div>
-<div id="inserer-dans-des-tables-de-donnees-de-flux-communales-des-echelons-supra-communaux" class="section level2">
+<div id="insérer-dans-des-tables-de-données-de-flux-communales-des-échelons-supra-communaux" class="section level2">
 <h2>Insérer dans des tables de données de flux communales des échelons supra-communaux</h2>
 <p>La fonction <code>nivsupra</code> peut également s’appliquer à des tables de flux (non agrégées par codes communes) grâce à l’option agregation = FALSE. La table en entrée est alors conservée comme telle avec une nouvelle colonne qui correspond au niveau supracommunal du code commune considéré.</p>
 <p>Ici, on ajoute les colonnes ZE2010_COMMUNE et ZE2010_DCLT à la table de flux domicile-travail utilisée précédemment.</p>

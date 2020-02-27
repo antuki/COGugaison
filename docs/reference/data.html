@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • COGugaison</title>
+<title>Données contenues dans le package — data • COGugaison</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -42,7 +42,15 @@
 
 
 
-<meta property="og:title" content="Function reference" />
+<meta property="og:title" content="Données contenues dans le package — data" />
+<meta property="og:description" content="Les données contenues dans le package sont nombreuses :
+COGXXXXidentifiant, nom et population dans la commune à l'année XXXX
+PASSAGE_XXXX_YYYYtables de passages permettant de passer d’un COG à un autre (plus récent ou plus ancien) : identifiants des communes, type d'événement (fusion, défusion, changement de nom), ratio en cas de défusion, date de l'événement
+table_supracom_XXXXtables d’appartenance des communes aux différents niveaux géographiques supra-communaux
+libelles_supracom_2017indique les libellés des différents niveaux supra-communaux.
+
+
+" />
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -63,7 +71,7 @@
   </head>
 
   <body>
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -110,108 +118,44 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Reference</h1>
+    <h1>Données contenues dans le package</h1>
+    <small class="dont-index">Source: <a href='https://github.com/antuki/COGugaison/blob/master/R/data.R'><code>R/data.R</code></a></small>
+    <div class="hidden name"><code>data.Rd</code></div>
     </div>
 
-    <table class="ref-index">
+    <div class="ref-description">
+    <p>Les données contenues dans le package sont nombreuses :</p><table class='table'>
+<tr><td>COGXXXX</td><td>identifiant, nom et population dans la commune à l'année XXXX</td></tr>
+<tr><td>PASSAGE_XXXX_YYYY</td><td>tables de passages permettant de passer d’un COG à un autre (plus récent ou plus ancien) : identifiants des communes, type d'événement (fusion, défusion, changement de nom), ratio en cas de défusion, date de l'événement</td></tr>
+<tr><td>table_supracom_XXXX</td><td>tables d’appartenance des communes aux différents niveaux géographiques supra-communaux</td></tr>
+<tr><td>libelles_supracom_2017</td><td>indique les libellés des différents niveaux supra-communaux.</td></tr>
+</table>
 
-    <colgroup>
-      
-      <col class="alias" />
-      <col class="title" />
-    </colgroup>
 
-    <tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="apparier_COG.html">apparier_COG()</a></code> </p>
-        </td>
-        <td><p>Apparier une liste de communes avec un millésime de COG</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="changement_COG_typo.html">changement_COG_typo()</a></code> </p>
-        </td>
-        <td><p>Changer les typologies de géographie communale</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="changement_COG_typo_details.html">changement_COG_typo_details()</a></code> </p>
-        </td>
-        <td><p>Créer une table de communes fusionnées appartenant à des classes différentes selon une typologie</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="changement_COG_varNum.html">changement_COG_varNum()</a></code> </p>
-        </td>
-        <td><p>Changer les variables numériques de géographie communale</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="COG_akinator.html">COG_akinator()</a></code> </p>
-        </td>
-        <td><p>Deviner la géographie communale</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="data.html">COG2020</a></code> <code><a href="data.html">COG2019</a></code> </p>
-        </td>
-        <td><p>Données contenues dans le package</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="enlever_PLM.html">enlever_PLM()</a></code> </p>
-        </td>
-        <td><p>Remplacer les arrondissements municipaux par les codes communes</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="modifications_communales.html">modifications_communales()</a></code> </p>
-        </td>
-        <td><p>Visualiser les modifications communales entre deux dates</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="modification_Corse.html">modification_Corse()</a></code> </p>
-        </td>
-        <td><p>Modifier les codes Insee des communes corses</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="modification_Oudon.html">modification_Oudon()</a></code> </p>
-        </td>
-        <td><p>Modifier les codes Insee de l'ancienne commune de l'Oudon (Calvados, 14)</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="nivsupra.html">nivsupra()</a></code> </p>
-        </td>
-        <td><p>Agréger des données à des échelons supra-communaux</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="trajectoire_commune.html">trajectoire_commune()</a></code> <code><a href="trajectoire_commune.html">trajectoire_commune_shiny()</a></code> </p>
-        </td>
-        <td><p>Observer la trajectoire d'une commune</p></td>
-      </tr>
-    </tbody>
-    </table>
+    </div>
+
+    <pre class="usage"><span class='no'>COG2020</span>
+
+<span class='no'>COG2019</span></pre>
+
+
+    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
+
+    <p><code>data.frame</code></p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>Les tables suffixées par "_insee" correspondent à des tables selon le COG pris en compte par l’Insee dans la diffusion de ses données (qui est presque identique au COG à quelques exceptions près listées dans la documentation).</p>
+
   </div>
-
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-all-functions">All functions</a></li>
+      <li><a href="#format">Format</a></li>
+      <li><a href="#details">Details</a></li>
     </ul>
+
   </div>
 </div>
 

@@ -34,7 +34,7 @@
 #' @examples
 #' ## Exemple 1
 #' # Ici, nous cherchons le millésime du code officiel géographique (COG) utilisé dans la table de données communales exemple_popcom.
-#' COG_akinator(vecteur_codgeo=exemple_popcom[,1],donnees_insee=T)
+#' COG_akinator(vecteur_codgeo=exemple_popcom[,1],donnees_insee=TRUE)
 #' @encoding UTF-8
 
 COG_akinator <- function (vecteur_codgeo, donnees_insee = TRUE)

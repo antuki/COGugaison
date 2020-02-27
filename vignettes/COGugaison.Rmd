@@ -26,9 +26,7 @@ Ce package R a alors pour objectif global de manipuler des données communales p
 - permettre d'agréger les tables de données communales à de nombreux échelons supra-communaux administratifs (EPCI, arrondissements, cantons-villes, départements, régions) ou d'étude (bassins de vie, zones d'emploi, unités urbaines, aires urbaines) : `nivsupra`. 
 - gérer des cas particuliers comme les codes Insee des communes corses (`modification_Corse`) ou des arrondissements municipaux de Paris, Lyon, et Marseille (`enlever_PLM`) ou encore l'ancienne commune de l'Oudon (`modification_Oudon`)
 
-Il est à noter que la version actuellement en ligne du package correspond à un premier développement qui comporte  des imperfections. L'idée est donc à ce stade que les personnes qui utilisent régulièrement des bases de données communales produites à différents millésimes testent ses fonctionnalités, détectent ses bugs et ses manques pour l'améliorer.  
-
-Il est également important de souligner que les données utilisées ici s'appuient sur des tables publiées par l'Insee : 
+Il est important de souligner que les données utilisées ici s'appuient sur des tables publiées par l'Insee : 
 
 - [l'historique des géographies communales](https://www.insee.fr/fr/information/2666684#titre-bloc-11) 
 - [les tables d'appartenance des communes aux différents niveaux géographiques](https://www.insee.fr/fr/information/2028028) 
@@ -54,7 +52,7 @@ En plus de contenir des fonctions permettant la gestion des codes officiels géo
 
 > - COG
 
-Ce Rdata contient des data.frame (tables de données) intitulés COGXXXX, XXXX étant à remplacer par une année de COG donnée. Les tables intitulées COGXXXX_insee correspondent à des tables selon le COG pris en compte par l'Insee dans la diffusion de ses données (qui est presque identique au COG à quelques exceptions près listées dans la documentations).
+Ce Rdata contient des data.frame (tables de données) intitulés COGXXXX, XXXX étant à remplacer par une année de COG donnée. Les tables intitulées COGXXXX_insee correspondent à des tables selon le COG pris en compte par l'Insee dans la diffusion de ses données (qui est presque identique au COG à quelques exceptions près listées dans la documentation).
 
 ```{r, fig.show='hold'}
 head(COG2017)

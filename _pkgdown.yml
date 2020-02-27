@@ -1,0 +1,9 @@
+navbar:
+  left:
+  - text: Introduction à COGugaison
+    href: articles/COGugaison.html
+  - text: Documentation des fonctions
+    href: reference/index.html
+  - text: Nouveautés
+    href: news/index.html
+

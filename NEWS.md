@@ -30,9 +30,7 @@
 
 * mise à jour de table_supracom_2019 et libelles_supracom_2019 [la fonction modifications_communales n'est pour le moment plus maintenue en 2019 suite à un changement de fichier fourni par l'Insee]
 
-### février 2020
 
-* mise à jour totale du COG2020 
 
 ## correction de bugs / optimisation du code
 
@@ -45,3 +43,24 @@
 
 * création des variables globales annees_possibles et annee_ref, intégrées dans les différentes fonctions pour faciliter les mises à jours de COG notamment
 * ajout de tests de vérification du contenu des paramètres (fonctions types match.arg ou if(){stop()}) dans l'ensemble des fonctions
+
+# COGugaison 1.0.1
+
+## nouveautés
+
+### décembre 2019
+
+* premier test de modification de version de COGugaison
+* ajout d'une enquête de satisfaction à l'ouverture du package
+
+## correction de bugs / optimisation du code
+
+# COGugaison 1.0.2
+
+## nouveautés
+
+### février 2020
+
+* mise à jour totale du COG2020 
+
+## correction de bugs / optimisation du code

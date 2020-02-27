@@ -38,7 +38,7 @@
 #' @export
 #' @examples
 #' ## Exemple 1
-#' COG_akinator(exemple_popcom$CODGEO,donnees_insee = T)
+#' COG_akinator(exemple_popcom$CODGEO,donnees_insee = TRUE)
 #' apparier_COG(vecteur_codgeo=c(exemple_popcom[which(exemple_popcom$CODGEO!="01001"),1],"XXXXX"), donnees_insee = T,COG=2014)
 #' appariement <- apparier_COG(vecteur_codgeo=c(exemple_popcom[which(exemple_popcom$CODGEO!="01001"),1],"XXXXX"), donnees_insee = T,COG=2014)
 #' cat(appariement$absent_de_bdd)
