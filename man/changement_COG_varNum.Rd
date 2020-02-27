@@ -29,9 +29,9 @@ changement_COG_varNum(table_entree, annees,
 Transformer des tables de données numériques en géographie au premier janvier d'une année souhaitée.
 }
 \details{
-Le code officiel géographique le plus récent du package est actuellement celui au 01/01/2019. \cr
+Le code officiel géographique le plus récent du package est actuellement celui au 01/01/2020. \cr
 
-Les millésimes des COG qui peuvent être utilisés sont à ce stade les suivants : 1968, 1975, 1982, 1990, 1999, 2008 à 2019. \cr
+Les millésimes des COG qui peuvent être utilisés sont à ce stade les suivants : 1968, 1975, 1982, 1990, 1999, 2008 à 2020. \cr
 
 Les dates de référence des codes officiels géographiques utilisés dans COGugaison sont les suivantes :
 \itemize{

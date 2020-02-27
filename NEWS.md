@@ -30,6 +30,10 @@
 
 * mise à jour de table_supracom_2019 et libelles_supracom_2019 [la fonction modifications_communales n'est pour le moment plus maintenue en 2019 suite à un changement de fichier fourni par l'Insee]
 
+### février 2020
+
+* mise à jour totale du COG2020 
+
 ## correction de bugs / optimisation du code
 
 ### août 2017

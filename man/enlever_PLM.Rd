@@ -23,9 +23,9 @@ enlever_PLM(table_entree, codgeo_entree = colnames(table_entree)[1],
 Remplacer les codes Insee des arrondissements municipaux de Paris, Lyon et Marseille par leurs codes communes respectifs.
 }
 \details{
-Le code officiel géographique le plus récent du package est actuellement celui au 01/01/2019. \cr
+Le code officiel géographique le plus récent du package est actuellement celui au 01/01/2020. \cr
 
-Les millésimes des COG qui peuvent être utilisés sont à ce stade les suivants : 1968, 1975, 1982, 1990, 1999, 2008 à 2019. \cr
+Les millésimes des COG qui peuvent être utilisés sont à ce stade les suivants : 1968, 1975, 1982, 1990, 1999, 2008 à 2020. \cr
 
 Les dates de référence des codes officiels géographiques utilisés dans COGugaison sont les suivantes :
 \itemize{

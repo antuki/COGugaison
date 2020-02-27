@@ -3,7 +3,7 @@
 #' @description Permettre d'agréger les tables de données communales à de nombreux échelons supra-communaux administratifs (EPCI, arrondissements, cantons-villes, départements, régions) ou d'étude (bassins de vie, zones d'emploi, unités urbaines, aires urbaines). La fonction `nivsupra` peut également s'appliquer à des tables de flux (non agrégées par codes communes) grâce à l'option agregation = FALSE. La table en entrée est alors conservée comme telle avec une nouvelle colonne qui correspond au niveau supracommunal du code commune considéré.
 #' @param table_entree correspond à la table (ou le vecteur, cf. paramètre vecteur_entree) à transformer de manière à modifier les codes des communes corses.
 #' @param codgeo_entree est une chaîne de caractères qui indique le nom de la variable contenant les codes communes Insee. Par défaut, il s'agit du nom de la première colonne de table_entree.
-#' @param COG indique l'année de COG de la table communale considérée. (exemple 2014). Années possibles : de 2008 à 2019. Par défaut, vaut 2019.
+#' @param COG indique l'année de COG de la table communale considérée. (exemple 2014). Années possibles : de 2008 à 2020. Par défaut, vaut 2020.
 #' @param var_num est un vecteur de chaînes de caractères qui indique les noms des variables numériques à convertir. Par défaut, il s'agit de l'ensemble des variables de types numériques dans table_entree.
 #' @param nivsupra est une chaîne de caractères qui indique le nom du niveau supra-communale souhaité. Pour les années récentes :
 #' - "DEP" : départements
@@ -21,7 +21,7 @@
 #' @details
 #' Le code officiel géographique le plus récent du package est actuellement celui au 01/01/2017. \cr
 #'
-#' Les millésimes des COG qui peuvent être utilisés sont à ce stade les suivants : 1968, 1975, 1982, 1990, 1999, 2008 à 2019. \cr
+#' Les millésimes des COG qui peuvent être utilisés sont à ce stade les suivants : 1968, 1975, 1982, 1990, 1999, 2008 à 2020. \cr
 #'
 #' Les dates de référence des codes officiels géographiques utilisés dans COGugaison sont les suivantes :
 #' \itemize{

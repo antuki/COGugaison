@@ -29,9 +29,9 @@ modification_Oudon(table_entree,
 Modifier les codes Insee de l'ancienne commune de l'Oudon (Calvados, 14). En effet, la commune de l'Oudon a toujours été codée "14697" puis a changé de code devenant "14472" à partir du 07/01/2014 suite à un transfert de chef lieu. Cette commune a depuis disparu puisqu'elle est devenue commune déléguée au sein de Saint-Pierre-en-Auge (14654).
 }
 \details{
-Le code officiel géographique le plus récent du package est actuellement celui au 01/01/2019. \cr
+Le code officiel géographique le plus récent du package est actuellement celui au 01/01/2020. \cr
 
-Les millésimes des COG qui peuvent être utilisés sont à ce stade les suivants : 1968, 1975, 1982, 1990, 1999, 2008 à 2019. \cr
+Les millésimes des COG qui peuvent être utilisés sont à ce stade les suivants : 1968, 1975, 1982, 1990, 1999, 2008 à 2020. \cr
 
 Les dates de référence des codes officiels géographiques utilisés dans COGugaison sont les suivantes :
 \itemize{

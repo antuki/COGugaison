@@ -15,7 +15,7 @@ nivsupra(table_entree, codgeo_entree = colnames(table_entree)[1],
 
 \item{codgeo_entree}{est une chaîne de caractères qui indique le nom de la variable contenant les codes communes Insee. Par défaut, il s'agit du nom de la première colonne de table_entree.}
 
-\item{COG}{indique l'année de COG de la table communale considérée. (exemple 2014). Années possibles : de 2008 à 2019. Par défaut, vaut 2019.}
+\item{COG}{indique l'année de COG de la table communale considérée. (exemple 2014). Années possibles : de 2008 à 2020. Par défaut, vaut 2020.}
 
 \item{var_num}{est un vecteur de chaînes de caractères qui indique les noms des variables numériques à convertir. Par défaut, il s'agit de l'ensemble des variables de types numériques dans table_entree.}
 
@@ -41,7 +41,7 @@ Permettre d'agréger les tables de données communales à de nombreux échelons 
 \details{
 Le code officiel géographique le plus récent du package est actuellement celui au 01/01/2017. \cr
 
-Les millésimes des COG qui peuvent être utilisés sont à ce stade les suivants : 1968, 1975, 1982, 1990, 1999, 2008 à 2019. \cr
+Les millésimes des COG qui peuvent être utilisés sont à ce stade les suivants : 1968, 1975, 1982, 1990, 1999, 2008 à 2020. \cr
 
 Les dates de référence des codes officiels géographiques utilisés dans COGugaison sont les suivantes :
 \itemize{
