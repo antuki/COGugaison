@@ -6,6 +6,7 @@
 #' @details
 #' Le code est vectorisé, il est donc possible de l'utiliser dans un data.frame pour créer une nouvelle colonne.\cr
 #' Les données de 2020, les plus récentes, sont utilisées.
+#' @export
 #' @examples
 #' # Renvoie de le département de l'Ain
 #' libelle("DEP", "01")
