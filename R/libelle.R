@@ -8,10 +8,10 @@
 #' Les données de 2020, les plus récentes, sont utilisées.
 #' @export
 #' @examples
-#' # Renvoie le nom de département de l'Ain
-#' libelle("DEP", "01")
-#' # Renvoie le nom de commune de L'Abergement-Clémenciat
-#' libelle("COG", "01001")
+#' # Renvoie les noms de département de l'Ain et l'Aisne
+#' libelle("DEP", c("01", "02"))
+#' # Renvoie les nom de commune de L'Abergement-Clémenciat et L'Abergement-de-Varey
+#' libelle("COG", c("01001", "01002"))
 
 libelle <- function(niveau, code) {
 

@@ -19,8 +19,8 @@ Le code est vectorisé, il est donc possible de l'utiliser dans un data.frame po
 Les données de 2020, les plus récentes, sont utilisées.
 }
 \examples{
-# Renvoie le nom de dÃ©partement de l'Ain
-libelle("DEP", "01")
-# Renvoie le nom de commune de L'Abergement-ClÃ©menciat
-libelle("COG", "01001")
+# Renvoie les noms de dÃ©partement de l'Ain et l'Aisne
+libelle("DEP", c("01", "02"))
+# Renvoie les nom de commune de L'Abergement-ClÃ©menciat et L'Abergement-de-Varey
+libelle("COG", c("01001", "01002"))
 }
