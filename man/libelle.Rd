@@ -7,7 +7,7 @@
 libelle(niveau, code)
 }
 \arguments{
-\item{niveau}{Niveau de code géographie: `COG` pour la commune et les valeurs définie dans la table `libelles_supracom` pour les niveau supra.}
+\item{niveau}{Niveau de code géographique: `COG` pour la commune et les valeurs définies dans la table `libelles_supracom` pour les niveaux supra.}
 
 \item{code}{Code de l'entité géographique.}
 }
