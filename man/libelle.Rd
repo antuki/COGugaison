@@ -19,7 +19,7 @@ Le code est vectorisé, il est donc possible de l'utiliser dans un data.frame po
 Les données de 2020, les plus récentes, sont utilisées.
 }
 \examples{
-# Renvoie de le dÃ©partement de l'Ain
+# Renvoie le nom de dÃ©partement de l'Ain
 libelle("DEP", "01")
 # Renvoie le nom de commune de L'Abergement-ClÃ©menciat
 libelle("COG", "01001")

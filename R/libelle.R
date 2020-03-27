@@ -8,7 +8,7 @@
 #' Les données de 2020, les plus récentes, sont utilisées.
 #' @export
 #' @examples
-#' # Renvoie de le département de l'Ain
+#' # Renvoie le nom de département de l'Ain
 #' libelle("DEP", "01")
 #' # Renvoie le nom de commune de L'Abergement-Clémenciat
 #' libelle("COG", "01001")
