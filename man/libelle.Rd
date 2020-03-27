@@ -9,7 +9,7 @@ libelle(niveau, code)
 \arguments{
 \item{niveau}{Niveau de code géographie: `COG` pour la commune et les valeurs définie dans la table `libelles_supracom` pour les niveau supra.}
 
-\item{code}{.}
+\item{code}{Code de l'entité géographique.}
 }
 \description{
 Renvoie le libellé d'une entité géographique à partir de son code. Il est nécessaire de préciser le niveau géographique du code : commune, département, région, etc...
