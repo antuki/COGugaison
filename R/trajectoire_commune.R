@@ -5,9 +5,9 @@
 #' @param COG indique l'année de COG de la communes considérée (exemple 2014). Années possibles : de 1968 à 2020. Par défaut, vaut 2020.
 #' @param donnees_insee vaut TRUE si l'on veut observer les dates de prise en compte du COG par l'Insee. En effet, quelques rares modifications communales (la défusion des communes Loisey et Culey au 1er janvier 2014 par exemple) ont été prises en compte dans les bases de données communales de l'Insee plus tard que la date officielle.
 #' @details
-#' Le code officiel géographique le plus récent du package est actuellement celui au 01/01/2020. \cr
+#' Le code officiel géographique le plus récent du package est actuellement celui au 01/01/2021. \cr
 #'
-#' Les millésimes des COG qui peuvent être utilisés sont à ce stade les suivants : 1968, 1975, 1982, 1990, 1999, 2008 à 2020. \cr
+#' Les millésimes des COG qui peuvent être utilisés sont à ce stade les suivants : 1968, 1975, 1982, 1990, 1999, 2008 à 2021. \cr
 #'
 #' Les dates de référence des codes officiels géographiques utilisés dans COGugaison sont les suivantes :
 #' \itemize{

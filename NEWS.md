@@ -63,4 +63,8 @@
 
 * mise à jour totale du COG2020 
 
+### mars 2021
+
+* mise à jour totale du COG2021
+
 ## correction de bugs / optimisation du code

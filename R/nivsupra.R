@@ -11,17 +11,22 @@
 #' - "EPCI" : EPCI au 01/01/20XX
 #' - "ARR" : arrondissements au 01/01/20XX
 #' - "CV" : cantons-villes au 01/01/20XX
-#' - "ZE2010" : zones d'emploi 2010
-#' - "UU2010" : unités urbaines 2010
-#' - "AU2010" : aires urbaines 2010
+#' - "ZE2010" : zones d'emploi 2010 (avant 2020)
+#' - "ZE2020" : zones d'emploi 2020 (après 2020)
+#' - "UU2010" : unités urbaines 2010 (avant 2020)
+#' - "UU2020" : unités urbaines 2020 (après 2020)
+#' - "AU2010" : aires urbaines 2010 (avant 2020)
+#' - "AAV2020" : aires d'attraction des villes 2020 (après 2020)
 #' - "BV2012" : bassins de vie 2012
 #' Pour les COG plus anciens, regarder au cas par cas selon les années. Par exemple, str(table_supracom_2008)
 #' @param nivsupra_nom indique le nom à donner au niveau supra-communal dans la table de sortie. Il faut par défaut la chaîne de caractère contenue dans nivsupra si agregation = T et la concaténation de nivsupra et codgeo_entree séparée d'un "_" si agregation = F.
 #' @param agregation vaut TRUE si la table souhaitée doit sommer toutes les lignes qui concernent une même commune et FALSE si l'on souhaite volontairement conserver les doublons dans les codes commune (dans les tables de flux par exemple). Si agregation = F, les variables de type caractère sont alors conservées comme telles ou dupliquées en cas de défusion et les variables numériques sommées en cas de fusion ou réparties proportionnellement à la population de chaque commune en cas de défusion.
 #' @details
-#' Le code officiel géographique le plus récent du package est actuellement celui au 01/01/2017. \cr
+#' Le code officiel géographique le plus récent du package est actuellement celui au 01/01/2021. \cr
 #'
-#' Les millésimes des COG qui peuvent être utilisés sont à ce stade les suivants : 1968, 1975, 1982, 1990, 1999, 2008 à 2020. \cr
+#' Les millésimes des COG qui peuvent être utilisés sont à ce stade les suivants : 1968, 1975, 1982, 1990, 1999, 2008 à 2021. \cr
+#'
+#' A partir de 2020, de nombreux zonages ont été modifiés suite à la refonte des zonages de l'Insee. Les ZE2010 deviennent les ZE2020, les UU2010 deviennent les UU2020, les AU2010 deviennent les AAV2020.
 #'
 #' Les dates de référence des codes officiels géographiques utilisés dans COGugaison sont les suivantes :
 #' \itemize{
