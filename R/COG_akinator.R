@@ -33,7 +33,7 @@
 #' @export
 #' @examples
 #' ## Exemple 1
-#' # Ici, nous cherchons le millésime du code officiel géographique (COG) utilisé dans la table de données communales exemple_popcom.
+#' # Ici, nous cherchons le millesime du code officiel geographique (COG) utilise dans la table de donnees communales exemple_popcom.
 #' COG_akinator(vecteur_codgeo=exemple_popcom[,1],donnees_insee=TRUE)
 #' @encoding UTF-8
 

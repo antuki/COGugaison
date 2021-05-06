@@ -4,9 +4,13 @@
 \alias{changement_COG_typo_details}
 \title{Créer une table de communes fusionnées appartenant à des classes différentes selon une typologie}
 \usage{
-changement_COG_typo_details(table_entree, annees,
-  codgeo_entree = colnames(table_entree)[1], typo,
-  donnees_insee = TRUE)
+changement_COG_typo_details(
+  table_entree,
+  annees,
+  codgeo_entree = colnames(table_entree)[1],
+  typo,
+  donnees_insee = TRUE
+)
 }
 \arguments{
 \item{table_entree}{correspond à la table à transformer en une autre géographie}
@@ -47,11 +51,11 @@ Les différences entre les tables de passage Insee et non Insee sont les suivant
 }
 \examples{
 ## Exemple 1
-# Ici nous allons transformer les deux typologies (typoA et typoB) de la table exemple_pop en géographie communale au 1er janvier 2017 (au lieu de 2014).
-# L'hypothèse de classement en cas de fusion de communes (*methode_fusion*) choisie est celle d'une classe spécifique (*methode_difference*, classe appelée *mot_difference*="differents") aux regroupements de plusieurs communes de classes différentes. Les autres hypothèses possibles auraient pu être l'hypothèse du maximum de population *methode_max_pop* ou de classe absorbante *methode_classe_absorbante*.
+# Ici nous allons transformer les deux typologies (typoA et typoB) de la table exemple_pop en geographie communale au 1er janvier 2017 (au lieu de 2014).
+# L'hypothese de classement en cas de fusion de communes (*methode_fusion*) choisie est celle d'une classe specifique (*methode_difference*, classe appelee *mot_difference*="differents") aux regroupements de plusieurs communes de classes differentes. Les autres hypotheses possibles auraient pu etre l'hypothese du maximum de population *methode_max_pop* ou de classe absorbante *methode_classe_absorbante*.
 exemple_popcom_COG2017_typo <- changement_COG_typo(table_entree=exemple_popcom[,-2],annees=c(2014:2017),methode_fusion="methode_difference",typos=c("typoA","typoB"),mot_difference = "differents",libgeo=T,donnees_insee=T)
 head(exemple_popcom_COG2017_typo)
-# Nous allons maintenant isoler dans une table les communes fusionnées appartenant à des classes différentes, ici selon la typologie "typoA" entre 2014 et 2015, 2015 et 2016 et 2016 et 2017.
+# Nous allons maintenant isoler dans une table les communes fusionnees appartenant Ã  des classes differentes, ici selon la typologie "typoA" entre 2014 et 2015, 2015 et 2016 et 2016 et 2017.
 details_exemple_popcom_COG2017_typo <- changement_COG_typo_details(table_entree=exemple_popcom[,-2],annees=c(2014:2017),typo="typoA", donnees_insee=T)
 head(details_exemple_popcom_COG2017_typo[["2014_2015"]])
 head(details_exemple_popcom_COG2017_typo[["2015_2016"]])

@@ -11,7 +11,7 @@ URL: http://github.com/antuki/COGugaison
 BugReports: http://github.com/antuki/COGugaison/issues
 Depends: 
     R (>= 3.5.0)
-RoxygenNote: 6.1.1
+RoxygenNote: 7.1.1
 Suggests: 
     knitr,
     rmarkdown,

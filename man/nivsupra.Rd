@@ -4,11 +4,16 @@
 \alias{nivsupra}
 \title{Agréger des données à des échelons supra-communaux}
 \usage{
-nivsupra(table_entree, codgeo_entree = colnames(table_entree)[1],
+nivsupra(
+  table_entree,
+  codgeo_entree = colnames(table_entree)[1],
   COG = annee_ref,
   var_num = colnames(table_entree)[sapply(table_entree, is.numeric)],
-  nivsupra, nivsupra_nom = ifelse(agregation == TRUE, nivsupra,
-  paste0(nivsupra, "_", codgeo_entree)), agregation = T)
+  nivsupra,
+  nivsupra_nom = ifelse(agregation == TRUE, nivsupra, paste0(nivsupra, "_",
+    codgeo_entree)),
+  agregation = T
+)
 }
 \arguments{
 \item{table_entree}{correspond à la table (ou le vecteur, cf. paramètre vecteur_entree) à transformer de manière à modifier les codes des communes corses.}
@@ -68,13 +73,13 @@ Les différences entre les tables de passage Insee et non Insee sont les suivant
 }
 \examples{
 ## Exemple 1
-# Ici, après avoir transformé les données en géographie communale au 01/01/2017, nous agrégeons la population et la superficie des communes à l'échelon géographique des zones d'emploi afin d'obtenir une table des densités de population par zone d'emploi.
+# Ici, apres avoir transforme les donnees en geographie communale au 01/01/2017, nous agregeons la population et la superficie des communes a l'echelon geographique des zones d'emploi afin d'obtenir une table des densites de population par zone d'emploi.
 exemple_popcom_COG2017_num <- changement_COG_varNum(table_entree=exemple_popcom,annees=c(2014:2017),agregation=T,libgeo=T,donnees_insee=T)
 exemple_popcom_ZE2010 <- nivsupra(table_entree=exemple_popcom_COG2017_num,COG=2017,nivsupra="ZE2010",agregation=T)
 exemple_popcom_ZE2010$densite <- exemple_popcom_ZE2010$P12_POP / exemple_popcom_ZE2010$SUPERF
 head(exemple_popcom_ZE2010)
 ## Exemple 2
-# Ici, on ajoute les colonnes ZE2010_COMMUNE et ZE2010_DCLT à la table exemple de flux domicile-travail.
+# Ici, on ajoute les colonnes ZE2010_COMMUNE et ZE2010_DCLT a la table exemple de flux domicile-travail.
 exemple_flux_COG2017 <- changement_COG_varNum(table_entree=exemple_flux,annees=c(2014:2017),codgeo_entree="COMMUNE",agregation=F,libgeo=F,donnees_insee=T)
 exemple_flux_COG2017 <- changement_COG_varNum(table_entree=exemple_flux_COG2017,annees=c(2014:2017),codgeo_entree="DCLT",agregation=F,libgeo=F,donnees_insee=T)
 exemple_flux_COG2017_etZE <- nivsupra(table_entree=exemple_flux_COG2017,codgeo_entree="COMMUNE",nivsupra="ZE2010",COG=2017,agregation=F)

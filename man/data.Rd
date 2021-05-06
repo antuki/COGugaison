@@ -6,7 +6,11 @@
 \alias{COG2020}
 \alias{COG2019}
 \title{Données contenues dans le package}
-\format{\code{data.frame}}
+\format{
+\code{data.frame}
+
+An object of class \code{data.frame} with 34970 rows and 3 columns.
+}
 \usage{
 COG2020
 

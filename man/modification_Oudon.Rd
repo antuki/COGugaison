@@ -5,12 +5,15 @@
 \alias{modification_Oudon}
 \title{Modifier les codes Insee de l'ancienne commune de l'Oudon (Calvados, 14)}
 \usage{
-modification_Oudon(table_entree,
+modification_Oudon(
+  table_entree,
   codgeo_entree = colnames(table_entree)[1],
   vecteur_entree = is.vector(table_entree),
-  donnees_insee_entree = TRUE, donnees_insee_sortie = TRUE,
-  COG = as.numeric(substr(COG_akinator(vecteur_codgeo = table_entree[,
-  codgeo_entree], donnees_insee = donnees_insee_entree), 4, 7)))
+  donnees_insee_entree = TRUE,
+  donnees_insee_sortie = TRUE,
+  COG = as.numeric(substr(COG_akinator(vecteur_codgeo = table_entree[, codgeo_entree],
+    donnees_insee = donnees_insee_entree), 4, 7))
+)
 }
 \arguments{
 \item{table_entree}{correspond à la table (ou le vecteur, cf. paramètre vecteur_entree) à transformer de manière à modifier le code de la commune de l'Oudon.}

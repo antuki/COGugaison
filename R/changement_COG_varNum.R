@@ -39,11 +39,11 @@
 #' @export
 #' @examples
 #' ## Exemple 1
-#' # Ici, nous allons transformer les variables numériques de la table *exemple_pop* afin de récupérer les données de population et de superficie des communes au 1er janvier 2017 (au lieu de 2014).
+#' # Ici, nous allons transformer les variables numeriques de la table *exemple_pop* afin de recuperer les donnees de population et de superficie des communes au 1er janvier 2017 (au lieu de 2014).
 #' exemple_popcom_COG2017_num <- changement_COG_varNum(table_entree=exemple_popcom,annees=c(2014:2017),agregation=T,libgeo=T,donnees_insee=T)
 #' head(exemple_popcom_COG2017_num)
 #' ## Exemple 2
-#' # La fonction peut également s'appliquer à des tables de flux (codes communes pouvant comporter des doublons) grâce à l'option agregation = FALSE.
+#' # La fonction peut egalement s'appliquer a des tables de flux (codes communes pouvant comporter des doublons) grace à l'option agregation = FALSE.
 #' exemple_flux_COG2017 <- changement_COG_varNum(table_entree=exemple_flux,annees=c(2014:2017),codgeo_entree="COMMUNE",agregation=F,libgeo=F,donnees_insee=T)
 #' exemple_flux_COG2017 <- changement_COG_varNum(table_entree=exemple_flux_COG2017,annees=c(2014:2017),codgeo_entree="DCLT",agregation=F,libgeo=F,donnees_insee=T)
 #' @encoding UTF-8

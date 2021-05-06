@@ -5,10 +5,15 @@
 \alias{changement_COG_varNum}
 \title{Changer les variables numériques de géographie communale}
 \usage{
-changement_COG_varNum(table_entree, annees,
+changement_COG_varNum(
+  table_entree,
+  annees,
   codgeo_entree = colnames(table_entree)[1],
   var_num = colnames(table_entree)[sapply(table_entree, is.numeric)],
-  agregation = TRUE, libgeo = FALSE, donnees_insee = TRUE)
+  agregation = TRUE,
+  libgeo = FALSE,
+  donnees_insee = TRUE
+)
 }
 \arguments{
 \item{table_entree}{correspond à la table à transformer en une autre géographie}
@@ -53,11 +58,11 @@ Les différences entre les tables de passage Insee et non Insee sont les suivant
 }
 \examples{
 ## Exemple 1
-# Ici, nous allons transformer les variables numériques de la table *exemple_pop* afin de récupérer les données de population et de superficie des communes au 1er janvier 2017 (au lieu de 2014).
+# Ici, nous allons transformer les variables numeriques de la table *exemple_pop* afin de recuperer les donnees de population et de superficie des communes au 1er janvier 2017 (au lieu de 2014).
 exemple_popcom_COG2017_num <- changement_COG_varNum(table_entree=exemple_popcom,annees=c(2014:2017),agregation=T,libgeo=T,donnees_insee=T)
 head(exemple_popcom_COG2017_num)
 ## Exemple 2
-# La fonction peut également s'appliquer à des tables de flux (codes communes pouvant comporter des doublons) grâce à l'option agregation = FALSE.
+# La fonction peut egalement s'appliquer a des tables de flux (codes communes pouvant comporter des doublons) grace Ã  l'option agregation = FALSE.
 exemple_flux_COG2017 <- changement_COG_varNum(table_entree=exemple_flux,annees=c(2014:2017),codgeo_entree="COMMUNE",agregation=F,libgeo=F,donnees_insee=T)
 exemple_flux_COG2017 <- changement_COG_varNum(table_entree=exemple_flux_COG2017,annees=c(2014:2017),codgeo_entree="DCLT",agregation=F,libgeo=F,donnees_insee=T)
 }

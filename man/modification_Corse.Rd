@@ -4,10 +4,12 @@
 \alias{modification_Corse}
 \title{Modifier les codes Insee des communes corses}
 \usage{
-modification_Corse(table_entree,
+modification_Corse(
+  table_entree,
   codgeo_entree = colnames(table_entree)[1],
-  vecteur_entree = is.vector(table_entree), sens = c("20vers2A2B",
-  "2A2Bvers20"))
+  vecteur_entree = is.vector(table_entree),
+  sens = c("20vers2A2B", "2A2Bvers20")
+)
 }
 \arguments{
 \item{table_entree}{correspond à la table (ou le vecteur, cf. paramètre vecteur_entree) à transformer de manière à modifier les codes des communes corses.}
@@ -46,7 +48,7 @@ Les différences entre les tables de passage Insee et non Insee sont les suivant
 }
 \examples{
 ## Exemple 1
-# Ici, nous allons remplacer les codes communes corses commençant par 2A ou 2B par 20 (l'exemple actuel ne contient pas de commune Corse donc le code n'a pas d'impact).
+# Ici, nous allons remplacer les codes communes corses commencant par 2A ou 2B par 20 (l'exemple actuel ne contient pas de commune Corse donc le code n'a pas d'impact).
 exemple_flux_sansCorse <- modification_Corse(table_entree=exemple_flux,sens="2A2Bvers20")
 }
 \references{
