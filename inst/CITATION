@@ -2,9 +2,9 @@ citHeader("Pour citer COGugaison dans vos productions, merci d'utiliser :")
 
 citEntry(entry = "manual",
   author = "Kim Antunez",
-  title = "package COGugaison",
+  title = "package R COGugaison",
   url = "https://antuki.github.io/COGugaison/",
-  textVersion = "package COGugaison https://antuki.github.io/COGugaison/"
+  textVersion = "package R COGugaison https://antuki.github.io/COGugaison/"
 
 )
 

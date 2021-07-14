@@ -21,7 +21,7 @@ Il est évidemment conseillé de se référer aux données officielles de l'Inse
 Pour installer le package `COGugaison` et le charger dans R :
  
 ```r
-devtools::install_github("antuki/COGugaison")
+remotes::install_github("antuki/COGugaison")
 library(COGugaison)
 ```
 
@@ -29,6 +29,6 @@ library(COGugaison)
 
 COGugaison est un package open-source qui intègre des données (tables de passage et de correspondance entre zonages administratifs) construites à partir du [Code Officiel Géographique de l'Insee](https://www.insee.fr/fr/information/2560452). Les données COGugaison sont disponibles sous la licence libre [Open Data Commons Open Database License (ODbL)](http://opendatacommons.org/licenses/odbl/1.0/). Tous les droits sur les contenus individuels ont pour licence la [Database Contents Licence](http://opendatacommons.org/licenses/dbcl/1.0/).
 
-Vous êtes donc libre de copier, distribuer, transmettre et adapter les données de ce package, à condition que vous créditiez COGugaison de cette manière « © package COGugaison http://github.com/antuki/COGugaison ». Si vous modifiez ou utilisez ces données dans d’autres oeuvres dérivées, vous ne pouvez distribuer celles-ci que sous la même licence. 
+Vous êtes donc libre de copier, distribuer, transmettre et adapter les données de ce package, à condition que vous créditiez COGugaison de cette manière « © package COGugaison http://github.com/antuki/COGugaison ». Si vous modifiez ou utilisez ces données dans d’autres oeuvres dérivées, vous ne pouvez distribuer celles-ci que sous la même licence. 
 
-Le code du package est quant à lui sous licence open-source [GPL-3](LICENCE). 
+Le code du package est quant à lui sous licence open-source [GPL-3](LICENSE). 
