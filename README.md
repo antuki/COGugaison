@@ -14,11 +14,9 @@ Ce package R a alors pour objectif global de manipuler des données communales p
 - permettre d'agréger les tables de données communales à de nombreux échelons supra-communaux administratifs (EPCI, arrondissements, cantons-villes, départements, régions) ou d'étude (bassins de vie, zones d'emploi, unités urbaines, aires urbaines) : `nivsupra`. 
 - gérer des cas particuliers comme les codes Insee des communes corses (`modification_Corse`) ou des arrondissements municipaux de Paris, Lyon, et Marseille (`enlever_PLM`) ou encore l'ancienne commune de l'Oudon (`modification_Oudon`)
 
-Il est important de souligner que les données utilisées ici s'appuient sur des tables publiées par l'Insee :
-- [l'historique des géographies communales](https://www.insee.fr/fr/information/2666684#titre-bloc-11)
-- [les tables d'appartenance des communes aux différents niveaux géographiques](https://www.insee.fr/fr/information/2028028)
+Il est important de souligner que les données utilisées ici s'appuient sur des [tables de données publiées par l'Insee](https://www.insee.fr/fr/information/2560452)
 
-Tant que le package n'est pas stabilisé, il est évidemment conseillé de se référer aux données officielles de l'Insee en cas de doute sur un résultat.  
+Il est évidemment conseillé de se référer aux données officielles de l'Insee en cas de doute sur un résultat.  
 
 Pour installer le package `COGugaison` et le charger dans R :
  
@@ -26,3 +24,11 @@ Pour installer le package `COGugaison` et le charger dans R :
 devtools::install_github("antuki/COGugaison")
 library(COGugaison)
 ```
+
+### Licence
+
+COGugaison est un package open-source qui intègre des données (tables de passage et de correspondance entre zonages administratifs) construites à partir du [Code Officiel Géographique de l'Insee](https://www.insee.fr/fr/information/2560452). Les données COGugaison sont disponibles sous la licence libre [Open Data Commons Open Database License (ODbL)](http://opendatacommons.org/licenses/odbl/1.0/). Tous les droits sur les contenus individuels ont pour licence la [Database Contents Licence](http://opendatacommons.org/licenses/dbcl/1.0/).
+
+Vous êtes donc libre de copier, distribuer, transmettre et adapter les données de ce package, à condition que vous créditiez COGugaison de cette manière « © package COGugaison http://github.com/antuki/COGugaison ». Si vous modifiez ou utilisez ces données dans d’autres oeuvres dérivées, vous ne pouvez distribuer celles-ci que sous la même licence. 
+
+Le code du package est quant à lui sous licence open-source [GPL-3](LICENCE). 
