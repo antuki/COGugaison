@@ -17,23 +17,27 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.1/css/all.min.css" integrity="sha256-PbSmjxuVAzJ6FPvNYsrXygfGhNJYyZ2GktDbkMBqQZg=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.1/css/v4-shims.min.css" integrity="sha256-A6jcAdwFD48VMjlI3GDxUd+eCQa7/KWy6G9oe/ovaPA=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -46,7 +50,6 @@
 <meta property="og:description" content="Visualiser les modifications communales (fusions, défusions, changements de codes ou de noms) qui ont eu lieu entre deux dates.
 Attention, cette fonction est encore en cours de développement il est donc possible que certains évènements ne soient pas encore pris en compte." />
 <meta property="og:image" content="/logo.png" />
-<meta name="twitter:card" content="summary" />
 
 
 
@@ -64,7 +67,7 @@ Attention, cette fonction est encore en cours de développement il est donc poss
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -78,7 +81,7 @@ Attention, cette fonction est encore en cours de développement il est donc poss
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">COGugaison</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.4</span>
       </span>
     </div>
 
@@ -96,7 +99,7 @@ Attention, cette fonction est encore en cours de développement il est donc poss
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/antuki/COGugaison">
+  <a href="http://github.com/antuki/COGugaison/">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -115,7 +118,7 @@ Attention, cette fonction est encore en cours de développement il est donc poss
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Visualiser les modifications communales entre deux dates</h1>
-    <small class="dont-index">Source: <a href='https://github.com/antuki/COGugaison/blob/master/R/modifications_communales.R'><code>R/modifications_communales.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/antuki/COGugaison/blob/master/R/modifications_communales.R'><code>R/modifications_communales.R</code></a></small>
     <div class="hidden name"><code>modifications_communales.Rd</code></div>
     </div>
 
@@ -124,7 +127,7 @@ Attention, cette fonction est encore en cours de développement il est donc poss
 Attention, cette fonction est encore en cours de développement il est donc possible que certains évènements ne soient pas encore pris en compte.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>modifications_communales</span>(<span class='no'>date_debut</span>, <span class='no'>date_fin</span>)</pre>
+    <pre class="usage"><span class='fu'>modifications_communales</span><span class='op'>(</span><span class='va'>date_debut</span>, <span class='va'>date_fin</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -176,7 +179,9 @@ Attention, cette fonction est encore en cours de développement il est donc poss
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>## Exemple 1</span>
 <span class='co'># modifications communales ayant eu lieu entre 2014 et 2015</span>
-<span class='no'>modifs</span> <span class='kw'>&lt;-</span> <span class='fu'>modifications_communales</span>(<span class='kw'>date_debut</span><span class='kw'>=</span><span class='st'>"01-01-2014"</span>,<span class='kw'>date_fin</span><span class='kw'>=</span><span class='st'>"01-01-2015"</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: En raison d'un changement de fichier d'historique de l'Insee en 2019, cette fonction n'est à ce stade plus maintenue pour les millésimes après 2018.</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span>(<span class='no'>modifs</span>$<span class='no'>fusions</span>)</div><div class='output co'>#&gt; 2015-01-01 : Notre-Dame-d'Estrées-Corbon (14474) est un rassemblement de Corbon (14178), Notre-Dame-d'Estrées (14474) [commune nouvelle avec commune(s) déléguée(s)].
+<span class='va'>modifs</span> <span class='op'>&lt;-</span> <span class='fu'>modifications_communales</span><span class='op'>(</span>date_debut<span class='op'>=</span><span class='st'>"01-01-2014"</span>,date_fin<span class='op'>=</span><span class='st'>"01-01-2015"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: En raison d'un changement de fichier d'historique de l'Insee en 2019, cette fonction n'est à ce stade plus maintenue pour les millésimes après 2018.</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span><span class='op'>(</span><span class='va'>modifs</span><span class='op'>$</span><span class='va'>fusions</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; 2015-01-01 : Notre-Dame-d'Estrées-Corbon (14474) est un rassemblement de Corbon (14178), Notre-Dame-d'Estrées (14474) [commune nouvelle avec commune(s) déléguée(s)].
 #&gt; 2015-01-01 : Auxons (25035) est un rassemblement de Auxon-Dessous (25034), Auxon-Dessus (25035) [commune nouvelle avec commune(s) déléguée(s)].
 #&gt; 2015-01-01 : Goussainville (28185) est un rassemblement de Champagne (28069), Goussainville (28185) [commune nouvelle avec commune(s) déléguée(s)].
 #&gt; 2015-01-01 : Eclose-Badinières (38152) est un rassemblement de Badinières (38024), Eclose (38152) [commune nouvelle avec commune(s) déléguée(s)].
@@ -188,7 +193,10 @@ Attention, cette fonction est encore en cours de développement il est donc poss
 #&gt; 2015-01-01 : Clux-Villeneuve (71578) est un rassemblement de Clux (71138), Villeneuve (71578) [commune nouvelle avec commune(s) déléguée(s)].
 #&gt; 2015-01-01 : Villeneuve-en-Perseigne (72137) est un rassemblement de Chassé (72069), Fresnaye-sur-Chédouet (72137), Lignières-la-Carelle (72162), Montigny (72207), Roullée (72258), Saint-Rigomer-des-Bois (72318) [commune nouvelle avec commune(s) déléguée(s)].
 #&gt; 2015-01-01 : Saint-Offenge (73263) est un rassemblement de Saint-Offenge-Dessous (73263), Saint-Offenge-Dessus (73264) [commune nouvelle avec commune(s) déléguée(s)].
-#&gt; 2015-01-01 : Orvanne (77316) est un rassemblement de Écuelles (77166), Moret-sur-Loing (77316) [commune nouvelle avec commune(s) déléguée(s)].</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span>(<span class='no'>modifs</span>$<span class='no'>defusions</span>)</div><div class='output co'>#&gt; ATTENTION, l'évènement suivant a été pris en compte dans les données de l'Insee seulement au 01/01/2015 : 2014-01-01 : Loisey (55298) s'est séparée en Loisey (55298), Culey (55138) [rétablissement].</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span>(<span class='no'>modifs</span>$<span class='no'>changements_codes</span>)</div><div class='output co'>#&gt; 2014-01-07 : Le code commune de Oudon passe de 14697 à 14472 [changement de code dû à un changement de chef-lieu].</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span>(<span class='no'>modifs</span>$<span class='no'>changements_noms</span>)</div><div class='output co'>#&gt; 2014-12-06 : La commune de Barisis (02049) change de nom en Barisis-aux-Bois [changement de nom].
+#&gt; 2015-01-01 : Orvanne (77316) est un rassemblement de Écuelles (77166), Moret-sur-Loing (77316) [commune nouvelle avec commune(s) déléguée(s)].</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span><span class='op'>(</span><span class='va'>modifs</span><span class='op'>$</span><span class='va'>defusions</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; ATTENTION, l'évènement suivant a été pris en compte dans les données de l'Insee seulement au 01/01/2015 : 2014-01-01 : Loisey (55298) s'est séparée en Loisey (55298), Culey (55138) [rétablissement].</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span><span class='op'>(</span><span class='va'>modifs</span><span class='op'>$</span><span class='va'>changements_codes</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; 2014-01-07 : Le code commune de Oudon passe de 14697 à 14472 [changement de code dû à un changement de chef-lieu].</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span><span class='op'>(</span><span class='va'>modifs</span><span class='op'>$</span><span class='va'>changements_noms</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; 2014-12-06 : La commune de Barisis (02049) change de nom en Barisis-aux-Bois [changement de nom].
 #&gt; 2014-12-06 : La commune de Sainte-Colombe (21544) change de nom en Sainte-Colombe-en-Auxois [changement de nom].
 #&gt; 2014-12-06 : La commune de Pont-de-Roide (25463) change de nom en Pont-de-Roide-Vermondans [changement de nom].
 #&gt; 2014-12-06 : La commune de Cazaril-Laspènes (31129) change de nom en Cazarilh-Laspènes [changement de nom].
@@ -198,26 +206,20 @@ Attention, cette fonction est encore en cours de développement il est donc poss
 #&gt; 2014-12-06 : La commune de Saint-Vincent (82174) change de nom en Saint-Vincent-d'Autéjac [changement de nom].</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#details">Details</a></li>
-      <li><a href="#references">References</a></li>
-      <li><a href="#see-also">See also</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
 
       <footer>
       <div class="copyright">
-  <p>Developed by  antuki.</p>
+  <p>Developed by Kim Antunez.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

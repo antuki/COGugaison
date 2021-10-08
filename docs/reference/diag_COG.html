@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Observer la trajectoire d'une commune — trajectoire_commune • COGugaison</title>
+<title>Effectuer un diagnostic sur le COG présent dans une base de données — diag_COG • COGugaison</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="Observer la trajectoire d'une commune — trajectoire_commune" />
-<meta property="og:description" content="Observer sur un diagramme interactif la trajectoire d'une commune depuis 1968 (aucun changement, fusions, défusions ou changements de codes) notamment via une application shiny." />
+<meta property="og:title" content="Effectuer un diagnostic sur le COG présent dans une base de données — diag_COG" />
+<meta property="og:description" content="Effectuer un diagnostic sur le COG présent dans une base de données" />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -116,33 +116,40 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Observer la trajectoire d'une commune</h1>
-    <small class="dont-index">Source: <a href='http://github.com/antuki/COGugaison/blob/master/R/trajectoire_commune.R'><code>R/trajectoire_commune.R</code></a></small>
-    <div class="hidden name"><code>trajectoire_commune.Rd</code></div>
+    <h1>Effectuer un diagnostic sur le COG présent dans une base de données</h1>
+    <small class="dont-index">Source: <a href='http://github.com/antuki/COGugaison/blob/master/R/diag_COG.R'><code>R/diag_COG.R</code></a></small>
+    <div class="hidden name"><code>diag_COG.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Observer sur un diagramme interactif la trajectoire d'une commune depuis 1968 (aucun changement, fusions, défusions ou changements de codes) notamment via une application shiny.</p>
+    <p>Effectuer un diagnostic sur le COG présent dans une base de données</p>
     </div>
 
-    <pre class="usage"><span class='fu'>trajectoire_commune</span><span class='op'>(</span><span class='va'>codgeo</span>, COG <span class='op'>=</span> <span class='va'>annee_ref</span>, donnees_insee <span class='op'>=</span> <span class='cn'>F</span><span class='op'>)</span>
-
-<span class='fu'>trajectoire_commune_shiny</span><span class='op'>(</span>donnees_insee <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>diag_COG</span><span class='op'>(</span>
+  <span class='va'>table_entree</span>,
+  codgeo_entree <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span><span class='op'>(</span><span class='va'>table_entree</span><span class='op'>)</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span>,
+  ign_na <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  id_doubl <span class='op'>=</span> <span class='cn'>FALSE</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>codgeo</th>
-      <td><p>est une chaîne de 5 caractères qui indique le code Insee de la commune considérée.</p></td>
+      <th>table_entree</th>
+      <td><p>correspond à la table à diagnostiquer (ajout de la colonne de diagnostic au tableau en entrée, nouveaux paramètres optionnels ign_na et id_doubl, simplification du diagnostic)</p></td>
     </tr>
     <tr>
-      <th>COG</th>
-      <td><p>indique l'année de COG de la communes considérée (exemple 2014). Années possibles : de 1968 à 2020. Par défaut, vaut 2020.</p></td>
+      <th>codgeo_entree</th>
+      <td><p>est une chaîne de caractères qui indique le nom de la variable contenant les codes Insee communaux. Par défaut, il s'agit du nom de la première colonne de table_entree.</p></td>
     </tr>
     <tr>
-      <th>donnees_insee</th>
-      <td><p>vaut TRUE si l'on veut observer les dates de prise en compte du COG par l'Insee. En effet, quelques rares modifications communales (la défusion des communes Loisey et Culey au 1er janvier 2014 par exemple) ont été prises en compte dans les bases de données communales de l'Insee plus tard que la date officielle.</p></td>
+      <th>ign_na</th>
+      <td><p>vaut TRUE si on souhaite ignorer les codes manquants. Valeur FALSE par défaut.</p></td>
+    </tr>
+    <tr>
+      <th>id_doubl</th>
+      <td><p>vaut TRUE si on souhaite ajouter une colonne d'identification des codes en double à l'export. Valeur FALSE par défaut.</p></td>
     </tr>
     </table>
 
@@ -177,23 +184,33 @@
 
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><a href='changement_COG_typo.html'>changement_COG_typo</a>, <a href='changement_COG_typo_details.html'>changement_COG_typo_details</a>,  <a href='COG_akinator.html'>COG_akinator</a>, <a href='enlever_PLM.html'>enlever_PLM</a>, <a href='modification_Corse.html'>modification_Corse</a>, <a href='modifications_communales.html'>modifications_communales</a>,<a href='nivsupra.html'>nivsupra</a>,<a href='apparier_COG.html'>apparier_COG</a>,<a href='modification_Oudon.html'>modification_Oudon</a>,trajectoire_commune</p></div>
+    <div class='dont-index'><p><a href='COG_akinator.html'>COG_akinator</a>, <a href='enlever_PLM.html'>enlever_PLM</a>, <a href='trajectoire_commune.html'>trajectoire_commune</a></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>## Exemple 1</span>
-<span class='co'># Ici, nous allons observer sur un graphique interactif la trajectoire des communes ayant pour codes 01003 en 1968, 14697 en 1968, 76108 en 2014.</span>
-<span class='fu'>trajectoire_commune</span><span class='op'>(</span><span class='st'>"01003"</span>, <span class='fl'>1968</span>,donnees_insee<span class='op'>=</span><span class='cn'>F</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Attachement du package : 'dplyr'</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from 'package:stats':</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    filter, lag</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from 'package:base':</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    intersect, setdiff, setequal, union</span></div><div class='input'><span class='fu'>trajectoire_commune</span><span class='op'>(</span><span class='st'>"14697"</span>, <span class='fl'>1968</span>,donnees_insee<span class='op'>=</span><span class='cn'>F</span><span class='op'>)</span>
-<span class='fu'>trajectoire_commune</span><span class='op'>(</span><span class='st'>"76108"</span>, <span class='fl'>2014</span>,donnees_insee<span class='op'>=</span><span class='cn'>F</span><span class='op'>)</span>
-<span class='co'>## Exemple 2</span>
-<span class='co'># Cette fonction lance une application shiny permettant d'observer toutes les trajectoires des communes.</span>
-<span class='co'># trajectoire_commune_shiny()</span>
-</div></pre>
+<span class='co'># Exemple d'une table dont le COG est au carrÃ©</span>
+<span class='va'>sortie</span> <span class='op'>&lt;-</span> <span class='fu'>diag_COG</span><span class='op'>(</span><span class='va'>COG2010</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] "# ------------------------------"
+#&gt; [1] "# DIAGNOSTIC DE COG"
+#&gt; [1] "# ------------------------------"
+#&gt; [1] "# Synthèse"
+#&gt; [1] "# COG2010"
+#&gt; [1] "# ------------------------------"
+#&gt; [1] "# Diagnostic détaillé"
+#&gt; [1] "# Le fichier compte 36699 codes communes."
+#&gt; [1] "# Le diagnostic de COG correspond au COG le plus récent dans lequel l'ensemble des codes communes du fichier en entrée sont présents."
+#&gt; 
+#&gt; 
+#&gt; |              | Nombre d'observations|
+#&gt; |:-------------|---------------------:|
+#&gt; |COG2010       |                 36699|
+#&gt; |codes uniques |                 36699|</div><div class='input'><span class='co'>## Exemple 2</span>
+<span class='co'># Exemple d'une table qui mix plusieurs COG</span>
+<span class='va'>table_fictive</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>rbind</a></span><span class='op'>(</span><span class='va'>COG2021</span>,<span class='va'>COG2019</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+<span class='fu'>distinct</span><span class='op'>(</span><span class='va'>CODGEO</span>, .keep_all <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>add_row</span><span class='op'>(</span>CODGEO <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='st'>"01001"</span>,<span class='fl'>5</span><span class='op'>)</span>,<span class='st'>"75101"</span>,<span class='cn'>NA</span>,<span class='st'>"98756"</span>,<span class='st'>"ZZZZZ"</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in rbind(COG2021, COG2019) %&gt;% distinct(CODGEO, .keep_all = TRUE) %&gt;%     add_row(CODGEO = c(rep("01001", 5), "75101", NA, "98756",         "ZZZZZ")): impossible de trouver la fonction "%&gt;%"</span></div><div class='input'><span class='va'>sortie</span> <span class='op'>&lt;-</span> <span class='fu'>diag_COG</span><span class='op'>(</span><span class='va'>table_fictive</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in diag_COG(table_fictive): objet 'table_fictive' introuvable</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

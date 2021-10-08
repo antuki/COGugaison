@@ -17,23 +17,27 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.1/css/all.min.css" integrity="sha256-PbSmjxuVAzJ6FPvNYsrXygfGhNJYyZ2GktDbkMBqQZg=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.1/css/v4-shims.min.css" integrity="sha256-A6jcAdwFD48VMjlI3GDxUd+eCQa7/KWy6G9oe/ovaPA=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -45,7 +49,6 @@
 <meta property="og:title" content="Apparier une liste de communes avec un millésime de COG — apparier_COG" />
 <meta property="og:description" content="Comparer la liste des communes présente dans une table de données avec le COG d'un millésime donné. Fonction souvent utile après l'utilisation de la fonction COG_akinator." />
 <meta property="og:image" content="/logo.png" />
-<meta name="twitter:card" content="summary" />
 
 
 
@@ -63,7 +66,7 @@
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -77,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">COGugaison</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.4</span>
       </span>
     </div>
 
@@ -95,7 +98,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/antuki/COGugaison">
+  <a href="http://github.com/antuki/COGugaison/">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -114,7 +117,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Apparier une liste de communes avec un millésime de COG</h1>
-    <small class="dont-index">Source: <a href='https://github.com/antuki/COGugaison/blob/master/R/apparier_COG.R'><code>R/apparier_COG.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/antuki/COGugaison/blob/master/R/apparier_COG.R'><code>R/apparier_COG.R</code></a></small>
     <div class="hidden name"><code>apparier_COG.Rd</code></div>
     </div>
 
@@ -122,9 +125,12 @@
     <p>Comparer la liste des communes présente dans une table de données avec le COG d'un millésime donné. Fonction souvent utile après l'utilisation de la fonction COG_akinator.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>apparier_COG</span>(<span class='no'>vecteur_codgeo</span>, <span class='kw'>donnees_insee</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>COG</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/substr.html'>substr</a></span>(<span class='fu'><a href='COG_akinator.html'>COG_akinator</a></span>(<span class='kw'>vecteur_codgeo</span> <span class='kw'>=</span> <span class='no'>vecteur_codgeo</span>,
-  <span class='kw'>donnees_insee</span> <span class='kw'>=</span> <span class='no'>donnees_insee_entree</span>), <span class='fl'>4</span>, <span class='fl'>7</span>)))</pre>
+    <pre class="usage"><span class='fu'>apparier_COG</span><span class='op'>(</span>
+  <span class='va'>vecteur_codgeo</span>,
+  donnees_insee <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  COG <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/substr.html'>substr</a></span><span class='op'>(</span><span class='fu'><a href='COG_akinator.html'>COG_akinator</a></span><span class='op'>(</span>vecteur_codgeo <span class='op'>=</span> <span class='va'>vecteur_codgeo</span>, donnees_insee <span class='op'>=</span>
+    <span class='va'>donnees_insee_entree</span><span class='op'>)</span>, <span class='fl'>4</span>, <span class='fl'>7</span><span class='op'>)</span><span class='op'>)</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -185,15 +191,20 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>## Exemple 1</span>
-<span class='fu'><a href='COG_akinator.html'>COG_akinator</a></span>(<span class='no'>exemple_popcom</span>$<span class='no'>CODGEO</span>,<span class='kw'>donnees_insee</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; [1] "COG2014"</div><div class='input'><span class='fu'>apparier_COG</span>(<span class='kw'>vecteur_codgeo</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='no'>exemple_popcom</span>[<span class='fu'><a href='https://rdrr.io/r/base/which.html'>which</a></span>(<span class='no'>exemple_popcom</span>$<span class='no'>CODGEO</span><span class='kw'>!=</span><span class='st'>"01001"</span>),<span class='fl'>1</span>],<span class='st'>"XXXXX"</span>), <span class='kw'>donnees_insee</span> <span class='kw'>=</span> <span class='no'>T</span>,<span class='kw'>COG</span><span class='kw'>=</span><span class='fl'>2014</span>)</div><div class='output co'>#&gt; $absent_de_bdd
+<span class='fu'><a href='COG_akinator.html'>COG_akinator</a></span><span class='op'>(</span><span class='va'>exemple_popcom</span><span class='op'>$</span><span class='va'>CODGEO</span>,donnees_insee <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] "COG2014"</div><div class='input'><span class='fu'>apparier_COG</span><span class='op'>(</span>vecteur_codgeo<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>exemple_popcom</span><span class='op'>[</span><span class='fu'><a href='https://rdrr.io/r/base/which.html'>which</a></span><span class='op'>(</span><span class='va'>exemple_popcom</span><span class='op'>$</span><span class='va'>CODGEO</span><span class='op'>!=</span><span class='st'>"01001"</span><span class='op'>)</span>,<span class='fl'>1</span><span class='op'>]</span>,<span class='st'>"XXXXX"</span><span class='op'>)</span>, donnees_insee <span class='op'>=</span> <span class='cn'>TRUE</span>,COG<span class='op'>=</span><span class='fl'>2014</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; $absent_de_bdd
 #&gt;  [1] "01001" "97601" "97602" "97603" "97604" "97605" "97606" "97607" "97608"
 #&gt; [10] "97609" "97610" "97611" "97612" "97613" "97614" "97615" "97616" "97617"
 #&gt; 
 #&gt; $absent_de_COG
 #&gt; [1] "XXXXX"
-#&gt; </div><div class='input'><span class='no'>appariement</span> <span class='kw'>&lt;-</span> <span class='fu'>apparier_COG</span>(<span class='kw'>vecteur_codgeo</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='no'>exemple_popcom</span>[<span class='fu'><a href='https://rdrr.io/r/base/which.html'>which</a></span>(<span class='no'>exemple_popcom</span>$<span class='no'>CODGEO</span><span class='kw'>!=</span><span class='st'>"01001"</span>),<span class='fl'>1</span>],<span class='st'>"XXXXX"</span>), <span class='kw'>donnees_insee</span> <span class='kw'>=</span> <span class='no'>T</span>,<span class='kw'>COG</span><span class='kw'>=</span><span class='fl'>2014</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span>(<span class='no'>appariement</span>$<span class='no'>absent_de_bdd</span>)</div><div class='output co'>#&gt; 01001 97601 97602 97603 97604 97605 97606 97607 97608 97609 97610 97611 97612 97613 97614 97615 97616 97617</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span>(<span class='no'>appariement</span>$<span class='no'>absent_de_COG</span>)</div><div class='output co'>#&gt; XXXXX</div><div class='input'><span class='co'># regarder le libellÃ© des communes prÃ©sentes dans le COG mais pas dans la base de donnÃ©es</span>
-<span class='no'>COG2014_insee</span>[<span class='fu'><a href='https://rdrr.io/r/base/which.html'>which</a></span>(<span class='no'>COG2014_insee</span>$<span class='no'>CODGEO</span><span class='kw'>%in%</span><span class='no'>appariement</span>$<span class='no'>absent_de_bdd</span>),<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>2</span>)]</div><div class='output co'>#&gt;       CODGEO                  LIBGEO
+#&gt; </div><div class='input'><span class='va'>appariement</span> <span class='op'>&lt;-</span> <span class='fu'>apparier_COG</span><span class='op'>(</span>vecteur_codgeo<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>exemple_popcom</span><span class='op'>[</span><span class='fu'><a href='https://rdrr.io/r/base/which.html'>which</a></span><span class='op'>(</span><span class='va'>exemple_popcom</span><span class='op'>$</span><span class='va'>CODGEO</span><span class='op'>!=</span><span class='st'>"01001"</span><span class='op'>)</span>,<span class='fl'>1</span><span class='op'>]</span>,<span class='st'>"XXXXX"</span><span class='op'>)</span>, donnees_insee <span class='op'>=</span> <span class='cn'>TRUE</span>,COG<span class='op'>=</span><span class='fl'>2014</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span><span class='op'>(</span><span class='va'>appariement</span><span class='op'>$</span><span class='va'>absent_de_bdd</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; 01001 97601 97602 97603 97604 97605 97606 97607 97608 97609 97610 97611 97612 97613 97614 97615 97616 97617</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span><span class='op'>(</span><span class='va'>appariement</span><span class='op'>$</span><span class='va'>absent_de_COG</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; XXXXX</div><div class='input'><span class='co'># regarder le libellÃ© des communes prÃ©sentes dans le COG mais pas dans la base de donnÃ©es</span>
+<span class='va'>COG2014_insee</span><span class='op'>[</span><span class='fu'><a href='https://rdrr.io/r/base/which.html'>which</a></span><span class='op'>(</span><span class='va'>COG2014_insee</span><span class='op'>$</span><span class='va'>CODGEO</span><span class='op'>%in%</span><span class='va'>appariement</span><span class='op'>$</span><span class='va'>absent_de_bdd</span><span class='op'>)</span>,<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>2</span><span class='op'>)</span><span class='op'>]</span>
+</div><div class='output co'>#&gt;       CODGEO                  LIBGEO
 #&gt; 1      01001 L'Abergement-Clémenciat
 #&gt; 36665  97601                   Acoua
 #&gt; 36666  97602              Bandraboua
@@ -214,27 +225,20 @@
 #&gt; 36681  97617                Tsingoni</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#details">Details</a></li>
-      <li><a href="#references">References</a></li>
-      <li><a href="#see-also">See also</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
 
       <footer>
       <div class="copyright">
-  <p>Developed by  antuki.</p>
+  <p>Developed by Kim Antunez.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

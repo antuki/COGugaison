@@ -18,9 +18,9 @@ Le découpage des territoires français, en particulier les communes, n'est pas 
 
 Ce package R a alors pour objectif global de manipuler des données communales produites à différents millésimes et de les agréger à différents niveaux supra-communaux. Plus précisément, il permet actuellement de : 
 
-- détecter le millésime du code officiel géographique d'une table de données communales : fonction `COG_akinator` et apparier une liste de communes d'une base de données avec celle du COG d'un millésime donné avec `apparier_COG`
-- visualiser les modifications communales (fusions, défusions, changements de codes ou de noms) qui ont eu lieu entre deux dates : `modifications_communales`
-- visualiser sur un graphique interactif la trajectoire d'une commune donnée, c'est-à-dire toutes les modifications qui ont eu lieu depuis 1968 : `trajectoire_commune` et `trajectoire_commune_shiny`  
+- détecter le millésime du code officiel géographique d'une table de données communales : fonction `COG_akinator`, faire un diagnostic de COG plus détaillé avec `diag_COG` et apparier une liste de communes d'une base de données avec celle du COG d'un millésime donné avec `apparier_COG`
+- visualiser les modifications communales (fusions, défusions, changements de codes ou de noms) qui ont eu lieu entre deux dates : `modifications_communales`  
+- visualiser sur un graphique interactif la trajectoire d'une commune donnée, c'est-à-dire toutes les modifications qui ont eu lieu depuis 1968 : `trajectoire_commune` et `trajectoire_commune_shiny`.
 - transformer des tables de données numériques en géographie au premier janvier d'une année souhaitée : `changement_COG_varNum`. 
 - transformer des typologies de communes en géographie au premier janvier d'une année souhaitée en ayant le choix entre plusieurs hypothèses de classement en cas de fusion de communes de classes différentes (attribuer une unique classe à toutes les communes fusionnées, attribuer la classe qui contient le plus de population, définir une classe absorbante, une classe absorbée ou une classe spécifique aux regroupements de plusieurs communes de classes différentes) : `changement_COG_typo`. Il est également possible d'isoler dans une table les communes fusionnées appartenant à des classes différentes : `changement_COG_typo_details`.
 - permettre d'agréger les tables de données communales à de nombreux échelons supra-communaux administratifs (EPCI, arrondissements, cantons-villes, départements, régions) ou d'étude (bassins de vie, zones d'emploi, unités urbaines, aires urbaines) : `nivsupra`. 
@@ -96,13 +96,14 @@ Ce Rdata contient un data.frame intitulé historiq qui correspond à [l'historiq
 
 ## Quel code officiel géographique est utilisé ? 
 
-
 Nous allons maintenant manipuler une table exemple incluse dans le package, la table `exemple_popcom` qui contient comme variables le code géographique de la commune (CODGEO), son nom (LIBGEO), sa population en 2012 (P12_POP), sa superficie (SUPERF) ainsi que deux typologies de territoires générées aléatoirement (typoA et typoB). Il faut veiller à ce que les variables numériques soient au bon format dans R et que les typologies et identifiants soient au format caractère (si ce n'est pas le cas, il faudra les transformer avec les fonctions *as.numeric* et *as.character*).
 
 ```{r, fig.show='hold'}
 head(exemple_popcom)
 str(exemple_popcom)
 ```
+
+### `COG_akinator`
 
 La fonction `COG_akinator` permet de donner des pistes à l'utilisateur sur le code officiel géographique (COG) utilisé dans sa table de données communales, c'est-à-dire de savoir si la liste de communes utilisée correspond à la liste officiel au premier janvier de 2017 ? de 2016 ? ou d'une autre année. 
 
@@ -113,6 +114,8 @@ COG_akinator(vecteur_codgeo = exemple_popcom[,1], donnees_insee = TRUE)
 ```
 
 En l'occurrence la liste de communes utilisée dans cette table correspond à la liste des communes au 1er janvier 2014. 
+
+### `apparier_COG`
 
 Une fois que le COG d'une base de données est détecté, ou bien si justement le COG n'arrive pas à être détecté par la fonction `COG_akinator`, il est possible d'utiliser la fonction `apparier_COG` pour comparer la liste des communes présente dans une table de données avec le COG d'un millésime donné.
 
@@ -128,6 +131,73 @@ cat(appariement$absent_de_COG)
 COG2014_insee[which(COG2014_insee$CODGEO %in% appariement$absent_de_bdd),c(1,2)]
 ```
 
+### `diag_COG`
+
+Enfin, la fonction `diag_COG` permet de vous outiller encore davantage. Elle réalise un diagnostic complet du ou des COG présents dans votre base de données. 
+
+```{r, fig.show='hold'}
+diagnostic <- diag_COG(exemple_popcom)
+head(diagnostic)
+```
+
+Ici le diagnostic nous montre que la base de données est bien construite puisqu'elle ne comporte que des codes communes d'une même année, 2014. 
+
+Mais cette fonction permet également de diagnostiquer des bases de données qui comportent des mix entre plusieurs COG (oh, horreur !) comme dans l'exemple ci-dessous : 
+
+```{r, fig.show='hold', include=FALSE}
+library(dplyr)
+```
+
+
+```{r, fig.show='hold', eval=FALSE}
+library(dplyr)
+```
+
+```{r, fig.show='hold'}
+exemple_popcom_deforme <- exemple_popcom %>% 
+  add_row(CODGEO = c(rep("01001",5),"14666","75101",NA,"98756","ZZZZZ"))
+```
+
+```{r, fig.show='hold', eval = FALSE}
+diagnostic2 <- diag_COG(exemple_popcom_deforme)
+```
+
+```
+[1] "# ------------------------------"
+[1] "# DIAGNOSTIC DE COG"
+[1] "# ------------------------------"
+[1] "# Synthèse"
+[1] "# COG non identifiable"
+[1] "# ------------------------------"
+[1] "# Diagnostic détaillé"
+[1] "# Le fichier compte 36674 codes communes."
+[1] "# Dans la mesure où le COG n'est pas identifiable, le diagnostic de COG correspond au COG le plus récent d'apparition de chaque code commune du fichier en entrée."
+
+
+|                         | Nombre d'observations|
+|:------------------------|---------------------:|
+|COG2021                  |                 34952|
+|COG2015                  |                   773|
+|COG2016                  |                   467|
+|COG2018                  |                   387|
+|COG2017                  |                    59|
+|COG2014                  |                    25|
+|COG2020                  |                     4|
+|COG2019                  |                     3|
+|arrondissement municipal |                     1|
+|code indéterminé         |                     1|
+|code manquant            |                     1|
+|collectivité d'outre-mer |                     1|
+|codes uniques            |                 36668|
+```
+
+La fonction `diag_COG` ne reconnaissant pas le COG, elle identifie pour chaque ligne de la table, l'année la plus récente d'apparition de la commune dans les tables de COG.
+
+Toutefois, lorsque le COG est relativement ancien, comme ici 2014, il n'est pas évident à partir de cela d'en déduire qu'il s'agit d'une table millésimée 2014 avec simplement quelques lignes erronées dedans puisque `diag_COG` identifie en priorité les COG récents. Dans ce cas, la fonction `COG_akinator` vue précédemment peut vous aider à identifier le millésime 2014 de par son approche complémentaire à `diag_COG` :
+
+```{r, fig.show='hold'}
+COG_akinator(exemple_popcom_deforme$CODGEO)
+```
 
 ## Visualiser les modifications communales
 

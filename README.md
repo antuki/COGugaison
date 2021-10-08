@@ -6,7 +6,7 @@ Le découpage des territoires français, en particulier les communes, n'est pas 
 
 Ce package R a alors pour objectif global de manipuler des données communales produites à différents millésimes et de les agréger à différents niveaux supra-communaux. Plus précisément, il permet actuellement de : 
 
-- détecter le millésime du code officiel géographique d'une table de données communales : fonction `COG_akinator` et apparier une liste de communes d'une base de données avec celle du COG d'un millésime donné avec `apparier_COG`
+- détecter le millésime du code officiel géographique d'une table de données communales : fonction `COG_akinator`, faire un diagnostic de COG plus détaillé avec `diag_COG` et apparier une liste de communes d'une base de données avec celle du COG d'un millésime donné avec `apparier_COG`
 - visualiser les modifications communales (fusions, défusions, changements de codes ou de noms) qui ont eu lieu entre deux dates : `modifications_communales`  
 - visualiser sur un graphique interactif la trajectoire d'une commune donnée, c'est-à-dire toutes les modifications qui ont eu lieu depuis 1968 : `trajectoire_commune` et `trajectoire_commune_shiny`.
 - transformer des tables de données numériques en géographie au premier janvier d'une année souhaitée : `changement_COG_varNum`. 

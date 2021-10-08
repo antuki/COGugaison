@@ -67,4 +67,14 @@
 
 * mise à jour totale du COG2021
 
+# COGugaison 1.0.4
+
+## nouveautés
+
+### octobre 2021
+
+* ajout de la fonction diag_COG
+
+
 ## correction de bugs / optimisation du code
+
