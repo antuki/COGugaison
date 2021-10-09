@@ -9,7 +9,8 @@ diag_COG(
   table_entree,
   codgeo_entree = colnames(table_entree)[1],
   ign_na = FALSE,
-  id_doubl = FALSE
+  id_doubl = FALSE,
+  hypothese_COG = annee_ref
 )
 }
 \arguments{
@@ -20,6 +21,8 @@ diag_COG(
 \item{ign_na}{vaut TRUE si on souhaite ignorer les codes manquants. Valeur FALSE par défaut.}
 
 \item{id_doubl}{vaut TRUE si on souhaite ajouter une colonne d'identification des codes en double à l'export. Valeur FALSE par défaut.}
+
+\item{hypothese_COG}{hypothèse formulée par l'utilisateur concernant l'année de référence de COG supposée de la base de données. Le diagnostic sera alors effectué par rapport à cette année de COG. vaut annee_ref (COG le plus récent) par défaut.}
 }
 \description{
 Effectuer un diagnostic sur le COG présent dans une base de données
@@ -53,10 +56,14 @@ Les différences entre les tables de passage Insee et non Insee sont les suivant
 sortie <- diag_COG(COG2010)
 ## Exemple 2
 # Exemple d'une table qui mix plusieurs COG
-table_fictive <- rbind(COG2021,COG2019) \%>\%
-distinct(CODGEO, .keep_all = TRUE) \%>\%
+ table_fictive <- rbind(COG2014,COG2015,COG2013) \%>\%
+ distinct(CODGEO, .keep_all = TRUE) \%>\%
   add_row(CODGEO = c(rep("01001",5),"75101",NA,"98756","ZZZZZ"))
-sortie <- diag_COG(table_fictive)
+ # Sans hypothÃ¨se prÃ©alable sur le COG probable de la table
+ sortie <- diag_COG(table_fictive)
+ # En ayant une hypothÃ¨se prÃ©alable sur le COG de sortie de la table
+ COG_akinator(table_fictive$CODGEO)
+ sortie <- diag_COG(table_fictive, hypothese_COG = 2013)
 }
 \references{
 \itemize{

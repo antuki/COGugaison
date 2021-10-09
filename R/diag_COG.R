@@ -1,4 +1,4 @@
-# Auteure : Constance Lecomte, Observatoire des territoires, ANCT
+# Auteure : Constance Lecomte, Observatoire des territoires, ANCT. Mainteneur et fonctionnalités évolutives : Kim Antunez
 #' @title Effectuer un diagnostic sur le COG présent dans une base de données
 #' @name diag_COG
 #' @description Effectuer un diagnostic sur le COG présent dans une base de données
@@ -6,6 +6,7 @@
 #' @param codgeo_entree est une chaîne de caractères qui indique le nom de la variable contenant les codes Insee communaux. Par défaut, il s'agit du nom de la première colonne de table_entree.
 #' @param ign_na vaut TRUE si on souhaite ignorer les codes manquants. Valeur FALSE par défaut.
 #' @param id_doubl vaut TRUE si on souhaite ajouter une colonne d'identification des codes en double à l'export. Valeur FALSE par défaut.
+#' @param hypothese_COG hypothèse formulée par l'utilisateur concernant l'année de référence de COG supposée de la base de données. Le diagnostic sera alors effectué par rapport à cette année de COG. vaut annee_ref (COG le plus récent) par défaut.
 #' @details
 #' Le code officiel géographique le plus récent du package est actuellement celui au 01/01/2021. \cr
 #'
@@ -41,14 +42,18 @@
 #' sortie <- diag_COG(COG2010)
 #' ## Exemple 2
 #' # Exemple d'une table qui mix plusieurs COG
-#' table_fictive <- rbind(COG2021,COG2019) %>%
-#' distinct(CODGEO, .keep_all = TRUE) %>%
+#'  table_fictive <- rbind(COG2014,COG2015,COG2013) %>%
+#'  distinct(CODGEO, .keep_all = TRUE) %>%
 #'   add_row(CODGEO = c(rep("01001",5),"75101",NA,"98756","ZZZZZ"))
-#' sortie <- diag_COG(table_fictive)
+#'  # Sans hypothèse préalable sur le COG probable de la table
+#'  sortie <- diag_COG(table_fictive)
+#'  # En ayant une hypothèse préalable sur le COG de sortie de la table
+#'  COG_akinator(table_fictive$CODGEO)
+#'  sortie <- diag_COG(table_fictive, hypothese_COG = 2013)
 #' @encoding UTF-8
 #' @import dplyr
 
-diag_COG <- function(table_entree, codgeo_entree = colnames(table_entree)[1], ign_na = FALSE, id_doubl = FALSE){
+diag_COG <- function(table_entree, codgeo_entree = colnames(table_entree)[1], ign_na = FALSE, id_doubl = FALSE, hypothese_COG = annee_ref){
 
 
   table_sortie <- table_entree
@@ -92,6 +97,17 @@ diag_COG <- function(table_entree, codgeo_entree = colnames(table_entree)[1], ig
   i <- 1
   cog_propre <- FALSE
 
+  # vient d'être déplacé. n'a pas besoin d'être dans la boucle
+  if(ign_na == F){
+    df_to_test <- temp %>%
+      filter(!(codgeo_init %in% temp.plm$codgeo_init) & !(codgeo_init %in% temp.com$codgeo_init))
+  } else if(ign_na == T) {
+    df_to_test <- temp %>%
+      filter(!is.na(codgeo_init)) %>%
+      filter(!(codgeo_init %in% temp.plm$codgeo_init) & !(codgeo_init %in% temp.com$codgeo_init))
+  }
+
+
   while(cog_propre == FALSE){
     an <- list_an_COG[i]
     nom_COG <- paste0("COG", as.character(an))
@@ -100,16 +116,8 @@ diag_COG <- function(table_entree, codgeo_entree = colnames(table_entree)[1], ig
 
       df_COG <- eval(parse(text = nom_COG))
 
-      if(ign_na == F){
-        df_to_test <- temp %>%
-          filter(!(codgeo_init %in% temp.plm$codgeo_init) & !(codgeo_init %in% temp.com$codgeo_init))
-      } else if(ign_na == T) {
-        df_to_test <- temp %>%
-          filter(!is.na(codgeo_init)) %>%
-          filter(!(codgeo_init %in% temp.plm$codgeo_init) & !(codgeo_init %in% temp.com$codgeo_init))
-      }
-
-      nb_obs_abs <- nrow(filter(df_to_test, !(codgeo_init %in% df_COG$CODGEO)))
+      obs_abs <- filter(df_to_test, !(codgeo_init %in% df_COG$CODGEO))
+      nb_obs_abs <- nrow(obs_abs)
 
       if(nb_obs_abs == 0){
         cog_propre <- TRUE
@@ -131,57 +139,41 @@ diag_COG <- function(table_entree, codgeo_entree = colnames(table_entree)[1], ig
     }
   }
 
-  # Si COG indétectable
+  # Si COG indétectable (simplification de la V0 par KA)
   if(cog_propre == "non identifiable"){
-    for(code in diacog.exp[[codgeo_entree]]){
-      i <- 1
-      code_id <- FALSE
+    codes_communes <- diacog.exp[[codgeo_entree]]
 
-      while(code_id == FALSE){
-        an <- list_an_COG[i]
-        nom_COG <- paste0("COG", as.character(an))
-
-        if(!is.na(an)){
-          df_COG <- eval(parse(text = nom_COG))
-          if(code %in% df_COG[["CODGEO"]]){
-            diacog.exp[["diag_cog"]][diacog.exp[[codgeo_entree]]==code] <- nom_COG
-            code_id <- TRUE
-          } else{
-            i <- i+1
-          }
-        } else{
-          if(code %in% temp.com$codgeo_init & code_id == FALSE){
-            diacog.exp[["diag_cog"]][diacog.exp[[codgeo_entree]]==code] <- "collectivité d'outre-mer"
-            code_id <- TRUE
-          }
-          if(code %in% temp.plm$codgeo_init & code_id == FALSE){
-            diacog.exp[["diag_cog"]][diacog.exp[[codgeo_entree]]==code] <- "arrondissement municipal"
-            code_id <- TRUE
-          } else if(code_id == FALSE){
-            diacog.exp[["diag_cog"]][diacog.exp[[codgeo_entree]]==code] <- "code indéterminé"
-            code_id <- TRUE
-          }
-        }
-      }
+    # Si on fait une hypothèse sur le COG, on change l'ordre de parcourt des années.
+    # On commence par l'hypothèses puis on parcourt les années des plus proches de celle-ci (plus proches voisins)
+    if(hypothese_COG!=annee_ref){
+      list_an_COG <- list_an_COG[order(abs(hypothese_COG-list_an_COG))]
     }
 
+    # On parcourt toutes les années
+    for(an in list_an_COG){
+      nom_COG <- paste0("COG", as.character(an))
+      df_COG <- eval(parse(text = nom_COG))
+      codes_communes[which(codes_communes%in%df_COG$CODGEO)]<- as.character(an)
+    }
+    # On traite le cas des codes communes particuliers
+    codes_communes[which(is.na(codes_communes))]<- "code manquant"
+    codes_communes[which(!codes_communes%in%c("code manquant",temp.plm$codgeo_init, temp.com$codgeo_init, annees_possibles))]<- "code indéterminé"
+    codes_communes[which(codes_communes%in%temp.com$codgeo_init)]<- "collectivité d'outre-mer"
+    codes_communes[which(codes_communes%in%temp.plm$codgeo_init)]<- "arrondissement municipal"
+    diacog.exp[["diag_cog"]] <- codes_communes
   }
-  diacog.exp[["diag_cog"]][is.na(diacog.exp[[codgeo_entree]])] <- "code manquant"
 
   # Export
   if(id_doubl == F){
     diacog.exp <- diacog.exp %>%
       select(!!as.name(codgeo_entree), diag_cog, everything())
-  }
-  else if(id_doubl == T){
+  } else {
     diacog.exp <- diacog.exp %>%
       group_by(!!as.name(codgeo_entree)) %>%
       mutate("code_doubl" = case_when(n()>1 ~ "code doublonné", TRUE ~ "code unique")) %>%
       ungroup() %>%
       select(!!as.name(codgeo_entree), diag_cog, code_doubl, everything())
   }
-
-  #assign(deparse(substitute(table_sortie)), diacog.exp,  envir = parent.frame())
 
   # ****************************************************************************
   # Export du diagnostic
@@ -191,7 +183,7 @@ diag_COG <- function(table_entree, codgeo_entree = colnames(table_entree)[1], ig
   print("# ------------------------------")
   print("# Synthèse")
 
-  recap.temp <<- diacog.exp %>%
+  recap.temp <- diacog.exp %>%
     group_by(diag_cog) %>%
     summarise("NB_OBS" = n()) %>%
     ungroup() %>%
@@ -206,7 +198,11 @@ diag_COG <- function(table_entree, codgeo_entree = colnames(table_entree)[1], ig
     print("# ------------------------------")
     print("# Diagnostic détaillé")
     print(paste0("# Le fichier compte ", nrow(diacog.exp), " codes communes."))
-    print("# Le diagnostic de COG correspond au COG le plus récent dans lequel l'ensemble des codes communes du fichier en entrée sont présents.")
+    if(hypothese_COG==annee_ref){
+      print("# Pour chaque commune considérée, le diagnostic de COG correspond au COG le plus récent qui contient son code commune.")
+    } else{
+      print(paste0("# Pour chaque commune considérée, le diagnostic de COG correspond au COG le plus proche de l'année de référence (", hypothese_COG,") qui contient son code commune."))
+    }
 
     print(knitr::kable(recap.temp,
                   format = "markdown"))
@@ -225,6 +221,8 @@ diag_COG <- function(table_entree, codgeo_entree = colnames(table_entree)[1], ig
 
   }
 
-  return(diacog.exp) #table_sortie
+  return(diacog.exp)
 
 }
+
+

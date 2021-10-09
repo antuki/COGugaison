@@ -155,49 +155,20 @@ library(dplyr)
 
 ```{r, fig.show='hold'}
 exemple_popcom_deforme <- exemple_popcom %>% 
-  add_row(CODGEO = c(rep("01001",5),"14666","75101",NA,"98756","ZZZZZ"))
-```
-
-```{r, fig.show='hold', eval = FALSE}
+  add_row(CODGEO = c(rep("01001",5),"76601","75101",NA,"98756","ZZZZZ"))
 diagnostic2 <- diag_COG(exemple_popcom_deforme)
-```
-
-```
-[1] "# ------------------------------"
-[1] "# DIAGNOSTIC DE COG"
-[1] "# ------------------------------"
-[1] "# Synthèse"
-[1] "# COG non identifiable"
-[1] "# ------------------------------"
-[1] "# Diagnostic détaillé"
-[1] "# Le fichier compte 36674 codes communes."
-[1] "# Dans la mesure où le COG n'est pas identifiable, le diagnostic de COG correspond au COG le plus récent d'apparition de chaque code commune du fichier en entrée."
-
-
-|                         | Nombre d'observations|
-|:------------------------|---------------------:|
-|COG2021                  |                 34952|
-|COG2015                  |                   773|
-|COG2016                  |                   467|
-|COG2018                  |                   387|
-|COG2017                  |                    59|
-|COG2014                  |                    25|
-|COG2020                  |                     4|
-|COG2019                  |                     3|
-|arrondissement municipal |                     1|
-|code indéterminé         |                     1|
-|code manquant            |                     1|
-|collectivité d'outre-mer |                     1|
-|codes uniques            |                 36668|
 ```
 
 La fonction `diag_COG` ne reconnaissant pas le COG, elle identifie pour chaque ligne de la table, l'année la plus récente d'apparition de la commune dans les tables de COG.
 
-Toutefois, lorsque le COG est relativement ancien, comme ici 2014, il n'est pas évident à partir de cela d'en déduire qu'il s'agit d'une table millésimée 2014 avec simplement quelques lignes erronées dedans puisque `diag_COG` identifie en priorité les COG récents. Dans ce cas, la fonction `COG_akinator` vue précédemment peut vous aider à identifier le millésime 2014 de par son approche complémentaire à `diag_COG` :
+Toutefois, lorsque le COG est relativement ancien, comme ici 2014, cette sortie par défaut ne permet pas de réaliser diagnostic de COG utile. Il peut alors être utile de faire une **hypothèse préalable sur le COG initial de la table**, en utilisant notamment la fonction `COG_akinator` puis le paramètre `hypothese_COG` de la fonction `diag_COG` comme ci-après.
 
 ```{r, fig.show='hold'}
 COG_akinator(exemple_popcom_deforme$CODGEO)
+diagnostic3 <- diag_COG(exemple_popcom_deforme, hypothese_COG = 2014)
 ```
+
+La sortie est alors davantage conforme aux souhaits de l'utilisateur. Une commune a été identifiée comme étant de COG2017 et est à expertiser. Il s'agit de la commune 76601 qui est issue d'une scission ayant eu lieu en 2017. 
 
 ## Visualiser les modifications communales
 
