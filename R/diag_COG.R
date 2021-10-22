@@ -6,7 +6,8 @@
 #' @param codgeo_entree est une chaîne de caractères qui indique le nom de la variable contenant les codes Insee communaux. Par défaut, il s'agit du nom de la première colonne de table_entree.
 #' @param ign_na vaut TRUE si on souhaite ignorer les codes manquants. Valeur FALSE par défaut.
 #' @param id_doubl vaut TRUE si on souhaite ajouter une colonne d'identification des codes en double à l'export. Valeur FALSE par défaut.
-#' @param hypothese_COG hypothèse formulée par l'utilisateur concernant l'année de référence de COG supposée de la base de données. Le diagnostic sera alors effectué par rapport à cette année de COG. vaut annee_ref (COG le plus récent) par défaut.
+#' @param hypothese_COG (optionnelle) hypothèse formulée par l'utilisateur concernant l'année de référence de COG supposée de la base de données. Le diagnostic sera alors effectué par rapport à cette année de COG. vaut annee_ref (COG le plus récent) par défaut.
+#' @param table_diagnostic vaut TRUE si on souhaite obtenir en sortie une table avec un diagnostic de COG pour chaque ligne. vaut TRUE par défaut.
 #' @details
 #' Le code officiel géographique le plus récent du package est actuellement celui au 01/01/2021. \cr
 #'
@@ -42,6 +43,7 @@
 #' sortie <- diag_COG(COG2010)
 #' ## Exemple 2
 #' # Exemple d'une table qui mix plusieurs COG
+#'  library(dplyr)
 #'  table_fictive <- rbind(COG2014,COG2015,COG2013) %>%
 #'  distinct(CODGEO, .keep_all = TRUE) %>%
 #'   add_row(CODGEO = c(rep("01001",5),"75101",NA,"98756","ZZZZZ"))
@@ -53,7 +55,7 @@
 #' @encoding UTF-8
 #' @import dplyr
 
-diag_COG <- function(table_entree, codgeo_entree = colnames(table_entree)[1], ign_na = FALSE, id_doubl = FALSE, hypothese_COG = annee_ref){
+diag_COG <- function(table_entree, codgeo_entree = colnames(table_entree)[1], ign_na = FALSE, id_doubl = FALSE, hypothese_COG = annee_ref, table_diagnostic=TRUE){
 
 
   table_sortie <- table_entree
@@ -97,7 +99,6 @@ diag_COG <- function(table_entree, codgeo_entree = colnames(table_entree)[1], ig
   i <- 1
   cog_propre <- FALSE
 
-  # vient d'être déplacé. n'a pas besoin d'être dans la boucle
   if(ign_na == F){
     df_to_test <- temp %>%
       filter(!(codgeo_init %in% temp.plm$codgeo_init) & !(codgeo_init %in% temp.com$codgeo_init))
@@ -139,7 +140,7 @@ diag_COG <- function(table_entree, codgeo_entree = colnames(table_entree)[1], ig
     }
   }
 
-  # Si COG indétectable (simplification de la V0 par KA)
+  # Si COG indétectable
   if(cog_propre == "non identifiable"){
     codes_communes <- diacog.exp[[codgeo_entree]]
 
@@ -198,11 +199,8 @@ diag_COG <- function(table_entree, codgeo_entree = colnames(table_entree)[1], ig
     print("# ------------------------------")
     print("# Diagnostic détaillé")
     print(paste0("# Le fichier compte ", nrow(diacog.exp), " codes communes."))
-    if(hypothese_COG==annee_ref){
-      print("# Pour chaque commune considérée, le diagnostic de COG correspond au COG le plus récent qui contient son code commune.")
-    } else{
-      print(paste0("# Pour chaque commune considérée, le diagnostic de COG correspond au COG le plus proche de l'année de référence (", hypothese_COG,") qui contient son code commune."))
-    }
+    print("# Le diagnostic de COG correspond au COG le plus récent dans lequel l'ensemble des codes communes du fichier en entrée sont présents.")
+
 
     print(knitr::kable(recap.temp,
                   format = "markdown"))
@@ -214,14 +212,23 @@ diag_COG <- function(table_entree, codgeo_entree = colnames(table_entree)[1], ig
     print("# ------------------------------")
     print("# Diagnostic détaillé")
     print(paste0("# Le fichier compte ", nrow(diacog.exp), " codes communes."))
-    print("# Dans la mesure où le COG n'est pas identifiable, le diagnostic de COG correspond au COG le plus récent d'apparition de chaque code commune du fichier en entrée.")
+
+    if(hypothese_COG==annee_ref){
+      print("# Dans la mesure où le COG n'est pas identifiable, pour chaque commune considérée, le diagnostic de COG correspond au COG le plus récent qui contient son code commune.")
+    } else{
+      print(paste0("# Dans la mesure où le COG n'est pas identifiable, pour chaque commune considérée, le diagnostic de COG correspond au COG le plus proche de l'année de référence (", hypothese_COG,") qui contient son code commune."))
+    }
 
      print(knitr::kable(recap.temp,
                   format = "markdown"))
 
   }
 
-  return(diacog.exp)
+  if(table_diagnostic){
+    return(diacog.exp)
+  } else{
+    return(invisible(NULL))
+  }
 
 }
 
