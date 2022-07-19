@@ -10,7 +10,8 @@ diag_COG(
   codgeo_entree = colnames(table_entree)[1],
   ign_na = FALSE,
   id_doubl = FALSE,
-  hypothese_COG = annee_ref
+  hypothese_COG = annee_ref,
+  table_diagnostic = TRUE
 )
 }
 \arguments{
@@ -22,15 +23,17 @@ diag_COG(
 
 \item{id_doubl}{vaut TRUE si on souhaite ajouter une colonne d'identification des codes en double à l'export. Valeur FALSE par défaut.}
 
-\item{hypothese_COG}{hypothèse formulée par l'utilisateur concernant l'année de référence de COG supposée de la base de données. Le diagnostic sera alors effectué par rapport à cette année de COG. vaut annee_ref (COG le plus récent) par défaut.}
+\item{hypothese_COG}{(optionnelle) hypothèse formulée par l'utilisateur concernant l'année de référence de COG supposée de la base de données. Le diagnostic sera alors effectué par rapport à cette année de COG. vaut annee_ref (COG le plus récent) par défaut.}
+
+\item{table_diagnostic}{vaut TRUE si on souhaite obtenir en sortie une table avec un diagnostic de COG pour chaque ligne. vaut TRUE par défaut.}
 }
 \description{
 Effectuer un diagnostic sur le COG présent dans une base de données
 }
 \details{
-Le code officiel géographique le plus récent du package est actuellement celui au 01/01/2021. \cr
+Le code officiel géographique le plus récent du package est actuellement celui au 01/01/2022. \cr
 
-Les millésimes des COG qui peuvent être utilisés sont à ce stade les suivants : 1968, 1975, 1982, 1990, 1999, 2008 à 2021. \cr
+Les millésimes des COG qui peuvent être utilisés sont à ce stade les suivants : 1968, 1975, 1982, 1990, 1999, 2008 à 2022. \cr
 
 Les dates de référence des codes officiels géographiques utilisés dans COGugaison sont les suivantes :
 \itemize{
@@ -56,6 +59,7 @@ Les différences entre les tables de passage Insee et non Insee sont les suivant
 sortie <- diag_COG(COG2010)
 ## Exemple 2
 # Exemple d'une table qui mix plusieurs COG
+ library(dplyr)
  table_fictive <- rbind(COG2014,COG2015,COG2013) \%>\%
  distinct(CODGEO, .keep_all = TRUE) \%>\%
   add_row(CODGEO = c(rep("01001",5),"75101",NA,"98756","ZZZZZ"))

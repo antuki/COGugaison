@@ -33,6 +33,25 @@ cat(appariement$absent_de_COG)
 # regarder le libellé des communes présentes dans le COG mais pas dans la base de données
 COG2014_insee[which(COG2014_insee$CODGEO %in% appariement$absent_de_bdd),c(1,2)]
 
+## ---- fig.show='hold'---------------------------------------------------------
+diagnostic <- diag_COG(exemple_popcom)
+head(diagnostic)
+
+## ---- fig.show='hold', include=FALSE------------------------------------------
+library(dplyr)
+
+## ---- fig.show='hold', eval=FALSE---------------------------------------------
+#  library(dplyr)
+
+## ---- fig.show='hold'---------------------------------------------------------
+exemple_popcom_deforme <- exemple_popcom %>% 
+  add_row(CODGEO = c(rep("01001",5),"76601","75101",NA,"98756","ZZZZZ"))
+diagnostic2 <- diag_COG(exemple_popcom_deforme)
+
+## ---- fig.show='hold'---------------------------------------------------------
+COG_akinator(exemple_popcom_deforme$CODGEO)
+diagnostic3 <- diag_COG(exemple_popcom_deforme, hypothese_COG = 2014)
+
 ## ---- fig.show='hold',warning=F,error=F, message=FALSE------------------------
 # Ici, nous allons observer sur un graphique interactif la trajectoire de la commune ayant pour code 01003 en 1968
 # (fusion avec 2 autres communes le 1er janvier 1974)

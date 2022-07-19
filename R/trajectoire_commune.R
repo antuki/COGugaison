@@ -218,6 +218,8 @@ afficher_visNetwork <- function(base_exhaustive,codgeo, COG,donnees_insee=F){
       tab <- sapply(1:length(tab),function(i){tab[[i]] %>% filter(CODGEO==comm[i]) %>% unlist() })
       return(tab)
     }
+    #extraction_COG(2022,"01001")["POP",]
+
 
     label_typemodif <- function(vect){
       vect[which(vect=="f")] <- "fusion"

@@ -22,9 +22,9 @@
 #' @param nivsupra_nom indique le nom à donner au niveau supra-communal dans la table de sortie. Il faut par défaut la chaîne de caractère contenue dans nivsupra si agregation = T et la concaténation de nivsupra et codgeo_entree séparée d'un "_" si agregation = F.
 #' @param agregation vaut TRUE si la table souhaitée doit sommer toutes les lignes qui concernent une même commune et FALSE si l'on souhaite volontairement conserver les doublons dans les codes commune (dans les tables de flux par exemple). Si agregation = F, les variables de type caractère sont alors conservées comme telles ou dupliquées en cas de défusion et les variables numériques sommées en cas de fusion ou réparties proportionnellement à la population de chaque commune en cas de défusion.
 #' @details
-#' Le code officiel géographique le plus récent du package est actuellement celui au 01/01/2021. \cr
+#' Le code officiel géographique le plus récent du package est actuellement celui au 01/01/2022. \cr
 #'
-#' Les millésimes des COG qui peuvent être utilisés sont à ce stade les suivants : 1968, 1975, 1982, 1990, 1999, 2008 à 2021. \cr
+#' Les millésimes des COG qui peuvent être utilisés sont à ce stade les suivants : 1968, 1975, 1982, 1990, 1999, 2008 à 2022. \cr
 #'
 #' A partir de 2020, de nombreux zonages ont été modifiés suite à la refonte des zonages de l'Insee. Les ZE2010 deviennent les ZE2020, les UU2010 deviennent les UU2020, les AU2010 deviennent les AAV2020.
 #'

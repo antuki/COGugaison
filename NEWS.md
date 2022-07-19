@@ -75,6 +75,13 @@
 
 * ajout de la fonction diag_COG
 
+# COGugaison 1.0.5
+
+## nouveautés
+
+### juillet 2022
+
+* mise à jour totale du COG2022 
 
 ## correction de bugs / optimisation du code
 
