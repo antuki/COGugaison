@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">COGugaison</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.5</span>
       </span>
     </div>
 
@@ -130,7 +130,8 @@
   codgeo_entree <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span><span class='op'>(</span><span class='va'>table_entree</span><span class='op'>)</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span>,
   ign_na <span class='op'>=</span> <span class='cn'>FALSE</span>,
   id_doubl <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  hypothese_COG <span class='op'>=</span> <span class='va'>annee_ref</span>
+  hypothese_COG <span class='op'>=</span> <span class='va'>annee_ref</span>,
+  table_diagnostic <span class='op'>=</span> <span class='cn'>TRUE</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -154,14 +155,18 @@
     </tr>
     <tr>
       <th>hypothese_COG</th>
-      <td><p>hypothèse formulée par l'utilisateur concernant l'année de référence de COG supposée de la base de données. Le diagnostic sera alors effectué par rapport à cette année de COG. vaut annee_ref (COG le plus récent) par défaut.</p></td>
+      <td><p>(optionnelle) hypothèse formulée par l'utilisateur concernant l'année de référence de COG supposée de la base de données. Le diagnostic sera alors effectué par rapport à cette année de COG. vaut annee_ref (COG le plus récent) par défaut.</p></td>
+    </tr>
+    <tr>
+      <th>table_diagnostic</th>
+      <td><p>vaut TRUE si on souhaite obtenir en sortie une table avec un diagnostic de COG pour chaque ligne. vaut TRUE par défaut.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Le code officiel géographique le plus récent du package est actuellement celui au 01/01/2021. <br /></p>
-<p>Les millésimes des COG qui peuvent être utilisés sont à ce stade les suivants : 1968, 1975, 1982, 1990, 1999, 2008 à 2021. <br /></p>
+    <p>Le code officiel géographique le plus récent du package est actuellement celui au 01/01/2022. <br /></p>
+<p>Les millésimes des COG qui peuvent être utilisés sont à ce stade les suivants : 1968, 1975, 1982, 1990, 1999, 2008 à 2022. <br /></p>
 <p>Les dates de référence des codes officiels géographiques utilisés dans COGugaison sont les suivantes :</p><ul>
 <li><p>COG 1968 : à partir du 01/03/1968</p></li>
 <li><p>COG 1975 : à partir du 20/02/1975</p></li>
@@ -203,7 +208,7 @@
 #&gt; [1] "# ------------------------------"
 #&gt; [1] "# Diagnostic détaillé"
 #&gt; [1] "# Le fichier compte 36699 codes communes."
-#&gt; [1] "# Pour chaque commune considérée, le diagnostic de COG correspond au COG le plus récent qui contient son code commune."
+#&gt; [1] "# Le diagnostic de COG correspond au COG le plus récent dans lequel l'ensemble des codes communes du fichier en entrée sont présents."
 #&gt; 
 #&gt; 
 #&gt; |              | Nombre d'observations|
@@ -211,15 +216,68 @@
 #&gt; |COG2010       |                 36699|
 #&gt; |codes uniques |                 36699|</div><div class='input'><span class='co'>## Exemple 2</span>
 <span class='co'># Exemple d'une table qui mix plusieurs COG</span>
- <span class='va'>table_fictive</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>rbind</a></span><span class='op'>(</span><span class='va'>COG2014</span>,<span class='va'>COG2015</span>,<span class='va'>COG2013</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
- <span class='fu'>distinct</span><span class='op'>(</span><span class='va'>CODGEO</span>, .keep_all <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'>add_row</span><span class='op'>(</span>CODGEO <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='st'>"01001"</span>,<span class='fl'>5</span><span class='op'>)</span>,<span class='st'>"75101"</span>,<span class='cn'>NA</span>,<span class='st'>"98756"</span>,<span class='st'>"ZZZZZ"</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in rbind(COG2014, COG2015, COG2013) %&gt;% distinct(CODGEO, .keep_all = TRUE) %&gt;%     add_row(CODGEO = c(rep("01001", 5), "75101", NA, "98756",         "ZZZZZ")): impossible de trouver la fonction "%&gt;%"</span></div><div class='input'> <span class='co'># Sans hypothÃ¨se prÃ©alable sur le COG probable de la table</span>
+ <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://dplyr.tidyverse.org'>dplyr</a></span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'>Attachement du package : 'dplyr'</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from 'package:stats':</span>
+#&gt; <span class='message'></span>
+#&gt; <span class='message'>    filter, lag</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from 'package:base':</span>
+#&gt; <span class='message'></span>
+#&gt; <span class='message'>    intersect, setdiff, setequal, union</span></div><div class='input'> <span class='va'>table_fictive</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>rbind</a></span><span class='op'>(</span><span class='va'>COG2014</span>,<span class='va'>COG2015</span>,<span class='va'>COG2013</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+ <span class='fu'><a href='https://dplyr.tidyverse.org/reference/distinct.html'>distinct</a></span><span class='op'>(</span><span class='va'>CODGEO</span>, .keep_all <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://tibble.tidyverse.org/reference/add_row.html'>add_row</a></span><span class='op'>(</span>CODGEO <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='st'>"01001"</span>,<span class='fl'>5</span><span class='op'>)</span>,<span class='st'>"75101"</span>,<span class='cn'>NA</span>,<span class='st'>"98756"</span>,<span class='st'>"ZZZZZ"</span><span class='op'>)</span><span class='op'>)</span>
+ <span class='co'># Sans hypothÃ¨se prÃ©alable sur le COG probable de la table</span>
  <span class='va'>sortie</span> <span class='op'>&lt;-</span> <span class='fu'>diag_COG</span><span class='op'>(</span><span class='va'>table_fictive</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in diag_COG(table_fictive): objet 'table_fictive' introuvable</span></div><div class='input'> <span class='co'># En ayant une hypothÃ¨se prÃ©alable sur le COG de sortie de la table</span>
+</div><div class='output co'>#&gt; [1] "# ------------------------------"
+#&gt; [1] "# DIAGNOSTIC DE COG"
+#&gt; [1] "# ------------------------------"
+#&gt; [1] "# Synthèse"
+#&gt; [1] "# COG non identifiable"
+#&gt; [1] "# ------------------------------"
+#&gt; [1] "# Diagnostic détaillé"
+#&gt; [1] "# Le fichier compte 36693 codes communes."
+#&gt; [1] "# Dans la mesure où le COG n'est pas identifiable, pour chaque commune considérée, le diagnostic de COG correspond au COG le plus récent qui contient son code commune."
+#&gt; 
+#&gt; 
+#&gt; |                         | Nombre d'observations|
+#&gt; |:------------------------|---------------------:|
+#&gt; |2022                     |                 34959|
+#&gt; |2015                     |                   773|
+#&gt; |2016                     |                   468|
+#&gt; |2018                     |                   387|
+#&gt; |2017                     |                    59|
+#&gt; |2014                     |                    25|
+#&gt; |2021                     |                    10|
+#&gt; |2020                     |                     4|
+#&gt; |2019                     |                     3|
+#&gt; |2013                     |                     1|
+#&gt; |arrondissement municipal |                     1|
+#&gt; |code indéterminé         |                     1|
+#&gt; |code manquant            |                     1|
+#&gt; |collectivité d'outre-mer |                     1|
+#&gt; |codes uniques            |                 36688|</div><div class='input'> <span class='co'># En ayant une hypothÃ¨se prÃ©alable sur le COG de sortie de la table</span>
  <span class='fu'><a href='COG_akinator.html'>COG_akinator</a></span><span class='op'>(</span><span class='va'>table_fictive</span><span class='op'>$</span><span class='va'>CODGEO</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in COG_akinator(table_fictive$CODGEO): objet 'table_fictive' introuvable</span></div><div class='input'> <span class='va'>sortie</span> <span class='op'>&lt;-</span> <span class='fu'>diag_COG</span><span class='op'>(</span><span class='va'>table_fictive</span>, hypothese_COG <span class='op'>=</span> <span class='fl'>2013</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in diag_COG(table_fictive, hypothese_COG = 2013): objet 'table_fictive' introuvable</span></div></pre>
+</div><div class='output co'>#&gt; [1] "COG2013" "COG2015"</div><div class='input'> <span class='va'>sortie</span> <span class='op'>&lt;-</span> <span class='fu'>diag_COG</span><span class='op'>(</span><span class='va'>table_fictive</span>, hypothese_COG <span class='op'>=</span> <span class='fl'>2013</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] "# ------------------------------"
+#&gt; [1] "# DIAGNOSTIC DE COG"
+#&gt; [1] "# ------------------------------"
+#&gt; [1] "# Synthèse"
+#&gt; [1] "# COG non identifiable"
+#&gt; [1] "# ------------------------------"
+#&gt; [1] "# Diagnostic détaillé"
+#&gt; [1] "# Le fichier compte 36693 codes communes."
+#&gt; [1] "# Dans la mesure où le COG n'est pas identifiable, pour chaque commune considérée, le diagnostic de COG correspond au COG le plus proche de l'année de référence (2013) qui contient son code commune."
+#&gt; 
+#&gt; 
+#&gt; |                         | Nombre d'observations|
+#&gt; |:------------------------|---------------------:|
+#&gt; |2013                     |                 36686|
+#&gt; |2014                     |                     2|
+#&gt; |2015                     |                     1|
+#&gt; |arrondissement municipal |                     1|
+#&gt; |code indéterminé         |                     1|
+#&gt; |code manquant            |                     1|
+#&gt; |collectivité d'outre-mer |                     1|
+#&gt; |codes uniques            |                 36688|</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

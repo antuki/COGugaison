@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">COGugaison</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.5</span>
       </span>
     </div>
 
@@ -118,7 +118,7 @@
 <p>Le millésime le plus récent contenu dans le package peut être visualisé de la manière suivante :</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">COGugaison</span><span class="fu">:::</span><span class="va">annee_ref</span></code></pre></div>
-<pre><code>## [1] 2021</code></pre>
+<pre><code>## [1] 2022</code></pre>
 </div>
 <div id="les-bases-de-données-utiles-dans-cogugaison" class="section level2">
 <h2 class="hasAnchor">
@@ -319,7 +319,7 @@
 ## [1] "# ------------------------------"
 ## [1] "# Diagnostic détaillé"
 ## [1] "# Le fichier compte 36664 codes communes."
-## [1] "# Pour chaque commune considérée, le diagnostic de COG correspond au COG le plus récent qui contient son code commune."
+## [1] "# Le diagnostic de COG correspond au COG le plus récent dans lequel l'ensemble des codes communes du fichier en entrée sont présents."
 ## 
 ## 
 ## |              | Nombre d'observations|
@@ -351,17 +351,18 @@
 ## [1] "# ------------------------------"
 ## [1] "# Diagnostic détaillé"
 ## [1] "# Le fichier compte 36674 codes communes."
-## [1] "# Dans la mesure où le COG n'est pas identifiable, le diagnostic de COG correspond au COG le plus récent d'apparition de chaque code commune du fichier en entrée."
+## [1] "# Dans la mesure où le COG n'est pas identifiable, pour chaque commune considérée, le diagnostic de COG correspond au COG le plus récent qui contient son code commune."
 ## 
 ## 
 ## |                         | Nombre d'observations|
 ## |:------------------------|---------------------:|
-## |2021                     |                 34952|
+## |2022                     |                 34942|
 ## |2015                     |                   773|
 ## |2016                     |                   467|
 ## |2018                     |                   387|
 ## |2017                     |                    59|
 ## |2014                     |                    25|
+## |2021                     |                    10|
 ## |2020                     |                     4|
 ## |2019                     |                     3|
 ## |arrondissement municipal |                     1|
@@ -384,7 +385,7 @@
 ## [1] "# ------------------------------"
 ## [1] "# Diagnostic détaillé"
 ## [1] "# Le fichier compte 36674 codes communes."
-## [1] "# Dans la mesure où le COG n'est pas identifiable, le diagnostic de COG correspond au COG le plus récent d'apparition de chaque code commune du fichier en entrée."
+## [1] "# Dans la mesure où le COG n'est pas identifiable, pour chaque commune considérée, le diagnostic de COG correspond au COG le plus proche de l'année de référence (2014) qui contient son code commune."
 ## 
 ## 
 ## |                         | Nombre d'observations|
@@ -409,8 +410,8 @@
 <code class="sourceCode R"><span class="co"># Ici, nous allons observer sur un graphique interactif la trajectoire de la commune ayant pour code 01003 en 1968</span>
 <span class="co"># (fusion avec 2 autres communes le 1er janvier 1974)</span>
 <span class="fu"><a href="../reference/trajectoire_commune.html">trajectoire_commune</a></span><span class="op">(</span><span class="st">"01003"</span>, <span class="fl">1968</span>, donnees_insee <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
-<div id="htmlwidget-ad2a550e5bb5e33786e7" style="width:100%;height:500px;" class="visNetwork html-widget"></div>
-<script type="application/json" data-for="htmlwidget-ad2a550e5bb5e33786e7">{"x":{"nodes":{"id":["01003_1968","01070_1968","01165_1968","01165_1975","01165_2021"],"comm":["01003","01070","01165","01165","01165"],"COG":["1968","1968","1968","1975","2021"],"label":["01003\n(1968)","01070\n(1968)","01165\n(1968)","01165\n(1975)","01165\n(2021)"],"level":[1,1,1,2,3],"pop":["140","100","128","470","1603"],"libgeo":["AMAREINS","CESSEINS","FRANCHELEINS","FRANCHELEINS","Francheleins"],"ratio":[1,1,1,1,1],"title":["<b><a target=\"_blank\" href=https://www.insee.fr/fr/recherche/recherche-geographique?geo=COM-01003&debut=0>01003<\/a> AMAREINS<\/b><br>Population : 140 hab.","<b><a target=\"_blank\" href=https://www.insee.fr/fr/recherche/recherche-geographique?geo=COM-01070&debut=0>01070<\/a> CESSEINS<\/b><br>Population : 100 hab.","<b><a target=\"_blank\" href=https://www.insee.fr/fr/recherche/recherche-geographique?geo=COM-01165&debut=0>01165<\/a> FRANCHELEINS<\/b><br>Population : 128 hab.","<b><a target=\"_blank\" href=https://www.insee.fr/fr/recherche/recherche-geographique?geo=COM-01165&debut=0>01165<\/a> FRANCHELEINS<\/b><br>Population : 470 hab.","<b><a target=\"_blank\" href=https://www.insee.fr/fr/recherche/recherche-geographique?geo=COM-01165&debut=0>01165<\/a> Francheleins<\/b><br>Population : 1603 hab."]},"edges":{"from":["01003_1968","01070_1968","01165_1968","01165_1975"],"to":["01165_1975","01165_1975","01165_1975","01165_2021"],"LIBGEO":["AMAREINS","CESSEINS","FRANCHELEINS",null],"POP":[140,100,128,null],"annee":["1974-01-01","1974-01-01","1974-01-01",null],"typemodif":["f","f","f",null],"ratio":[1,1,1,1],"arrows.middle.enabled":[true,true,true,false],"dashes":[false,false,false,true],"value":[1,1,1,0.2],"title":["<b>fusion<\/b><br>Date : 01 janv. 1974<br>","<b>fusion<\/b><br>Date : 01 janv. 1974<br>","<b>fusion<\/b><br>Date : 01 janv. 1974<br>",null]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"ellipse","color":{"border":"black","background":"#000000","highlight":{"border":"#000000","background":"#000000"}},"fixed":{"allowedToMoveX":true,"allowedToMoveY":true},"font":{"face":"verdana","color":"#FFFFFF","size":20}},"manipulation":{"enabled":false},"edges":{"width":10,"arrows":{"middle":{"enabled":true,"scaleFactor":3}},"color":{"color":"#2AA198"},"shadow":false},"layout":{"hierarchical":{"enabled":true,"levelSeparation":500,"direction":"LR"},"randomSeed":12},"interaction":{"hoverConnectedEdges":false,"navigationButtons":true,"selectable":false,"selectConnectedEdges":false},"physics":{"hierarchicalRepulsion":{"centralGravity":0,"springConstant":0,"nodeDistance":0}},"configure":{"enabled":false}},"groups":null,"width":"100%","height":"500px","idselection":{"enabled":false},"byselection":{"enabled":false},"main":null,"submain":null,"footer":null,"background":"rgba(0, 0, 0, 0)","tooltipStay":300,"tooltipStyle":"position: fixed;visibility:hidden;padding: 5px;white-space: nowrap;font-family: verdana;font-size:14px;font-color:#000000;background-color: #f5f4ed;-moz-border-radius: 3px;-webkit-border-radius: 3px;border-radius: 3px;border: 1px solid #808074;box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);"},"evals":[],"jsHooks":[]}</script><div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<div id="htmlwidget-03dc4782284139926bf1" style="width:100%;height:500px;" class="visNetwork html-widget"></div>
+<script type="application/json" data-for="htmlwidget-03dc4782284139926bf1">{"x":{"nodes":{"id":["01003_1968","01070_1968","01165_1968","01165_1975","01165_2022"],"comm":["01003","01070","01165","01165","01165"],"COG":["1968","1968","1968","1975","2022"],"label":["01003\n(1968)","01070\n(1968)","01165\n(1968)","01165\n(1975)","01165\n(2022)"],"level":[1,1,1,2,3],"pop":["140","100","128","470","1594"],"libgeo":["AMAREINS","CESSEINS","FRANCHELEINS","FRANCHELEINS","Francheleins"],"ratio":[1,1,1,1,1],"title":["<b><a target=\"_blank\" href=https://www.insee.fr/fr/recherche/recherche-geographique?geo=COM-01003&debut=0>01003<\/a> AMAREINS<\/b><br>Population : 140 hab.","<b><a target=\"_blank\" href=https://www.insee.fr/fr/recherche/recherche-geographique?geo=COM-01070&debut=0>01070<\/a> CESSEINS<\/b><br>Population : 100 hab.","<b><a target=\"_blank\" href=https://www.insee.fr/fr/recherche/recherche-geographique?geo=COM-01165&debut=0>01165<\/a> FRANCHELEINS<\/b><br>Population : 128 hab.","<b><a target=\"_blank\" href=https://www.insee.fr/fr/recherche/recherche-geographique?geo=COM-01165&debut=0>01165<\/a> FRANCHELEINS<\/b><br>Population : 470 hab.","<b><a target=\"_blank\" href=https://www.insee.fr/fr/recherche/recherche-geographique?geo=COM-01165&debut=0>01165<\/a> Francheleins<\/b><br>Population : 1594 hab."]},"edges":{"from":["01003_1968","01070_1968","01165_1968","01165_1975"],"to":["01165_1975","01165_1975","01165_1975","01165_2022"],"LIBGEO":["AMAREINS","CESSEINS","FRANCHELEINS",null],"POP":[140,100,128,null],"annee":["1974-01-01","1974-01-01","1974-01-01",null],"typemodif":["f","f","f",null],"ratio":[1,1,1,1],"arrows.middle.enabled":[true,true,true,false],"dashes":[false,false,false,true],"value":[1,1,1,0.2],"title":["<b>fusion<\/b><br>Date : 01 janv. 1974<br>","<b>fusion<\/b><br>Date : 01 janv. 1974<br>","<b>fusion<\/b><br>Date : 01 janv. 1974<br>",null]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"ellipse","color":{"border":"black","background":"#000000","highlight":{"border":"#000000","background":"#000000"}},"fixed":{"allowedToMoveX":true,"allowedToMoveY":true},"font":{"face":"verdana","color":"#FFFFFF","size":20}},"manipulation":{"enabled":false},"edges":{"width":10,"arrows":{"middle":{"enabled":true,"scaleFactor":3}},"color":{"color":"#2AA198"},"shadow":false},"layout":{"hierarchical":{"enabled":true,"levelSeparation":500,"direction":"LR"},"randomSeed":12},"interaction":{"hoverConnectedEdges":false,"navigationButtons":true,"selectable":false,"selectConnectedEdges":false},"physics":{"hierarchicalRepulsion":{"centralGravity":0,"springConstant":0,"nodeDistance":0}},"configure":{"enabled":false}},"groups":null,"width":"100%","height":"500px","idselection":{"enabled":false},"byselection":{"enabled":false},"main":null,"submain":null,"footer":null,"background":"rgba(0, 0, 0, 0)","tooltipStay":300,"tooltipStyle":"position: fixed;visibility:hidden;padding: 5px;white-space: nowrap;font-family: verdana;font-size:14px;font-color:#000000;background-color: #f5f4ed;-moz-border-radius: 3px;-webkit-border-radius: 3px;border-radius: 3px;border: 1px solid #808074;box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);"},"evals":[],"jsHooks":[]}</script><div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Cette fonction lance une application shiny permettant d'observer toutes les trajectoires des communes.</span>
 <span class="co">#trajectoire_commune_shiny()</span></code></pre></div>
 <p>La fonction <code>modifications_communales</code> permet, comme son nom l’indique, de visualiser les modifications communales (fusions, défusions, changements de codes ou de noms) qui ont eu lieu entre deux dates. Ici entre le 01/01/2014 et le 01/01/2015. Cette fonction est encore en cours de développement il est donc possible que certains évènements ne soient pas encore pris en compte. Il ne faut pas hésiter à le signaler.</p>
