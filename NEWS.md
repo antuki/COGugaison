@@ -53,8 +53,6 @@
 * premier test de modification de version de COGugaison
 * ajout d'une enquête de satisfaction à l'ouverture du package
 
-## correction de bugs / optimisation du code
-
 # COGugaison 1.0.2
 
 ## nouveautés
@@ -84,4 +82,8 @@
 * mise à jour totale du COG2022 
 
 ## correction de bugs / optimisation du code
+
+### juillet 2022
+
+* voir issue 17 sur des coquilles repérées dans enlever_PLM et modification_Corse. Résolue dans le commit 1ec8a4b58ee9652d72f821220200ff0aee872df9
 
