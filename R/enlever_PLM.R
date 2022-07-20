@@ -67,8 +67,8 @@ if(agregation==F){
 
 if(!is.null(libgeo)){
   table_sortie[with(table_sortie,get(codgeo_entree))=="75056", libgeo] <- "Paris"
-  table_sortie[with(table_sortie,get(codgeo_entree))=="13055", libgeo] <- "Lyon"
-  table_sortie[with(table_sortie,get(codgeo_entree))=="69123", libgeo] <- "Marseille"
+  table_sortie[with(table_sortie,get(codgeo_entree))=="13055", libgeo] <- "Marseille"
+  table_sortie[with(table_sortie,get(codgeo_entree))=="69123", libgeo] <- "Lyon"
 }
 
   }
