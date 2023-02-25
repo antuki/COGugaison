@@ -1,3 +1,5 @@
+url: https://antuki.github.io/COGugaison
+
 navbar:
   left:
   - text: Introduction à COGugaison
@@ -6,4 +8,3 @@ navbar:
     href: reference/index.html
   - text: Nouveautés
     href: news/index.html
-
