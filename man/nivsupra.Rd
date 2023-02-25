@@ -47,9 +47,9 @@ Pour les COG plus anciens, regarder au cas par cas selon les années. Par exempl
 Permettre d'agréger les tables de données communales à de nombreux échelons supra-communaux administratifs (EPCI, arrondissements, cantons-villes, départements, régions) ou d'étude (bassins de vie, zones d'emploi, unités urbaines, aires urbaines). La fonction `nivsupra` peut également s'appliquer à des tables de flux (non agrégées par codes communes) grâce à l'option agregation = FALSE. La table en entrée est alors conservée comme telle avec une nouvelle colonne qui correspond au niveau supracommunal du code commune considéré.
 }
 \details{
-Le code officiel géographique le plus récent du package est actuellement celui au 01/01/2022. \cr
+Le code officiel géographique le plus récent du package est actuellement celui au 01/01/2023. \cr
 
-Les millésimes des COG qui peuvent être utilisés sont à ce stade les suivants : 1968, 1975, 1982, 1990, 1999, 2008 à 2022. \cr
+Les millésimes des COG qui peuvent être utilisés sont à ce stade les suivants : 1968, 1975, 1982, 1990, 1999, 2008 à 2023. \cr
 
 A partir de 2020, de nombreux zonages ont été modifiés suite à la refonte des zonages de l'Insee. Les ZE2010 deviennent les ZE2020, les UU2010 deviennent les UU2020, les AU2010 deviennent les AAV2020.
 

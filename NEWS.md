@@ -87,3 +87,11 @@
 
 * voir issue 17 sur des coquilles repérées dans enlever_PLM et modification_Corse. Résolue dans le commit 1ec8a4b58ee9652d72f821220200ff0aee872df9
 
+
+# COGugaison 1.0.6
+
+## nouveautés
+
+### février 2023
+
+* mise à jour totale du COG2023

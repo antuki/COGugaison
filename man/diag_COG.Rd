@@ -31,9 +31,9 @@ diag_COG(
 Effectuer un diagnostic sur le COG présent dans une base de données
 }
 \details{
-Le code officiel géographique le plus récent du package est actuellement celui au 01/01/2022. \cr
+Le code officiel géographique le plus récent du package est actuellement celui au 01/01/2023. \cr
 
-Les millésimes des COG qui peuvent être utilisés sont à ce stade les suivants : 1968, 1975, 1982, 1990, 1999, 2008 à 2022. \cr
+Les millésimes des COG qui peuvent être utilisés sont à ce stade les suivants : 1968, 1975, 1982, 1990, 1999, 2008 à 2023. \cr
 
 Les dates de référence des codes officiels géographiques utilisés dans COGugaison sont les suivantes :
 \itemize{
