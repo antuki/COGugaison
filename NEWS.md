@@ -94,4 +94,9 @@
 
 ### février 2023
 
-* mise à jour totale du COG2023
+* mise à jour du COG2023 sauf la table nivsupra incomplète
+
+### mai 2023
+
+* ajout de la table nivsupra COG2023
+* compression des fichiers de data grâce à `tools::resaveRdaFiles("data")`

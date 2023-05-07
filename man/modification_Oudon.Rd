@@ -56,7 +56,7 @@ Les différences entre les tables de passage Insee et non Insee sont les suivant
 }
 \examples{
 ## Exemple 1
-# Ici, nous allons remplacer les codes communes de l'Oudon dans une table de l'Insee (en COG 2014 mais que nous considÃ©rons en COG 2015 uniquement pour cet exemple).
+# Ici, nous allons remplacer les codes communes de l'Oudon dans une table de l'Insee (en COG 2014 mais que nous considérons en COG 2015 uniquement pour cet exemple).
 head(exemple_popcom[which(exemple_popcom$CODGEO\%in\%c("14472","14697")),])
 exemple_popcom_oudon <- modification_Oudon(table_entree=exemple_popcom,donnees_insee_entree=T,donnees_insee_sortie=F,COG=2015)
 head(exemple_popcom_oudon[which(exemple_popcom$CODGEO\%in\%c("14472","14697")),])

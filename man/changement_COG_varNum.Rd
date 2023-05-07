@@ -34,9 +34,9 @@ changement_COG_varNum(
 Transformer des tables de données numériques en géographie au premier janvier d'une année souhaitée.
 }
 \details{
-Le code officiel géographique le plus récent du package est actuellement celui au 01/01/2021. \cr
+Le code officiel géographique le plus récent du package est actuellement celui au 01/01/2023. \cr
 
-Les millésimes des COG qui peuvent être utilisés sont à ce stade les suivants : 1968, 1975, 1982, 1990, 1999, 2008 à 2021. \cr
+Les millésimes des COG qui peuvent être utilisés sont à ce stade les suivants : 1968, 1975, 1982, 1990, 1999, 2008 à 2023. \cr
 
 Les dates de référence des codes officiels géographiques utilisés dans COGugaison sont les suivantes :
 \itemize{
@@ -62,7 +62,7 @@ Les différences entre les tables de passage Insee et non Insee sont les suivant
 exemple_popcom_COG2017_num <- changement_COG_varNum(table_entree=exemple_popcom,annees=c(2014:2017),agregation=T,libgeo=T,donnees_insee=T)
 head(exemple_popcom_COG2017_num)
 ## Exemple 2
-# La fonction peut egalement s'appliquer a des tables de flux (codes communes pouvant comporter des doublons) grace Ã  l'option agregation = FALSE.
+# La fonction peut egalement s'appliquer a des tables de flux (codes communes pouvant comporter des doublons) grace à l'option agregation = FALSE.
 exemple_flux_COG2017 <- changement_COG_varNum(table_entree=exemple_flux,annees=c(2014:2017),codgeo_entree="COMMUNE",agregation=F,libgeo=F,donnees_insee=T)
 exemple_flux_COG2017 <- changement_COG_varNum(table_entree=exemple_flux_COG2017,annees=c(2014:2017),codgeo_entree="DCLT",agregation=F,libgeo=F,donnees_insee=T)
 }

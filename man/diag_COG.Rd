@@ -55,7 +55,7 @@ Les différences entre les tables de passage Insee et non Insee sont les suivant
 }
 \examples{
 ## Exemple 1
-# Exemple d'une table dont le COG est au carrÃ©
+# Exemple d'une table dont le COG est au carré
 sortie <- diag_COG(COG2010)
 ## Exemple 2
 # Exemple d'une table qui mix plusieurs COG
@@ -63,9 +63,9 @@ sortie <- diag_COG(COG2010)
  table_fictive <- rbind(COG2014,COG2015,COG2013) \%>\%
  distinct(CODGEO, .keep_all = TRUE) \%>\%
   add_row(CODGEO = c(rep("01001",5),"75101",NA,"98756","ZZZZZ"))
- # Sans hypothÃ¨se prÃ©alable sur le COG probable de la table
+ # Sans hypothèse préalable sur le COG probable de la table
  sortie <- diag_COG(table_fictive)
- # En ayant une hypothÃ¨se prÃ©alable sur le COG de sortie de la table
+ # En ayant une hypothèse préalable sur le COG de sortie de la table
  COG_akinator(table_fictive$CODGEO)
  sortie <- diag_COG(table_fictive, hypothese_COG = 2013)
 }

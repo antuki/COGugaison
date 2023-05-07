@@ -58,7 +58,7 @@ apparier_COG(vecteur_codgeo=c(exemple_popcom[which(exemple_popcom$CODGEO!="01001
 appariement <- apparier_COG(vecteur_codgeo=c(exemple_popcom[which(exemple_popcom$CODGEO!="01001"),1],"XXXXX"), donnees_insee = TRUE,COG=2014)
 cat(appariement$absent_de_bdd)
 cat(appariement$absent_de_COG)
-# regarder le libellÃ© des communes prÃ©sentes dans le COG mais pas dans la base de donnÃ©es
+# regarder le libellé des communes présentes dans le COG mais pas dans la base de données
 COG2014_insee[which(COG2014_insee$CODGEO\%in\%appariement$absent_de_bdd),c(1,2)]
 }
 \references{
