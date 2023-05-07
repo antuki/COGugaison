@@ -99,8 +99,8 @@
 </dl></div>
     <div id="details">
     <h2>Details</h2>
-    <p>Le code officiel géographique le plus récent du package est actuellement celui au 01/01/2021. <br></p>
-<p>Les millésimes des COG qui peuvent être utilisés sont à ce stade les suivants : 1968, 1975, 1982, 1990, 1999, 2008 à 2021. <br></p>
+    <p>Le code officiel géographique le plus récent du package est actuellement celui au 01/01/2023. <br></p>
+<p>Les millésimes des COG qui peuvent être utilisés sont à ce stade les suivants : 1968, 1975, 1982, 1990, 1999, 2008 à 2023. <br></p>
 <p>Les dates de référence des codes officiels géographiques utilisés dans COGugaison sont les suivantes :</p><ul><li><p>COG 1968 : à partir du 01/03/1968</p></li>
 <li><p>COG 1975 : à partir du 20/02/1975</p></li>
 <li><p>COG 1982 : à partir du 04/03/1982</p></li>
@@ -140,7 +140,7 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> 5  01006                 Ambléon     110      6</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 6  01007                Ambronay    2437     34</span>
 <span class="r-in"><span><span class="co">## Exemple 2</span></span></span>
-<span class="r-in"><span><span class="co"># La fonction peut egalement s'appliquer a des tables de flux (codes communes pouvant comporter des doublons) grace Ã  l'option agregation = FALSE.</span></span></span>
+<span class="r-in"><span><span class="co"># La fonction peut egalement s'appliquer a des tables de flux (codes communes pouvant comporter des doublons) grace à l'option agregation = FALSE.</span></span></span>
 <span class="r-in"><span><span class="va">exemple_flux_COG2017</span> <span class="op">&lt;-</span> <span class="fu">changement_COG_varNum</span><span class="op">(</span>table_entree<span class="op">=</span><span class="va">exemple_flux</span>,annees<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2014</span><span class="op">:</span><span class="fl">2017</span><span class="op">)</span>,codgeo_entree<span class="op">=</span><span class="st">"COMMUNE"</span>,agregation<span class="op">=</span><span class="cn">F</span>,libgeo<span class="op">=</span><span class="cn">F</span>,donnees_insee<span class="op">=</span><span class="cn">T</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">exemple_flux_COG2017</span> <span class="op">&lt;-</span> <span class="fu">changement_COG_varNum</span><span class="op">(</span>table_entree<span class="op">=</span><span class="va">exemple_flux_COG2017</span>,annees<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2014</span><span class="op">:</span><span class="fl">2017</span><span class="op">)</span>,codgeo_entree<span class="op">=</span><span class="st">"DCLT"</span>,agregation<span class="op">=</span><span class="cn">F</span>,libgeo<span class="op">=</span><span class="cn">F</span>,donnees_insee<span class="op">=</span><span class="cn">T</span><span class="op">)</span></span></span>
 </code></pre></div>

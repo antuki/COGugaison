@@ -89,8 +89,8 @@
 </dl></div>
     <div id="details">
     <h2>Details</h2>
-    <p>Le code officiel géographique le plus récent du package est actuellement celui au 01/01/2021. <br></p>
-<p>Les millésimes des COG qui peuvent être utilisés sont à ce stade les suivants : 1968, 1975, 1982, 1990, 1999, 2008 à 2021. <br></p>
+    <p>Le code officiel géographique le plus récent du package est actuellement celui au 01/01/2023. <br></p>
+<p>Les millésimes des COG qui peuvent être utilisés sont à ce stade les suivants : 1968, 1975, 1982, 1990, 1999, 2008 à 2023. <br></p>
 <p>Les dates de référence des codes officiels géographiques utilisés dans COGugaison sont les suivantes :</p><ul><li><p>COG 1968 : à partir du 01/03/1968</p></li>
 <li><p>COG 1975 : à partir du 20/02/1975</p></li>
 <li><p>COG 1982 : à partir du 04/03/1982</p></li>
@@ -130,7 +130,7 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> 4  01005     Ambérieux-en-Dombes CLASSE 3     F</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 5  01006                 Ambléon CLASSE 4     E</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 6  01007                Ambronay CLASSE 5     A</span>
-<span class="r-in"><span><span class="co"># Nous allons maintenant isoler dans une table les communes fusionnees appartenant Ã  des classes differentes, ici selon la typologie "typoA" entre 2014 et 2015, 2015 et 2016 et 2016 et 2017.</span></span></span>
+<span class="r-in"><span><span class="co"># Nous allons maintenant isoler dans une table les communes fusionnees appartenant à des classes differentes, ici selon la typologie "typoA" entre 2014 et 2015, 2015 et 2016 et 2016 et 2017.</span></span></span>
 <span class="r-in"><span><span class="va">details_exemple_popcom_COG2017_typo</span> <span class="op">&lt;-</span> <span class="fu">changement_COG_typo_details</span><span class="op">(</span>table_entree<span class="op">=</span><span class="va">exemple_popcom</span><span class="op">[</span>,<span class="op">-</span><span class="fl">2</span><span class="op">]</span>,annees<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2014</span><span class="op">:</span><span class="fl">2017</span><span class="op">)</span>,typo<span class="op">=</span><span class="st">"typoA"</span>, donnees_insee<span class="op">=</span><span class="cn">T</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">details_exemple_popcom_COG2017_typo</span><span class="op">[[</span><span class="st">"2014_2015"</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   cod2014              lib2014 cod2015                     lib2015    typoA</span>
