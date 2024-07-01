@@ -22,9 +22,9 @@
 #' @param nivsupra_nom indique le nom à donner au niveau supra-communal dans la table de sortie. Il faut par défaut la chaîne de caractère contenue dans nivsupra si agregation = T et la concaténation de nivsupra et codgeo_entree séparée d'un "_" si agregation = F.
 #' @param agregation vaut TRUE si la table souhaitée doit sommer toutes les lignes qui concernent une même commune et FALSE si l'on souhaite volontairement conserver les doublons dans les codes commune (dans les tables de flux par exemple). Si agregation = F, les variables de type caractère sont alors conservées comme telles ou dupliquées en cas de défusion et les variables numériques sommées en cas de fusion ou réparties proportionnellement à la population de chaque commune en cas de défusion.
 #' @details
-#' Le code officiel géographique le plus récent du package est actuellement celui au 01/01/2023. \cr
+#' Le code officiel géographique le plus récent du package est actuellement celui au 01/01/2024. \cr
 #'
-#' Les millésimes des COG qui peuvent être utilisés sont à ce stade les suivants : 1968, 1975, 1982, 1990, 1999, 2008 à 2023. \cr
+#' Les millésimes des COG qui peuvent être utilisés sont à ce stade les suivants : 1968, 1975, 1982, 1990, 1999, annuel à partir de 2008. \cr
 #'
 #' A partir de 2020, de nombreux zonages ont été modifiés suite à la refonte des zonages de l'Insee. Les ZE2010 deviennent les ZE2020, les UU2010 deviennent les UU2020, les AU2010 deviennent les AAV2020.
 #'
@@ -54,20 +54,24 @@
 #' @examples
 #' ## Exemple 1
 #' # Ici, apres avoir transforme les donnees en geographie communale au 01/01/2017, nous agregeons la population et la superficie des communes a l'echelon geographique des zones d'emploi afin d'obtenir une table des densites de population par zone d'emploi.
-#' exemple_popcom_COG2017_num <- changement_COG_varNum(table_entree=exemple_popcom,annees=c(2014:2017),agregation=T,libgeo=T,donnees_insee=T)
-#' exemple_popcom_ZE2010 <- nivsupra(table_entree=exemple_popcom_COG2017_num,COG=2017,nivsupra="ZE2010",agregation=T)
+#' exemple_popcom_COG2017_num <- changement_COG_varNum(table_entree = exemple_popcom,annees=c(2014:2017), agregation = TRUE, libgeo = TRUE, donnees_insee = TRUE)
+#' exemple_popcom_ZE2010 <- nivsupra(table_entree=exemple_popcom_COG2017_num,COG=2017,nivsupra="ZE2010", agregation = TRUE)
 #' exemple_popcom_ZE2010$densite <- exemple_popcom_ZE2010$P12_POP / exemple_popcom_ZE2010$SUPERF
 #' head(exemple_popcom_ZE2010)
 #' ## Exemple 2
 #' # Ici, on ajoute les colonnes ZE2010_COMMUNE et ZE2010_DCLT a la table exemple de flux domicile-travail.
-#' exemple_flux_COG2017 <- changement_COG_varNum(table_entree=exemple_flux,annees=c(2014:2017),codgeo_entree="COMMUNE",agregation=F,libgeo=F,donnees_insee=T)
-#' exemple_flux_COG2017 <- changement_COG_varNum(table_entree=exemple_flux_COG2017,annees=c(2014:2017),codgeo_entree="DCLT",agregation=F,libgeo=F,donnees_insee=T)
-#' exemple_flux_COG2017_etZE <- nivsupra(table_entree=exemple_flux_COG2017,codgeo_entree="COMMUNE",nivsupra="ZE2010",COG=2017,agregation=F)
-#' exemple_flux_COG2017_etZE <- nivsupra(table_entree=exemple_flux_COG2017_etZE,codgeo_entree="DCLT",nivsupra="ZE2010",COG=2017,agregation=F)
+#' exemple_flux_COG2017 <- changement_COG_varNum(table_entree = exemple_flux, annees=c(2014:2017), codgeo_entree="COMMUNE",agregation = FALSE, libgeo = FALSE, donnees_insee = TRUE)
+#' exemple_flux_COG2017 <- changement_COG_varNum(table_entree = exemple_flux_COG2017, annees=c(2014:2017),codgeo_entree="DCLT", agregation = FALSE, libgeo = FALSE, donnees_insee = TRUE)
+#' exemple_flux_COG2017_etZE <- nivsupra(table_entree = exemple_flux_COG2017, codgeo_entree="COMMUNE",nivsupra="ZE2010",COG=2017, agregation = FALSE)
+#' exemple_flux_COG2017_etZE <- nivsupra(table_entree = exemple_flux_COG2017_etZE, codgeo_entree="DCLT",nivsupra="ZE2010",COG=2017, agregation = FALSE)
 #' head(exemple_flux_COG2017_etZE)
 
-nivsupra <- function(table_entree,codgeo_entree=colnames(table_entree)[1] ,COG=annee_ref,var_num=colnames(table_entree)[sapply(table_entree, is.numeric)]
-                     ,nivsupra, nivsupra_nom=ifelse(agregation==TRUE,nivsupra,paste0(nivsupra,"_",codgeo_entree)),agregation=T){
+nivsupra <- function(table_entree,codgeo_entree = colnames(table_entree)[1],
+                     COG = annee_ref,
+                     var_num = colnames(table_entree)[sapply(table_entree, is.numeric)],
+                     nivsupra,
+                     nivsupra_nom = ifelse(agregation == TRUE,nivsupra,paste0(nivsupra,"_",codgeo_entree)),
+                     agregation = TRUE){
 
   if(!codgeo_entree%in%colnames(table_entree)){ #NEW
     stop(paste0("codgeo_entree doit être une colonne de table_entree."))
@@ -82,18 +86,18 @@ nivsupra <- function(table_entree,codgeo_entree=colnames(table_entree)[1] ,COG=a
     stop(paste0("nivsupra doit être un des niveaux géo suivants : ",paste0(colnames(get(paste0("table_supracom_",COG)))[-c(1,2)],collapse=", ")))
   }
 
-  table_sortie <- enlever_PLM(table_entree=table_entree,codgeo_entree = codgeo_entree,agregation=F) #nouveau
-  table_sortie <- merge(table_sortie,get(paste0("table_supracom_",COG))[,c("CODGEO",nivsupra)],by.x=codgeo_entree,by.y="CODGEO",all.x=T,all.y=F)
+  table_sortie <- enlever_PLM(table_entree = table_entree, codgeo_entree = codgeo_entree, agregation = FALSE) #nouveau
+  table_sortie <- merge(table_sortie,get(paste0("table_supracom_",COG))[,c("CODGEO",nivsupra)],by.x=codgeo_entree,by.y="CODGEO", all.x = TRUE, all.y = FALSE)
   colnames(table_sortie)[which(colnames(table_sortie)==nivsupra)]<- nivsupra_nom
 
-  if(agregation==F){
-    table_sortie <- merge(table_sortie,get(paste0("libelles_supracom_",COG))[which(get(paste0("libelles_supracom_",COG))[,"NIVGEO"]==nivsupra),c(2,3)],by.x=nivsupra_nom,by.y="CODGEO",all.x=T,all.y=F)
+  if(agregation == FALSE){
+    table_sortie <- merge(table_sortie,get(paste0("libelles_supracom_",COG))[which(get(paste0("libelles_supracom_",COG))[,"NIVGEO"]==nivsupra),c(2,3)],by.x=nivsupra_nom,by.y="CODGEO", all.x = TRUE, all.y = FALSE)
     colnames(table_sortie)[ncol(table_sortie)]<- paste0(nivsupra,"_nom_",codgeo_entree)
     table_sortie <- table_sortie[,c(colnames(table_entree),nivsupra_nom,paste0(nivsupra,"_nom_",codgeo_entree))]
   } else{
     table_sortie <- aggregate(table_sortie[,c(var_num)],by=list(table_sortie[,nivsupra_nom]),FUN=sum)
     colnames(table_sortie) <- c(nivsupra_nom,var_num)
-    table_sortie <- merge(table_sortie,get(paste0("libelles_supracom_",COG))[which(get(paste0("libelles_supracom_",COG))[,"NIVGEO"]==nivsupra),c(2,3)],by.x=nivsupra_nom,by.y="CODGEO",all.x=T,all.y=F)
+    table_sortie <- merge(table_sortie,get(paste0("libelles_supracom_",COG))[which(get(paste0("libelles_supracom_",COG))[,"NIVGEO"]==nivsupra),c(2,3)],by.x=nivsupra_nom,by.y="CODGEO", all.x = TRUE, all.y = FALSE)
     table_sortie <- table_sortie[,c(nivsupra_nom,"LIBGEO",var_num)]
   }
 

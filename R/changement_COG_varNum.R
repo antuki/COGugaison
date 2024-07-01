@@ -9,9 +9,9 @@
 #' @param libgeo vaut TRUE si l'on veut rajouter dans la table une colonne nommée "nom_commune" qui indique le nom de la commune issu du code officiel géographique et FALSE sinon.
 #' @param donnees_insee vaut TRUE si les données manipulées sont produites par l'Insee. En effet, quelques rares modifications communales (la défusion des communes Loisey et Culey au 1er janvier 2014 par exemple) ont été prises en compte dans les bases de données communales de l'Insee plus tard que la date officielle.
 #' @details
-#' Le code officiel géographique le plus récent du package est actuellement celui au 01/01/2023. \cr
+#' Le code officiel géographique le plus récent du package est actuellement celui au 01/01/2024. \cr
 #'
-#' Les millésimes des COG qui peuvent être utilisés sont à ce stade les suivants : 1968, 1975, 1982, 1990, 1999, 2008 à 2023. \cr
+#' Les millésimes des COG qui peuvent être utilisés sont à ce stade les suivants : 1968, 1975, 1982, 1990, 1999, annuel à partir de 2008. \cr
 #'
 #' Les dates de référence des codes officiels géographiques utilisés dans COGugaison sont les suivantes :
 #' \itemize{
@@ -40,16 +40,18 @@
 #' @examples
 #' ## Exemple 1
 #' # Ici, nous allons transformer les variables numeriques de la table *exemple_pop* afin de recuperer les donnees de population et de superficie des communes au 1er janvier 2017 (au lieu de 2014).
-#' exemple_popcom_COG2017_num <- changement_COG_varNum(table_entree=exemple_popcom,annees=c(2014:2017),agregation=T,libgeo=T,donnees_insee=T)
+#' exemple_popcom_COG2017_num <- changement_COG_varNum(table_entree=exemple_popcom,annees=c(2014:2017), agregation = TRUE, libgeo = TRUE, donnees_insee = TRUE)
 #' head(exemple_popcom_COG2017_num)
 #' ## Exemple 2
 #' # La fonction peut egalement s'appliquer a des tables de flux (codes communes pouvant comporter des doublons) grace à l'option agregation = FALSE.
-#' exemple_flux_COG2017 <- changement_COG_varNum(table_entree=exemple_flux,annees=c(2014:2017),codgeo_entree="COMMUNE",agregation=F,libgeo=F,donnees_insee=T)
-#' exemple_flux_COG2017 <- changement_COG_varNum(table_entree=exemple_flux_COG2017,annees=c(2014:2017),codgeo_entree="DCLT",agregation=F,libgeo=F,donnees_insee=T)
+#' exemple_flux_COG2017 <- changement_COG_varNum(table_entree=exemple_flux,annees=c(2014:2017),codgeo_entree="COMMUNE", agregation = FALSE, libgeo = FALSE, donnees_insee = TRUE)
+#' exemple_flux_COG2017 <- changement_COG_varNum(table_entree=exemple_flux_COG2017,annees=c(2014:2017),codgeo_entree="DCLT", agregation = FALSE, libgeo = FALSE, donnees_insee = TRUE)
 #' @encoding UTF-8
 
 
-changement_COG_varNum <- function(table_entree,annees,codgeo_entree=colnames(table_entree)[1],var_num=colnames(table_entree)[sapply(table_entree, is.numeric)],agregation=TRUE,libgeo=FALSE,donnees_insee=TRUE){
+changement_COG_varNum <- function(table_entree, annees, codgeo_entree=colnames(table_entree)[1],
+                                  var_num=colnames(table_entree)[sapply(table_entree, is.numeric)],
+                                  agregation = TRUE, libgeo = FALSE, donnees_insee = TRUE){
 
   if(!codgeo_entree%in%colnames(table_entree)){ #NEW
     stop(paste0("codgeo_entree doit être une colonne de table_entree."))
@@ -76,10 +78,12 @@ changement_COG_varNum <- function(table_entree,annees,codgeo_entree=colnames(tab
       assign(paste0("PASSAGE_",annees[i],"_",annees[i+1]),get(paste0("PASSAGE_",annees[i],"_",annees[i+1],"_insee")))
     }
 
-    if(length(annees)==1 || nrow(get(paste0("PASSAGE_",annees[i],"_",annees[i+1])))==0){
+    if(length(annees)==1 || nrow(get(paste0("PASSAGE_",annees[i],"_",annees[i+1]))) == 0){
       table_finale <- table_entree
     } else {
-      provisoire <- merge(table_entree,get(paste0("PASSAGE_",annees[i],"_",annees[i+1])),by.x=codgeo_entree,by.y=paste0("cod",annees[i]),all.x=T,all.y=F)
+      provisoire <- merge(table_entree,get(paste0("PASSAGE_",annees[i],"_",annees[i+1])),
+                          by.x = codgeo_entree, by.y=paste0("cod",annees[i]),
+                          all.x = TRUE, all.y = FALSE)
       provisoire[which(is.na(with(provisoire,get(paste0("cod",annees[i+1]))))),"ratio"] <- 1
       provisoire[which(is.na(with(provisoire,get(paste0("cod",annees[i+1]))))),paste0("cod",annees[i+1])] <- as.character(provisoire[which(is.na(with(provisoire,get(paste0("cod",annees[i+1]))))),codgeo_entree])
       provisoire[,c(var_num)] <- (provisoire[,c(var_num,"ratio")] * provisoire[,"ratio"])[,-(length(var_num)+1)]
@@ -100,7 +104,8 @@ changement_COG_varNum <- function(table_entree,annees,codgeo_entree=colnames(tab
     if(donnees_insee){
       assign(paste0("COG",annees[length(annees)]),get(paste0("COG",annees[length(annees)],"_insee")))
     }
-    table_finale <- merge(table_finale,get(paste0("COG",annees[length(annees)]))[,c(1,2)],by.x=codgeo_entree,by.y="CODGEO",all.x=T,all.y=F)
+    table_finale <- merge(table_finale,get(paste0("COG",annees[length(annees)]))[,c(1,2)],
+                          by.x=codgeo_entree, by.y="CODGEO", all.x = TRUE, all.y = FALSE)
     table_finale <- table_finale[,c(1,ncol(table_finale),2:(ncol(table_finale)-1))]
     colnames(table_finale)[2]<-"nom_commune"
   }

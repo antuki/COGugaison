@@ -5,9 +5,9 @@
 #' @param COG indique l'année de COG de la communes considérée (exemple 2014). Années possibles : de 1968 à 2020. Par défaut, vaut 2020.
 #' @param donnees_insee vaut TRUE si l'on veut observer les dates de prise en compte du COG par l'Insee. En effet, quelques rares modifications communales (la défusion des communes Loisey et Culey au 1er janvier 2014 par exemple) ont été prises en compte dans les bases de données communales de l'Insee plus tard que la date officielle.
 #' @details
-#' Le code officiel géographique le plus récent du package est actuellement celui au 01/01/2023. \cr
+#' Le code officiel géographique le plus récent du package est actuellement celui au 01/01/2024. \cr
 #'
-#' Les millésimes des COG qui peuvent être utilisés sont à ce stade les suivants : 1968, 1975, 1982, 1990, 1999, 2008 à 2023. \cr
+#' Les millésimes des COG qui peuvent être utilisés sont à ce stade les suivants : 1968, 1975, 1982, 1990, 1999, annuel à partir de 2008. \cr
 #'
 #' Les dates de référence des codes officiels géographiques utilisés dans COGugaison sont les suivantes :
 #' \itemize{
@@ -35,9 +35,9 @@
 #' @examples
 #' ## Exemple 1
 #' # Ici, nous allons observer sur un graphique interactif la trajectoire des communes ayant pour codes 01003 en 1968, 14697 en 1968, 76108 en 2014.
-#' trajectoire_commune("01003", 1968,donnees_insee=F)
-#' trajectoire_commune("14697", 1968,donnees_insee=F)
-#' trajectoire_commune("76108", 2014,donnees_insee=F)
+#' trajectoire_commune("01003", 1968, donnees_insee = FALSE)
+#' trajectoire_commune("14697", 1968, donnees_insee = FALSE)
+#' trajectoire_commune("76108", 2014, donnees_insee = FALSE)
 #' ## Exemple 2
 #' # Cette fonction lance une application shiny permettant d'observer toutes les trajectoires des communes.
 #' # trajectoire_commune_shiny()
@@ -45,7 +45,7 @@
 
 #' @rdname trajectoire_commune
 #' @export
-trajectoire_commune <- function(codgeo,COG=annee_ref,donnees_insee=F){
+trajectoire_commune <- function(codgeo, COG=annee_ref, donnees_insee = FALSE){
 
   COG <- as.numeric(match.arg(as.character(COG),annees_possibles)) ## new
   base_exhaustive <-  creer_base_empilee(donnees_insee=donnees_insee)
@@ -59,7 +59,7 @@ trajectoire_commune <- function(codgeo,COG=annee_ref,donnees_insee=F){
 
 #' @rdname trajectoire_commune
 #' @export
-trajectoire_commune_shiny <- function(donnees_insee=FALSE){
+trajectoire_commune_shiny <- function(donnees_insee = FALSE){
 
     if (!requireNamespace("shiny", quietly = TRUE)) {
       stop("Package shiny needed for this function to work. Please install it.",
@@ -123,7 +123,7 @@ trajectoire_commune_shiny <- function(donnees_insee=FALSE){
 
 
 
-creer_base_empilee <- function(donnees_insee=F){
+creer_base_empilee <- function(donnees_insee = FALSE){
   library(dplyr)
   annees <- annees_possibles
   if (donnees_insee) {
@@ -154,7 +154,7 @@ creer_base_empilee <- function(donnees_insee=F){
 }
 
 
-afficher_visNetwork <- function(base_exhaustive,codgeo, COG,donnees_insee=F){
+afficher_visNetwork <- function(base_exhaustive, codgeo, COG, donnees_insee = FALSE){
   if (!requireNamespace("visNetwork", quietly = TRUE)) {
     stop("Package visNetwork needed for this function to work. Please install it.",
          call. = FALSE)
@@ -257,7 +257,7 @@ afficher_visNetwork <- function(base_exhaustive,codgeo, COG,donnees_insee=F){
     network <- visNetwork(nodes, edges,height="500px",width = "100%") %>%
       visNodes(color = list(border = "black", background="#000000", highlight = list(border="#000000",background="#000000")),
                font = list(face="verdana", color="#FFFFFF",size=20),
-               fixed = list(allowedToMoveX=T,allowedToMoveY=T),
+               fixed = list(allowedToMoveX = TRUE, allowedToMoveY = TRUE),
                shape= "ellipse"
       ) %>%
       visEdges(shadow = FALSE,
@@ -267,13 +267,13 @@ afficher_visNetwork <- function(base_exhaustive,codgeo, COG,donnees_insee=F){
       ) %>%
       visHierarchicalLayout(direction = "LR", levelSeparation = 500) %>%
       visLayout(randomSeed = 12) %>%
-      visInteraction(selectable=F,
-                     navigationButtons=T,
-                     selectConnectedEdges=F,
-                     hoverConnectedEdges=F
+      visInteraction(selectable = FALSE,
+                     navigationButtons = TRUE,
+                     selectConnectedEdges = FALSE,
+                     hoverConnectedEdges = FALSE
       ) %>%
       visPhysics(hierarchicalRepulsion=list(centralGravity=0,springConstant=0,nodeDistance=0))  %>%
-      visConfigure(enabled = F)
+      visConfigure(enabled = FALSE)
 
 
 

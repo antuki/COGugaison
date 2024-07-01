@@ -16,9 +16,9 @@ COG_akinator(vecteur_codgeo, donnees_insee = TRUE)
 Détecter le millésime du code officiel géographique d'une table de données communales.
 }
 \details{
-Le code officiel géographique le plus récent du package est actuellement celui au 01/01/2023. \cr
+Le code officiel géographique le plus récent du package est actuellement celui au 01/01/2024. \cr
 
-Les millésimes des COG qui peuvent être utilisés sont à ce stade les suivants : 1968, 1975, 1982, 1990, 1999, 2008 à 2023. \cr
+Les millésimes des COG qui peuvent être utilisés sont à ce stade les suivants : 1968, 1975, 1982, 1990, 1999, annuel à partir de 2008. \cr
 
 Les dates de référence des codes officiels géographiques utilisés dans COGugaison sont les suivantes :
 \itemize{
@@ -41,7 +41,7 @@ Les différences entre les tables de passage Insee et non Insee sont les suivant
 \examples{
 ## Exemple 1
 # Ici, nous cherchons le millesime du code officiel geographique (COG) utilise dans la table de donnees communales exemple_popcom.
-COG_akinator(vecteur_codgeo=exemple_popcom[,1],donnees_insee=TRUE)
+COG_akinator(vecteur_codgeo=exemple_popcom[,1], donnees_insee = TRUE)
 }
 \references{
 \itemize{

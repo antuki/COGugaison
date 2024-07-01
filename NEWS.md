@@ -100,3 +100,11 @@
 
 * ajout de la table nivsupra COG2023
 * compression des fichiers de data grâce à `tools::resaveRdaFiles("data")`
+
+# COGugaison 1.0.7
+
+## nouveautés
+
+### juillet 2024
+
+* mise à jour du COG2024

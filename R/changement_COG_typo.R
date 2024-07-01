@@ -18,9 +18,9 @@
 #' @param libgeo vaut TRUE si l'on veut rajouter dans la table une colonne nommée "nom_commune" qui indique le nom de la commune issu du code officiel géographique et FALSE sinon.
 #' @param donnees_insee vaut TRUE si les données manipulées sont produites par l'Insee. En effet, quelques rares modifications communales (la défusion des communes Loisey et Culey au 1er janvier 2014 par exemple) ont été prises en compte dans les bases de données communales de l'Insee plus tard que la date officielle.
 #' @details
-#' Le code officiel géographique le plus récent du package est actuellement celui au 01/01/2023. \cr
+#' Le code officiel géographique le plus récent du package est actuellement celui au 01/01/2024. \cr
 #'
-#' Les millésimes des COG qui peuvent être utilisés sont à ce stade les suivants : 1968, 1975, 1982, 1990, 1999, 2008 à 2023. \cr
+#' Les millésimes des COG qui peuvent être utilisés sont à ce stade les suivants : 1968, 1975, 1982, 1990, 1999, annuel à partir de 2008. \cr
 #'
 #' Les dates de référence des codes officiels géographiques utilisés dans COGugaison sont les suivantes :
 #' \itemize{
@@ -49,16 +49,21 @@
 #' ## Exemple 1
 #' # Ici nous allons transformer les deux typologies (typoA et typoB) de la table exemple_pop en geographie communale au 1er janvier 2017 (au lieu de 2014).
 #' # L'hypothese de classement en cas de fusion de communes (*methode_fusion*) choisie est celle d'une classe specifique (*methode_difference*, classe appelee *mot_difference*="differents") aux regroupements de plusieurs communes de classes differentes. Les autres hypotheses possibles auraient pu etre l'hypothese du maximum de population *methode_max_pop* ou de classe absorbante *methode_classe_absorbante*.
-#' exemple_popcom_COG2017_typo <- changement_COG_typo(table_entree=exemple_popcom[,-2],annees=c(2014:2017),methode_fusion="methode_difference",typos=c("typoA","typoB"),mot_difference = "differents",libgeo=TRUE,donnees_insee=TRUE)
+#' exemple_popcom_COG2017_typo <- changement_COG_typo(table_entree=exemple_popcom[,-2],annees=c(2014:2017),methode_fusion="methode_difference",typos=c("typoA","typoB"),mot_difference = "differents", libgeo = TRUE, donnees_insee = TRUE)
 #' head(exemple_popcom_COG2017_typo)
 #' # Nous allons maintenant isoler dans une table les communes fusionnees appartenant à des classes differentes, ici selon la typologie "typoA" entre 2014 et 2015, 2015 et 2016 et 2016 et 2017.
-#' details_exemple_popcom_COG2017_typo <- changement_COG_typo_details(table_entree=exemple_popcom[,-2],annees=c(2014:2017),typo="typoA", donnees_insee=TRUE)
+#' details_exemple_popcom_COG2017_typo <- changement_COG_typo_details(table_entree=exemple_popcom[,-2], annees = c(2014:2017), typo="typoA", donnees_insee = TRUE)
 #' head(details_exemple_popcom_COG2017_typo[["2014_2015"]])
 #' head(details_exemple_popcom_COG2017_typo[["2015_2016"]])
 #' head(details_exemple_popcom_COG2017_typo[["2016_2017"]])
 #' @encoding UTF-8
 
-changement_COG_typo <- function(table_entree,annees,codgeo_entree=colnames(table_entree)[1],typos=colnames(table_entree)[-which(colnames(table_entree)==codgeo_entree)], methode_fusion=c("methode_difference","methode_classe_fusion","methode_max_pop","methode_classe_absorbante","methode_classe_absorbee"),mot_difference=NULL,mot_fusion="commune fusionnée",classe_absorbante=NULL,classe_absorbee=NULL,donnees_insee=TRUE,libgeo=FALSE){
+changement_COG_typo <- function(table_entree, annees,codgeo_entree = colnames(table_entree)[1],
+                                typos = colnames(table_entree)[-which(colnames(table_entree)==codgeo_entree)],
+                                methode_fusion=c("methode_difference", "methode_classe_fusion", "methode_max_pop",
+                                                 "methode_classe_absorbante", "methode_classe_absorbee"),
+                                mot_difference = NULL, mot_fusion = "commune fusionnée", classe_absorbante=NULL,
+                                classe_absorbee = NULL, donnees_insee = TRUE, libgeo = FALSE){
   if(!codgeo_entree%in%colnames(table_entree)){ #NEW
     stop(paste0("codgeo_entree doit être une colonne de table_entree."))
   }
@@ -89,7 +94,9 @@ changement_COG_typo <- function(table_entree,annees,codgeo_entree=colnames(table
       table_finale <- table_entree
     } else {
 
-      provisoire <- merge(table_entree,get(paste0("PASSAGE_",annees[i],"_",annees[i+1])),by.x=codgeo_entree,by.y=paste0("cod",annees[i]),all.x=T,all.y=T) #all.y=T nouveau
+      provisoire <- merge(table_entree,get(paste0("PASSAGE_",annees[i],"_",annees[i+1])),
+                          by.x=codgeo_entree,by.y = paste0("cod",annees[i]),
+                          all.x = TRUE, all.y = TRUE)
       colnames(provisoire)[1]<- paste0("cod",annees[i])
       provisoire[which(is.na(with(provisoire,get(paste0("cod",annees[i+1]))))),"ratio"] <- 1
       provisoire[which(is.na(with(provisoire,get(paste0("cod",annees[i+1]))))),paste0("cod",annees[i+1])] <- as.character(provisoire[which(is.na(with(provisoire,get(paste0("cod",annees[i+1]))))),paste0("cod",annees[i])])
@@ -104,26 +111,26 @@ changement_COG_typo <- function(table_entree,annees,codgeo_entree=colnames(table
         if(nrow(table_f)!=0){
 
           table_f_liste <- lapply(unique(with(table_f,get(paste0("cod",annees[i+1])))),function(x){table_f[which(with(table_f,get(paste0("cod",annees[i+1])))==x),]})
-          table_f_sanspb <-table_f_liste[which(lapply(table_f_liste, FUN=function(x){ifelse(length(unique(x[,6]))==1,T,F)})==T)]
-          table_f_sanspb <- lapply(table_f_sanspb, FUN=function(x){x[1,]})
+          table_f_sanspb <-table_f_liste[which(lapply(table_f_liste, FUN = function(x){ifelse(length(unique(x[,6]))==1, TRUE, FALSE)}) == TRUE)]
+          table_f_sanspb <- lapply(table_f_sanspb, FUN = function(x){x[1,]})
           table_f_sanspb  <- do.call("rbind", table_f_sanspb)
-          table_f_avecpb <-table_f_liste[which(lapply(table_f_liste, FUN=function(x){ifelse(length(unique(x[,6]))==1,T,F)})==F)]
+          table_f_avecpb <-table_f_liste[which(lapply(table_f_liste, FUN = function(x){ifelse(length(unique(x[,6]))==1, TRUE, FALSE)}) == FALSE)]
 
           if (methode_fusion=="methode_classe_fusion"){
             if(!is.null(table_f_sanspb)){ #NEW suite à bug
               table_f_sanspb[,ncol(table_f_sanspb)] <- mot_fusion
             }
-            table_f_avecpb <- lapply(table_f_avecpb, FUN=function(x){
+            table_f_avecpb <- lapply(table_f_avecpb, FUN = function(x){
               x[1,var]<- mot_fusion
               return(x[1,])
             })
           }
 
           if (methode_fusion=="methode_difference"){
-            table_f_avecpb <- lapply(table_f_avecpb, FUN=function(x){
+            table_f_avecpb <- lapply(table_f_avecpb, FUN = function(x){
               categories <- unique(x[,var])[order(unique(x[,var]))]
               mot_diff <- ifelse(is.null(mot_difference),F,T)
-              x[1,var]<- ifelse(mot_diff==T,mot_difference,paste(categories,collapse = " et "))
+              x[1,var]<- ifelse(mot_diff == TRUE, mot_difference, paste(categories,collapse = " et "))
               return(x[1,])
             })
           }
@@ -132,25 +139,25 @@ changement_COG_typo <- function(table_entree,annees,codgeo_entree=colnames(table
             if(donnees_insee){
               assign(paste0("COG",annees[i]),get(paste0("COG",annees[i],"_insee")))
             }
-            table_f_avecpb <- lapply(table_f_avecpb, FUN=function(x){merge(x,get(paste0("COG",annees[i]))[,-2],by.x=paste0("cod",annees[i]),by.y="CODGEO",all.x=T,all.y=F)})
-            table_f_avecpb  <- lapply(table_f_avecpb, FUN=function(x){x[which(x[,6]==(aggregate(POP ~ get(colnames(x)[6]),data =x, FUN=sum)[which.max(aggregate(POP ~ get(colnames(x)[6]),data = x, FUN=sum)$POP),1]))[1],-7]})
+            table_f_avecpb <- lapply(table_f_avecpb, FUN = function(x){merge(x,get(paste0("COG",annees[i]))[,-2], by.x=paste0("cod",annees[i]),by.y="CODGEO",all.x = TRUE,all.y = FALSE)})
+            table_f_avecpb  <- lapply(table_f_avecpb, FUN = function(x){x[which(x[,6]==(aggregate(POP ~ get(colnames(x)[6]),data =x, FUN=sum)[which.max(aggregate(POP ~ get(colnames(x)[6]),data = x, FUN=sum)$POP),1]))[1],-7]})
           }
 
 
           if (methode_fusion=="methode_classe_absorbante"){
-           table_f_avecpb <- lapply(table_f_avecpb, FUN=function(x){
+           table_f_avecpb <- lapply(table_f_avecpb, FUN = function(x){
               categories <- unique(x[,var])[order(unique(x[,var]))]
               absorb <- ifelse(classe_absorbante%in%categories,T,F)
-              x[1,var]<- ifelse(absorb==T,classe_absorbante,paste(categories,collapse = " et "))
+              x[1,var]<- ifelse(absorb == TRUE, classe_absorbante, paste(categories,collapse = " et "))
               return(x[1,])
             })
           }
 
           if (methode_fusion=="methode_classe_absorbee"){
-            table_f_avecpb <- lapply(table_f_avecpb, FUN=function(x){
+            table_f_avecpb <- lapply(table_f_avecpb, FUN = function(x){
               categories <- unique(x[,var])[order(unique(x[,var]))]
-              absorb <- ifelse(classe_absorbee%in%categories,T,F)
-              x[1,var]<- ifelse(absorb==T,paste(categories[-which(categories==classe_absorbee)],collapse = " et "),paste(categories,collapse = " et "))
+              absorb <- ifelse(classe_absorbee%in%categories, TRUE, FALSE)
+              x[1,var]<- ifelse(absorb == TRUE,paste(categories[-which(categories==classe_absorbee)],collapse = " et "),paste(categories,collapse = " et "))
               return(x[1,])
             })
           }
@@ -165,10 +172,10 @@ changement_COG_typo <- function(table_entree,annees,codgeo_entree=colnames(table
           names(table_finale_provisoire)[names(table_finale_provisoire)==paste0("cod",annees[i+1])] <- codgeo_entree
         }
 
-        if(var==typos[1]){
+        if(var == typos[1]){
           table_finale <- table_finale_provisoire
         } else{
-          table_finale <- merge(table_finale,table_finale_provisoire,by=codgeo_entree,all.x=T,all.y=F)
+          table_finale <- merge(table_finale,table_finale_provisoire,by=codgeo_entree,all.x = TRUE, all.y = FALSE)
         }
       }
     }
@@ -180,7 +187,7 @@ changement_COG_typo <- function(table_entree,annees,codgeo_entree=colnames(table
     if(donnees_insee){
       assign(paste0("COG",annees[length(annees)]),get(paste0("COG",annees[length(annees)],"_insee")))
     }
-    table_finale <- merge(table_finale,get(paste0("COG",annees[length(annees)]))[,c(1,2)],by.x=codgeo_entree,by.y="CODGEO",all.x=T,all.y=F)
+    table_finale <- merge(table_finale,get(paste0("COG",annees[length(annees)]))[,c(1,2)],by.x=codgeo_entree,by.y="CODGEO",all.x = TRUE, all.y = FALSE)
     table_finale <- table_finale[,c(1,ncol(table_finale),2:(ncol(table_finale)-1))]
     colnames(table_finale)[2]<-"nom_commune"
   }

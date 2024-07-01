@@ -6,7 +6,7 @@
 \alias{trajectoire_commune_shiny}
 \title{Observer la trajectoire d'une commune}
 \usage{
-trajectoire_commune(codgeo, COG = annee_ref, donnees_insee = F)
+trajectoire_commune(codgeo, COG = annee_ref, donnees_insee = FALSE)
 
 trajectoire_commune_shiny(donnees_insee = FALSE)
 }
@@ -21,9 +21,9 @@ trajectoire_commune_shiny(donnees_insee = FALSE)
 Observer sur un diagramme interactif la trajectoire d'une commune depuis 1968 (aucun changement, fusions, défusions ou changements de codes) notamment via une application shiny.
 }
 \details{
-Le code officiel géographique le plus récent du package est actuellement celui au 01/01/2023. \cr
+Le code officiel géographique le plus récent du package est actuellement celui au 01/01/2024. \cr
 
-Les millésimes des COG qui peuvent être utilisés sont à ce stade les suivants : 1968, 1975, 1982, 1990, 1999, 2008 à 2023. \cr
+Les millésimes des COG qui peuvent être utilisés sont à ce stade les suivants : 1968, 1975, 1982, 1990, 1999, annuel à partir de 2008. \cr
 
 Les dates de référence des codes officiels géographiques utilisés dans COGugaison sont les suivantes :
 \itemize{
@@ -46,9 +46,9 @@ Les différences entre les tables de passage Insee et non Insee sont les suivant
 \examples{
 ## Exemple 1
 # Ici, nous allons observer sur un graphique interactif la trajectoire des communes ayant pour codes 01003 en 1968, 14697 en 1968, 76108 en 2014.
-trajectoire_commune("01003", 1968,donnees_insee=F)
-trajectoire_commune("14697", 1968,donnees_insee=F)
-trajectoire_commune("76108", 2014,donnees_insee=F)
+trajectoire_commune("01003", 1968, donnees_insee = FALSE)
+trajectoire_commune("14697", 1968, donnees_insee = FALSE)
+trajectoire_commune("76108", 2014, donnees_insee = FALSE)
 ## Exemple 2
 # Cette fonction lance une application shiny permettant d'observer toutes les trajectoires des communes.
 # trajectoire_commune_shiny()

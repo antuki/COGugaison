@@ -6,9 +6,9 @@
 #' @param vecteur_entree vaut TRUE si table_entree est un simple vecteur.
 #' @param sens vaut "20vers2A2B" pour changer tous les codes communes corses commençant par 20 par 2A ou 2B et vaut "2A2Bvers20" quand l'effet inverse est recherché.
 #' @details
-#' Le code officiel géographique le plus récent du package est actuellement celui au 01/01/2023. \cr
+#' Le code officiel géographique le plus récent du package est actuellement celui au 01/01/2024. \cr
 #'
-#' Les millésimes des COG qui peuvent être utilisés sont à ce stade les suivants : 1968, 1975, 1982, 1990, 1999, 2008 à 2023. \cr
+#' Les millésimes des COG qui peuvent être utilisés sont à ce stade les suivants : 1968, 1975, 1982, 1990, 1999, annuel à partir de 2008. \cr
 #'
 #' Les dates de référence des codes officiels géographiques utilisés dans COGugaison sont les suivantes :
 #' \itemize{
@@ -47,7 +47,7 @@ modification_Corse <- function(table_entree,codgeo_entree = colnames(table_entre
 
   table_sortie <- table_entree
 
-  if(vecteur_entree==T){
+  if(vecteur_entree == T){
     vecteur <- table_sortie
   } else{
     vecteur <- table_sortie[,codgeo_entree]
@@ -61,7 +61,7 @@ modification_Corse <- function(table_entree,codgeo_entree = colnames(table_entre
     substr(vecteur[which(vecteur%in%c("20002","20003","20005","20007","20009","20010","20012","20013","20015","20016","20020","20023","20025","20029","20030","20033","20034","20036","20037","20039","20042","20043","20044","20045","20046","20047","20049","20050","20051","20052","20053","20054","20055","20057","20058","20059","20063","20067","20068","20069","20072","20073","20074","20075","20076","20077","20078","20079","20080","20081","20082","20083","20084","20086","20087","20088","20093","20095","20096","20097","20101","20102","20105","20106","20107","20109","20110","20111","20112","20113","20116","20120","20121","20122","20123","20124","20125","20126","20134","20135","20136","20137","20138","20140","20143","20145","20147","20148","20149","20150","20151","20152","20153","20155","20156","20157","20159","20161","20162","20164","20165","20166","20167","20168","20169","20170","20171","20172","20173","20175","20176","20177","20178","20179","20180","20182","20183","20184","20185","20187","20188","20190","20192","20193","20194","20195","20199","20201","20202","20205","20206","20207","20208","20210","20213","20214","20216","20217","20218","20219","20220","20221","20222","20223","20224","20225","20226","20227","20229","20230","20231","20233","20234","20235","20236","20238","20239","20241","20242","20243","20244","20245","20246","20248","20250","20251","20252","20255","20256","20257","20260","20261","20263","20264","20265","20267","20273","20274","20275","20277","20280","20281","20283","20286","20287","20289","20290","20291","20292","20293","20296","20297","20298","20299","20301","20302","20303","20304","20305","20306","20307","20309","20311","20313","20314","20315","20316","20317","20318","20319","20320","20321","20327","20328","20329","20332","20333","20334","20335","20337","20338","20339","20340","20341","20342","20343","20344","20346","20347","20350","20352","20353","20354","20355","20356","20361","20364","20365","20366"))],1,2)<-"2B"
   }
 
-  if(vecteur_entree==T){
+  if(vecteur_entree == T){
     table_sortie <- vecteur
   } else{
     table_sortie[,codgeo_entree] <- vecteur
@@ -74,23 +74,23 @@ modification_Corse <- function(table_entree,codgeo_entree = colnames(table_entre
  #
  # COG1968 <- read.csv(paste0("COG",1968,"_insee_Corse2A2B.csv"),sep=";",stringsAsFactors = F,colClasses = c("character","character","numeric"))
  # COG1968_20 <- modification_Corse(table_entree=COG1968[,1],sens="2A2Bvers20")
- # write.table(COG1968_20,"COG1968_20.csv",sep=";",dec=".",row.names=F)
+ # write.table(COG1968_20,"COG1968_20.csv",sep=";",dec=".", row.names = FALSE)
  #
  # COG1975 <- read.csv(paste0("COG",1975,"_insee_Corse2A2B.csv"),sep=";",stringsAsFactors = F,colClasses = c("character","character","numeric"))
  # COG1975_20 <- modification_Corse(table_entree=COG1975,sens="2A2Bvers20")
- # write.table(COG1975_20,"COG1975_20.csv",sep=";",dec=".",row.names=F)
+ # write.table(COG1975_20,"COG1975_20.csv",sep=";",dec=".", row.names = FALSE)
 
 # test <- PASSAGE_1975_1982_insee[-which(substr(PASSAGE_1975_1982_insee$cod1975,1,2)%in%c("2A","2B")),]
 # test2 <- table_passage[which(substr(table_passage$cod1975,1,2)=="20"),]
 # test2 <- test2[order(test2$cod1982),]
 # test <- rbind.data.frame(test2,test)
 #
-# write.table(test,"PASSAGE_1975_1982_insee_new.csv",sep=";",dec=".",row.names=F)
+# write.table(test,"PASSAGE_1975_1982_insee_new.csv",sep=";",dec=".", row.names = FALSE)
 #
 #
 # test <- PASSAGE_1968_1975_insee
-# test <- modification_Corse(table_entree=test,codgeo_entree = "cod1968",sens="2A2Bvers20")
-# test <- modification_Corse(table_entree=test,codgeo_entree = "cod1975",sens="2A2Bvers20")
+# test <- modification_Corse(table_entree = test, codgeo_entree = "cod1968", sens = "2A2Bvers20")
+# test <- modification_Corse(table_entree = test, codgeo_entree = "cod1975", sens = "2A2Bvers20")
 #
-# write.table(test,"PASSAGE_1968_1975_insee_new.csv",sep=";",dec=".",row.names=F)
+# write.table(test,"PASSAGE_1968_1975_insee_new.csv",sep=";",dec=".", row.names = FALSE)
 

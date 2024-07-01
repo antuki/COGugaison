@@ -27,9 +27,9 @@ enlever_PLM(
 Remplacer les codes Insee des arrondissements municipaux de Paris, Lyon et Marseille par leurs codes communes respectifs.
 }
 \details{
-Le code officiel géographique le plus récent du package est actuellement celui au 01/01/2023. \cr
+Le code officiel géographique le plus récent du package est actuellement celui au 01/01/2024. \cr
 
-Les millésimes des COG qui peuvent être utilisés sont à ce stade les suivants : 1968, 1975, 1982, 1990, 1999, 2008 à 2023. \cr
+Les millésimes des COG qui peuvent être utilisés sont à ce stade les suivants : 1968, 1975, 1982, 1990, 1999, annuel à partir de 2008. \cr
 
 Les dates de référence des codes officiels géographiques utilisés dans COGugaison sont les suivantes :
 \itemize{
@@ -52,8 +52,8 @@ Les différences entre les tables de passage Insee et non Insee sont les suivant
 \examples{
 ## Exemple 1
 # Ici, nous allons remplacer les arrondissement municipaux par les codes communaux dans la table exemple_flux pour les variables COMMUNE puis DCLT.
-exemple_flux_sansPLM <-enlever_PLM(table_entree=exemple_flux,codgeo_entree = "COMMUNE",libgeo=NULL,agregation = F,vecteur_entree=F)
-exemple_flux_sansPLM <-enlever_PLM(table_entree=exemple_flux_sansPLM,codgeo_entree = "DCLT",libgeo=NULL,agregation = F,vecteur_entree=F)
+exemple_flux_sansPLM <-enlever_PLM(table_entree = exemple_flux, codgeo_entree = "COMMUNE", libgeo = NULL, agregation = FALSE, vecteur_entree = FALSE)
+exemple_flux_sansPLM <-enlever_PLM(table_entree = exemple_flux_sansPLM, codgeo_entree = "DCLT", libgeo = NULL, agregation = FALSE, vecteur_entree = FALSE)
 }
 \references{
 \itemize{

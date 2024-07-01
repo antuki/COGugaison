@@ -8,9 +8,9 @@
 #'
 #' ATTENTION. En raison d'un changement de fichier d'historique de l'Insee en 2019, cette fonction n'est à ce stade plus maintenue pour les millésimes après 2018.
 #'
-#' Le code officiel géographique le plus récent du package est actuellement celui au 01/01/2023. \cr
+#' Le code officiel géographique le plus récent du package est actuellement celui au 01/01/2024. \cr
 #'
-#' Les millésimes des COG qui peuvent être utilisés sont à ce stade les suivants : 1968, 1975, 1982, 1990, 1999, 2008 à 2023. \cr
+#' Les millésimes des COG qui peuvent être utilisés sont à ce stade les suivants : 1968, 1975, 1982, 1990, 1999, annuel à partir de 2008. \cr
 #'
 #' Les dates de référence des codes officiels géographiques utilisés dans COGugaison sont les suivantes :
 #' \itemize{
@@ -71,7 +71,7 @@ for(codgeo in unique(donnees_fusions[which(donnees_fusions$MOD%in%c("320","321",
                           paste(c(date," : ",
                           "La commune de ",donnees_fusions[which(donnees_fusions$DEPCOM==codgeo & donnees_fusions$EFF==date),"NCCANC"]," (",codgeo,")",
                           " change de nom en ",unique(donnees_fusions[which(donnees_fusions$DEPCOM==codgeo & donnees_fusions$EFF==date),"NCCOFF"]),
-                          sapply(as.character(unique(donnees_fusions[which(donnees_fusions$DEPCOM==codgeo & donnees_fusions$EFF==date & donnees_fusions$MOD%in%c("110","111","120","130","140","150")),"MOD"])),FUN=function(x){switch(x,
+                          sapply(as.character(unique(donnees_fusions[which(donnees_fusions$DEPCOM==codgeo & donnees_fusions$EFF==date & donnees_fusions$MOD%in%c("110","111","120","130","140","150")),"MOD"])),FUN = function(x){switch(x,
                                                                                                                                                                        "110"={" [changement de nom dû à une fusion (simple ou association)]"},
                                                                                                                                                                        "120"={" [changement de nom dû à un rétablissement]"},
                                                                                                                                                                        "130"={" [changement de nom dû au changement de chef-lieu]"},
@@ -89,7 +89,7 @@ for(codgeo in unique(donnees_fusions[which(donnees_fusions$MOD%in%c("320","321",
                           )
                           ,collapse=", "),
                           #paste(paste0(donnees_fusions[which((donnees_fusions$MOD=="110" | donnees_fusions$MOD=="111"| donnees_fusions$MOD=="120") & donnees_fusions$DEPCOM==codgeo) ,"NCCANC"]," (",codgeo,")",collapse=", "))),collapse=", "),
-                          sapply(unique(as.character(donnees_fusions[which(donnees_fusions$MOD%in%c("320","321","340","341") & donnees_fusions$DEPCOM==codgeo & donnees_fusions$EFF==date & donnees_fusions$MOD%in%c("310","320","311","321","330","340","331","341","333","332")),c("MOD")])),FUN=function(x){switch(x,
+                          sapply(unique(as.character(donnees_fusions[which(donnees_fusions$MOD%in%c("320","321","340","341") & donnees_fusions$DEPCOM==codgeo & donnees_fusions$EFF==date & donnees_fusions$MOD%in%c("310","320","311","321","330","340","331","341","333","332")),c("MOD")])),FUN = function(x){switch(x,
                                                                                                                                                                                                                               "320"={" [fusion simple]"},
                                                                                                                                                                                                                               "321"={" [commune nouvelle sans commune(s) déléguée(s)]"},
                                                                                                                                                                                                                               "340"={" [fusion-association]"},
@@ -114,7 +114,7 @@ for(codgeo in unique(donnees_defusions[which(donnees_defusions$MOD%in%c("220","2
                              date," : ",
                              paste0(unique(donnees_defusions[which((donnees_defusions$MOD%in%c("220","230")) & donnees_defusions$DEPCOM==codgeo & donnees_defusions$EFF==date),"NCCOFF"])," (",codgeo, ") s'est séparée en "),
                              paste(c(paste0(unique(donnees_defusions[which(donnees_defusions$MOD%in%c("220","230") & donnees_defusions$DEPCOM==codgeo & donnees_defusions$EFF==date) ,"NCCOFF"])," (",codgeo,")"),paste0(unique(donnees_defusions[which(donnees_defusions$MOD%in%c("200","210") & donnees_defusions$COMECH==codgeo & donnees_defusions$EFF==date) ,"NCCOFF"])," (",donnees_defusions[which(donnees_defusions$MOD%in%c("200","210") & donnees_defusions$COMECH==codgeo & donnees_defusions$EFF==date) ,"DEPCOM"],")")),collapse = ", "),
-                             sapply(unique(as.character(donnees_defusions[which((donnees_defusions$MOD%in%c("220","230")) & donnees_defusions$DEPCOM==codgeo & donnees_defusions$EFF==date),c("MOD")])),FUN=function(x){switch(x,
+                             sapply(unique(as.character(donnees_defusions[which((donnees_defusions$MOD%in%c("220","230")) & donnees_defusions$DEPCOM==codgeo & donnees_defusions$EFF==date),c("MOD")])),FUN = function(x){switch(x,
                                                                                                                                                                                                                     "230"={" [rétablissement]"},
                                                                                                                                                                                                                     "220"={" [création]"})}),
                           ".\n"
@@ -136,7 +136,7 @@ for(codgeo in unique(donnees_changements_codes[which(donnees_changements_codes$M
                                        date," : ",
                                        "Le code commune de ",donnees_changements_codes[which(donnees_changements_codes$DEPCOM==codgeo & donnees_changements_codes$EFF==date & donnees_changements_codes$MOD%in%c("410","411")),"NCCOFF"], " passe de ",
                                        donnees_changements_codes[which(donnees_changements_codes$DEPCOM==codgeo & donnees_changements_codes$EFF==date & donnees_changements_codes$MOD%in%c("410","411")),"DEPANC"], " à ", donnees_changements_codes[which(donnees_changements_codes$DEPCOM==codgeo & donnees_changements_codes$EFF==date & donnees_changements_codes$MOD%in%c("410","411")),"DEPCOM"],
-                                       sapply(as.character(unique(donnees_changements_codes[which(donnees_changements_codes$DEPCOM==codgeo & donnees_changements_codes$EFF==date & donnees_changements_codes$MOD%in%c("410","411")),"MOD"])),FUN=function(x){switch(x,
+                                       sapply(as.character(unique(donnees_changements_codes[which(donnees_changements_codes$DEPCOM==codgeo & donnees_changements_codes$EFF==date & donnees_changements_codes$MOD%in%c("410","411")),"MOD"])),FUN = function(x){switch(x,
                                                                                                                                                                                                                                                                     "410"={" [changement de département]"},
                                                                                                                                                                                                                                                                     "411"={" [changement de département dû à la création d'une commune nouvelle]"})}),
 
@@ -150,7 +150,7 @@ for(codgeo in unique(donnees_changements_codes[which(donnees_changements_codes$M
 #     date," : ",
 #     "Le code commune de ",donnees_changements_codes[which(donnees_changements_codes$DEPCOM==codgeo & donnees_changements_codes$EFF==date & donnees$MOD%in%c("410","411")),"NCCOFF"], " passe de ",
 #     donnees_changements_codes[which(donnees_changements_codes$DEPCOM==codgeo & donnees_changements_codes$EFF==date & donnees$MOD%in%c("410","411")),"DEPANC"], " à ", donnees_changements_codes[which(donnees_changements_codes$DEPCOM==codgeo & donnees_changements_codes$EFF==date & donnees$MOD%in%c("410","411")),"DEPCOM"],
-#     sapply(as.character(unique(donnees_changements_codes[which(donnees_changements_codes$DEPCOM==codgeo & donnees_changements_codes$EFF==date & donnees$MOD%in%c("410","411")),"MOD"])),FUN=function(x){switch(x,
+#     sapply(as.character(unique(donnees_changements_codes[which(donnees_changements_codes$DEPCOM==codgeo & donnees_changements_codes$EFF==date & donnees$MOD%in%c("410","411")),"MOD"])),FUN = function(x){switch(x,
 #                                                                                                                                          "410"={" [changement de département]"},
 #                                                                                                                                          "411"={" [changement de département dû à la création d'une commune nouvelle]"})}),
 #
@@ -166,7 +166,7 @@ for(codgeo in unique(donnees_changements_codes[which(donnees_changements_codes$M
 
                                        date," : ",
                                        "Le code commune de ",unique(donnees_changements_codes[which(donnees_changements_codes$DEPCOM==codgeo & donnees_changements_codes$EFF==date & donnees_changements_codes$MOD%in%c("130")),"NCCOFF"]), " passe de ", unique(donnees_changements_codes[which(donnees_changements_codes$C_LOFF==codgeo & donnees_changements_codes$EFF==date & donnees_changements_codes$MOD%in%c("500")),"C_LANC"]), " à ",codgeo,
-                                       sapply(as.character(unique(donnees_changements_codes[which(donnees_changements_codes$C_LOFF==codgeo & donnees_changements_codes$EFF==date & donnees_changements_codes$MOD%in%c("500")),"MOD"])),FUN=function(x){switch(x,
+                                       sapply(as.character(unique(donnees_changements_codes[which(donnees_changements_codes$C_LOFF==codgeo & donnees_changements_codes$EFF==date & donnees_changements_codes$MOD%in%c("500")),"MOD"])),FUN = function(x){switch(x,
                                                                                                                                                                                                                                                               "500"={" [changement de code dû à un changement de chef-lieu]"})}),
 
                                        ".\n"
@@ -192,7 +192,7 @@ for(codgeo in unique(donnees_changements_noms[,c("DEPCOM")])){
       date," : ",
       "La commune de ",donnees_changements_noms[which(donnees_changements_noms$DEPCOM==codgeo & donnees_changements_noms$EFF==date),"NCCANC"]," (",codgeo,")",
       " change de nom en ",donnees_changements_noms[which(donnees_changements_noms$DEPCOM==codgeo & donnees_changements_noms$EFF==date),"NCCOFF"],
-      sapply(as.character(unique(donnees_changements_noms[which(donnees_changements_noms$DEPCOM==codgeo & donnees_changements_noms$EFF==date),"MOD"])),FUN=function(x){switch(x,
+      sapply(as.character(unique(donnees_changements_noms[which(donnees_changements_noms$DEPCOM==codgeo & donnees_changements_noms$EFF==date),"MOD"])),FUN = function(x){switch(x,
                                                                                                                                            "100"={" [changement de nom]"},
                                                                                                                                            "140"={" [changement de nom dû au transfert du bureau centralisateur de canton]"},
                                                                                                                                            "150"={" [changement de nom dû au transfert du chef-lieu d’arrondissement]"}

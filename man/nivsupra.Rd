@@ -12,7 +12,7 @@ nivsupra(
   nivsupra,
   nivsupra_nom = ifelse(agregation == TRUE, nivsupra, paste0(nivsupra, "_",
     codgeo_entree)),
-  agregation = T
+  agregation = TRUE
 )
 }
 \arguments{
@@ -47,9 +47,9 @@ Pour les COG plus anciens, regarder au cas par cas selon les années. Par exempl
 Permettre d'agréger les tables de données communales à de nombreux échelons supra-communaux administratifs (EPCI, arrondissements, cantons-villes, départements, régions) ou d'étude (bassins de vie, zones d'emploi, unités urbaines, aires urbaines). La fonction `nivsupra` peut également s'appliquer à des tables de flux (non agrégées par codes communes) grâce à l'option agregation = FALSE. La table en entrée est alors conservée comme telle avec une nouvelle colonne qui correspond au niveau supracommunal du code commune considéré.
 }
 \details{
-Le code officiel géographique le plus récent du package est actuellement celui au 01/01/2023. \cr
+Le code officiel géographique le plus récent du package est actuellement celui au 01/01/2024. \cr
 
-Les millésimes des COG qui peuvent être utilisés sont à ce stade les suivants : 1968, 1975, 1982, 1990, 1999, 2008 à 2023. \cr
+Les millésimes des COG qui peuvent être utilisés sont à ce stade les suivants : 1968, 1975, 1982, 1990, 1999, annuel à partir de 2008. \cr
 
 A partir de 2020, de nombreux zonages ont été modifiés suite à la refonte des zonages de l'Insee. Les ZE2010 deviennent les ZE2020, les UU2010 deviennent les UU2020, les AU2010 deviennent les AAV2020.
 
@@ -74,16 +74,16 @@ Les différences entre les tables de passage Insee et non Insee sont les suivant
 \examples{
 ## Exemple 1
 # Ici, apres avoir transforme les donnees en geographie communale au 01/01/2017, nous agregeons la population et la superficie des communes a l'echelon geographique des zones d'emploi afin d'obtenir une table des densites de population par zone d'emploi.
-exemple_popcom_COG2017_num <- changement_COG_varNum(table_entree=exemple_popcom,annees=c(2014:2017),agregation=T,libgeo=T,donnees_insee=T)
-exemple_popcom_ZE2010 <- nivsupra(table_entree=exemple_popcom_COG2017_num,COG=2017,nivsupra="ZE2010",agregation=T)
+exemple_popcom_COG2017_num <- changement_COG_varNum(table_entree = exemple_popcom,annees=c(2014:2017), agregation = TRUE, libgeo = TRUE, donnees_insee = TRUE)
+exemple_popcom_ZE2010 <- nivsupra(table_entree=exemple_popcom_COG2017_num,COG=2017,nivsupra="ZE2010", agregation = TRUE)
 exemple_popcom_ZE2010$densite <- exemple_popcom_ZE2010$P12_POP / exemple_popcom_ZE2010$SUPERF
 head(exemple_popcom_ZE2010)
 ## Exemple 2
 # Ici, on ajoute les colonnes ZE2010_COMMUNE et ZE2010_DCLT a la table exemple de flux domicile-travail.
-exemple_flux_COG2017 <- changement_COG_varNum(table_entree=exemple_flux,annees=c(2014:2017),codgeo_entree="COMMUNE",agregation=F,libgeo=F,donnees_insee=T)
-exemple_flux_COG2017 <- changement_COG_varNum(table_entree=exemple_flux_COG2017,annees=c(2014:2017),codgeo_entree="DCLT",agregation=F,libgeo=F,donnees_insee=T)
-exemple_flux_COG2017_etZE <- nivsupra(table_entree=exemple_flux_COG2017,codgeo_entree="COMMUNE",nivsupra="ZE2010",COG=2017,agregation=F)
-exemple_flux_COG2017_etZE <- nivsupra(table_entree=exemple_flux_COG2017_etZE,codgeo_entree="DCLT",nivsupra="ZE2010",COG=2017,agregation=F)
+exemple_flux_COG2017 <- changement_COG_varNum(table_entree = exemple_flux, annees=c(2014:2017), codgeo_entree="COMMUNE",agregation = FALSE, libgeo = FALSE, donnees_insee = TRUE)
+exemple_flux_COG2017 <- changement_COG_varNum(table_entree = exemple_flux_COG2017, annees=c(2014:2017),codgeo_entree="DCLT", agregation = FALSE, libgeo = FALSE, donnees_insee = TRUE)
+exemple_flux_COG2017_etZE <- nivsupra(table_entree = exemple_flux_COG2017, codgeo_entree="COMMUNE",nivsupra="ZE2010",COG=2017, agregation = FALSE)
+exemple_flux_COG2017_etZE <- nivsupra(table_entree = exemple_flux_COG2017_etZE, codgeo_entree="DCLT",nivsupra="ZE2010",COG=2017, agregation = FALSE)
 head(exemple_flux_COG2017_etZE)
 }
 \references{

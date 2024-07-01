@@ -9,9 +9,9 @@
 #' @param hypothese_COG (optionnelle) hypothèse formulée par l'utilisateur concernant l'année de référence de COG supposée de la base de données. Le diagnostic sera alors effectué par rapport à cette année de COG. vaut annee_ref (COG le plus récent) par défaut.
 #' @param table_diagnostic vaut TRUE si on souhaite obtenir en sortie une table avec un diagnostic de COG pour chaque ligne. vaut TRUE par défaut.
 #' @details
-#' Le code officiel géographique le plus récent du package est actuellement celui au 01/01/2023. \cr
+#' Le code officiel géographique le plus récent du package est actuellement celui au 01/01/2024. \cr
 #'
-#' Les millésimes des COG qui peuvent être utilisés sont à ce stade les suivants : 1968, 1975, 1982, 1990, 1999, 2008 à 2023. \cr
+#' Les millésimes des COG qui peuvent être utilisés sont à ce stade les suivants : 1968, 1975, 1982, 1990, 1999, annuel à partir de 2008. \cr
 #'
 #' Les dates de référence des codes officiels géographiques utilisés dans COGugaison sont les suivantes :
 #' \itemize{
@@ -55,7 +55,10 @@
 #' @encoding UTF-8
 #' @import dplyr
 
-diag_COG <- function(table_entree, codgeo_entree = colnames(table_entree)[1], ign_na = FALSE, id_doubl = FALSE, hypothese_COG = annee_ref, table_diagnostic=TRUE){
+diag_COG <- function(table_entree, codgeo_entree = colnames(table_entree)[1],
+                     ign_na = FALSE, id_doubl = FALSE,
+                     hypothese_COG = annee_ref,
+                     table_diagnostic = TRUE){
 
 
   table_sortie <- table_entree

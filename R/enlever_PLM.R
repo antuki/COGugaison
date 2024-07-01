@@ -7,9 +7,9 @@
 #' @param agregation vaut TRUE si la table souhaitée doit sommer toutes les lignes qui concernent une même commune et FALSE si l'on souhaite volontairement conserver les doublons dans les codes commune (dans les tables de flux par exemple). Si agregation = F, les variables de type caractère sont alors conservées comme telles ou dupliquées en cas de défusion et les variables numériques sommées en cas de fusion ou réparties proportionnellement à la population de chaque commune en cas de défusion.
 #' @param vecteur_entree vaut TRUE si table_entree est un simple vecteur.
 #' @details
-#' Le code officiel géographique le plus récent du package est actuellement celui au 01/01/2023. \cr
+#' Le code officiel géographique le plus récent du package est actuellement celui au 01/01/2024. \cr
 #'
-#' Les millésimes des COG qui peuvent être utilisés sont à ce stade les suivants : 1968, 1975, 1982, 1990, 1999, 2008 à 2023. \cr
+#' Les millésimes des COG qui peuvent être utilisés sont à ce stade les suivants : 1968, 1975, 1982, 1990, 1999, annuel à partir de 2008. \cr
 #'
 #' Les dates de référence des codes officiels géographiques utilisés dans COGugaison sont les suivantes :
 #' \itemize{
@@ -37,15 +37,15 @@
 #' @examples
 #' ## Exemple 1
 #' # Ici, nous allons remplacer les arrondissement municipaux par les codes communaux dans la table exemple_flux pour les variables COMMUNE puis DCLT.
-#' exemple_flux_sansPLM <-enlever_PLM(table_entree=exemple_flux,codgeo_entree = "COMMUNE",libgeo=NULL,agregation = F,vecteur_entree=F)
-#' exemple_flux_sansPLM <-enlever_PLM(table_entree=exemple_flux_sansPLM,codgeo_entree = "DCLT",libgeo=NULL,agregation = F,vecteur_entree=F)
+#' exemple_flux_sansPLM <-enlever_PLM(table_entree = exemple_flux, codgeo_entree = "COMMUNE", libgeo = NULL, agregation = FALSE, vecteur_entree = FALSE)
+#' exemple_flux_sansPLM <-enlever_PLM(table_entree = exemple_flux_sansPLM, codgeo_entree = "DCLT", libgeo = NULL, agregation = FALSE, vecteur_entree = FALSE)
 
-enlever_PLM <- function(table_entree,codgeo_entree = colnames(table_entree)[1],libgeo=NULL,agregation = TRUE,vecteur_entree=is.vector(table_entree)){
+enlever_PLM <- function(table_entree, codgeo_entree = colnames(table_entree)[1], libgeo = NULL, agregation = TRUE, vecteur_entree = is.vector(table_entree)){
   if(!vecteur_entree && !codgeo_entree%in%colnames(table_entree)){ #NEW
     stop(paste0("codgeo_entree doit être une colonne de table_entree."))
   }
 
-  if(vecteur_entree==T){
+  if(vecteur_entree == TRUE){
     table_entree[substr(table_entree,1,2)=="75"] <- "75056"
     table_entree[substr(table_entree,1,3)=="132"] <- "13055"
     table_entree[substr(table_entree,1,4)=="6938"] <- "69123"
@@ -56,13 +56,13 @@ enlever_PLM <- function(table_entree,codgeo_entree = colnames(table_entree)[1],l
   table_entree[substr(with(table_entree,get(codgeo_entree)),1,3)=="132", codgeo_entree] <- "13055"
   table_entree[substr(with(table_entree,get(codgeo_entree)),1,4)=="6938", codgeo_entree] <- "69123"
 
-if(agregation==F){
+if(agregation == FALSE){
   table_sortie <- table_entree
 } else{
 
   table_sortie <- aggregate(table_entree[,sapply(table_entree, function(x){is.numeric(x) | is.integer(x)})],by =list(with(table_entree,get(codgeo_entree))),FUN=sum)
-  colnames(table_sortie)<- colnames(table_entree[,c(codgeo_entree,names(sapply(table_entree, function(x){is.numeric(x) | is.integer(x)})[sapply(table_entree, function(x){is.numeric(x) | is.integer(x)})==T]))])
-  #table_sortie <- merge(table_sortie,table_entree[!duplicated(with(table_entree,get(codgeo_entree))),names(sapply(table_entree, function(x){is.numeric(x) | is.integer(x)})[sapply(table_entree, function(x){is.numeric(x) | is.integer(x)})==F])], by=codgeo_entree,all.x=T,all.y=F)
+  colnames(table_sortie)<- colnames(table_entree[,c(codgeo_entree,names(sapply(table_entree, function(x){is.numeric(x) | is.integer(x)})[sapply(table_entree, function(x){is.numeric(x) | is.integer(x)}) == TRUE]))])
+  #table_sortie <- merge(table_sortie,table_entree[!duplicated(with(table_entree,get(codgeo_entree))),names(sapply(table_entree, function(x){is.numeric(x) | is.integer(x)})[sapply(table_entree, function(x){is.numeric(x) | is.integer(x)}) == FALSE])], by=codgeo_entree, all.x = TRUE, all.y = FALSE)
    }
 
 if(!is.null(libgeo)){

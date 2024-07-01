@@ -8,9 +8,9 @@
 #' @param donnees_insee_sortie vaut TRUE si les données souhaitées en sorties doivent respecter le même COG que les données Insee
 #' @param COG indique l'année de COG de la table considérée. (exemple 1968). Par défaut renvoie l'année retournée par la fonction COG_akinator
 #' @details
-#' Le code officiel géographique le plus récent du package est actuellement celui au 01/01/2023. \cr
+#' Le code officiel géographique le plus récent du package est actuellement celui au 01/01/2024. \cr
 #'
-#' Les millésimes des COG qui peuvent être utilisés sont à ce stade les suivants : 1968, 1975, 1982, 1990, 1999, 2008 à 2023. \cr
+#' Les millésimes des COG qui peuvent être utilisés sont à ce stade les suivants : 1968, 1975, 1982, 1990, 1999, annuel à partir de 2008. \cr
 #'
 #' Les dates de référence des codes officiels géographiques utilisés dans COGugaison sont les suivantes :
 #' \itemize{
@@ -39,12 +39,15 @@
 #' ## Exemple 1
 #' # Ici, nous allons remplacer les codes communes de l'Oudon dans une table de l'Insee (en COG 2014 mais que nous considérons en COG 2015 uniquement pour cet exemple).
 #' head(exemple_popcom[which(exemple_popcom$CODGEO%in%c("14472","14697")),])
-#' exemple_popcom_oudon <- modification_Oudon(table_entree=exemple_popcom,donnees_insee_entree=T,donnees_insee_sortie=F,COG=2015)
+#' exemple_popcom_oudon <- modification_Oudon(table_entree=exemple_popcom, donnees_insee_entree = TRUE, donnees_insee_sortie = FALSE, COG = 2015)
 #' head(exemple_popcom_oudon[which(exemple_popcom$CODGEO%in%c("14472","14697")),])
 #' @encoding UTF-8
 
 
-modification_Oudon <- function(table_entree,codgeo_entree = colnames(table_entree)[1], vecteur_entree=is.vector(table_entree),donnees_insee_entree=TRUE,donnees_insee_sortie=TRUE,COG=as.numeric(substr(COG_akinator(vecteur_codgeo = table_entree[,codgeo_entree],donnees_insee = donnees_insee_entree),4,7))){
+modification_Oudon <- function(table_entree, codgeo_entree = colnames(table_entree)[1],
+                               vecteur_entree = is.vector(table_entree), donnees_insee_entree = TRUE,
+                               donnees_insee_sortie = TRUE,
+                               COG = as.numeric(substr(COG_akinator(vecteur_codgeo = table_entree[,codgeo_entree],donnees_insee = donnees_insee_entree),4,7))){
   if(!codgeo_entree%in%colnames(table_entree)){ #NEW
     stop(paste0("codgeo_entree doit être une colonne de table_entree."))
   }
@@ -54,7 +57,7 @@ modification_Oudon <- function(table_entree,codgeo_entree = colnames(table_entre
 
   table_sortie <- table_entree
 
-  if(vecteur_entree==T){
+  if(vecteur_entree == TRUE){
     vecteur <- table_sortie
   } else{
     vecteur <- table_sortie[,codgeo_entree]
@@ -74,7 +77,7 @@ modification_Oudon <- function(table_entree,codgeo_entree = colnames(table_entre
   }
 
 
-  if(vecteur_entree==T){
+  if(vecteur_entree == TRUE){
     table_sortie <- vecteur
   } else{
     table_sortie[,codgeo_entree] <- vecteur
