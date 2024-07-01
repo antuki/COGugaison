@@ -62,7 +62,7 @@ COG_akinator <- function (vecteur_codgeo, donnees_insee = TRUE)
     vecteur_codgeo_COG <- get(paste0("COG", annee))[, 1]
     vecteur_codgeo_COG <- vecteur_codgeo_COG[-which(substr(vecteur_codgeo_COG,1, 2) == 97)]
     vecteur_codgeo_COG[which(vecteur_codgeo_COG%in%c("14472"))] <-"14697" #cas l'Oudon
-    if (length(setdiff(vecteur_codgeo_COG,vecteur_codgeo))==0) { # new : avant all(vecteur_codgeo %in% vecteur_codgeo_COG)
+    if (length(setdiff(vecteur_codgeo, vecteur_codgeo_COG))==0) { # new : avant all(vecteur_codgeo %in% vecteur_codgeo_COG)
       COG_possibles <- c(COG_possibles, paste0("COG", annee))
     }
   }

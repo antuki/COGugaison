@@ -114,3 +114,5 @@
 ### juillet 2024
 
 * Les tables COG2022 et COG2022_insee étaient erronées (COG2021 à la place) cf. [#20](https://github.com/antuki/COGugaison/issues/20)
+
+* Correction d'un morceau de code de `COG_akinator` [#21](https://github.com/antuki/COGugaison/issues/21)
