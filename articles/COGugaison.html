@@ -12,7 +12,7 @@
 <link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png">
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">COGugaison</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.7</span>
       </span>
     </div>
 
@@ -73,7 +73,7 @@
 
       
 
-      </header><script src="COGugaison_files/htmlwidgets-1.6.2/htmlwidgets.js"></script><link href="COGugaison_files/vis-9.1.0/vis-network.min.css" rel="stylesheet">
+      </header><script src="COGugaison_files/htmlwidgets-1.6.4/htmlwidgets.js"></script><link href="COGugaison_files/vis-9.1.0/vis-network.min.css" rel="stylesheet">
 <script src="COGugaison_files/vis-9.1.0/vis-network.min.js"></script><script src="COGugaison_files/visNetwork-binding-2.1.2/visNetwork.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
@@ -164,7 +164,7 @@ charger dans R.</p>
 visualisé de la manière suivante :</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">COGugaison</span><span class="fu">:::</span><span class="va">annee_ref</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] 2023</span></span></code></pre>
+<pre><code><span><span class="co">## [1] 2024</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="les-bases-de-données-utiles-dans-cogugaison">Les bases de données utiles dans COGugaison<a class="anchor" aria-label="anchor" href="#les-bases-de-donn%C3%A9es-utiles-dans-cogugaison"></a>
@@ -459,13 +459,14 @@ dans l’exemple ci-dessous :</p>
 <span><span class="co">## </span></span>
 <span><span class="co">## |                         | Nombre d'observations|</span></span>
 <span><span class="co">## |:------------------------|---------------------:|</span></span>
-<span><span class="co">## |2023                     |                 34932|</span></span>
-<span><span class="co">## |2015                     |                   773|</span></span>
+<span><span class="co">## |2024                     |                 34922|</span></span>
+<span><span class="co">## |2015                     |                   771|</span></span>
 <span><span class="co">## |2016                     |                   467|</span></span>
-<span><span class="co">## |2018                     |                   387|</span></span>
+<span><span class="co">## |2018                     |                   386|</span></span>
 <span><span class="co">## |2017                     |                    59|</span></span>
 <span><span class="co">## |2014                     |                    25|</span></span>
 <span><span class="co">## |2022                     |                    21|</span></span>
+<span><span class="co">## |2023                     |                    13|</span></span>
 <span><span class="co">## |2019                     |                     3|</span></span>
 <span><span class="co">## |2020                     |                     3|</span></span>
 <span><span class="co">## |arrondissement municipal |                     1|</span></span>
@@ -530,8 +531,8 @@ vous souhaitez observer ses modifications depuis 1968.</p>
 <code class="sourceCode R"><span><span class="co"># Ici, nous allons observer sur un graphique interactif la trajectoire de la commune ayant pour code 01003 en 1968</span></span>
 <span><span class="co"># (fusion avec 2 autres communes le 1er janvier 1974)</span></span>
 <span><span class="fu"><a href="../reference/trajectoire_commune.html">trajectoire_commune</a></span><span class="op">(</span><span class="st">"01003"</span>, <span class="fl">1968</span>, donnees_insee <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
-<div id="htmlwidget-434e2f8811ad2e72a8d9" style="width:100%;height:500px;" class="visNetwork html-widget "></div>
-<script type="application/json" data-for="htmlwidget-434e2f8811ad2e72a8d9">{"x":{"nodes":{"id":["01003_1968","01070_1968","01165_1968","01165_1975","01165_2023"],"comm":["01003","01070","01165","01165","01165"],"COG":["1968","1968","1968","1975","2023"],"label":["01003\n(1968)","01070\n(1968)","01165\n(1968)","01165\n(1975)","01165\n(2023)"],"level":[1,1,1,2,3],"pop":["140","100","128","470","1594"],"libgeo":["AMAREINS","CESSEINS","FRANCHELEINS","FRANCHELEINS","Francheleins"],"ratio":[1,1,1,1,1],"title":["<b><a target=\"_blank\" href=https://www.insee.fr/fr/recherche/recherche-geographique?geo=COM-01003&debut=0>01003<\/a> AMAREINS<\/b><br>Population : 140 hab.","<b><a target=\"_blank\" href=https://www.insee.fr/fr/recherche/recherche-geographique?geo=COM-01070&debut=0>01070<\/a> CESSEINS<\/b><br>Population : 100 hab.","<b><a target=\"_blank\" href=https://www.insee.fr/fr/recherche/recherche-geographique?geo=COM-01165&debut=0>01165<\/a> FRANCHELEINS<\/b><br>Population : 128 hab.","<b><a target=\"_blank\" href=https://www.insee.fr/fr/recherche/recherche-geographique?geo=COM-01165&debut=0>01165<\/a> FRANCHELEINS<\/b><br>Population : 470 hab.","<b><a target=\"_blank\" href=https://www.insee.fr/fr/recherche/recherche-geographique?geo=COM-01165&debut=0>01165<\/a> Francheleins<\/b><br>Population : 1594 hab."]},"edges":{"from":["01003_1968","01070_1968","01165_1968","01165_1975"],"to":["01165_1975","01165_1975","01165_1975","01165_2023"],"LIBGEO":["AMAREINS","CESSEINS","FRANCHELEINS",null],"POP":[140,100,128,null],"annee":["1974-01-01","1974-01-01","1974-01-01",null],"typemodif":["f","f","f",null],"ratio":[1,1,1,1],"arrows.middle.enabled":[true,true,true,false],"dashes":[false,false,false,true],"value":[1,1,1,0.2],"title":["<b>fusion<\/b><br>Date : 01 Jan 1974<br>","<b>fusion<\/b><br>Date : 01 Jan 1974<br>","<b>fusion<\/b><br>Date : 01 Jan 1974<br>",null]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"ellipse","color":{"border":"black","background":"#000000","highlight":{"border":"#000000","background":"#000000"}},"fixed":{"allowedToMoveX":true,"allowedToMoveY":true},"font":{"face":"verdana","color":"#FFFFFF","size":20}},"manipulation":{"enabled":false},"edges":{"width":10,"arrows":{"middle":{"enabled":true,"scaleFactor":3}},"color":{"color":"#2AA198"},"shadow":false},"layout":{"hierarchical":{"enabled":true,"levelSeparation":500,"direction":"LR"},"randomSeed":12},"interaction":{"hoverConnectedEdges":false,"navigationButtons":true,"selectable":false,"selectConnectedEdges":false,"zoomSpeed":1},"physics":{"hierarchicalRepulsion":{"centralGravity":0,"springConstant":0,"nodeDistance":0}},"configure":{"enabled":false}},"groups":null,"width":"100%","height":"500px","idselection":{"enabled":false},"byselection":{"enabled":false},"main":null,"submain":null,"footer":null,"background":"rgba(0, 0, 0, 0)","tooltipStay":300,"tooltipStyle":"position: fixed;visibility:hidden;padding: 5px;white-space: nowrap;font-family: verdana;font-size:14px;font-color:#000000;background-color: #f5f4ed;-moz-border-radius: 3px;-webkit-border-radius: 3px;border-radius: 3px;border: 1px solid #808074;box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);"},"evals":[],"jsHooks":[]}</script><div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<div id="htmlwidget-ac96cb3ee4656e2e9ec3" style="width:100%;height:500px;" class="visNetwork html-widget"></div>
+<script type="application/json" data-for="htmlwidget-ac96cb3ee4656e2e9ec3">{"x":{"nodes":{"id":["01003_1968","01070_1968","01165_1968","01165_1975","01165_2024"],"comm":["01003","01070","01165","01165","01165"],"COG":["1968","1968","1968","1975","2024"],"label":["01003\n(1968)","01070\n(1968)","01165\n(1968)","01165\n(1975)","01165\n(2024)"],"level":[1,1,1,2,3],"pop":["140","100","128","470","1585"],"libgeo":["AMAREINS","CESSEINS","FRANCHELEINS","FRANCHELEINS","Francheleins"],"ratio":[1,1,1,1,1],"title":["<b><a target=\"_blank\" href=https://www.insee.fr/fr/recherche/recherche-geographique?geo=COM-01003&debut=0>01003<\/a> AMAREINS<\/b><br>Population : 140 hab.","<b><a target=\"_blank\" href=https://www.insee.fr/fr/recherche/recherche-geographique?geo=COM-01070&debut=0>01070<\/a> CESSEINS<\/b><br>Population : 100 hab.","<b><a target=\"_blank\" href=https://www.insee.fr/fr/recherche/recherche-geographique?geo=COM-01165&debut=0>01165<\/a> FRANCHELEINS<\/b><br>Population : 128 hab.","<b><a target=\"_blank\" href=https://www.insee.fr/fr/recherche/recherche-geographique?geo=COM-01165&debut=0>01165<\/a> FRANCHELEINS<\/b><br>Population : 470 hab.","<b><a target=\"_blank\" href=https://www.insee.fr/fr/recherche/recherche-geographique?geo=COM-01165&debut=0>01165<\/a> Francheleins<\/b><br>Population : 1585 hab."]},"edges":{"from":["01003_1968","01070_1968","01165_1968","01165_1975"],"to":["01165_1975","01165_1975","01165_1975","01165_2024"],"LIBGEO":["AMAREINS","CESSEINS","FRANCHELEINS",null],"POP":[140,100,128,null],"annee":["1974-01-01","1974-01-01","1974-01-01",null],"typemodif":["f","f","f",null],"ratio":[1,1,1,1],"arrows.middle.enabled":[true,true,true,false],"dashes":[false,false,false,true],"value":[1,1,1,0.2],"title":["<b>fusion<\/b><br>Date : 01 Jan 1974<br>","<b>fusion<\/b><br>Date : 01 Jan 1974<br>","<b>fusion<\/b><br>Date : 01 Jan 1974<br>",null]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"ellipse","color":{"border":"black","background":"#000000","highlight":{"border":"#000000","background":"#000000"}},"fixed":{"allowedToMoveX":true,"allowedToMoveY":true},"font":{"face":"verdana","color":"#FFFFFF","size":20}},"manipulation":{"enabled":false},"edges":{"width":10,"arrows":{"middle":{"enabled":true,"scaleFactor":3}},"color":{"color":"#2AA198"},"shadow":false},"layout":{"hierarchical":{"enabled":true,"levelSeparation":500,"direction":"LR"},"randomSeed":12},"interaction":{"hoverConnectedEdges":false,"navigationButtons":true,"selectable":false,"selectConnectedEdges":false,"zoomSpeed":1},"physics":{"hierarchicalRepulsion":{"centralGravity":0,"springConstant":0,"nodeDistance":0}},"configure":{"enabled":false}},"groups":null,"width":"100%","height":"500px","idselection":{"enabled":false},"byselection":{"enabled":false},"main":null,"submain":null,"footer":null,"background":"rgba(0, 0, 0, 0)","tooltipStay":300,"tooltipStyle":"position: fixed;visibility:hidden;padding: 5px;white-space: nowrap;font-family: verdana;font-size:14px;font-color:#000000;background-color: #f5f4ed;-moz-border-radius: 3px;-webkit-border-radius: 3px;border-radius: 3px;border: 1px solid #808074;box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);"},"evals":[],"jsHooks":[]}</script><div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Cette fonction lance une application shiny permettant d'observer toutes les trajectoires des communes.</span></span>
 <span><span class="co">#trajectoire_commune_shiny()</span></span></code></pre></div>
 <p>La fonction <code>modifications_communales</code> permet, comme son
@@ -859,7 +860,7 @@ de flux domicile-travail utilisée précédemment.</p>
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.9.</p>
 </div>
 
       </footer>
