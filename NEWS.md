@@ -108,3 +108,9 @@
 ### juillet 2024
 
 * mise à jour du COG2024
+
+## correction de bugs / optimisation du code
+
+### juillet 2024
+
+* Les tables COG2022 et COG2022_insee étaient erronées (COG2021 à la place) cf. [#20](https://github.com/antuki/COGugaison/issues/20)
