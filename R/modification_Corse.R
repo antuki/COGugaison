@@ -6,7 +6,7 @@
 #' @param vecteur_entree vaut TRUE si table_entree est un simple vecteur.
 #' @param sens vaut "20vers2A2B" pour changer tous les codes communes corses commençant par 20 par 2A ou 2B et vaut "2A2Bvers20" quand l'effet inverse est recherché.
 #' @details
-#' Le code officiel géographique le plus récent du package est actuellement celui au 01/01/2024. \cr
+#' Le code officiel géographique le plus récent du package est actuellement celui au 01/01/2025. \cr
 #'
 #' Les millésimes des COG qui peuvent être utilisés sont à ce stade les suivants : 1968, 1975, 1982, 1990, 1999, annuel à partir de 2008. \cr
 #'

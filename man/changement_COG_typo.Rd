@@ -52,7 +52,7 @@ changement_COG_typo(
 Transformer des typologies en géographie au premier janvier d'une année souhaitée en ayant le choix entre plusieurs hypothèses de classement en cas de fusion de communes de classes différentes (attribuer la classe qui contient le plus de population, définir une classe absorbante ou une classe spécifique aux regroupements de plusieurs communes de classes différentes).
 }
 \details{
-Le code officiel géographique le plus récent du package est actuellement celui au 01/01/2024. \cr
+Le code officiel géographique le plus récent du package est actuellement celui au 01/01/2025. \cr
 
 Les millésimes des COG qui peuvent être utilisés sont à ce stade les suivants : 1968, 1975, 1982, 1990, 1999, annuel à partir de 2008. \cr
 

@@ -24,7 +24,7 @@ modification_Corse(
 Modifier les codes Insee des communes corses. En effet, en 1976, les codes de toutes les communes corses sont modifiés : alors qu'ils commençaient tous par "20", leurs deux premiers caractères sont remplacés par "2A" (Corse du Sud) ou "2B" (Corse du Nord). Les codes postaux conservent d'ailleurs aujourd'hui le préfixe historique "20". Cette fonction est notamment utile pour la raison suivante :  dans certaines tables issues des recensements Insee de 1968 ou 1975, les communes sont déjà codées avec les préfixes 2A et 2B.
 }
 \details{
-Le code officiel géographique le plus récent du package est actuellement celui au 01/01/2024. \cr
+Le code officiel géographique le plus récent du package est actuellement celui au 01/01/2025. \cr
 
 Les millésimes des COG qui peuvent être utilisés sont à ce stade les suivants : 1968, 1975, 1982, 1990, 1999, annuel à partir de 2008. \cr
 

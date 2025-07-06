@@ -1,12 +1,12 @@
 Package: COGugaison
 Type: Package
 Title: Gestion des codes officiels géographiques (COG)
-Version: 1.0.7
+Version: 1.0.8
 Authors@R: 
     c(person(given = "Kim",
              family = "Antunez",
              role = c("aut", "cre", "cph"),
-             email = "kim.antunez@ensae.fr"),
+             email = "antuki.kim@gmail.com"),
       person(given = "Constance",
              family = "Lecomte",
              role = "ctb"))

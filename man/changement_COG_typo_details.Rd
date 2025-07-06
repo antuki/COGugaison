@@ -27,7 +27,7 @@ changement_COG_typo_details(
 Isoler dans une table les communes fusionnées entre deux géographies communales qui appartiennent à des classes différentes selon une typologie.
 }
 \details{
-Le code officiel géographique le plus récent du package est actuellement celui au 01/01/2024. \cr
+Le code officiel géographique le plus récent du package est actuellement celui au 01/01/2025. \cr
 
 Les millésimes des COG qui peuvent être utilisés sont à ce stade les suivants : 1968, 1975, 1982, 1990, 1999, annuel à partir de 2008. \cr
 

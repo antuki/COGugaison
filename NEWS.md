@@ -63,7 +63,7 @@
 
 ### mars 2021
 
-* mise à jour totale du COG2021
+* ajout du COG2021
 
 # COGugaison 1.0.4
 
@@ -79,7 +79,7 @@
 
 ### juillet 2022
 
-* mise à jour totale du COG2022 
+* ajout du COG2022 
 
 ## correction de bugs / optimisation du code
 
@@ -94,7 +94,7 @@
 
 ### février 2023
 
-* mise à jour du COG2023 sauf la table nivsupra incomplète
+* ajout du COG2023 sauf la table nivsupra incomplète
 
 ### mai 2023
 
@@ -107,7 +107,7 @@
 
 ### juillet 2024
 
-* mise à jour du COG2024
+* ajout du COG2024
 
 ## correction de bugs / optimisation du code
 
@@ -116,3 +116,22 @@
 * Les tables COG2022 et COG2022_insee étaient erronées (COG2021 à la place) cf. [#20](https://github.com/antuki/COGugaison/issues/20)
 
 * Correction d'un morceau de code de `COG_akinator` [#21](https://github.com/antuki/COGugaison/issues/21)
+
+
+# COGugaison 1.0.8
+
+## nouveautés
+
+### juillet 2025
+
+* ajout du COG2025
+
+* ajout des ratios de défusion dans PASSAGE_2023_2024 grâce à la publication des populations de référence 2022 en COG2024 (avant pas de ratio proportionnel à la population connu)
+
+* ajout du dossier _MAJ_annuelle_ comportant la documentation et des fonctions utilitaires pour mettre à jour le COG annuellement dans COGugaison
+
+## correction de bugs / optimisation du code
+
+### juillet 2025
+
+* Les ratios des tables de passage PASSAGE_2024_2023 et PASSAGE_2023_2022 étaient erronées (proportionnel au nombre de communes et pas à la population) cf. [#24](https://github.com/antuki/COGugaison/issues/24). C'est corrigé.

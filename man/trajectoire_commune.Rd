@@ -21,7 +21,7 @@ trajectoire_commune_shiny(donnees_insee = FALSE)
 Observer sur un diagramme interactif la trajectoire d'une commune depuis 1968 (aucun changement, fusions, défusions ou changements de codes) notamment via une application shiny.
 }
 \details{
-Le code officiel géographique le plus récent du package est actuellement celui au 01/01/2024. \cr
+Le code officiel géographique le plus récent du package est actuellement celui au 01/01/2025. \cr
 
 Les millésimes des COG qui peuvent être utilisés sont à ce stade les suivants : 1968, 1975, 1982, 1990, 1999, annuel à partir de 2008. \cr
 
